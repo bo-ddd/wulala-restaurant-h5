@@ -5,6 +5,7 @@ import App from "./App.vue";
 import router from "./router";
 
 import "./assets/main.css";
+import "./assets/lib/lib-flexable.js"
 
 const app = createApp(App);
 
