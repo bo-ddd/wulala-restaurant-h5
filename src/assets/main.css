@@ -1,4 +1,23 @@
-body,h1,h2,h3,h4,h5,h6{
+body,h1,h2,h3,h4,h5,h6,p{
   margin: 0;
   padding: 0;
+}
+a{
+  text-decoration: none;
+}
+.wrap{
+  width: 32.5rem;
+  margin: 0 auto;
+}
+.mt-24{
+  margin-top: 2.4rem;
+}
+.mb-18{
+  margin-bottom: 1.8rem;
+}
+.center{
+  text-align: center;
+}
+.mt-58{
+  margin-top: 5.8rem;
 }
