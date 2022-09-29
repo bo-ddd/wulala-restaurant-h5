@@ -3,11 +3,11 @@
     <h4 class="sign-in_title wrap mt-24">Sign In</h4>
     <form class="wrap center">
         <div class="user-box mb-18">
-            <input type="text" name="" required>
+            <input type="text">
             <label>Email or Phone</label>
         </div>
         <div class="user-box">
-            <input type="password" name="" required>
+            <input type="password" autocomplete="off" >
             <label>Password</label>
         </div>
         <!-- 忘记密码？ -->
