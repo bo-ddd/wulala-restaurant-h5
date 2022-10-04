@@ -16,7 +16,7 @@
     <div class="sign-in wrap mt-58">Sign in</div>
     <!-- sign up 注册 -->
     <!-- 没有帐户？ -->
-    <div class="signup-go_text wrap">Don't have an Account? <a class="forgot-text" href="#">Sign up</a></div>
+    <div class="signup-go_text wrap">Don't have an Account? <a class="forgot-text" href="#" @click="toSignUp">Sign up</a></div>
     <!-- 继续使用Facebook -->
     <div class="sign-in wrap mt-24">Continue with Facebook</div>
     <!-- 我稍后再登录(报名) -->
@@ -24,7 +24,8 @@
 </template>
 
 <script lang="ts" setup>
-
+import useRecommendSignUp from "./composables/RecommendSignUp";
+let { toSignUp } = useRecommendSignUp();
 </script>
 
 <style scoped>
