@@ -3,11 +3,11 @@
     <h4 class="sign-in_title wrap mt-24">Sign In</h4>
     <form class="wrap center">
         <div class="user-box mb-18">
-            <input type="text">
+            <input type="text" required>
             <label>Email or Phone</label>
         </div>
         <div class="user-box">
-            <input type="password" autocomplete="off" >
+            <input type="password" required>
             <label>Password</label>
         </div>
         <!-- 忘记密码？ -->
@@ -76,7 +76,7 @@
   transition: .5s;
 }
 .user-box input:focus ~ label,
-.login-box .user-box input:valid ~ label {
+.user-box input:valid ~ label {
   top: -2rem;
   left: 0;
   color: #f77120;
