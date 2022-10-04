@@ -7,7 +7,7 @@
             <label>Email or Phone</label>
         </div>
         <div class="user-box">
-            <input type="password" required>
+            <input type="password" required autocomplete="off">
             <label>Password</label>
         </div>
         <!-- 忘记密码？ -->
