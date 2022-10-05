@@ -1,9 +1,9 @@
-// import { Tabbar } from "@/components/tabbar";
+import Title from "@/components/Title.vue"
 
 import type { App } from "vue";
 
 export default {
     install(app:App<Element>){
-        // app.component('Tabbar',Tabbar);
+        app.component('Title',Title);
     }
 }

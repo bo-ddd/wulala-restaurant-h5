@@ -1,6 +1,6 @@
 <template>
     <!-- 登录 -->
-    <h4 class="sign-in_title wrap mt-24">Sign In</h4>
+    <Title class="wrap mt-24" level="1" color="block">Sign In</Title>
     <form class="wrap center">
         <div class="user-box mb-18">
             <input type="text" required>
@@ -25,13 +25,11 @@
 
 <script lang="ts" setup>
 import useRecommendSignUp from "./composables/RecommendSignUp";
+import Title from "../../components/Title.vue";
 let { toSignUp } = useRecommendSignUp();
 </script>
 
 <style scoped>
-.sign-in_title{
-    padding: 1.5rem 0;
-}
 .sign-in{
     text-align: center;
     color: #fff;
