@@ -13,31 +13,22 @@
         <!-- 忘记密码？ -->
         <a class="forgot-text" href="#">Forgot your Password?</a>
     </form>
-    <div class="sign-in wrap mt-58">Sign in</div>
+    <Button class="wrap mt-58" color="white" bjcolor="#f77120">Sign in</Button>
     <!-- sign up 注册 -->
     <!-- 没有帐户？ -->
     <div class="signup-go_text wrap">Don't have an Account? <a class="forgot-text" href="#" @click="toSignUp">Sign up</a></div>
     <!-- 继续使用Facebook -->
-    <div class="sign-in wrap mt-24">Continue with Facebook</div>
+    <Button class="wrap mt-24" color="white" bjcolor="#f77120">Continue with Facebook</Button>
     <!-- 我稍后再登录(报名) -->
     <p class="later-signup">I'II sign up later</p>
 </template>
 
 <script lang="ts" setup>
 import useRecommendSignUp from "./composables/RecommendSignUp";
-import Title from "../../components/Title.vue";
 let { toSignUp } = useRecommendSignUp();
 </script>
 
 <style scoped>
-.sign-in{
-    text-align: center;
-    color: #fff;
-    padding: 1.8rem 0;
-    border-radius: 2.5rem;
-    background: #f77120;
-    font-size: 1.4rem;
-}
 .signup-go_text{
     font-size: 1.2rem;
     color: rgb(140, 138, 138);
