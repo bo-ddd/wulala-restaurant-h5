@@ -1,7 +1,7 @@
 <template>
-    <div class="btn">
-        <slot></slot>
-    </div>
+        <div class="btn">
+            <slot></slot>
+        </div>
 </template>
 
 <script lang="ts" setup>
@@ -14,10 +14,11 @@
 </script>
 
 <style scoped>
+
 .btn{
+    /* display:inline-block; */
     text-align: center;
     color: v-bind(color);
-    padding: 1.8rem 0;
     border-radius: 2.5rem;
     background: v-bind(bjcolor);
     font-size: 1.4rem;

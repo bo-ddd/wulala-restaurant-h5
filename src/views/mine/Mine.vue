@@ -13,12 +13,12 @@
         <!-- 忘记密码？ -->
         <a class="forgot-text" href="#">Forgot your Password?</a>
     </form>
-    <Button class="wrap mt-58" color="white" bjcolor="#f77120">Sign in</Button>
+    <Button class="wrap mt-58 pd-tb_18" color="white" bjcolor="#f77120">Sign in</Button>
     <!-- sign up 注册 -->
     <!-- 没有帐户？ -->
     <div class="signup-go_text wrap">Don't have an Account? <a class="forgot-text" href="#" @click="toSignUp">Sign up</a></div>
     <!-- 继续使用Facebook -->
-    <Button class="wrap mt-24" color="white" bjcolor="#f77120">Continue with Facebook</Button>
+    <Button class="wrap mt-24 pd-tb_18" color="white" bjcolor="#f77120">Continue with Facebook</Button>
     <!-- 我稍后再登录(报名) -->
     <p class="later-signup">I'II sign up later</p>
 </template>
