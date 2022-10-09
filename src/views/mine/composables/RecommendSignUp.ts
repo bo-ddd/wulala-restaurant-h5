@@ -1,14 +1,36 @@
 import { useRouter } from "vue-router";
 export default function () {
+    let MineOrderList = [
+        {
+            id:1,
+            orderUrl:'icon-shopcar.png',
+            text:'订单'
+        },
+        {
+            id:2,
+            orderUrl:'icon-collection.png',
+            text:'收藏'
+        },
+        {
+            id:3,
+            orderUrl:'icon-evaluate.png',
+            text:'待评价'
+        },
+        {
+            id:4,
+            orderUrl:'icon-feedback.png',
+            text:'反馈'
+        }
+    ]
     let router = useRouter();
-    const toSignUp= function (){
+    const toSignIn= function (){
         router.push({
-            name:'toSignUp',
+            name:'signin',
             // query:{
             //     goodsId
             // }
         })
     }
 
-    return {toSignUp};
+    return {toSignIn, MineOrderList};
 }
