@@ -18,7 +18,24 @@ const router = createRouter({
         }, {
           path: '/menu', //menu
           name: 'menu',
-          component: () => import("@/views/menu/Menu.vue")
+          component: () => import("@/views/menu/Menu.vue"),
+          children:[
+            {
+              path: '/breakfast',
+              name:'breakfast',
+              component:() => import("@/views/breakfast/Breakfast.vue")
+            },
+            {
+              path: '/lunch',
+              name:'lunch',
+              component:() => import("@/views/lunch/Lunch.vue")
+            },
+            {
+              path: '/supper',
+              name:'supper',
+              component:() => import("@/views/supper/Supper.vue")
+            },
+          ]
         }, {
           path: '/order',//shoppingCart
           name: 'order',
