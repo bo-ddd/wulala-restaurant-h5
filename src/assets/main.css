@@ -1,23 +1,51 @@
-body,h1,h2,h3,h4,h5,h6,p{
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
   margin: 0;
   padding: 0;
 }
-a{
+
+a {
   text-decoration: none;
 }
-.wrap{
-  width: 32.5rem;
+
+.wrap {
+  width: 35.5rem;
   margin: 0 auto;
 }
-.mt-24{
+
+.mt-24 {
   margin-top: 2.4rem;
 }
-.mb-18{
+.mt-16{
+  margin-top: 1.6rem;
+}
+
+.pt-18 {
+  padding-top: 1.8rem;
+}
+
+.mb-18 {
   margin-bottom: 1.8rem;
 }
-.center{
+
+.center {
   text-align: center;
 }
-.mt-58{
+
+.mt-58 {
   margin-top: 5.8rem;
+}
+
+.btn-pd{
+    padding: 1.8rem 2.5rem;
+}
+
+.pd-tb_18{
+  padding: 1.8rem 0;
 }
