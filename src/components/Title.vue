@@ -7,7 +7,7 @@
 <script setup lang="ts">
 import { h, useCssModule } from 'vue';
 let props = defineProps<{
-  level: "1" | "2" | "3" | "4" | "5" | "6";
+  level?: "1" | "2" | "3" | "4" | "5" | "6";
   color: string;
 }>();
 let style = useCssModule();
