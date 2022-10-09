@@ -16,17 +16,17 @@ export default function () {
         },
         {
             id: 1,
-            url: parsrAsssetFile('icon-map.png'),
-            urls: parsrAsssetFile('icon-map_hover.png'),
-            text: '地图',
-            name: 'map'
+            url: parsrAsssetFile('icon-menu.png'),
+            urls: parsrAsssetFile('icon-menu_hover.png'),
+            text: '菜单',
+            name: 'menu'
         },
         {
             id: 2, 
-            url: parsrAsssetFile('icon-shoppingcart.png'),
-            urls: parsrAsssetFile('icon-shoppingcart_hover.png'),
-            text: '购物车',
-            name: 'shoppingCart'
+            url: parsrAsssetFile('icon-order.png'),
+            urls: parsrAsssetFile('icon-order_hover.png'),
+            text: '订单',
+            name: 'order'
         },
         {
             id: 3,

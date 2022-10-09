@@ -16,17 +16,17 @@ const router = createRouter({
           name: '/',
           component: Home
         }, {
-          path: '/map', //map
-          name: 'map',
-          component: () => import("../views/map/Map.vue")
+          path: '/menu', //menu
+          name: 'menu',
+          component: () => import("@/views/menu/Menu.vue")
         }, {
-          path: '/shoppingCart',//shoppingCart
-          name: 'shoppingCart',
+          path: '/order',//shoppingCart
+          name: 'order',
           // route level code-splitting
           // this generates a separate chunk (About.[hash].js) for this route
           // which is lazy-loaded when the route is visited.
           //路由的懒加载，型能好
-          component: () => import('../views/shoppingCart/shoppingCart.vue')
+          component: () => import('../views/order/Order.vue')
         },
         {
           path: '/mine', //mien
