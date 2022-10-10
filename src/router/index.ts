@@ -22,6 +22,7 @@ const router = createRouter({
           children:[
             {
               path: '/breakfast',
+              alias:'/',
               name:'breakfast',
               component:() => import("@/views/breakfast/Breakfast.vue")
             },
