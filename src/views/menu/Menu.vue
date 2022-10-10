@@ -21,7 +21,4 @@ let { imgarr, selected, nav } = useTabbar()
 </script>
 
 <style scoped>
-.main{
-    border-bottom: .2rem solid #ececec;
-}
 </style>
