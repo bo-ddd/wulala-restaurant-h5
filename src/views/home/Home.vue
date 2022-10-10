@@ -111,7 +111,7 @@ const bestSellers = [
     background-size: 100%;
     background-repeat: no-repeat;
     min-height: 100%;
-    background-color: pink;
+    background-color: #f8f8f8;
 }
 
 .box-button {
@@ -132,7 +132,8 @@ const bestSellers = [
     align-items: center;
     justify-content: center;
     text-align: center;
-    background-color: red;
+    background-image: url('@/assets/images/banaer-1.png');
+    background-size: 100%;
     border-radius: 1rem;
     font-size: 1.8rem;
     padding: 3rem 0;
@@ -142,7 +143,9 @@ const bestSellers = [
 
 .ranking-1 {
     width: 17rem;
-    background-color: red;
+    background-image: url('@/assets/images/banaer-1.png');
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
     display: flex;
     align-items: center;
     justify-content: center;

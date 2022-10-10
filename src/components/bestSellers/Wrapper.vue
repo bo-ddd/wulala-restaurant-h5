@@ -7,6 +7,6 @@
 <style scoped>
     .best-sellers{
         column-count: 2;
-        column-gap: 1rem;
+        column-gap: 2rem;
     }
 </style>
