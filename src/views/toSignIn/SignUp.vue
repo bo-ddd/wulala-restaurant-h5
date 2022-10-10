@@ -16,7 +16,7 @@
         </div>
         <div class="verification-code">
             <div class="user-box mb-18 width-60">
-                <input type="text" >
+                <input type="text" required>
                 <label>验证码 </label>  
             </div>
             <div class="send">发送验证码</div>
