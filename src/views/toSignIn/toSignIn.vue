@@ -1,7 +1,7 @@
 <template>
   <main>
     <!-- 登录 -->
-    <Title class="wrap mt-24" level="1" color="block">登录</Title>
+    <Title class="wrap mt-24" level="1" color="white">登录</Title>
     <form class="wrap center">
         <div class="user-box mb-18">
             <input type="text" required>
@@ -39,12 +39,15 @@ const lastPage = function () {
   padding: 1.8rem 0;
 }
 
-
-
+main{
+  background: url('@/assets/images/icon-signup_bj.png') 100% 100%;
+  min-height: 100vh;
+  overflow: hidden;
+}
+/* 
 main{
   min-height: 100vh;
   overflow: hidden;
-  /* background-color: #e493d0; */
   background-image: 
     radial-gradient(closest-side, rgba(235 , 105 , 78 , 1), rgba(235 , 105 , 78 , 0)),
     radial-gradient(closest-side, rgba(234 , 11 , 164 , 1), rgba(234 , 11 , 164 , 0)),
@@ -67,7 +70,7 @@ main{
     50vmax 50vmax
   ;
   background-repeat: no-repeat;
-  animation: 3s movement linear infinite;
+  animation: 5s movement linear infinite;
 }
 @keyframes movement {
   0%, 100%{
@@ -88,21 +91,21 @@ main{
   }
   25% {
     background-size: 
-      100vmax 100vmax,
+      90vmax 90vmax,
       90vmax  90vmax,
       100vmax 100vmax,
       90vmax 90vmax,
-      60vmax 60vmax
+      70vmax 70vmax
     ;
     background-position: 
-      -60vmax -90vmax,
-      50vmax -40vmax,
-      0vmax -20vmax,
-      -40vmax -20vmax,
+      -50vmax -40vmax,
+      50vmax -30vmax,
+      20vmax -30vmax,
+      -10vmax 10vmax,
       40vmax 60vmax
     ;
   }
-}
+} */
 
 .signup-go_text{
     font-size: 1.2rem;
@@ -142,7 +145,7 @@ main{
   font-size: 1.2rem;
 }
 .forgot-text{
-    color: blue;
+    color: #f77120;
     font-size: 1.2rem;
     text-align: center;
 }
