@@ -1,4 +1,5 @@
 <template>
+  <main>
     <!-- 登录 -->
     <Title class="wrap mt-24" level="1" color="block">登录</Title>
     <form class="wrap center">
@@ -20,6 +21,7 @@
     <!-- 继续使用Facebook -->
     <Button  @click="lastPage" class="wrap mt-24 pd-18" color="white" bjcolor="#f77120">我稍后再登录</Button>
     <!-- 我稍后再登录(报名) -->
+  </main>
 </template>
 
 <script lang="ts" setup>
@@ -39,6 +41,68 @@ const lastPage = function () {
 
 
 
+main{
+  min-height: 100vh;
+  overflow: hidden;
+  /* background-color: #e493d0; */
+  background-image: 
+    radial-gradient(closest-side, rgba(235 , 105 , 78 , 1), rgba(235 , 105 , 78 , 0)),
+    radial-gradient(closest-side, rgba(234 , 11 , 164 , 1), rgba(234 , 11 , 164 , 0)),
+    radial-gradient(closest-side, rgba(254 , 234 , 131 , 1), rgba(254 , 234 , 131 , 0)),
+    radial-gradient(closest-side, rgba(170 , 142 , 245 , 1), rgba(170 , 142 , 245 , 0)),
+    radial-gradient(closest-side, rgba(248 , 192 , 147 , 1), rgba(248 , 192 , 147 , 0))
+  ;
+  background-size: 
+    130vmax 130vmax,
+    80vmax  80vmax,
+    90vmax 90vmax,
+    110vmax 110vmax,
+    90vmax 90vmax
+  ;
+  background-position: 
+    -80vmax -80vmax,
+    60vmax -30vmax,
+    10vmax 10vmax,
+    -30vmax -10vmax,
+    50vmax 50vmax
+  ;
+  background-repeat: no-repeat;
+  animation: 3s movement linear infinite;
+}
+@keyframes movement {
+  0%, 100%{
+    background-size: 
+    130vmax 130vmax,
+    80vmax  80vmax,
+    90vmax 90vmax,
+    110vmax 110vmax,
+    90vmax 90vmax
+    ;
+    background-position: 
+      -80vmax -80vmax,
+      60vmax -30vmax,
+      10vmax 10vmax,
+      -30vmax -10vmax,
+      50vmax 50vmax
+    ;
+  }
+  25% {
+    background-size: 
+      100vmax 100vmax,
+      90vmax  90vmax,
+      100vmax 100vmax,
+      90vmax 90vmax,
+      60vmax 60vmax
+    ;
+    background-position: 
+      -60vmax -90vmax,
+      50vmax -40vmax,
+      0vmax -20vmax,
+      -40vmax -20vmax,
+      40vmax 60vmax
+    ;
+  }
+}
 
 .signup-go_text{
     font-size: 1.2rem;
