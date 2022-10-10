@@ -11,19 +11,16 @@
             <label>密码</label>
         </div>
         <div class="user-box mb-18">
-            <input type="text" required>
+            <input type="text" onfocus="this.type='password'" required>
             <label>确认密码</label>
         </div>
         <div class="verification-code">
             <div class="user-box mb-18 width-60">
-                <input type="password" required autocomplete="off">
+                <input type="text" >
                 <label>验证码 </label>  
             </div>
             <div class="send">发送验证码</div>
         </div>
-
-     
-       
     </form>
     
     
