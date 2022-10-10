@@ -1,6 +1,6 @@
 <template>
   <main>
-    <Title class="wrap mt-24" level="1" color="block">呜啦啦</Title>
+    <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <div class="sign-up wrap mt-20 mb-20">
       <!-- 头像 -->
       <div class="head-portrait">

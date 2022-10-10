@@ -60,6 +60,16 @@ const router = createRouter({
       path:'/signin',
       name:'signin',
       component:()=> import("../views/toSignIn/toSignIn.vue"),
+    },
+    {
+      path:'/forgotpasswrod',
+      name:'forgotpasswrod',
+      component:()=> import("../views/toSignIn/ForgotPassword.vue"),
+    },
+    {
+      path:'/signup',
+      name:'signup',
+      component:()=> import("../views/toSignIn/SignUp.vue"),
     }
   ],
 })
