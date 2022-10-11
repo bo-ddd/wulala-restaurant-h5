@@ -16,7 +16,7 @@
                 <label>确认密码</label>
             </div>
             <div class="verification-code">
-                <div class="user-box mb-18 width-60">
+                <div class="user-box mb-18 width-70">
                     <input type="text" required>
                     <label>验证码 </label>  
                 </div>
@@ -43,8 +43,8 @@ const lastPage = function () {
 .pd-18{
   padding: 1.8rem 0;
 }
-.width-60{
-    width: 60%;
+.width-70{
+    width: 70%;
 }
 
 
@@ -62,10 +62,10 @@ main{
   opacity: .8;
 }
 .send{
-    font-size: 1.5rem;
-    color: rgb(253, 253, 254);
+    font-size: 1.2rem;
+    color: #2d5b73;
     border-radius: 2rem;
-    background: #f77120;
+    background: #eddda9;
     padding: .5rem 1rem;
 }
 .from{
