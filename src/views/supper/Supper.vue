@@ -2,11 +2,12 @@
     <main>
         <MenuConten.Wrapper>
             <MenuConten.Item :src="parsrAsssetFile('cg.png')" content="菜狗" price="20"></MenuConten.Item>
-            <MenuConten.Item :src="parsrAsssetFile('yrc.png')" content="羊肉串" price="3"></MenuConten.Item>
-            <MenuConten.Item :src="parsrAsssetFile('gbjd.png')" content="宫保鸡丁" price="30"></MenuConten.Item>
-            <MenuConten.Item :src="parsrAsssetFile('gbjd.png')" content="宫保鸡丁" price="30"></MenuConten.Item>
-            <MenuConten.Item :src="parsrAsssetFile('gbjd.png')" content="宫保鸡丁" price="30"></MenuConten.Item>
-            <MenuConten.Item :src="parsrAsssetFile('gbjd.png')" content="宫保鸡丁" price="30"></MenuConten.Item>
+            <MenuConten.Item :src="parsrAsssetFile('dfn.png')" content="豆腐脑" price="4"></MenuConten.Item>
+            <MenuConten.Item :src="parsrAsssetFile('hlt.png')" content="胡辣汤" price="4"></MenuConten.Item>
+            <MenuConten.Item :src="parsrAsssetFile('xmz.png')" content="小米粥" price="4"></MenuConten.Item>
+            <MenuConten.Item :src="parsrAsssetFile('dmz.png')" content="大米粥" price="4"></MenuConten.Item>
+            <MenuConten.Item :src="parsrAsssetFile('yt.png')" content="油条" price="1"></MenuConten.Item>
+            <MenuConten.Item :src="parsrAsssetFile('bz.png')" content="包子" price="0.5"></MenuConten.Item>
         </MenuConten.Wrapper>
     </main>
 </template>
