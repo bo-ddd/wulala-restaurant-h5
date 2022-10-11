@@ -2,7 +2,7 @@
     <div class="nav-item">
         <div>
             <slot name="icon">
-                <img class="nav-icon" :src="icon" :alt="text">
+                <img v-if="icon" class="nav-icon" :src="icon" alt=''>
             </slot>
         </div>
         <div>

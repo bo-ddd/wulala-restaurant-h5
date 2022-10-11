@@ -1,104 +1,24 @@
 <template>
    <main class="mine-order">
-       <Title color="black" class="order">全部订单</Title>
-       <!-- 已付款商品 -->
-       <div class="Paid wrap mt-15 mb-15">
-           <!-- 付款payment时间time-->
-           <div class="payment-time">
-               <p class="time">2019-06-30 11:50</p>
-               <p class="payment-state">买家已付款</p>
-           </div>
-           <List :icon="parsrAsssetFile('icon-nav_1.png')">
-               这是商品名称这是商品名称这是商品名称这是商品名称
-               <template #price>
-                   ￥300.00
-               </template>
-               <template #quantity>
-                   1
-               </template>
-               <template #model>
-                   款式，型号
-               </template>
-           </List>
-           <List :icon="parsrAsssetFile('icon-nav_1.png')">
-               这是商品名称这是商品名称这是商品名称这是商品名称
-               <template #price>
-                   ￥300.00
-               </template>
-               <template #quantity>
-                   1
-               </template>
-               <template #model>
-                   款式，型号
-               </template>
-           </List>
-           <List :icon="parsrAsssetFile('icon-nav_1.png')">
-               这是商品名称这是商品名称这是商品名称这是商品名称
-               <template #price>
-                   ￥300.00
-               </template>
-               <template #quantity>
-                   1
-               </template>
-               <template #model>
-                   款式，型号
-               </template>
-           </List>
-           <!-- 共计商品 total-goods 取消订单 cancel-order -->
-           <div class="total">
-               <p>共计{{3}}件产品 共计 : <span class="price">￥900.00</span></p>
-               <div class="cancel-order_btn mt-15">取消订单</div>
-           </div>
-       </div>
-       <div class="Paid wrap mt-15 mb-15">
-           <!-- 付款payment时间time-->
-           <div class="payment-time">
-               <p class="time">2019-06-30 11:50</p>
-               <p class="payment-state">交易成功</p>
-           </div>
-           <List :icon="parsrAsssetFile('icon-nav_1.png')">
-               这是商品名称这是商品名称这是商品名称这是商品名称
-               <template #price>
-                   ￥300.00
-               </template>
-               <template #quantity>
-                   1
-               </template>
-           </List>
-           <List :icon="parsrAsssetFile('icon-nav_1.png')">
-               这是商品名称这是商品名称这是商品名称这是商品名称
-               <template #price>
-                   ￥300.00
-               </template>
-               <template #quantity>
-                   1
-               </template>
-           </List>
-           <List :icon="parsrAsssetFile('icon-nav_1.png')">
-               这是商品名称这是商品名称这是商品名称这是商品名称
-               <template #price>
-                   ￥300.00
-               </template>
-               <template #quantity>
-                   1
-               </template>
-           </List>
-           <!-- 共计商品 total-goods 取消订单 cancel-order -->
-           <div class="total">
-               <p>共计{{3}}件产品 共计 : <span class="price">￥900.00</span></p>
-               <div class="cancel-order_btn mt-15">取消订单</div>
-           </div>
-       </div>
+   
+    <MenuTitle.Wrapper v-model="selected" @tap="orderNav">
+                <MenuTitle.Item v-for="(el,index) in NavList" :name="el.name" :key="index">
+                {{ el.text }}</MenuTitle.Item>
+            </MenuTitle.Wrapper>
+    <RouterView />
    </main>
+  
 </template>
 
 <script lang="ts" setup>
+import MenuTitle from "@/components/menuTitle"
    import useUtil from "@/assets/ulit";
    import { useRoute } from 'vue-router';
-import Title from '../../components/Title.vue';
+   import Nav from '@/components/nav'
+   import useRecommendOrder from "./composables/MyofMsgList";
    let route = useRoute();
    let goodsName = '您访问的商品是：' + '商品' + route.query.text;
-
+   let { NavList ,orderNav, selected } = useRecommendOrder();
    let { parsrAsssetFile } = useUtil();
 </script>
 
@@ -112,12 +32,17 @@ import Title from '../../components/Title.vue';
       margin-bottom: 1.5rem;
    }
 
-
+.nav-list{
+    display: flex;
+    justify-content: flex-start;
+}
 
 
    .mine-order{
-       background: #f5f8ff;
+    min-height: 100%;
+       background: #f8f8f8;
        overflow: hidden;
+    
    }
    .Paid{
        background: #fff;
@@ -130,8 +55,9 @@ import Title from '../../components/Title.vue';
        padding: 1.2rem 1.2rem 0 1.2rem;
    }
    .order{
-       background-color: #fff;
-       padding: 1.2rem 1.5rem;
+    font-size: 1.5rem;
+    font-weight: 600;
+       padding: 1.8rem 1.5rem 1rem 1.5rem;
    }
    .time{
        color: #b3bbc6;
