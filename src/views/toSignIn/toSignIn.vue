@@ -39,12 +39,7 @@ const lastPage = function () {
   padding: 1.8rem 0;
 }
 
-main{
-  background: url('@/assets/images/icon-signup_bj.png') 100% 100%;
-  min-height: 100vh;
-  overflow: hidden;
-}
-/* 
+
 main{
   min-height: 100vh;
   overflow: hidden;
@@ -70,7 +65,7 @@ main{
     50vmax 50vmax
   ;
   background-repeat: no-repeat;
-  animation: 5s movement linear infinite;
+  animation: 3s movement linear infinite;
 }
 @keyframes movement {
   0%, 100%{
@@ -105,7 +100,7 @@ main{
       40vmax 60vmax
     ;
   }
-} */
+}
 
 .signup-go_text{
     font-size: 1.2rem;
