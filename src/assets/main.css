@@ -18,6 +18,15 @@ a {
   width: 35.5rem;
   margin: 0 auto;
 }
+.pl-10{
+  padding-left: 1rem;
+}
+.mt-20{
+  margin-top: 1rem;
+}
+.mb-20{
+  margin-bottom: 1rem;
+}
 
 .mt-24 {
   margin-top: 2.4rem;
@@ -54,3 +63,4 @@ a {
 ::-webkit-scrollbar{
   display: none;
 }
+
