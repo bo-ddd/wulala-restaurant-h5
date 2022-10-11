@@ -22,7 +22,8 @@ a {
 .mt-24 {
   margin-top: 2.4rem;
 }
-.mt-16{
+
+.mt-16 {
   margin-top: 1.6rem;
 }
 
@@ -42,10 +43,14 @@ a {
   margin-top: 5.8rem;
 }
 
-.btn-pd{
-    padding: 1.8rem 2.5rem;
+.btn-pd {
+  padding: 1.8rem 2.5rem;
 }
 
-.pd-tb_18{
+.pd-tb_18 {
   padding: 1.8rem 0;
+}
+
+::-webkit-scrollbar{
+  display: none;
 }

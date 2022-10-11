@@ -18,5 +18,8 @@ let { parsrAsssetFile } = userUtil();
 </script>
 
 <style scoped>
-
+main {
+  height: 52rem;
+  overflow-y: scroll;
+}
 </style>

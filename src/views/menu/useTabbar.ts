@@ -19,18 +19,19 @@ export default function () {
             text: '晚餐',
             name: 'supper'
         },
-        
+
     ]
     let route = useRoute()
     let selected = ref(route.name) as Ref<string>
     let router = useRouter()
+    console.log(selected.value);
+    
 
-
-    //这个nav是这个页面中的唯一逻辑
-    const nav = function (name: string): void {
+    //这个menuNav是这个页面中的唯一逻辑
+    const menuNav = function (name: string): void {
         selected.value = name;
         router.push(name)
     }
-    return { imgarr, selected, nav }
+    return { imgarr, selected, menuNav }
 }
 

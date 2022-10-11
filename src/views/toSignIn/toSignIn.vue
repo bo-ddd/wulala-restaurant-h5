@@ -1,7 +1,7 @@
 <template>
   <main>
     <!-- 登录 -->
-    <Title class="wrap mt-24" level="1" color="white">登录</Title>
+    <Title class="wrap mt-24" level="1" color="black">登录</Title>
     <form class="wrap center">
         <div class="user-box mb-18">
             <input type="text" required>
@@ -43,7 +43,11 @@ const lastPage = function () {
 main{
   min-height: 100vh;
   overflow: hidden;
-  background-image: 
+  background-image: url("@/assets/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  
+  /* background-image: 
     radial-gradient(closest-side, rgba(235 , 105 , 78 , 1), rgba(235 , 105 , 78 , 0)),
     radial-gradient(closest-side, rgba(234 , 11 , 164 , 1), rgba(234 , 11 , 164 , 0)),
     radial-gradient(closest-side, rgba(254 , 234 , 131 , 1), rgba(254 , 234 , 131 , 0)),
@@ -66,6 +70,7 @@ main{
   ;
   background-repeat: no-repeat;
   animation: 5s movement linear infinite;
+  animation: 3s movement linear infinite; */
 }
 @keyframes movement {
   0%, 100%{
