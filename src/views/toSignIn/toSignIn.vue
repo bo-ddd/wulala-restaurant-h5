@@ -1,26 +1,28 @@
 <template>
   <main>
-    <!-- 登录 -->
-    <Title class="wrap mt-24" level="1" color="white">登录</Title>
-    <form class="wrap from center">
-        <div class="user-box mb-18">
-            <input type="text" required>
-            <label>电子邮件或电话</label>
-        </div>
-        <div class="user-box">
-            <input type="password" required autocomplete="off">
-            <label>密码</label>
-        </div>
-        <!-- 忘记密码？ Forgot  -->
-        <a class="forgot-text" @click="toForgotPasswrod">忘记密码?</a>
-    </form>
-    <Button class="wrap btn pd-18" color="white" bjcolor="#f77120">登录</Button>
-    <!-- sign up 注册 -->
-    <!-- 没有帐户？ -->
-    <div class="signup-go_text wrap">没有帐户? <a class="forgot-text" @click="toSignUp">注册</a></div>
-    <!-- 继续使用Facebook -->
-    <Button  @click="lastPage" class="wrap mt-24 pd-18" color="white" bjcolor="#f77120">我稍后再登录</Button>
-    <!-- 我稍后再登录(报名) -->
+    <div class="whole">
+      <!-- 登录 -->
+      <Title class="wrap mt-24" level="1" color="white">登录</Title>
+      <form class="wrap from center">
+          <div class="user-box mb-18">
+              <input type="text" required>
+              <label>电子邮件或电话</label>
+          </div>
+          <div class="user-box">
+              <input type="password" required autocomplete="off">
+              <label>密码</label>
+          </div>
+          <!-- 忘记密码？ Forgot  -->
+          <a class="forgot-text" @click="toForgotPasswrod">忘记密码?</a>
+      </form>
+      <Button class="wrap btn pd-18" color="white" bjcolor="#f77120">登录</Button>
+      <!-- sign up 注册 -->
+      <!-- 没有帐户？ -->
+      <div class="signup-go_text wrap">没有帐户? <a class="forgot-text" @click="toSignUp">注册</a></div>
+      <!-- 继续使用Facebook -->
+      <Button  @click="lastPage" class="wrap mt-24 pd-18" color="white" bjcolor="#f77120">我稍后再登录</Button>
+      <!-- 我稍后再登录(报名) -->
+    </div>
   </main>
 </template>
 
@@ -40,6 +42,11 @@ const lastPage = function () {
 }
 
 
+.whole{
+  min-height: 100vh;
+  overflow: hidden;
+  backdrop-filter: blur(.4rem);
+}
 main{
   min-height: 100vh;
   overflow: hidden;

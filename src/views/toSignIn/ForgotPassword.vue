@@ -1,22 +1,24 @@
 <template>
   <main>
-    <!-- 登录 -->
-    <Title class="wrap mt-24" level="1" color="white">找回密码</Title>
-    <form class="wrap from center">
-        <div class="user-box mb-18">
-            <input type="text" required>
-            <label>账号的手机号/邮箱</label>
-        </div>
-        <div class="verification-code">
-          <div class="user-box mb-18 width-70">
+    <div class="whole">
+      <!-- 登录 -->
+      <Title class="wrap mt-24" level="1" color="white">找回密码</Title>
+      <form class="wrap from center">
+          <div class="user-box mb-18">
               <input type="text" required>
-              <label>请输入验证码</label>
+              <label>账号的手机号/邮箱</label>
           </div>
-          <div class="send">发送验证码</div>
-        </div>
-    </form>
-    <Button  @click="lastPage" class="wrap mt-24 pd-18" color="white" bjcolor="#f77120">去登录</Button>
-    <!-- 我稍后去登录(报名) -->
+          <div class="verification-code">
+            <div class="user-box mb-18 width-70">
+                <input type="text" required>
+                <label>请输入验证码</label>
+            </div>
+            <div class="send">发送验证码</div>
+          </div>
+      </form>
+      <Button  @click="lastPage" class="wrap mt-24 pd-18" color="white" bjcolor="#f77120">去登录</Button>
+      <!-- 我稍后去登录(报名) -->
+    </div>
   </main>
 </template>
 
@@ -40,6 +42,11 @@ const lastPage = function () {
 
 
 
+.whole{
+  min-height: 100vh;
+  overflow: hidden;
+  backdrop-filter: blur(.4rem);
+}
 .send{
     font-size: 1.2rem;
     color: #2d5b73;

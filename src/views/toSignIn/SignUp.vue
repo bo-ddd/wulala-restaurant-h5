@@ -1,5 +1,6 @@
 <template>
     <main>
+      <div class="whole">
         <!-- 登录 -->
         <Title class="wrap mt-24" level="1" color="white">注册账号</Title>
         <form class="wrap center from">
@@ -26,6 +27,7 @@
         <!-- 继续使用Facebook -->
         <Button  @click="lastPage" class="wrap btn pd-18" color="white" bjcolor="#f77120">注册账号</Button>
         <!-- 我稍后再登录(报名) -->
+      </div>
     </main>
 </template>
 
@@ -48,6 +50,11 @@ const lastPage = function () {
 }
 
 
+.whole{
+  min-height: 100vh;
+  overflow: hidden;
+  backdrop-filter: blur(.4rem);
+}
 main{
   min-height: 100vh;
   overflow: hidden;
