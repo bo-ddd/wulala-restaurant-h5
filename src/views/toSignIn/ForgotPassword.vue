@@ -1,7 +1,8 @@
 <template>
+  <main>
     <!-- 登录 -->
-    <Title class="wrap mt-24" level="1" color="block">找回密码</Title>
-    <form class="wrap center  mt-24">
+    <Title class="wrap mt-24" level="1" color="white">找回密码</Title>
+    <form class="wrap from center">
         <div class="user-box mb-18">
             <input type="text" required>
             <label>账号的手机号/邮箱</label>
@@ -12,10 +13,9 @@
         </div>
     </form>
     <Button class="wrap mt-58 pd-18" color="white" bjcolor="#f77120">发送验证码</Button>
-
-   
     <Button  @click="lastPage" class="wrap mt-24 pd-18" color="white" bjcolor="#f77120">去登录</Button>
     <!-- 我稍后去登录(报名) -->
+  </main>
 </template>
 
 <script lang="ts" setup>
@@ -36,6 +36,14 @@ const lastPage = function () {
 
 
 
+main{
+  min-height: 100vh;
+  overflow: hidden;
+  background-image: url("@/assets/images/bg.jpg");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
 .signup-go_text{
     font-size: 1.2rem;
     color: rgb(140, 138, 138);
@@ -50,7 +58,7 @@ const lastPage = function () {
   width: 100%;
   padding: 1.2rem 0;
   font-size: 1.4rem;
-  color:#c4c7ce;
+  color:#ebd79a;
   border: none;
   border-bottom: .1rem solid;
   outline: none;
@@ -62,7 +70,7 @@ const lastPage = function () {
   left: 0;
   padding: 1.2rem 0;
   font-size: 1.4rem;
-  color: #c4c7ce;
+  color: #ebd79a;
   pointer-events: none;
   transition: .5s;
 }
@@ -77,5 +85,12 @@ const lastPage = function () {
     color: blue;
     font-size: 1.2rem;
     text-align: center;
+}
+.from{
+  transform: translateY(60%);
+}
+.btn{
+  transform: translateY(100%);
+  opacity: .8;
 }
 </style>
