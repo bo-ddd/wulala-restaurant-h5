@@ -65,7 +65,7 @@ main{
     50vmax 50vmax
   ;
   background-repeat: no-repeat;
-  animation: 3s movement linear infinite;
+  animation: 5s movement linear infinite;
 }
 @keyframes movement {
   0%, 100%{
