@@ -18,11 +18,11 @@ const router = createRouter({
         }, {
           path: '/menu', //menu
           name: 'menu',
+          redirect:'/breakfast', // 重定向
           component: () => import("@/views/menu/Menu.vue"),
           children:[
             {
               path: '/breakfast',
-              alias:'/',
               name:'breakfast',
               component:() => import("@/views/breakfast/Breakfast.vue")
             },
