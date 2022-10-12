@@ -104,4 +104,7 @@ main{
   left: 50%;
   transform: translate(-50%, -55%);
 }
+.btn{
+  opacity: .8;
+}
 </style>
