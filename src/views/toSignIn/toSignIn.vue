@@ -14,14 +14,14 @@
           </div>
           <!-- 忘记密码？ Forgot  -->
           <a class="forgot-text" @click="toForgotPasswrod">忘记密码?</a>
-      </form>
-      <Button class="wrap btn pd-18" color="white" bjcolor="#f77120">登录</Button>
-      <!-- sign up 注册 -->
-      <!-- 没有帐户？ -->
-      <div class="signup-go_text wrap">没有帐户? <a class="forgot-text" @click="toSignUp">注册</a></div>
-      <!-- 继续使用Facebook -->
-      <Button  @click="lastPage" class="wrap mt-24 pd-18" color="white" bjcolor="#f77120">我稍后再登录</Button>
-      <!-- 我稍后再登录(报名) -->
+          <Button class="wrap pd-18 mt-20" color="white" bjcolor="#f77120">登录</Button>
+          <!-- sign up 注册 -->
+          <!-- 没有帐户？ -->
+          <div class="signup-go_text wrap">没有帐户? <a class="forgot-text" @click="toSignUp">注册</a></div>
+          <!-- 继续使用Facebook -->
+          <Button  @click="lastPage" class="wrap mt-24 pd-18" color="white" bjcolor="#f77120">我稍后再登录</Button>
+          <!-- 我稍后再登录(报名) -->
+        </form>
     </div>
   </main>
 </template>
@@ -46,6 +46,7 @@ const lastPage = function () {
   min-height: 100vh;
   overflow: hidden;
   backdrop-filter: blur(.4rem);
+  position: relative;
 }
 main{
   min-height: 100vh;
@@ -61,7 +62,6 @@ main{
     padding: 2.4rem 0;
     text-align: center;
     border-bottom: .1rem solid #bbb;
-    transform: translateY(100%);
 }
 .user-box {
   position: relative;
@@ -99,10 +99,9 @@ main{
     text-align: center;
 }
 .from{
-  transform: translateY(45%);
-}
-.btn{
-  transform: translateY(120%);
-  opacity: .8;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
 }
 </style>
