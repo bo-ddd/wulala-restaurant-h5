@@ -29,7 +29,7 @@
             </div>
             <div class="ranking  lunch-bj ">
                 <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
-                <span class="pd-tb_80">午餐排名</span>
+                <span class="pd-tb_50">午餐排名</span>
             </div>
         </div>
         
