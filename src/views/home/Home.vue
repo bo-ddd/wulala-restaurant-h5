@@ -18,36 +18,40 @@
 
         <div class=" wrap box-ranking mt-16 ">
             <div>
-                <div class="ranking">
+                <div class="ranking breakfast-bj">
                     <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
                     <span>早餐排名</span>
                 </div>
-                <div class="ranking mt-16">
+                <div class="ranking wan mt-16 ">
                     <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
                     <span>晚餐排名</span>
                 </div>
             </div>
-            <div class="ranking-1">
+            <div class="ranking  lunch-bj ">
                 <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
-                <span>午餐排名</span>
+                <span class="pd-tb_50">午餐排名</span>
             </div>
         </div>
+        
+        
+        <div class="ok wrap mt-16">
+            <BestSellers.Wrapper class="wrap">
+                <Title class="mt-16" level="2" color="block">今日推荐</Title>
+                <p class="commodity">12件商品</p>
+                <BestSellers.Item class="mt-16" v-for="item in bestSellers">
+                    <template #image>
+                        <img class="best-sellers_png" :src="parsrAsssetFile(item.imgUrl)" alt="" />
+                    </template>
+                    <template #description>
+                        <div class="description">
+                            <div class="title-best_sellers">{{item.title}}</div>
+                            <div class="price">￥{{item.price}}</div>
+                        </div>
+                    </template>
+                </BestSellers.Item>
+            </BestSellers.Wrapper>
+        </div>
 
-
-
-        <BestSellers.Wrapper class="wrap">
-            <BestSellers.Item class="mt-16" v-for="item in bestSellers">
-                <template #image>
-                    <img class="best-sellers_png" :src="parsrAsssetFile(item.imgUrl)" alt="" />
-                </template>
-                <template #description>
-                    <div class="description">
-                        <div class="title-best_sellers">{{item.title}}</div>
-                        <div class="price">￥{{item.price}}</div>
-                    </div>
-                </template>
-            </BestSellers.Item>
-        </BestSellers.Wrapper>
 
     </div>
 </template>
@@ -56,6 +60,7 @@ import Search from '@/components/search'
 import Silder from '@/components/slider'
 import Button from "@/components/Button.vue";
 import BestSellers from '@/components/bestSellers'
+import Title from '@/components/Title.vue'
 
 import useUlit from '@/assets/ulit/index'
 import { useRouter } from 'vue-router'
@@ -107,13 +112,15 @@ const bestSellers = [
 </script>
 <style scoped>
 .home {
-    background-image: url('@/assets/images/bj.png');
-    background-size: 100%;
+    background-image: url('@/assets/images/bj.jpg');
+    background-size: 100% 14%;
     background-repeat: no-repeat;
     min-height: 100%;
-    background-color: #f8f8f8;
 }
-
+.ok{
+    background-color: #f5f5f5;
+    border-radius: 1rem;
+}
 .box-button {
     display: flex;
     justify-content: center;
@@ -131,9 +138,6 @@ const bestSellers = [
     display: flex;
     align-items: center;
     justify-content: center;
-    text-align: center;
-    background-image: url('@/assets/images/banaer-1.png');
-    background-size: 100%;
     border-radius: 1rem;
     font-size: 1.8rem;
     padding: 3rem 0;
@@ -141,19 +145,21 @@ const bestSellers = [
     font-weight: bold;
 }
 
-.ranking-1 {
-    width: 17rem;
-    background-image: url('@/assets/images/banaer-1.png');
+.breakfast-bj {
+    background-image: url('@/assets/images/zaocan.png');
+    background-size: 100%;
+}
+
+.lunch-bj {
+    background-image: url('@/assets/images/icon-lunch_bj.webp');
     background-size: 100% 100%;
     background-repeat: no-repeat;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 1rem;
-    font-size: 1.8rem;
-    padding: 8rem 0;
-    color: white;
-    font-weight: bold;
+}
+
+.wan {
+    background-image: url('@/assets/images/wan.webp');
+    background-size: 100%;
+    background-repeat: no-repeat;
 }
 
 .icon-ranking {
