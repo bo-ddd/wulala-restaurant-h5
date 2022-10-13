@@ -32,10 +32,24 @@ import useJumpInfo from './composables/JumpInfo';
 import { loginApi } from '@/api/api';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
 
-loginApi({
-  username:'xiaoming',
-  password:'999999',
-})
+(async function () {
+  loginApi({
+    username:'xiaoming',
+    password:'999999',
+  })
+  .then(res => {
+    console.log('------res----');
+    console.log(res)
+  })
+})()
+
+// loginApi({
+//   username:'xiaoming',
+//   password:'999999',
+// }).then(res => {
+//   console.log('------res----');
+//   console.log(res)
+// })
 
 // axios.post('/user/login',{
 //   username:'xiaoming',
