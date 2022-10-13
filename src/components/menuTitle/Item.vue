@@ -24,7 +24,7 @@ const to = function () {
 }
 
 let url = computed(() => selected.value == name ? activeUrl : src)
-// const color = computed(() => selected.value == name ? '#fb7b2c' : '#bcbcb9')
+const color = computed(() => selected.value == name ? '#fb7b2c' : '#bcbcb9')
 </script>
 <style scoped>
 .item {
@@ -41,7 +41,6 @@ let url = computed(() => selected.value == name ? activeUrl : src)
 
 .text {
     font-size: 1.6rem;
-    color: #bcbcb9;
-    /* color: v-bind(color); */
+    color: v-bind(color);
 }
 </style>
