@@ -4,7 +4,8 @@
       <img :src="src" alt="" />
     </div>
     <div class="content">
-      <span>{{ content }}</span>
+      <span>{{ content }}</span><br>
+      <span class="description">{{ description }}</span>
     </div>
     <div class="price">
       <span>￥{{ price }}</span>
@@ -17,9 +18,10 @@ let props = defineProps<{
   src?: string;
   content?: string;
   price?: string;
+  description?: string;
 }>();
 
-const { src, content, prive } = props;
+const { src, content, price, description } = props;
 </script>
 
 <style scoped>
@@ -34,9 +36,15 @@ const { src, content, prive } = props;
 }
 .img img {
   width: 10.5rem;
+  height: 8.5rem;
   border-radius: 1rem;
 }
 .content {
   margin-right: 10rem;
+}
+.description{
+  font-size: 1.2rem;
+  font-weight: 500;
+  color: #bcbcb9;
 }
 </style>

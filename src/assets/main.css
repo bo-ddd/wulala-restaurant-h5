@@ -63,4 +63,9 @@ a {
 ::-webkit-scrollbar{
   display: none;
 }
-
+.pd-tb_50{
+  padding: 5rem 0;
+}
+.ml-23{
+  margin-left: 2.3rem;
+}
