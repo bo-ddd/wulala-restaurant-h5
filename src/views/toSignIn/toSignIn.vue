@@ -28,23 +28,29 @@
 
 <script lang="ts" setup>
 import useJumpInfo from './composables/JumpInfo';
-import axios from '@/api/api';
+// import axios from '@/api/api';
+import { loginApi } from '@/api/api';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
 
-axios.post('/user/login',{
+loginApi({
   username:'xiaoming',
   password:'999999',
-}, {
-  headers:{
-    "Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"
-  }
-} ).then(res => {
-  console.log('----------res--------');
-  console.log(res);
-}).catch(err => {
-  console.log('-----------err--------');
-  console.log(err);
 })
+
+// axios.post('/user/login',{
+//   username:'xiaoming',
+//   password:'999999',
+// }, {
+//   headers:{
+//     "Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"
+//   }
+// } ).then(res => {
+//   console.log('----------res--------');
+//   console.log(res);
+// }).catch(err => {
+//   console.log('-----------err--------');
+//   console.log(err);
+// })
 
 const lastPage = function () {
     window.history.back();
