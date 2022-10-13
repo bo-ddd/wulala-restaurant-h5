@@ -1,33 +1,70 @@
 <template>
   <main>
-    <!-- 登录 -->
-    <Title class="wrap mt-24" level="1" color="white">登录</Title>
-    <form class="wrap from center">
-        <div class="user-box mb-18">
-            <input type="text" required>
-            <label>电子邮件或电话</label>
-        </div>
-        <div class="user-box">
-            <input type="password" required autocomplete="off">
-            <label>密码</label>
-        </div>
-        <!-- 忘记密码？ Forgot  -->
-        <a class="forgot-text" @click="toForgotPasswrod">忘记密码?</a>
-    </form>
-    <Button class="wrap btn pd-18" color="white" bjcolor="#f77120">登录</Button>
-    <!-- sign up 注册 -->
-    <!-- 没有帐户？ -->
-    <div class="signup-go_text wrap">没有帐户? <a class="forgot-text" @click="toSignUp">注册</a></div>
-    <!-- 继续使用Facebook -->
-    <Button  @click="lastPage" class="wrap mt-24 pd-18" color="white" bjcolor="#f77120">我稍后再登录</Button>
-    <!-- 我稍后再登录(报名) -->
+    <div class="whole">
+      <!-- 登录 -->
+      <Title class="wrap mt-24" level="1" color="white">登录</Title>
+      <form class="wrap from center">
+          <div class="user-box mb-18">
+              <input type="text" required>
+              <label>电子邮件或电话</label>
+          </div>
+          <div class="user-box">
+              <input type="password" required autocomplete="off">
+              <label>密码</label>
+          </div>
+          <!-- 忘记密码？ Forgot  -->
+          <a class="forgot-text" @click="toForgotPasswrod">忘记密码?</a>
+          <Button class="wrap pd-18 mt-20" color="white" bjcolor="#f77120">登录</Button>
+          <!-- sign up 注册 -->
+          <!-- 没有帐户？ -->
+          <div class="signup-go_text wrap">没有帐户? <a class="forgot-text" @click="toSignUp">注册</a></div>
+          <!-- 继续使用Facebook -->
+          <Button  @click="lastPage" class="wrap mt-24 pd-18" color="white" bjcolor="#f77120">我稍后再登录</Button>
+          <!-- 我稍后再登录(报名) -->
+        </form>
+    </div>
   </main>
 </template>
 
 <script lang="ts" setup>
 import useJumpInfo from './composables/JumpInfo';
-
+// import axios from '@/api/api';
+import { loginApi } from '@/api/api';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
+
+(async function () {
+  loginApi({
+    username:'xiaoming',
+    password:'999999',
+  })
+  .then(res => {
+    console.log('------res----');
+    console.log(res)
+  })
+})()
+
+// loginApi({
+//   username:'xiaoming',
+//   password:'999999',
+// }).then(res => {
+//   console.log('------res----');
+//   console.log(res)
+// })
+
+// axios.post('/user/login',{
+//   username:'xiaoming',
+//   password:'999999',
+// }, {
+//   headers:{
+//     "Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"
+//   }
+// } ).then(res => {
+//   console.log('----------res--------');
+//   console.log(res);
+// }).catch(err => {
+//   console.log('-----------err--------');
+//   console.log(err);
+// })
 
 const lastPage = function () {
     window.history.back();
@@ -40,6 +77,12 @@ const lastPage = function () {
 }
 
 
+.whole{
+  min-height: 100vh;
+  overflow: hidden;
+  backdrop-filter: blur(.4rem);
+  position: relative;
+}
 main{
   min-height: 100vh;
   overflow: hidden;
@@ -54,7 +97,6 @@ main{
     padding: 2.4rem 0;
     text-align: center;
     border-bottom: .1rem solid #bbb;
-    transform: translateY(100%);
 }
 .user-box {
   position: relative;
@@ -92,10 +134,12 @@ main{
     text-align: center;
 }
 .from{
-  transform: translateY(45%);
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -55%);
 }
 .btn{
-  transform: translateY(120%);
   opacity: .8;
 }
 </style>

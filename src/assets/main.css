@@ -18,6 +18,15 @@ a {
   width: 35.5rem;
   margin: 0 auto;
 }
+.pl-10{
+  padding-left: 1rem;
+}
+.mt-20{
+  margin-top: 1rem;
+}
+.mb-20{
+  margin-bottom: 1rem;
+}
 
 .mt-24 {
   margin-top: 2.4rem;
@@ -54,9 +63,13 @@ a {
 ::-webkit-scrollbar{
   display: none;
 }
+<<<<<<< HEAD
 .pd-tb_80{
   padding: 5rem 0;
 }
 .ml-23{
   margin-left: 2.3rem;
 }
+=======
+
+>>>>>>> 70f8c43cd6e000e5a025e38fb21dd86b2ccaaf45
