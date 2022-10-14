@@ -6,20 +6,20 @@
         <form class="wrap center from">
             <div class="user-box mb-18">
                 <input v-model="userNameIptValue" type="text" required>
-                <label>电子邮件/手机号</label>
+                <label :class="{ ipt:isActive }">{{userNameLabel}}</label>
             </div>
             <div class="user-box mb-18">
                 <input type="password" required autocomplete="off">
-                <label>密码</label>
+                <label>{{passwordLable}}</label>
             </div>
             <div class="user-box mb-18">
                 <input type="text" onfocus="this.type='password'" required>
-                <label>确认密码</label>
+                <label>{{confirmLable}}</label>
             </div>
             <div class="verification-code">
                 <div class="user-box mb-18 width-70">
                     <input type="text" required>
-                    <label>验证码 </label>  
+                    <label>{{phoneNumberLable}} </label>  
                 </div>
                 <div class="send">发送验证码</div>
             </div>
@@ -36,17 +36,29 @@ import useJumpInfo from './composables/JumpInfo';
 import { ref, type Ref } from 'vue';
 import { signUp } from '@/api/api';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
+let isActive = ref(false); //class的显示隐藏
+let userNameLabel = ref('用户名');
+let passwordLable = ref('密码');
+let confirmLable = ('确认密码');
+let phoneNumberLable = ref('电子邮件/手机号');
 
-let userNameIptValue = ref(null);
+
+let userNameIptValue = ref(''); //获取input框的值
+// let passwordIptValue = ref('');
+// let avatarNameIptValue = ref('');
+// let phoneNumberIptValue = ref('');
 const lastPage = function () {
+  // isActive.value = userNameIptValue.value == '' ? true : false
   // window.history.back();
-  console.log(userNameIptValue.value);
-  // console.log(userNameIptValue.value.length)
+  if(userNameIptValue.value == ''){
+    isActive.value = true; 
+    userNameLabel.value = '请输入用户名'
+  }else if(userNameIptValue.value != ''){
+    isActive.value = false;    
+    userNameLabel.value = '用户名'
+  }
 }
 
-if(userNameIptValue.value == null){
-  
-}
 
 // signUp({
 //   username:'xiaoming4',
@@ -70,6 +82,12 @@ if(userNameIptValue.value == null){
 }
 .width-70{
     width: 70%;
+}
+
+
+.ipt{
+  /* border-bottom: .1rem solid red !important; */
+  color: red !important;
 }
 
 
