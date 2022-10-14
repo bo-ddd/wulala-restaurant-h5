@@ -21,5 +21,4 @@ let { imgarr, selected, menuNav } = useTabbar()
 </script>
 
 <style scoped>
-
 </style>

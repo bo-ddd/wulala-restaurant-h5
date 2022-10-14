@@ -20,6 +20,11 @@ export default function () {
             id:4,
             orderUrl:'icon-feedback.png',
             text:'反馈'
+        },
+        {
+            id:5,
+            orderUrl:'icon-lucky_turntable.png',
+            text:'转盘'
         }
     ]
     let router = useRouter();
