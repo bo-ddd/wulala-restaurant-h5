@@ -3,7 +3,7 @@
         <!-- <Icon size="middle" :src="parsrAsssetFile('icon-search.png')"></Icon> -->
         <input class="wes" type="text" :placeholder=placeholder>
         <div class="box-btn_search">
-            搜索
+           <p>搜索</p>
         </div>
     </div>
 </template>
@@ -26,11 +26,9 @@ let { placeholder = '' } = props;
     height: 3rem;
     align-items: center;
     padding-left:1.2rem;
-    padding-right: .2rem;
     width: 100%;
 }
 .box-btn_search{
-    width: 3rem;
     padding: .5rem 1.5rem;
     font-size: 1.2rem;
     background-color: #fb7b2c;
@@ -41,7 +39,7 @@ input {
     border: none;
     outline: none;
     margin-right: 0.5rem;
-    width: 100%;
+    width: 80%;
 }
 
 .wes {
