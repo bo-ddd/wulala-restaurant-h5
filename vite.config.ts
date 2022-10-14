@@ -20,7 +20,7 @@ export default defineConfig({
       //访问的接口，如果是以 /api为开头
       // 我就自动去帮你访问 target这个地址 
       '^/api': {
-        target: 'http://8.131.89.181:80',
+        target: 'http://8.131.89.181:8080',
         changeOrigin: true,
         // 重写
         rewrite: (path) => path.replace(/^\/api/,'')
