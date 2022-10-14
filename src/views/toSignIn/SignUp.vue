@@ -5,7 +5,7 @@
         <Title class="wrap mt-24" level="1" color="white">注册账号</Title>
         <form class="wrap center from">
             <div class="user-box mb-18">
-                <input type="text" required>
+                <input v-model="userNameIptValue" type="text" required>
                 <label>电子邮件/手机号</label>
             </div>
             <div class="user-box mb-18">
@@ -33,12 +33,35 @@
 
 <script lang="ts" setup>
 import useJumpInfo from './composables/JumpInfo';
-
+import { ref, type Ref } from 'vue';
+import { signUp } from '@/api/api';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
 
+let userNameIptValue = ref(null);
 const lastPage = function () {
-    window.history.back();
+  // window.history.back();
+  console.log(userNameIptValue.value);
+  // console.log(userNameIptValue.value.length)
 }
+
+if(userNameIptValue.value == null){
+  
+}
+
+// signUp({
+//   username:'xiaoming4',
+//   password:'999999',
+//   avatarName:'小飞侠',
+//   phoneNumber :'14413321321'
+// }).then(res => {
+//   console.log('----res ---');
+//   console.log(res);
+  
+// }).catch(err => {
+//   console.log(err);
+  
+// })
+
 </script>
 
 <style scoped>

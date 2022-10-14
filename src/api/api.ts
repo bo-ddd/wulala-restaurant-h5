@@ -16,7 +16,9 @@ export const loginApi = function (payload = {}){
     //就是网页的预览
     return instance.post('/user/login' , payload)
 }
-
+export const signUp = function ( options = {} ){
+    return instance.post('/user/register' , options)
+}
 
 //命名规范  以Api为结尾；
 //增删改查的命名 和 post 接口命名规范是一样的；
