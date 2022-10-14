@@ -7,8 +7,5 @@
 <style scoped>
     .box{
         display:flex;
-        /* grid-template-columns: auto;
-        gap: 0 2rem;
-        align-items: center; */
     }
 </style>

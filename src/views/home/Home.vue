@@ -1,9 +1,14 @@
 <template>
     <div class="home">
         <Search.Wrapper class=" wrap pt-18">
-            <Search.Iptup placeholder="麻辣香锅"> </Search.Iptup>
+            <Search.Iptup placeholder="麻辣香锅">
+                <template #btn>
+                    <div class="search-btn">
+                        搜索
+                    </div>
+                </template>
+            </Search.Iptup>
         </Search.Wrapper>
-
         <Silder.Wrapper class="wrap mt-16">
             <Silder.Banner :src="parsrAsssetFile('banaer-1.png')"></Silder.Banner>
             <Silder.Banner :src="parsrAsssetFile('banaer-2.png')"></Silder.Banner>
@@ -16,7 +21,7 @@
             <Button class="btn-pd" color="#ffffff" bjcolor="#fb7b2c" @click="onOrder">开启点餐之旅===></Button>
         </div>
 
-        <div class=" wrap box-ranking mt-16 ">
+        <div class=" wrap box-ranking mt-16">
             <div>
                 <div class="ranking breakfast-bj">
                     <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
@@ -29,31 +34,35 @@
             </div>
             <div class="ranking  lunch-bj ">
                 <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
-                <span class="pd-tb_50">午餐排名</span>
+                <span class="pd-tb_43">午餐排名</span>
             </div>
         </div>
-        
-        
-        <div class="ok wrap mt-16">
-            <BestSellers.Wrapper class="wrap">
-                <Title class="mt-16" level="2" color="block">今日推荐</Title>
-                <p class="commodity">12件商品</p>
-                <BestSellers.Item class="mt-16" v-for="item in bestSellers">
-                    <template #image>
-                        <img class="best-sellers_png" :src="parsrAsssetFile(item.imgUrl)" alt="" />
-                    </template>
-                    <template #description>
-                        <div class="description">
-                            <div class="title-best_sellers">{{item.title}}</div>
-                            <div class="price">￥{{item.price}}</div>
+
+        <BestSellers.Wrapper class="wrap mt-16">
+            <Title class="mt-16" level="2" color="block">今日推荐</Title>
+            <p class="commodity">12件商品</p>
+            <BestSellers.Item class="mt-16" v-for="item in bestSellers">
+                <template #image>
+                    <img class="best-sellers_png" :src="parsrAsssetFile(item.imgUrl)" alt="" />
+                </template>
+                <template #description>
+                    <div class="description">
+                        <div class="title-best_sellers">{{item.title}}</div>
+                        <div class="box-evaluate">
+                            <div class="price">
+                                ￥{{item.price}}
+                            </div>
+                            <div>
+                                <img class="icon-evaluate" src="@/assets/images/icon-evaluate.png" alt="">
+                                <span>评价</span>
+                            </div>
                         </div>
-                    </template>
-                </BestSellers.Item>
-            </BestSellers.Wrapper>
-        </div>
-
-
+                    </div>
+                </template>
+            </BestSellers.Item>
+        </BestSellers.Wrapper>
     </div>
+
 </template>
 <script setup lang="ts">
 import Search from '@/components/search'
@@ -111,16 +120,32 @@ const bestSellers = [
 ]
 </script>
 <style scoped>
+.box-evaluate {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.box-evaluate span {
+    font-size: 1.4rem;
+    color: #f88d4c;
+    font-weight: bold;
+}
+
+.icon-evaluate {
+    width: 2rem;
+    vertical-align: middle;
+}
+
 .home {
     background-image: url('@/assets/images/bj.jpg');
     background-size: 100% 14%;
     background-repeat: no-repeat;
     min-height: 100%;
-}
-.ok{
     background-color: #f5f5f5;
-    border-radius: 1rem;
+    /* padding: 0 .5rem; */
 }
+
+
 .box-button {
     display: flex;
     justify-content: center;
@@ -131,16 +156,18 @@ const bestSellers = [
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: #fff;
+    padding: 1rem 1rem;
+    border-radius: 1rem;
 }
 
 .ranking {
-    width: 17rem;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
     font-size: 1.8rem;
-    padding: 3rem 0;
+    padding: 2.3rem 3.5rem;
     color: white;
     font-weight: bold;
 }
@@ -175,7 +202,7 @@ const bestSellers = [
 
 .description {
     padding: 1rem;
-    background-color: #fff;
+    background-color: #f5f5f5;
     font-size: 1.6rem;
     border-radius: 0 0 1rem 1rem;
 }
@@ -206,5 +233,12 @@ const bestSellers = [
     height: 12rem;
     display: inline-block;
     border-radius: 1rem 1rem 0 0;
+}
+
+.search-btn {
+    background-color: #f88d4c;
+    padding: .5rem 1.3rem;
+    font-size: 1.2rem;
+    border-radius: 2rem;
 }
 </style>

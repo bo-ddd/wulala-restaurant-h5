@@ -7,6 +7,9 @@
 <style scoped>
     .best-sellers{
         column-count: 2;
-        column-gap: 2rem;
+        column-gap: 1.2rem;
+        background-color: white;
+        padding: 1rem;
+        border-radius: 1rem;
     }
 </style>

@@ -1,5 +1,6 @@
 <template>
     <img :src="src" type alt="" class="icon">
+    <slot></slot>
 </template>
 <style scoped>
 img {
