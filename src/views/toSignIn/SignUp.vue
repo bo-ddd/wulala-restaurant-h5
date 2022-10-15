@@ -123,12 +123,27 @@ const lastPage = function () {
     }
   }
 
-  console.log(userNameIptValue.value);
-  console.log(passwordIptValue.value);
-  console.log(phoneNumberIptValue.value);
-  console.log(confirmIptValue.value);
-  console.log(avatarNameIptValue.value);
+  // console.log(isusernameActive.value);
+  // console.log(ispasswordActive.value);
+  // console.log(isconfirmActive.value);
+  // console.log(isphoneNumberActive.value);
+  // console.log(isavatarNameActive.value);
 
+  if(isusernameActive.value == false && ispasswordActive.value==false && isconfirmActive.value == false && isphoneNumberActive.value == false && isavatarNameActive.value == false){
+    signUp({
+      username:userNameIptValue.value,
+      password:passwordIptValue.value,
+      avatarName:avatarNameLable.value,
+      phoneNumber:phoneNumberIptValue.value
+    }).then(res=>{
+      console.log('----------res----------')
+      console.log(res);
+      console.log(res.data.msg);
+    }).catch(err => {
+      console.log('-------------err-----------');
+      console.log(err);
+    })
+  }
 }
 
 </script>
