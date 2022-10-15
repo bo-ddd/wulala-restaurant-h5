@@ -6,20 +6,24 @@
         <form class="wrap center from">
             <div class="user-box mb-18">
                 <input v-model="userNameIptValue" type="text" required>
-                <label :class="{ ipt:isActive }">{{userNameLabel}}</label>
+                <label :class="{ iptcolor:isusernameActive }">{{userNameLabel}}</label>
             </div>
             <div class="user-box mb-18">
-                <input type="password" required autocomplete="off">
-                <label>{{passwordLable}}</label>
+                <input v-model="avatarNameIptValue" type="text" required>
+                <label :class="{ iptcolor:isavatarNameActive }">{{avatarNameLable}}</label>
             </div>
             <div class="user-box mb-18">
-                <input type="text" onfocus="this.type='password'" required>
-                <label>{{confirmLable}}</label>
+                <input v-model="passwordIptValue" onfocus="'password'" type="password" required autocomplete="off">
+                <label :class="{iptcolor:ispasswordActive}">{{passwordLable}}</label>
+            </div>
+            <div class="user-box mb-18">
+                <input v-model="confirmIptValue" type="text" onfocus="this.type='password'" required>
+                <label :class="{ iptcolor:isconfirmActive }">{{confirmLable}}</label>
             </div>
             <div class="verification-code">
                 <div class="user-box mb-18 width-70">
-                    <input type="text" required>
-                    <label>{{phoneNumberLable}} </label>  
+                    <input v-model="phoneNumberIptValue" type="text" required>
+                    <label :class="{ iptcolor:isphoneNumberActive }">{{phoneNumberLable}} </label>  
                 </div>
                 <div class="send">发送验证码</div>
             </div>
@@ -36,43 +40,96 @@ import useJumpInfo from './composables/JumpInfo';
 import { ref, type Ref } from 'vue';
 import { signUp } from '@/api/api';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
-let isActive = ref(false); //class的显示隐藏
+
+let reg = /^\d{1,}$/; //判断是否为数子
+
+
+let isusernameActive = ref(false); //class的显示隐藏 用户名
+let ispasswordActive = ref(false); //class的显示隐藏 密码
+let isconfirmActive = ref(false); //class的显示隐藏  确认密码
+let isphoneNumberActive = ref(false); //class的显示隐藏 手机号
+let isavatarNameActive = ref(false); //class的显示隐藏 昵称
+
+
 let userNameLabel = ref('用户名');
 let passwordLable = ref('密码');
-let confirmLable = ('确认密码');
-let phoneNumberLable = ref('电子邮件/手机号');
+let confirmLable = ref('确认密码');
+let phoneNumberLable = ref('手机号');
+let avatarNameLable = ref('昵称');
 
-
-let userNameIptValue = ref(''); //获取input框的值
-// let passwordIptValue = ref('');
-// let avatarNameIptValue = ref('');
-// let phoneNumberIptValue = ref('');
+let userNameIptValue:Ref<string> = ref(''); //获取input框的值
+let passwordIptValue:Ref<string> = ref('');
+let phoneNumberIptValue:Ref<string> = ref('');
+let confirmIptValue:Ref<string> = ref('');
+let avatarNameIptValue:Ref<string> = ref('');
 const lastPage = function () {
-  // isActive.value = userNameIptValue.value == '' ? true : false
   // window.history.back();
+  
+  //  判断用户名
   if(userNameIptValue.value == ''){
-    isActive.value = true; 
+    isusernameActive.value = true; 
     userNameLabel.value = '请输入用户名'
+  }else if(userNameIptValue.value.length <= 5 || userNameIptValue.value.length >=20){
+    userNameLabel.value = '用户名长度必须是在6-20之间';
+    isusernameActive.value = true; 
   }else if(userNameIptValue.value != ''){
-    isActive.value = false;    
+    isusernameActive.value = false;    
     userNameLabel.value = '用户名'
   }
+  
+  // 判断，密码
+  if (passwordIptValue.value == '') {
+    passwordLable.value = '密码不能为空';
+    ispasswordActive.value = true
+  }else if (passwordIptValue.value.length <= 5 || passwordIptValue.value.length >= 20) {
+    passwordLable.value = '密码长度必须是在6-20之间';
+    ispasswordActive.value = true
+  } else if(passwordIptValue.value != ''){
+    passwordLable.value = '密码'
+    ispasswordActive.value = false
+  }
+  // 确认密码
+  if (confirmIptValue.value == '') {
+    confirmLable.value = '确认密码不能为空';
+    isconfirmActive.value = true;
+  }else if(confirmIptValue.value != passwordIptValue.value){
+    confirmLable.value = '密码不一致，请重新输入';
+  }else{
+    confirmLable.value = '确认密码';
+    isconfirmActive.value = false;
+  }
+  // 手机号
+  if (phoneNumberIptValue.value == '') {
+    phoneNumberLable.value = '请输入手机号'
+    isphoneNumberActive.value = true;
+  }else if(reg.test(phoneNumberIptValue.value) != true){
+    phoneNumberLable.value = '您输入的手机号不合法，请重新输入'
+    isphoneNumberActive.value = true;
+  }else if (phoneNumberIptValue.value.length == 10) {
+    phoneNumberLable.value = '您输入的手机号不合法，请重新输入'
+    isphoneNumberActive.value = true;
+  }else {
+    phoneNumberLable.value = '手机号'
+    isphoneNumberActive.value = false;
+  }
+
+  if (avatarNameIptValue.value != '') {
+    if (avatarNameIptValue.value.length >= 12) {
+      avatarNameLable.value = '昵称字符长度必须是在1-12';
+      isavatarNameActive.value = true;
+    }else{
+      avatarNameLable.value = '昵称';
+      isavatarNameActive.value = false;
+    }
+  }
+
+  console.log(userNameIptValue.value);
+  console.log(passwordIptValue.value);
+  console.log(phoneNumberIptValue.value);
+  console.log(confirmIptValue.value);
+  console.log(avatarNameIptValue.value);
+
 }
-
-
-// signUp({
-//   username:'xiaoming4',
-//   password:'999999',
-//   avatarName:'小飞侠',
-//   phoneNumber :'14413321321'
-// }).then(res => {
-//   console.log('----res ---');
-//   console.log(res);
-  
-// }).catch(err => {
-//   console.log(err);
-  
-// })
 
 </script>
 
@@ -85,12 +142,9 @@ const lastPage = function () {
 }
 
 
-.ipt{
-  /* border-bottom: .1rem solid red !important; */
+.iptcolor{
   color: red !important;
 }
-
-
 .whole{
   min-height: 100vh;
   overflow: hidden;
