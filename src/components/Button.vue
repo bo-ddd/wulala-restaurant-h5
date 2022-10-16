@@ -6,11 +6,12 @@
 
 <script lang="ts" setup>
     let props = defineProps<{
-        color:string;
+        color?:string;
         bjcolor:string;
         border?:string;
     }>();
     let { color, bjcolor, border } = props;
+    
 </script>
 
 <style scoped>

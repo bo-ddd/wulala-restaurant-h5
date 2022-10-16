@@ -1,15 +1,17 @@
 <template>
     <div class="home">
-        <Search.Wrapper class=" wrap pt-18">
-            <Search.Iptup placeholder="麻辣香锅">
-                <template #btn>
-                    <div class="search-btn">
-                        搜索
-                    </div>
-                </template>
-            </Search.Iptup>
-        </Search.Wrapper>
-        <Silder.Wrapper class="wrap mt-16">
+        <div class="aa wrap pt-18">
+            <Search.Wrapper class="">
+                <Search.Iptup placeholder="麻辣香锅">
+                    <template #btn>
+                        <div class="search-btn">
+                            搜&nbsp索
+                        </div>
+                    </template>
+                </Search.Iptup>
+            </Search.Wrapper>
+        </div>
+        <Silder.Wrapper class="wrap mt-14">
             <Silder.Banner :src="parsrAsssetFile('banaer-1.png')"></Silder.Banner>
             <Silder.Banner :src="parsrAsssetFile('banaer-2.png')"></Silder.Banner>
             <Silder.Banner :src="parsrAsssetFile('banaer-3.png')"></Silder.Banner>
@@ -17,19 +19,19 @@
             <Silder.Banner :src="parsrAsssetFile('banaer-5.png')"></Silder.Banner>
         </Silder.Wrapper>
 
-        <div class="box-button mt-16 wrap">
-            <Button class="btn-pd" color="#ffffff" bjcolor="#fb7b2c" @click="onOrder">开启点餐之旅===></Button>
+        <div class="box-button mt-14 wrap">
+            <img class="btn-order" src="/src/assets/images/btn-order.png" alt="">
         </div>
 
-        <div class=" wrap box-ranking mt-16">
+        <div class=" wrap box-ranking mt-14">
             <div>
                 <div class="ranking breakfast-bj">
                     <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
-                    <span>早餐排名</span>
+                    <span class="=text-ranking">早餐排名</span>
                 </div>
-                <div class="ranking wan mt-16 ">
+                <div class="ranking wan mt-14 ">
                     <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
-                    <span>晚餐排名</span>
+                    <span class="=text-ranking">晚餐排名</span>
                 </div>
             </div>
             <div class="ranking  lunch-bj ">
@@ -38,10 +40,10 @@
             </div>
         </div>
 
-        <BestSellers.Wrapper class="wrap mt-16">
-            <Title class="mt-16" level="2" color="block">今日推荐</Title>
+        <BestSellers.Wrapper class="wrap mt-14">
+            <Title class="mt-14" level="2" color="#f6e6dd">今日推荐</Title>
             <p class="commodity">12件商品</p>
-            <BestSellers.Item class="mt-16" v-for="item in bestSellers">
+            <BestSellers.Item class="mt-14" v-for="item in bestSellers">
                 <template #image>
                     <img class="best-sellers_png" :src="parsrAsssetFile(item.imgUrl)" alt="" />
                 </template>
@@ -125,6 +127,7 @@ const bestSellers = [
     justify-content: space-between;
     align-items: center;
 }
+
 .box-evaluate span {
     font-size: 1.4rem;
     color: #f88d4c;
@@ -137,8 +140,8 @@ const bestSellers = [
 }
 
 .home {
-    background-image: url('@/assets/images/bj.jpg');
-    background-size: 100% 14%;
+    background-image: url('@/assets/images/bj.png');
+    background-size: 100% 12%;
     background-repeat: no-repeat;
     min-height: 100%;
     background-color: #f5f5f5;
@@ -149,7 +152,15 @@ const bestSellers = [
 .box-button {
     display: flex;
     justify-content: center;
-    align-items: center
+    align-items: center;
+}
+
+.btn-order {
+    width: 75%;
+    display: inline-block;
+    padding: 0 1.5rem;
+    background-color: #212111;
+    border-radius: 2rem;
 }
 
 .box-ranking {
@@ -163,28 +174,28 @@ const bestSellers = [
 
 .ranking {
     display: flex;
+    width: 16rem;
     align-items: center;
     justify-content: center;
     border-radius: 1rem;
     font-size: 1.8rem;
-    padding: 2.3rem 3.5rem;
-    color: white;
+    padding: 2.3rem 0;
+    color: #f6e6dd;
     font-weight: bold;
 }
-
 .breakfast-bj {
-    background-image: url('@/assets/images/zaocan.png');
+    background-image: url('@/assets/images/bj.png');
     background-size: 100%;
 }
 
 .lunch-bj {
-    background-image: url('@/assets/images/icon-lunch_bj.webp');
+    background-image: url('@/assets/images/bj.png');
     background-size: 100% 100%;
     background-repeat: no-repeat;
 }
 
 .wan {
-    background-image: url('@/assets/images/wan.webp');
+    background-image: url('@/assets/images/bj.png');
     background-size: 100%;
     background-repeat: no-repeat;
 }
@@ -236,9 +247,14 @@ const bestSellers = [
 }
 
 .search-btn {
-    background-color: #f88d4c;
-    padding: .5rem 1.3rem;
-    font-size: 1.2rem;
+    background-color: #2d2823;
+    width: 3rem;
+    padding: .5rem 1.2rem;
+    font-size: 1.4rem;
     border-radius: 2rem;
+    display: inline-block;
+    text-align: center;
+    color: white;
+    font-weight: 550;
 }
 </style>

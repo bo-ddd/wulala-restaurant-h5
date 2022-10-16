@@ -10,6 +10,6 @@
     .best-sellers_item{
         background:#f5f5f5;
         display: inline-block;
-        border-radius: 1rem;
+        border-radius: 1rem ;
     }
 </style>

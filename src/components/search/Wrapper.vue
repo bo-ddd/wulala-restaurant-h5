@@ -5,7 +5,12 @@
     </div>
 </template>
 <style scoped>
-    .box{
-        display:flex;
-    }
+.box {
+    /* height: 3rem; */
+    display: flex;
+    width: 100%;
+    background: white;
+    border-radius: 2rem;
+    padding: .3rem 0;
+}
 </style>
