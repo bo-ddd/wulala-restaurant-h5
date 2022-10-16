@@ -36,10 +36,11 @@ let { toForgotPasswrod,toSignUp } = useJumpInfo();
   loginApi({
     username:'xiaoming',
     password:'999999',
-  })
-  .then(res => {
+  }).then(res => {
     console.log('------res----');
     console.log(res)
+  }).catch(err => {
+    console.log(err);
   })
 })()
 

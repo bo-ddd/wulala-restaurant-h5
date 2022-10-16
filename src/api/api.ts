@@ -3,7 +3,7 @@ import axios from "axios";
 const instance = axios.create({
     baseURL: '/api',
     timeout: 1000,  //如果接口一秒都没有返回结果，则axios会自动帮我们做一个失败(reject)的处理
-    headers: {'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},  //在发送服务端之前，前端设置请求头信息；
+    // headers: {'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},  //在发送服务端之前，前端设置请求头信息；
 });
 
 
@@ -16,7 +16,9 @@ export const loginApi = function (payload = {}){
     //就是网页的预览
     return instance.post('/user/login' , payload)
 }
-
+export const signUp = function ( options = {} ){
+    return instance.post('/user/register' , options)
+}
 
 //命名规范  以Api为结尾；
 //增删改查的命名 和 post 接口命名规范是一样的；
