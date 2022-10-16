@@ -17,6 +17,10 @@ export const loginApi = function (payload = {}){
     return instance.post('/user/login' , payload)
 }
 
+export const signUp = function ( options = {} ){
+    return instance.post('/user/register' , options)
+}
+
 export const getFoodListApi = function (payload ={}){
     return instance.get('/food/list', payload)
 }
