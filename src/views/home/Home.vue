@@ -240,7 +240,7 @@ const bestSellers = [
 }
 
 .best-sellers_png {
-    width: 100%;
+    width: 16.2rem;
     height: 12rem;
     display: inline-block;
     border-radius: 1rem 1rem 0 0;
