@@ -1,9 +1,9 @@
 <template>
-    <div class="search-input">
+    
         <input  type="text" :placeholder=placeholder>
         <!-- <Icon size="middle" :src="parsrAsssetFile('icon-search.png')"></Icon> -->
         <slot name="btn"></slot>
-    </div>
+   
 </template>
 <script setup lang="ts">
 import Icon from '@/components/Icon.vue'
@@ -23,14 +23,21 @@ input {
     outline: none;
     width: 79%;
     text-indent: 1.2rem;
+    margin-left: .8rem;
 }
-.search-input {
+/* .search-input {
     background-color: white;
     border-radius:2rem;
     display: flex;
     height: 3rem;
-    justify-content: space-around;
-    align-items: center;
+    justify-content: flex-end;
+    border: .1rem #f88d4c solid;
     width: 100%;
+    box-sizing: border-box;
+} */
+.search-input{
+    width: 100%;
+    background: white;
+  
 }
 </style>

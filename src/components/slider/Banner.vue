@@ -5,7 +5,8 @@
   .banner {
     display: inline-block;
     width: 100%;
-    height:19rem; 
+    height:15rem; 
+    
 }
 
 </style>
