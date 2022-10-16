@@ -6,24 +6,24 @@
       <form class="wrap center from">
           <div class="user-box mb-18">
               <input v-model="userNameIptValue" type="text" required>
-              <label :class="{ iptcolor:isusernameActive }">{{userNameLabel}}</label>
+              <label :class="{ setcolor:isusernameActive }">{{userNameLabel}}</label>
           </div>
           <div class="user-box mb-18">
               <input v-model="avatarNameIptValue" type="text" required>
-              <label :class="{ iptcolor:isavatarNameActive }">{{avatarNameLable}}</label>
+              <label :class="{ setcolor:isavatarNameActive }">{{avatarNameLable}}</label>
           </div>
           <div class="user-box mb-18">
               <input v-model="passwordIptValue" onfocus="'password'" type="password" required autocomplete="off">
-              <label :class="{iptcolor:ispasswordActive}">{{passwordLable}}</label>
+              <label :class="{setcolor:ispasswordActive}">{{passwordLable}}</label>
           </div>
           <div class="user-box mb-18">
               <input v-model="confirmIptValue" type="text" onfocus="this.type='password'" required>
-              <label :class="{ iptcolor:isconfirmActive }">{{confirmLable}}</label>
+              <label :class="{ setcolor:isconfirmActive }">{{confirmLable}}</label>
           </div>
           <div class="verification-code">
               <div class="user-box mb-18 width-70">
                   <input v-model="phoneNumberIptValue" type="text" required>
-                  <label :class="{ iptcolor:isphoneNumberActive }">{{phoneNumberLable}} </label>  
+                  <label :class="{ setcolor:isphoneNumberActive }">{{phoneNumberLable}} </label>  
               </div>
               <div class="send">发送验证码</div>
           </div>
@@ -159,7 +159,7 @@ padding: 1.8rem 0;
 }
 
 
-.iptcolor{
+.setcolor{
 color: red !important;
 }
 .whole{
