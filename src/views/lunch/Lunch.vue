@@ -1,19 +1,32 @@
 <template>
-    <main>
-        <MenuConten.Wrapper>
-            <MenuConten.Item :src="parsrAsssetFile('gbjd.png')" content="宫保鸡丁" price="0" description="这是宫保鸡丁"></MenuConten.Item>
-            <MenuConten.Item :src="parsrAsssetFile('yxrs.png')" content="鱼香肉丝" price="0" description="这是鱼香肉丝"></MenuConten.Item>
-            <MenuConten.Item :src="parsrAsssetFile('rpm.png')" content="油泼面" price="0" description="这是油泼面"></MenuConten.Item>
-            <MenuConten.Item :src="parsrAsssetFile('cg.png')" content="菜狗" price="0" description="这是菜狗"></MenuConten.Item>
-            <MenuConten.Item :src="parsrAsssetFile('huimian.png')" content="烩面" price="0" description="这是烩面"></MenuConten.Item>
-        </MenuConten.Wrapper>
-    </main>
+  <main>
+    <MenuConten.Wrapper>
+      <menuConten.Item
+        v-for="(item, index) in foodlists"
+        :key="index"
+        :src="item.bannerUrl"
+        :content="item.foodName"
+        :price="item.price"
+        :description="item.description"
+      ></menuConten.Item>
+    </MenuConten.Wrapper>
+  </main>
 </template>
 
 <script setup lang="ts">
-import MenuConten from '@/components/menuContent'
-import userUtil from '@/assets/ulit'
+import { getFoodListApi } from "@/api/api";
+import { ref } from "vue";
+import MenuConten from "@/components/menuContent";
+import userUtil from "@/assets/ulit";
 let { parsrAsssetFile } = userUtil();
+
+let foodlists = ref({});
+(async function () {
+  let foodlist = await getFoodListApi({});
+  // console.log(foodlist);
+
+  foodlists.value = foodlist.data.data.list;
+})();
 </script>
 
 <style scoped>

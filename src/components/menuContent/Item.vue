@@ -17,11 +17,12 @@
 let props = defineProps<{
   src?: string;
   content?: string;
-  price?: string;
+  price?: number;
   description?: string;
 }>();
 
 const { src, content, price, description } = props;
+
 </script>
 
 <style scoped>

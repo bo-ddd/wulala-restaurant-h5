@@ -17,6 +17,10 @@ export const loginApi = function (payload = {}){
     return instance.post('/user/login' , payload)
 }
 
+export const getFoodListApi = function (payload ={}){
+    return instance.get('/food/list', payload)
+}
+
 
 //命名规范  以Api为结尾；
 //增删改查的命名 和 post 接口命名规范是一样的；
