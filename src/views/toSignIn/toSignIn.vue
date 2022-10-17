@@ -63,8 +63,8 @@ const signInBtn = function(){
       }).then(res => {
         console.log('------res----');
         console.log(res)
-        if (res.data.msg == '用户名或密码错误') {
-          alert(res.data.msg);
+        if (res.data.msg == '用户名或者密码错误') {
+          confirm(res.data.msg);
         }else if(res.data.msg == '成功'){
           alert('登录成功');
           router.push({name:'mine'})
