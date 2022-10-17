@@ -1,4 +1,5 @@
 <template>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <main>
     <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <!-- 个人 personal 信息 info -->
