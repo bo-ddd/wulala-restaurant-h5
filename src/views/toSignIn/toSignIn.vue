@@ -1,5 +1,6 @@
 <template>
-  <main initial-scale=1.0>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <main>
     <div class="whole">
       <!-- 登录 -->
       <Title class="wrap mt-24" level="1" color="white">登录</Title>
@@ -30,7 +31,6 @@
 import useJumpInfo from './composables/JumpInfo';
 import { useRouter } from "vue-router";
 import {ref} from 'vue';
-// import axios from '@/api/api';
 import { loginApi } from '@/api/api';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
 let username = ref(''); //获取input框的值
