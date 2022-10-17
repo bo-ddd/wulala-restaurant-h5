@@ -11,6 +11,12 @@ const instance = axios.create({
 //一个方法只实现一个功能；所以这个方法就只能是单纯的去调用服务端的接口；
 //这样房子的目的就只是为了可读性，和可维护性；
 //这个是 登录接口
+/**
+ * @description 登录接口
+ * @param payload object
+ * @param payload.username string 用户名  6-20位
+ * @param payload.password string 密码  6-20位
+ */
 export const loginApi = function (payload = {}){
     //payload 是不是服务端要的入参
     //就是网页的预览

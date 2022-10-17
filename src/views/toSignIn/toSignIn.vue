@@ -1,20 +1,21 @@
 <template>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <main>
     <div class="whole">
       <!-- 登录 -->
       <Title class="wrap mt-24" level="1" color="white">登录</Title>
       <form class="wrap from center">
           <div class="user-box mb-18">
-              <input type="text" required>
-              <label>电子邮件或电话</label>
+              <input v-model="username" type="text" required>
+              <label :class="{ setcolor:isUserName }">{{userNameLabel}}</label>
           </div>
           <div class="user-box">
-              <input type="password" required autocomplete="off">
-              <label>密码</label>
+              <input v-model="password" type="password" required autocomplete="off">
+              <label :class="{ setcolor:ispassword }">{{passwordLable}}</label>
           </div>
           <!-- 忘记密码？ Forgot  -->
           <a class="forgot-text" @click="toForgotPasswrod">忘记密码?</a>
-          <Button class="wrap pd-18 mt-20" color="white" bjcolor="#f77120">登录</Button>
+          <Button class="wrap pd-18 mt-20" @click="signInBtn" color="white" bjcolor="#f77120">登录</Button>
           <!-- sign up 注册 -->
           <!-- 没有帐户？ -->
           <div class="signup-go_text wrap">没有帐户? <a class="forgot-text" @click="toSignUp">注册</a></div>
@@ -28,44 +29,53 @@
 
 <script lang="ts" setup>
 import useJumpInfo from './composables/JumpInfo';
-// import axios from '@/api/api';
+import { useRouter } from "vue-router";
+import {ref} from 'vue';
 import { loginApi } from '@/api/api';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
+let username = ref(''); //获取input框的值
+let password = ref('');
+let router = useRouter();
 
-(async function () {
-  loginApi({
-    username:'xiaoming',
-    password:'999999',
-  }).then(res => {
-    console.log('------res----');
-    console.log(res)
-  }).catch(err => {
-    console.log(err);
-  })
-})()
+let userNameLabel = ref('用户名或电话');
+let passwordLable = ref('密码');
 
-// loginApi({
-//   username:'xiaoming',
-//   password:'999999',
-// }).then(res => {
-//   console.log('------res----');
-//   console.log(res)
-// })
+let isUserName = ref(false);//class 显示 隐藏
+let ispassword = ref(false);
 
-// axios.post('/user/login',{
-//   username:'xiaoming',
-//   password:'999999',
-// }, {
-//   headers:{
-//     "Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"
-//   }
-// } ).then(res => {
-//   console.log('----------res--------');
-//   console.log(res);
-// }).catch(err => {
-//   console.log('-----------err--------');
-//   console.log(err);
-// })
+const signInBtn = function(){
+  if (username.value == '' && password.value == '') {
+    userNameLabel.value = '请输入用户名';
+    passwordLable.value = '密码不能为空';
+    isUserName.value = true;
+    ispassword.value = true;
+  }else if (username.value != '' && password.value != '') {
+    userNameLabel.value = '用户名';
+    passwordLable.value = '密码';
+    isUserName.value = false;
+    ispassword.value = false;
+  }
+  if(isUserName.value == false && ispassword.value == false){
+    (async function () {
+      await loginApi({
+        username:username.value,
+        password:password.value,
+      }).then(res => {
+        console.log('------res----');
+        console.log(res)
+        if (res.data.msg == '用户名或者密码错误') {
+          confirm(res.data.msg);
+        }else if(res.data.msg == '成功'){
+          alert('登录成功');
+          router.push({name:'mine'})
+        }
+      }).catch(err => {
+        console.log(err);
+      })
+    })()
+  }
+};
+
 
 const lastPage = function () {
     window.history.back();
@@ -78,10 +88,14 @@ const lastPage = function () {
 }
 
 
+.setcolor{
+  color: red !important;
+}
 .whole{
   min-height: 100vh;
   overflow: hidden;
   backdrop-filter: blur(.4rem);
+  -webkit-backdrop-filter: blur(.4rem);
   position: relative;
 }
 main{

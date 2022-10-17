@@ -9,7 +9,7 @@
     </div>
     <div class="price">
       <span>￥{{ price }}</span>
-    </div>
+    </div>  
   </div>
 </template>
 
