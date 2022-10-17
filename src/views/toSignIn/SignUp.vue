@@ -2,7 +2,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <main>
     <div class="whole">
-      <!-- 登录 -->
+      <!-- 注册 -->
       <Title class="wrap mt-24" level="1" color="white">注册账号</Title>
       <form class="wrap center from">
           <div class="user-box mb-18">
