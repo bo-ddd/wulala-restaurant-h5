@@ -1,5 +1,5 @@
 <template>
-  <main>
+  <main initial-scale=1.0>
     <div class="whole">
       <!-- 登录 -->
       <Title class="wrap mt-24" level="1" color="white">登录</Title>
