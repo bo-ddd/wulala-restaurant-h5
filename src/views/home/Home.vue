@@ -19,9 +19,12 @@
             <Silder.Banner :src="parsrAsssetFile('banaer-5.png')"></Silder.Banner>
         </Silder.Wrapper>
 
-        <div class="box-button mt-14 wrap">
-            <img class="btn-order" src="/src/assets/images/btn-order.png" alt="">
-        </div>
+
+        <!-- 开启点餐之旅 -->
+        <HomeBtn.Wrapper class="mt-14 wrap" v-model="sect" @tap="homeNav">
+            <HomeBtn.Item :src="parsrAsssetFile('btn-order.png')" name="menu"></HomeBtn.Item>
+        </HomeBtn.Wrapper>
+
 
         <div class=" wrap box-ranking mt-14">
             <div>
@@ -43,7 +46,7 @@
         <BestSellers.Wrapper class="wrap mt-14">
             <Title class="mt-14" level="2" color="#f6e6dd">今日推荐</Title>
             <p class="commodity">12件商品</p>
-            <BestSellers.Item class="mt-14" v-for="item in bestSellers">
+            <BestSellers.Item class="mt-14" v-for="item in bestSellers" @click="toevaluate('evaluate',item.goodsId)">
                 <template #image>
                     <img class="best-sellers_png" :src="parsrAsssetFile(item.imgUrl)" alt="" />
                 </template>
@@ -54,10 +57,10 @@
                             <div class="price">
                                 ￥{{item.price}}
                             </div>
-                            <div>
+                            <!-- <div>
                                 <img class="icon-evaluate" src="@/assets/images/icon-evaluate.png" alt="">
-                                <span>评价</span>
-                            </div>
+                                <span @click="toevaluate('evaluate')">评价</span>
+                            </div> -->
                         </div>
                     </div>
                 </template>
@@ -67,18 +70,26 @@
 
 </template>
 <script setup lang="ts">
+import usehomeNav from '@/views/home/homeNav'
 import Search from '@/components/search'
 import Silder from '@/components/slider'
-import Button from "@/components/Button.vue";
 import BestSellers from '@/components/bestSellers'
 import Title from '@/components/Title.vue'
-
 import useUlit from '@/assets/ulit/index'
+import HomeBtn from '@/components/homeBtn'
 import { useRouter } from 'vue-router'
+
+let { sect, homeNav } = usehomeNav()
+
 let router = useRouter()
 let { parsrAsssetFile } = useUlit()
-const onOrder = function () {
-    router.push('menu')
+const onOrder = function (name: string) {
+    router.push(name)
+}
+
+const toevaluate = function (name: string, goodsId: number) {
+    window.location.href = `/evaluate?goodsId=${goodsId}`
+    // router.push(name)
 }
 
 const bestSellers = [
@@ -148,13 +159,6 @@ const bestSellers = [
     /* padding: 0 .5rem; */
 }
 
-
-.box-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-}
-
 .btn-order {
     width: 75%;
     display: inline-block;
@@ -183,6 +187,7 @@ const bestSellers = [
     color: #f6e6dd;
     font-weight: bold;
 }
+
 .breakfast-bj {
     background-image: url('@/assets/images/bj.png');
     background-size: 100%;

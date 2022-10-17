@@ -54,7 +54,7 @@ const router = createRouter({
             {
               path: '/appraise',
               name:'appraise',
-              component:() => import("@/views/order/appraise.vue")
+              component:() => import("@/views/order/Appraise.vue")
             },
             {
               path: '/consignmentfee',
@@ -92,6 +92,11 @@ const router = createRouter({
       path:'/signup',
       name:'signup',
       component:()=> import("../views/toSignIn/SignUp.vue"),
+    },
+    {
+      path:'/evaluate',
+      name:'evaluate',
+      component:()=> import("../views/evaluate/Evaluate.vue"),
     }
   ],
 })
