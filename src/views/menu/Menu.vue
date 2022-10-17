@@ -1,24 +1,69 @@
 <template>
-    <main>
-        <div class="wrap">
-            <Title color="#000">菜单</Title>
-        </div>
+  <main>
+    <div class="wrap">
+      <Title color="#000">菜单</Title>
+    </div>
 
-        <div class="main wrap">
+    <van-tabs v-model:active="active" class="wrap">
+      <van-tab :title="item.title" v-for="(item, index) in aa" :key="index">
+        <MenuConten.Wrapper>
+          <menuConten.Item
+            v-for="(item, index) in foodlists"
+            :key="index"
+            :src="item.bannerUrl"
+            :content="item.foodName"
+            :price="item.price"
+            :description="item.description"
+          ></menuConten.Item>
+        </MenuConten.Wrapper>
+        <!-- <RouterView /> -->
+
+        <!-- <div class="main wrap">
             <MenuTitle.Wrapper v-model="selected" @tap="menuNav">
                 <MenuTitle.Item v-for="(el,index) in imgarr" :name="el.name" :key="index">
                 {{ el.text }}</MenuTitle.Item>
             </MenuTitle.Wrapper>
-            <RouterView />
-        </div>
-    </main>
+        </div> -->
+      </van-tab>
+    </van-tabs>
+
+    <!-- <RouterView /> -->
+  </main>
 </template>
 
 <script setup lang="ts">
-import MenuTitle from "@/components/menuTitle"
-import useTabbar from "@/views/menu/useTabbar"
-let { imgarr, selected, menuNav } = useTabbar()
+import { ref } from "vue";
+import { getFoodListApi } from "@/api/api";
+import MenuTitle from "@/components/menuTitle";
+import MenuConten from "@/components/menuContent";
+import useTabbar from "@/views/menu/useTabbar";
+let { imgarr, selected, menuNav } = useTabbar();
+
+let aa = ref([{ title: "早餐" }, { title: "午餐" }, { title: "晚餐" }]);
+const active = ref(0);
+
+let foodlists = ref({});
+(async function () {
+  let foodlist = await getFoodListApi({});
+  // console.log(foodlist);
+
+  foodlists.value = foodlist.data.data.list;
+})();
 </script>
 
+<!-- <script lang="ts">
+import { ref } from "vue";
+
+export default {
+  setup() {
+    const active = ref(0);
+    return { active };
+  },
+};
+</script> -->
+
 <style scoped>
+.van-tabs__line {
+  background: yellow !important;
+}
 </style>
