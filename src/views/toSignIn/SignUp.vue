@@ -167,6 +167,7 @@ color: red !important;
 min-height: 100vh;
 overflow: hidden;
 backdrop-filter: blur(.4rem);
+-webkit-backdrop-filter: blur(.4rem);
 }
 main{
 min-height: 100vh;

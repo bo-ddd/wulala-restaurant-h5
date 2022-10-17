@@ -95,6 +95,7 @@ const lastPage = function () {
   min-height: 100vh;
   overflow: hidden;
   backdrop-filter: blur(.4rem);
+  -webkit-backdrop-filter: blur(.4rem);
   position: relative;
 }
 main{
