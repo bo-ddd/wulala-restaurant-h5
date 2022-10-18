@@ -8,19 +8,11 @@
       <van-tab :title="item.title" v-for="(item, index) in aa" :key="index">
         {{index}}
         <MenuConten.Wrapper>
-          <menuConten.Item
-            v-for="(item, index) in foodlists"
-            :key="index"
-            :src="item.bannerUrl"
-            :content="item.foodName"
-            :price="item.price"
-            :description="item.description"
-          ></menuConten.Item>
+          <menuConten.Item v-for="(item, index) in foodlists" :key="index" :src="item.bannerUrl"
+            :content="item.foodName" :price="item.price" :description="item.description"></menuConten.Item>
         </MenuConten.Wrapper>
-
       </van-tab>
     </van-tabs>
-
   </main>
 </template>
 

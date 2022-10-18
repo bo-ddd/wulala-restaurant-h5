@@ -24,8 +24,8 @@ export default function () {
     let route = useRoute()
     let selected = ref(route.name) as Ref<string>
     let router = useRouter()
+    console.log('-----------------selected.value-----------------');
     console.log(selected.value);
-    
 
     //这个menuNav是这个页面中的唯一逻辑
     const menuNav = function (name: string): void {
