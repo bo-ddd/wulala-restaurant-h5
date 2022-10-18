@@ -21,10 +21,17 @@ export default function () {
             orderUrl:'icon-feedback.png',
             text:'反馈'
         },
+    ]
+    let game = [
         {
             id:5,
             orderUrl:'icon-lucky_turntable.png',
             text:'转盘'
+        },
+        {
+            id:6,
+            orderUrl:'xiaoxiaole.png',
+            text:'消消乐'
         }
     ]
     let router = useRouter();
@@ -37,5 +44,5 @@ export default function () {
         })
     }
 
-    return {toSignIn, MineOrderList};
+    return {toSignIn, MineOrderList,game};
 }
