@@ -34,6 +34,8 @@
       <!-- 我稍后再登录(报名) -->
     </div>
   </main>
+  <!-- <div class="verificationYes"><img src="@/assets/images/yes.png" alt=""></div>
+  <div class="verificationNo"><img src="@/assets/images/error.png" alt=""></div> -->
 </template>
 
 <script lang="ts" setup>
@@ -140,7 +142,9 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
       alert('您已注册过此账号');
       router.push({name:'signin'});
     }else{
-      router.push({name:'mine'});
+      router.push({name:'/'});
+      let token = res.data.data.token;
+      localStorage.setItem('token',token);
     }
   }).catch(err => {
     console.log('-------------err-----------');
@@ -159,6 +163,9 @@ padding: 1.8rem 0;
   width: 70%;
 }
 
+
+
+/* verification */
 
 .setcolor{
 color: red !important;
