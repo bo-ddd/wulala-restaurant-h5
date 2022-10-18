@@ -3,8 +3,8 @@
   <main>
     <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <!-- 个人 personal 信息 info -->
-    <AccountInfo.Wrapper class="wrap mt-20 mb-20"  @click="toSignIn">
-      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" :text="'立即登录'">
+    <AccountInfo.Wrapper class="wrap mt-20 mb-20"  @click="deleteEvent&&toSignIn">
+      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" :text="text">
         <template #accountSettings>
           <div class="account-settings">账户设置</div>
         </template>
@@ -20,12 +20,24 @@
 </template>
 
 <script lang="ts" setup>
+import {ref} from 'vue';
 import useRecommendSignUp from "./composables/RecommendSignUp";
 import Nav from '@/components/nav';
 import AccountInfo from '@/components/accountInfo';
 import useUtil from "@/assets/ulit";
 let { parsrAsssetFile } = useUtil();
 let { toSignIn,MineOrderList } = useRecommendSignUp();
+let deleteEvent = ref(true);
+let text = ref('立即登录');
+let token = localStorage.getItem('token');
+if (token != '') {
+  text.value = '已登录';
+  deleteEvent.value = false;
+}else{
+  text.value = '立即登录';
+  deleteEvent.value = true;
+}
+
 </script>
 
 <style scoped>

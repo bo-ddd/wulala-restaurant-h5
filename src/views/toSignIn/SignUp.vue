@@ -140,7 +140,7 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
       alert('您已注册过此账号');
       router.push({name:'signin'});
     }else{
-      router.push({name:'mine'});
+      router.push({name:'/'});
     }
   }).catch(err => {
     console.log('-------------err-----------');
