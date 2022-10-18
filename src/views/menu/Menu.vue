@@ -6,6 +6,7 @@
 
     <van-tabs v-model:active="active" class="wrap">
       <van-tab :title="item.title" v-for="(item, index) in aa" :key="index">
+        {{index}}
         <MenuConten.Wrapper>
           <menuConten.Item
             v-for="(item, index) in foodlists"
@@ -16,18 +17,10 @@
             :description="item.description"
           ></menuConten.Item>
         </MenuConten.Wrapper>
-        <!-- <RouterView /> -->
 
-        <!-- <div class="main wrap">
-            <MenuTitle.Wrapper v-model="selected" @tap="menuNav">
-                <MenuTitle.Item v-for="(el,index) in imgarr" :name="el.name" :key="index">
-                {{ el.text }}</MenuTitle.Item>
-            </MenuTitle.Wrapper>
-        </div> -->
       </van-tab>
     </van-tabs>
 
-    <!-- <RouterView /> -->
   </main>
 </template>
 
@@ -63,7 +56,7 @@ export default {
 </script> -->
 
 <style scoped>
-.van-tabs__line {
-  background: yellow !important;
+::v-deep .van-tabs__line {
+  background: #2d2823;
 }
 </style>

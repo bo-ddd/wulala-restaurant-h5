@@ -28,7 +28,7 @@ export const signUp = function ( options = {} ){
 }
 
 export const getFoodListApi = function (payload ={}){
-    return instance.get('/food/list', payload)
+    return instance.post('/food/list', payload)
 }
 
 

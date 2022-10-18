@@ -1,5 +1,5 @@
 <template>
-  <div class="content-item">
+  <div class="content-item" @click="showPopup" >
     <div class="img">
       <img :src="src" alt="" />
     </div>
@@ -11,9 +11,20 @@
       <span>￥{{ price }}</span>
     </div>  
   </div>
+
+  <div class="layer">
+    <van-popup v-model:show="show">
+      <div class=""></div>
+      <!-- <img :src="src" alt="" /> -->
+      <span>{{ content }}</span>
+      <span>￥{{ price }}</span>
+    </van-popup>
+  </div>
 </template>
 
 <script setup lang="ts">
+import { ref } from 'vue';
+
 let props = defineProps<{
   src?: string;
   content?: string;
@@ -22,6 +33,11 @@ let props = defineProps<{
 }>();
 
 const { src, content, price, description } = props;
+
+const show = ref(false);
+    const showPopup = () => {
+      show.value = true;
+    };
 
 </script>
 
@@ -47,5 +63,9 @@ const { src, content, price, description } = props;
   font-size: 1.2rem;
   font-weight: 500;
   color: #bcbcb9;
+}
+
+.layer{
+  
 }
 </style>
