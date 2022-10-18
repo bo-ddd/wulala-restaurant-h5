@@ -6,7 +6,7 @@
 
     <van-tabs v-model:active="active" class="wrap">
       <van-tab :title="item.title" v-for="(item, index) in aa" :key="index">
-        {{index}}
+        <!-- {{index}} -->
         <MenuConten.Wrapper>
           <menuConten.Item v-for="(item, index) in foodlists" :key="index" :src="item.bannerUrl"
             :content="item.foodName" :price="item.price" :description="item.description"></menuConten.Item>

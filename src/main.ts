@@ -1,6 +1,6 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
-import {Tab,Tabs,Popup } from 'vant'
+import {Tab,Tabs,Popup,Stepper,Button} from 'vant'
 
 import App from "./App.vue";
 import router from "./router";
@@ -20,5 +20,7 @@ app.use(router);
 app.use(Tab);
 app.use(Tabs);
 app.use(Popup);
+app.use(Stepper);
+app.use(Button);
 
 app.mount("#app");
