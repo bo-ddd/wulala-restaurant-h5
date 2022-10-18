@@ -7,27 +7,11 @@
     <van-tabs v-model:active="active" class="wrap">
       <van-tab :title="item.title" v-for="(item, index) in aa" :key="index">
         <MenuConten.Wrapper>
-          <menuConten.Item
-            v-for="(item, index) in foodlists"
-            :key="index"
-            :src="item.bannerUrl"
-            :content="item.foodName"
-            :price="item.price"
-            :description="item.description"
-          ></menuConten.Item>
+          <menuConten.Item v-for="(item, index) in foodlists" :key="index" :src="item.bannerUrl"
+            :content="item.foodName" :price="item.price" :description="item.description"></menuConten.Item>
         </MenuConten.Wrapper>
-        <!-- <RouterView /> -->
-
-        <!-- <div class="main wrap">
-            <MenuTitle.Wrapper v-model="selected" @tap="menuNav">
-                <MenuTitle.Item v-for="(el,index) in imgarr" :name="el.name" :key="index">
-                {{ el.text }}</MenuTitle.Item>
-            </MenuTitle.Wrapper>
-        </div> -->
       </van-tab>
     </van-tabs>
-
-    <!-- <RouterView /> -->
   </main>
 </template>
 
