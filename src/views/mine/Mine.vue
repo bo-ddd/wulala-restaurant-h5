@@ -37,7 +37,6 @@ if (token != '') {
   text.value = '立即登录';
   deleteEvent.value = true;
 }
-
 </script>
 
 <style scoped>
