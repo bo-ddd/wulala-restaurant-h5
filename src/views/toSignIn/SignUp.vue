@@ -34,6 +34,8 @@
       <!-- 我稍后再登录(报名) -->
     </div>
   </main>
+  <!-- <div class="verificationYes"><img src="@/assets/images/yes.png" alt=""></div>
+  <div class="verificationNo"><img src="@/assets/images/error.png" alt=""></div> -->
 </template>
 
 <script lang="ts" setup>
@@ -161,6 +163,9 @@ padding: 1.8rem 0;
   width: 70%;
 }
 
+
+
+/* verification */
 
 .setcolor{
 color: red !important;

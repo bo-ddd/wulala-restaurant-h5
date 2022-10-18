@@ -1,11 +1,10 @@
 import axios from "axios";
-
+let token = localStorage.getItem('token');
 const instance = axios.create({
     baseURL: '/api',
     timeout: 1000,  //如果接口一秒都没有返回结果，则axios会自动帮我们做一个失败(reject)的处理
-    // headers: {'Content-Type':'application/x-www-form-urlencoded;charset=UTF-8'},  //在发送服务端之前，前端设置请求头信息；
+    headers: {'token':token},  //在发送服务端之前，前端设置请求头信息；
 });
-
 
 //api 在项目中，通常情况指的是  服务端的一个接口方法；
 //一个方法只实现一个功能；所以这个方法就只能是单纯的去调用服务端的接口；
@@ -25,6 +24,10 @@ export const loginApi = function (payload = {}){
 
 export const signUp = function ( options = {} ){
     return instance.post('/user/register' , options)
+}
+
+export const userInfo = function ( payload = {} ){
+    return instance.post('/user/info',payload)
 }
 
 export const getFoodListApi = function (payload ={}){

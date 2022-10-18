@@ -25,6 +25,7 @@ import useRecommendSignUp from "./composables/RecommendSignUp";
 import Nav from '@/components/nav';
 import AccountInfo from '@/components/accountInfo';
 import useUtil from "@/assets/ulit";
+import {userInfo} from '@/api/api';
 let { parsrAsssetFile } = useUtil();
 let { toSignIn,MineOrderList } = useRecommendSignUp();
 let deleteEvent = ref(true);
@@ -33,6 +34,15 @@ let token = localStorage.getItem('token');
 if (token != '') {
   text.value = '已登录';
   deleteEvent.value = false;
+  userInfo({
+    
+  }).then(res => {
+    console.log('---------res---------');
+    console.log(res);
+  }).catch(err => {
+    console.log('----------err----------');
+    console.log(err);
+  })
 }else{
   text.value = '立即登录';
   deleteEvent.value = true;
