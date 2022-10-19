@@ -98,12 +98,12 @@ const router = createRouter({
 // 导航守卫，路由守卫，路由拦截
 router.beforeEach((to,from,next)=>{
   // 验证token，只有存在token的时候 ，才能跳转到内容页
-  console.log(to);
-  console.log(from);
+  // console.log(to);
+  // console.log(from);
   let token = localStorage.getItem('token');
   if (token || to.path === '/signin') {
     next();
-    console.log(token);
+    // console.log(token);
   }else{
     next("/signin")
   }
