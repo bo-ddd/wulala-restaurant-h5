@@ -23,10 +23,9 @@
             <Silder.Banner :src="parsrAsssetFile('banaer-5.png')"></Silder.Banner>
         </Silder.Wrapper>
 
-
         <!-- 开启点餐之旅 -->
-        <HomeBtn.Wrapper class="mt-14 wrap" v-model="sect" @tap="homeNav">
-            <HomeBtn.Item :src="parsrAsssetFile('btn-order.png')" name="menu"></HomeBtn.Item>
+        <HomeBtn.Wrapper class="mt-14" >
+            <HomeBtn.Item :src="parsrAsssetFile('btn-order.png')"></HomeBtn.Item>
         </HomeBtn.Wrapper>
 
 
@@ -74,27 +73,25 @@
 
 </template>
 <script setup lang="ts">
-import usehomeNav from '@/views/home/homeNav'
-import Search from '@/components/search'
 import Silder from '@/components/slider'
 import BestSellers from '@/components/bestSellers'
 import Title from '@/components/Title.vue'
 import useUlit from '@/assets/ulit/index'
 import HomeBtn from '@/components/homeBtn'
-import { useRouter } from 'vue-router'
+import { useRouter,useRoute } from 'vue-router'
 import { ref } from 'vue';
 const value = ref('');
-let { sect, homeNav } = usehomeNav()
 
 let router = useRouter()
+let route = useRoute()
 let { parsrAsssetFile } = useUlit()
+
 const onOrder = function (name: string) {
-    router.push(name)
+    router.push(name);
 }
 
 const toevaluate = function (name: string, goodsId: number) {
     window.location.href = `/evaluate?goodsId=${goodsId}`
-    // router.push(name)
 }
 
 const bestSellers = [

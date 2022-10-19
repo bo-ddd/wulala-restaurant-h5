@@ -19,21 +19,21 @@ export default function () {
             url: parsrAsssetFile('icon-menu.png'),
             urls: parsrAsssetFile('icon-menu_hover.png'),
             text: '菜单',
-            name: 'menu'
+            name: '/menu'
         },
         {
             id: 2, 
             url: parsrAsssetFile('icon-order.png'),
             urls: parsrAsssetFile('icon-order_hover.png'),
             text: '订单',
-            name: 'order'
+            name: '/order'
         },
         {
             id: 3,
             url: parsrAsssetFile('icon-mine.png'),
             urls: parsrAsssetFile('icon-mine_hover.png'),
             text: '我的',
-            name: 'mine'
+            name: '/mine'
         }
     ]
     let route = useRoute()

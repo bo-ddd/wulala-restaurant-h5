@@ -4,21 +4,30 @@
     </div>
 </template>
 <script setup lang="ts">
-import { provide, toRefs } from "vue";
+import { provide, toRefs, watch, } from "vue";
+import {useRoute} from 'vue-router'
 const props = defineProps<{
     modelValue: string
 }>();
 const emit = defineEmits(['update:modelValue', 'tap'])
 let { modelValue } = toRefs(props)
 
-
 const models = function (name: string): any {
     emit("update:modelValue", name)
     emit("tap", name)
 }
+let route=useRoute();
+console.log(111);
 
+console.log(route.name);
+
+
+watch(modelValue, (curr, old) => {
+    console.log(curr);
+})
 provide('models', models)
 provide('selected', modelValue)
+
 
 </script>
 <style scoped>

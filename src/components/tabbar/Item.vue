@@ -7,9 +7,12 @@
     </div>
 </template>
 <script setup lang="ts">
-import { inject, computed, type Ref } from 'vue';
-import { useRouter } from "vue-router"
+import { inject, computed, type Ref, ref, watch } from 'vue';
+import { useRouter, useRoute } from "vue-router"
 let router = useRouter();
+let route = useRoute()
+
+
 const props = defineProps<{
     src: string;
     activeUrl: string;
@@ -19,15 +22,17 @@ const props = defineProps<{
 let { src, activeUrl, name } = props
 
 const models = inject('models') as (name: string) => void
-let selected = inject('selected') as Ref<string>
+let selected = inject('selected') as Ref<string>;
 const to = function () {
     models(name)
 }
 
+watch(() => router.currentRoute.value.path, (newValue, oldValue) => {
+    console.log('watch', newValue);
+}, { immediate: true })
 
-
-let url = computed(() => selected.value == name ? activeUrl : src)
-const color = computed(() => selected.value == name ? '#fb7b2c' : '#bcbcb9')
+let url = computed(() => router.currentRoute.value.path == name ? activeUrl : src)
+const color = computed(() => router.currentRoute.value.path == name ? '#fb7b2c' : '#bcbcb9')
 </script>
 <style scoped>
 .item {
