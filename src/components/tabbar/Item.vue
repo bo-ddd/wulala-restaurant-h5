@@ -26,11 +26,6 @@ let selected = inject('selected') as Ref<string>;
 const to = function () {
     models(name)
 }
-
-watch(() => router.currentRoute.value.path, (newValue, oldValue) => {
-    console.log('watch', newValue);
-}, { immediate: true })
-
 let url = computed(() => router.currentRoute.value.path == name ? activeUrl : src)
 const color = computed(() => router.currentRoute.value.path == name ? '#fb7b2c' : '#bcbcb9')
 </script>

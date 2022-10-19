@@ -17,14 +17,6 @@ const models = function (name: string): any {
     emit("tap", name)
 }
 let route=useRoute();
-console.log(111);
-
-console.log(route.name);
-
-
-watch(modelValue, (curr, old) => {
-    console.log(curr);
-})
 provide('models', models)
 provide('selected', modelValue)
 
