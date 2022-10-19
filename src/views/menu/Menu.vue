@@ -36,17 +36,6 @@ let foodlists = ref({});
 })();
 </script>
 
-<!-- <script lang="ts">
-import { ref } from "vue";
-
-export default {
-  setup() {
-    const active = ref(0);
-    return { active };
-  },
-};
-</script> -->
-
 <style scoped>
 ::v-deep .van-tabs__line {
   background: #2d2823;
