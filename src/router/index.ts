@@ -79,6 +79,10 @@ const router = createRouter({
       path:'/setaccount',
       name:'setaccount',
       component:()=> import("../views/toSignIn/SetAccount.vue"),
+    },{
+      path:'/evaluate',
+      name:'evaluate',
+      component:()=> import("../views/evaluate/Evaluate.vue"),
     }
   ],
 })
