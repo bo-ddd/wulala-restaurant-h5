@@ -1,7 +1,11 @@
 <template>
     <div class="home">
-        <div class="aa wrap pt-18">
-            <Search.Wrapper class="">
+
+        <div class=" bb wrap pt-18">
+            <!-- <van-search v-model="value" placeholder="麻辣香锅" /> -->
+            <van-search v-model="value" shape="round" background="#4fc08d" placeholder="麻辣香锅">
+            </van-search>
+            <!-- <Search.Wrapper class="">
                 <Search.Iptup placeholder="麻辣香锅">
                     <template #btn>
                         <div class="search-btn">
@@ -9,7 +13,7 @@
                         </div>
                     </template>
                 </Search.Iptup>
-            </Search.Wrapper>
+            </Search.Wrapper> -->
         </div>
         <Silder.Wrapper class="wrap mt-14">
             <Silder.Banner :src="parsrAsssetFile('banaer-1.png')"></Silder.Banner>
@@ -78,7 +82,8 @@ import Title from '@/components/Title.vue'
 import useUlit from '@/assets/ulit/index'
 import HomeBtn from '@/components/homeBtn'
 import { useRouter } from 'vue-router'
-
+import { ref } from 'vue';
+const value = ref('');
 let { sect, homeNav } = usehomeNav()
 
 let router = useRouter()
@@ -262,4 +267,18 @@ const bestSellers = [
     color: white;
     font-weight: 550;
 }
+.bb{
+    position: relative;
+}
+/* .aa{
+    font-size: 1.7rem;
+    font-weight:bold;
+    background-color: #212111;
+    color: #fff;
+    padding: .4rem 1rem;
+    border-radius: 3rem;
+    position: absolute;
+    top: 2rem;
+    right: .2rem;
+} */
 </style>
