@@ -58,11 +58,11 @@ if (token != '') {
     console.log(err);
   })
 }else{
-  text.value = '立即登录';
+  text.value = '';
 }
 
 const setaccount = function (){
-  router.push({name:'setaccount'})
+  router.push({name:'setaccount',query:{}})
 }
 </script>
 
