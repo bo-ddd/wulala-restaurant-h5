@@ -3,7 +3,7 @@ import { createPinia } from "pinia";
 /**
  * 刘总的
  */
-import {Tab,Tabs,Popup } from 'vant'
+import {Tab,Tabs,Popup ,Button,Stepper} from 'vant'
 import App from "./App.vue";
 /**
  * 宋总的
@@ -27,5 +27,6 @@ app.use(Tab);
 app.use(Tabs);
 app.use(Popup);
 app.use(Skeleton).use(Search);
-
+app.use(Button);
+app.use(Stepper);
 app.mount("#app");
