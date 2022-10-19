@@ -55,16 +55,6 @@ if (token != '') {
     console.log(err);
   })
   watchEffect(() => text.value)
-
-  // uploadGoods({
-  //   file: '@/assets/images/cg.png',
-  // }).then(res => {
-  //   console.log('---------res---------');
-  //   console.log(res);
-  // }).catch(err => {
-  //   console.log('-------err ------');
-  //   console.log(err);
-  // })
 }else{
   text.value = '立即登录'
 }

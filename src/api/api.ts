@@ -30,10 +30,6 @@ export const userInfo = function ( payload = {} ){
     return instance.post('/user/info',payload)
 }
 
-export const uploadGoods = function(payload = {}){
-    return instance.post('/upload/goods',payload)
-}
-
 export const getFoodListApi = function (payload ={}){
     return instance.post('/food/list', payload)
 }
