@@ -31,7 +31,7 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch } from 'vue';
+import { ref, watch , watchEffect} from 'vue';
 import useRecommendSignUp from "./composables/RecommendSignUp";
 import Nav from '@/components/nav';
 import AccountInfo from '@/components/accountInfo';
@@ -55,9 +55,7 @@ if (token != '') {
     console.log('----------err----------');
     console.log(err);
   })
-  watch(() => text.value, (newValue) => {
-  // console.log('watch', newValue);
-})
+  watchEffect(() => text.value)
 
   // uploadGoods({
   //   file: '@/assets/images/cg.png',
