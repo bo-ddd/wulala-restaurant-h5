@@ -3,16 +3,16 @@
   <main>
     <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <!-- 个人 personal 信息 info -->
-    <AccountInfo.Wrapper v-if="text  != '' && token != ''" class="wrap mt-20 mb-20">
-      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" :text="text">
+    <AccountInfo.Wrapper v-if="userName  != '' && tokens!=null" class="wrap mt-20 mb-20">
+      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" :text="userName">
         <template #accountSettings>
           <div class="account-settings" @click="setaccount">账户设置</div>
         </template>
       </AccountInfo.Item>
     </AccountInfo.Wrapper>
 
-    <AccountInfo.Wrapper v-else="token == ''" class="wrap mt-20 mb-20" @click="toSignIn">
-      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" :text="text">
+    <AccountInfo.Wrapper v-else="tokens == null" class="wrap mt-20 mb-20" @click="toSignIn">
+      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" text="立即登录">
         <template #accountSettings>
           <div class="account-settings">账户设置</div>
         </template>
@@ -31,33 +31,26 @@
 </template>
 
 <script lang="ts" setup>
-import { ref, watch , watchEffect} from 'vue';
+import { ref } from 'vue';
 import useRecommendSignUp from "./composables/RecommendSignUp";
 import Nav from '@/components/nav';
 import AccountInfo from '@/components/accountInfo';
 import useUtil from "@/assets/ulit";
-import { userInfo, uploadGoods } from '@/api/api';
+import { userInfo } from '@/api/api';
 import router from '@/router';
-import aq from '@/assets/images/cg.png'
 let { parsrAsssetFile } = useUtil();
 let { toSignIn, MineOrderList, game } = useRecommendSignUp();
-let text = ref('');
-
-let token = localStorage.getItem('token');
-
-if (token != '') {
-  userInfo({}).then(res => {
-    console.log('---------res---------');
-    console.log(res);
-    text.value = res.data.data.avatarName;
-  }).catch(err => {
-    console.log('----------err----------');
-    console.log(err);
-  })
-  watchEffect(() => text.value)
-}else{
-  text.value = '立即登录'
-}
+let userName = ref('');
+let tokens = localStorage.getItem('token');
+(async function () {
+  let userInfoRes = await userInfo({});
+  if (userInfoRes.data.status == 1) {
+    userName.value= userInfoRes.data.data.avatarName;
+    console.log(userName);
+  }else{
+    userName.value = '立即登录';
+  }
+})()
 
 const setaccount = function () {
   router.push({ name: 'setaccount', query: {} })
