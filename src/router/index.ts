@@ -18,25 +18,7 @@ const router = createRouter({
         }, {
           path: '/menu', //menu
           name: 'menu',
-          redirect:'/breakfast', // 重定向
           component: () => import("@/views/menu/Menu.vue"),
-          children:[
-            {
-              path: '/breakfast',
-              name:'breakfast',
-              component:() => import("@/views/breakfast/Breakfast.vue")
-            },
-            {
-              path: '/lunch',
-              name:'lunch',
-              component:() => import("@/views/lunch/Lunch.vue")
-            },
-            {
-              path: '/supper',
-              name:'supper',
-              component:() => import("@/views/supper/Supper.vue")
-            },
-          ]
         }, {
           path: '/order',//shoppingCart
           name: 'order',
@@ -92,7 +74,14 @@ const router = createRouter({
       path:'/signup',
       name:'signup',
       component:()=> import("../views/toSignIn/SignUp.vue"),
-    }
+    },{
+      path: '/evaluate', //mien
+      name: 'evaluate',
+      // route level code-splitting
+      // this generates a separate chunk (About.[hash].js) for this route
+      // which is lazy-loaded when the route is visited.
+      component: () => import('../views/evaluate/Evaluate.vue')
+    },
   ],
 })
 // 导航守卫，路由守卫，路由拦截
