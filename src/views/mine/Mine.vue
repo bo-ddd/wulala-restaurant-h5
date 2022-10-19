@@ -3,7 +3,7 @@
   <main>
     <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <!-- 个人 personal 信息 info -->
-    <AccountInfo.Wrapper v-if="text  != ''" class="wrap mt-20 mb-20">
+    <AccountInfo.Wrapper v-if="text  != '' && token != ''" class="wrap mt-20 mb-20">
       <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" :text="text">
         <template #accountSettings>
           <div class="account-settings" @click="setaccount">账户设置</div>
@@ -11,7 +11,7 @@
       </AccountInfo.Item>
     </AccountInfo.Wrapper>
 
-    <AccountInfo.Wrapper v-else="token == null" class="wrap mt-20 mb-20" @click="toSignIn">
+    <AccountInfo.Wrapper v-else="token == ''" class="wrap mt-20 mb-20" @click="toSignIn">
       <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" :text="text">
         <template #accountSettings>
           <div class="account-settings">账户设置</div>
@@ -44,9 +44,9 @@ let { toSignIn, MineOrderList, game } = useRecommendSignUp();
 let text = ref('');
 
 let token = localStorage.getItem('token');
+console.log(token);
+
 if (token != '') {
-  // router.go(0)
-  // window.location.reload();
   userInfo({}).then(res => {
     console.log('---------res---------');
     console.log(res);
@@ -59,15 +59,15 @@ if (token != '') {
   // console.log('watch', newValue);
 })
 
-  uploadGoods({
-    file: '@/assets/images/cg.png',
-  }).then(res => {
-    console.log('---------res---------');
-    console.log(res);
-  }).catch(err => {
-    console.log('-------err ------');
-    console.log(err);
-  })
+  // uploadGoods({
+  //   file: '@/assets/images/cg.png',
+  // }).then(res => {
+  //   console.log('---------res---------');
+  //   console.log(res);
+  // }).catch(err => {
+  //   console.log('-------err ------');
+  //   console.log(err);
+  // })
 }else{
   text.value = '立即登录'
 }
