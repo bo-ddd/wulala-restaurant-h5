@@ -34,16 +34,14 @@
       <!-- 我稍后再登录(报名) -->
     </div>
   </main>
-  <!-- <div class="verificationYes"><img src="@/assets/images/yes.png" alt=""></div>
-  <div class="verificationNo"><img src="@/assets/images/error.png" alt=""></div> -->
 </template>
 
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import useJumpInfo from './composables/JumpInfo';
 import { ref, type Ref } from 'vue';
-// import { signUp } from '@/api/api';
 import { signUp } from '@/api/api';
+import { Notify } from 'vant';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
 
 let router = useRouter();
@@ -139,7 +137,7 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
     console.log(res);
     console.log(res.data.msg);
     if (res.data.msg == '用户名已存在') {
-      alert('您已注册过此账号');
+      Notify({ type: 'primary', message: '您已注册过此账号,请登录' });
       router.push({name:'signin'});
     }else{
       router.push({name:'/'});

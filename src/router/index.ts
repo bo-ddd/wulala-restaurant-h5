@@ -92,22 +92,27 @@ const router = createRouter({
       path:'/signup',
       name:'signup',
       component:()=> import("../views/toSignIn/SignUp.vue"),
+    },
+    {
+      path:'/setaccount',
+      name:'setaccount',
+      component:()=> import("../views/toSignIn/SetAccount.vue"),
     }
   ],
 })
 // 导航守卫，路由守卫，路由拦截
-router.beforeEach((to,from,next)=>{
+// router.beforeEach((to,from,next)=>{
   // 验证token，只有存在token的时候 ，才能跳转到内容页
   // console.log(to);
   // console.log(from);
-  let token = localStorage.getItem('token');
-  if (token || to.path === '/signin') {
-    next();
+  // let token = localStorage.getItem('token');
+  // if (token || to.path === '/signin') {
+    // next();
     // console.log(token);
-  }else{
-    next("/signin")
-  }
+//   }else{
+//     next("/signin")
+//   }
   
-})
+// })
 
 export default router

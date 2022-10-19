@@ -6,7 +6,7 @@
     <AccountInfo.Wrapper v-if="text  != ''" class="wrap mt-20 mb-20">
       <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" :text="text">
         <template #accountSettings>
-          <div class="account-settings">账户设置</div>
+          <div class="account-settings" @click="setaccount">账户设置</div>
         </template>
       </AccountInfo.Item>
     </AccountInfo.Wrapper>
@@ -41,12 +41,14 @@ import Nav from '@/components/nav';
 import AccountInfo from '@/components/accountInfo';
 import useUtil from "@/assets/ulit";
 import {userInfo} from '@/api/api';
+import router from '@/router';
 let { parsrAsssetFile } = useUtil();
 let { toSignIn,MineOrderList ,game} = useRecommendSignUp();
-
 let text = ref('');
 let token = localStorage.getItem('token');
 if (token != '') {
+  // router.go(0)
+  // window.location.reload();
   userInfo({}).then(res => {
     console.log('---------res---------');     
     console.log(res);
@@ -59,6 +61,9 @@ if (token != '') {
   text.value = '立即登录';
 }
 
+const setaccount = function (){
+  router.push({name:'setaccount'})
+}
 </script>
 
 <style scoped>
