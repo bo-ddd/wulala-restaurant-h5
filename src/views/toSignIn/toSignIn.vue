@@ -67,7 +67,9 @@ const signInBtn = function(){
           confirm(res.data.msg);
         }else if(res.data.msg == '成功'){
           alert('登录成功');
-          router.push({name:'mine'})
+          router.push({name:'/'});
+          let token = res.data.data.token;
+          localStorage.setItem('token',token);
         }
       }).catch(err => {
         console.log(err);

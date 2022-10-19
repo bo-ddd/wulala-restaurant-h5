@@ -1,9 +1,14 @@
 import { createApp } from "vue";
 import { createPinia } from "pinia";
+/**
+ * 刘总的
+ */
 import {Tab,Tabs,Popup } from 'vant'
 import App from "./App.vue";
-import { Skeleton } from 'vant';
-import { Search } from 'vant';
+/**
+ * 宋总的
+ */
+import { Skeleton,Search } from 'vant';
 import router from "./router";
 
 import "./assets/main.css";

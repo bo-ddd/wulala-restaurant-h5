@@ -6,7 +6,7 @@
 
     <van-tabs v-model:active="active" class="wrap">
       <van-tab :title="item.title" v-for="(item, index) in aa" :key="index">
-        {{index}}
+        <!-- {{index}} -->
         <MenuConten.Wrapper>
           <menuConten.Item v-for="(item, index) in foodlists" :key="index" :src="item.bannerUrl"
             :content="item.foodName" :price="item.price" :description="item.description"></menuConten.Item>
@@ -35,17 +35,6 @@ let foodlists = ref({});
   foodlists.value = foodlist.data.data.list;
 })();
 </script>
-
-<!-- <script lang="ts">
-import { ref } from "vue";
-
-export default {
-  setup() {
-    const active = ref(0);
-    return { active };
-  },
-};
-</script> -->
 
 <style scoped>
 ::v-deep .van-tabs__line {
