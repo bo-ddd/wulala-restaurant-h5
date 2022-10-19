@@ -20,7 +20,7 @@
     /* display:inline-block; */
     text-align: center;
     color: v-bind(color);
-    border-radius: 2.5rem;
+    border-radius: 1rem;
     background: v-bind(bjcolor);
     font-size: 1.4rem;
     border: v-bind(border);

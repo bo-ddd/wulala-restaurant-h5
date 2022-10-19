@@ -32,6 +32,7 @@ import useJumpInfo from './composables/JumpInfo';
 import { useRouter } from "vue-router";
 import {ref} from 'vue';
 import { loginApi } from '@/api/api';
+import { Notify } from 'vant';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
 let username = ref(''); //获取input框的值
 let password = ref('');
@@ -42,7 +43,6 @@ let passwordLable = ref('密码');
 
 let isUserName = ref(false);//class 显示 隐藏
 let ispassword = ref(false);
-
 const signInBtn = function(){
   if (username.value == '' && password.value == '') {
     userNameLabel.value = '请输入用户名';
@@ -64,12 +64,14 @@ const signInBtn = function(){
         console.log('------res----');
         console.log(res)
         if (res.data.msg == '用户名或者密码错误') {
-          confirm(res.data.msg);
+          Notify({ type: 'danger', message: '用户名密码错误' })
         }else if(res.data.msg == '成功'){
-          alert('登录成功');
-          router.push({name:'/'});
-          let token = res.data.data.token;
-          localStorage.setItem('token',token);
+          Notify({ type: 'success', message: '登录成功' });
+            setTimeout(function (){
+            router.push({name:'/'});
+            let token = res.data.data.token;
+            localStorage.setItem('token',token);
+          },1500)
         }
       }).catch(err => {
         console.log(err);
