@@ -3,7 +3,8 @@
   <main>
     <div class="whole">
       <!-- 注册 -->
-      <Title class="wrap mt-24" level="1" color="white">注册账号</Title>
+      <Head class="head" color="white" imgcolor="1">注册账号</Head>
+      <!-- <Title class="wrap mt-24" level="1" color="white">注册账号</Title> -->
       <form class="wrap center from">
           <div class="user-box mb-18">
               <input v-model="userNameIptValue" type="text" required>
