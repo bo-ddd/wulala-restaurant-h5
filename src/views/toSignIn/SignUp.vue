@@ -47,6 +47,8 @@ let { toForgotPasswrod,toSignUp } = useJumpInfo();
 
 let router = useRouter();
 let reg = /^\d{1,}$/; //判断是否为数子;
+let regs=/\s/; //判断是否有空格
+
 
 let isusernameActive = ref(false); //class的显示隐藏 用户名
 let ispasswordActive = ref(false); //class的显示隐藏 密码
@@ -76,6 +78,9 @@ if(userNameIptValue.value == ''){
 }else if(userNameIptValue.value.length <= 5 || userNameIptValue.value.length >=20){
   userNameLabel.value = '用户名长度必须是在6-20之间';
   isusernameActive.value = true; 
+}else if(regs.test(userNameIptValue.value) == true){
+  userNameLabel.value = '用户名存在特殊字符';
+  isusernameActive.value = true;
 }else if(userNameIptValue.value != ''){
   isusernameActive.value = false;    
   userNameLabel.value = '用户名'
@@ -88,6 +93,9 @@ if (passwordIptValue.value == '') {
 }else if (passwordIptValue.value.length <= 5 || passwordIptValue.value.length >= 20) {
   passwordLable.value = '密码长度必须是在6-20之间';
   ispasswordActive.value = true
+}else if(regs.test(passwordIptValue.value) == true){
+  passwordLable.value = '密码存在特殊字符';
+  ispasswordActive.value = true;
 } else if(passwordIptValue.value != ''){
   passwordLable.value = '密码'
   ispasswordActive.value = false
@@ -112,6 +120,9 @@ if (phoneNumberIptValue.value == '') {
 }else if (phoneNumberIptValue.value.length == 10) {
   phoneNumberLable.value = '您输入的手机号不合法，请重新输入'
   isphoneNumberActive.value = true;
+}else if(regs.test(phoneNumberIptValue.value) == true){
+  phoneNumberLable.value = '您输入的手机号不合法，请重新输入';
+  isphoneNumberActive.value = true;
 }else {
   phoneNumberLable.value = '手机号'
   isphoneNumberActive.value = false;
@@ -120,6 +131,9 @@ if (phoneNumberIptValue.value == '') {
 if (avatarNameIptValue.value != '') {
   if (avatarNameIptValue.value.length >= 12) {
     avatarNameLable.value = '昵称字符长度必须是在1-12';
+    isavatarNameActive.value = true;
+  }else if(regs.test(avatarNameIptValue.value) == true){
+    avatarNameLable.value = '昵称带有特殊字符';
     isavatarNameActive.value = true;
   }else{
     avatarNameLable.value = '昵称';

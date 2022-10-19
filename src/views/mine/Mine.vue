@@ -44,7 +44,6 @@ let { toSignIn, MineOrderList, game } = useRecommendSignUp();
 let text = ref('');
 
 let token = localStorage.getItem('token');
-console.log(token);
 
 if (token != '') {
   userInfo({}).then(res => {
