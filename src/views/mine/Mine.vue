@@ -4,8 +4,11 @@
   <main>
     <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <!-- 个人 personal 信息 info -->
-    <AccountInfo.Wrapper v-if="userName  != '' && tokens!=null" class="wrap mt-20 mb-20" @click="toUserInfo">
-      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" :text="userName">
+    <AccountInfo.Wrapper v-if="userName  != '' && tokens!=null" class="wrap mt-20 mb-20">
+      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')">
+        <template #text>
+          <p class="account-info_name" @click="toUserInfo">{{userName}}</p>
+        </template>
         <template #accountSettings>
           <div class="account-settings" @click="setaccount">账户设置</div>
         </template>
@@ -85,5 +88,9 @@ main {
   border-radius: 2rem;
   border: .1rem solid #e8e8e8;
   padding: .4rem .8rem;
+}
+.account-info_name{
+  font-weight: 550;
+  padding-left: 1rem;
 }
 </style>

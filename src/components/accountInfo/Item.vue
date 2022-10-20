@@ -5,10 +5,10 @@
         <slot name="text">
             <Title class="title" lever="3" color="block">{{text}}</Title>
         </slot>
-      </div>
+    </div>
       <!-- 账户设置 -->
       <slot name="accountSettings">
-          <!-- <div class="account-settings">还没有传accountSettings</div> -->
+          <div class="account-settings">设置</div>
       </slot>
 </template>
 
