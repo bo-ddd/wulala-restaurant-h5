@@ -1,14 +1,14 @@
 <template>
-    <div class="box-button">
+    <div class="line-top">
         <slot></slot>
     </div>
 </template>
 <script setup lang="ts">
+
 </script>
+
 <style scoped>
-.box-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.line-top {
+    border-top: .1rem solid #f2f2f2;
 }
 </style>

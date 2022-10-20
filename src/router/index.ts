@@ -18,25 +18,7 @@ const router = createRouter({
         }, {
           path: '/menu', //menu
           name: 'menu',
-          redirect:'/breakfast', // 重定向
           component: () => import("@/views/menu/Menu.vue"),
-          children:[
-            {
-              path: '/breakfast',
-              name:'breakfast',
-              component:() => import("@/views/breakfast/Breakfast.vue")
-            },
-            {
-              path: '/lunch',
-              name:'lunch',
-              component:() => import("@/views/lunch/Lunch.vue")
-            },
-            {
-              path: '/supper',
-              name:'supper',
-              component:() => import("@/views/supper/Supper.vue")
-            },
-          ]
         }, {
           path: '/order',//shoppingCart
           name: 'order',
@@ -92,22 +74,35 @@ const router = createRouter({
       path:'/signup',
       name:'signup',
       component:()=> import("../views/toSignIn/SignUp.vue"),
+    },
+    {
+      path:'/setaccount',
+      name:'setaccount',
+      component:()=> import("../views/toSignIn/SetAccount.vue"),
+    },{
+      path:'/evaluate',
+      name:'evaluate',
+      component:()=> import("../views/evaluate/Evaluate.vue"),
+    },{
+      path:'/userinfo',
+      name:'userinfo',
+      component:()=> import("../views/toSignIn/UserInfo.vue")
     }
   ],
 })
 // 导航守卫，路由守卫，路由拦截
-router.beforeEach((to,from,next)=>{
+// router.beforeEach((to,from,next)=>{
   // 验证token，只有存在token的时候 ，才能跳转到内容页
-  console.log(to);
-  console.log(from);
-  let token = localStorage.getItem('token');
-  if (token || to.path === '/signin') {
-    next();
-    console.log(token);
-  }else{
-    next("/signin")
-  }
+  // console.log(to);
+  // console.log(from);
+  // let token = localStorage.getItem('token');
+  // if (token || to.path === '/signin') {
+    // next();
+    // console.log(token);
+//   }else{
+//     next("/signin")
+//   }
   
-})
+// })
 
 export default router

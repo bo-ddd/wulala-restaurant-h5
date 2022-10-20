@@ -1,18 +1,22 @@
 <template>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!-- <input type="file" name="" id=""> -->
   <main>
     <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <!-- 个人 personal 信息 info -->
-    <AccountInfo.Wrapper v-if="text=='已登录'" class="wrap mt-20 mb-20">
-      <AccountInfo.Item  :icon="parsrAsssetFile('end-sign_in.png')" text="小明">
+    <AccountInfo.Wrapper v-if="userName  != '' && tokens!=null" class="wrap mt-20 mb-20">
+      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')">
+        <template #text>
+          <p class="account-info_name" @click="toUserInfo">{{userName}}</p>
+        </template>
         <template #accountSettings>
-          <div class="account-settings">账户设置</div>
+          <div class="account-settings" @click="setaccount">账户设置</div>
         </template>
       </AccountInfo.Item>
     </AccountInfo.Wrapper>
 
-    <AccountInfo.Wrapper v-else="text=='立即登录'" class="wrap mt-20 mb-20"  @click="toSignIn">
-      <AccountInfo.Item  :icon="parsrAsssetFile('end-sign_in.png')" :text="text">
+    <AccountInfo.Wrapper v-else="tokens == null" class="wrap mt-20 mb-20" @click="toSignIn">
+      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" text="立即登录">
         <template #accountSettings>
           <div class="account-settings">账户设置</div>
         </template>
@@ -20,65 +24,73 @@
     </AccountInfo.Wrapper>
 
     <Nav.Wrapper class="nav-list wrap">
-      <Nav.Item class="order" v-for="item in MineOrderList" 
-      :size="'3'" 
-      :icon="parsrAsssetFile(item.orderUrl)" 
-      :text="item.text"></Nav.Item>
+      <Nav.Item class="order" v-for="item in MineOrderList" :size="'3'" :icon="parsrAsssetFile(item.orderUrl)"
+        :text="item.text"></Nav.Item>
     </Nav.Wrapper>
     <Nav.Wrapper class="nav-list wrap mt-20">
-      <Nav.Item class="order" v-for="item in game" 
-      :size="'3'" 
-      :icon="parsrAsssetFile(item.orderUrl)" 
-      :text="item.text"></Nav.Item>
+      <Nav.Item class="order" v-for="item in game" :size="'3'" :icon="parsrAsssetFile(item.orderUrl)" :text="item.text">
+      </Nav.Item>
     </Nav.Wrapper>
   </main>
 </template>
 
 <script lang="ts" setup>
-import {ref} from 'vue';
+import { ref } from 'vue';
 import useRecommendSignUp from "./composables/RecommendSignUp";
 import Nav from '@/components/nav';
 import AccountInfo from '@/components/accountInfo';
 import useUtil from "@/assets/ulit";
-import {userInfo} from '@/api/api';
+import { userInfo, uploadAvatar } from '@/api/api';
+import router from '@/router';
 let { parsrAsssetFile } = useUtil();
-let { toSignIn,MineOrderList ,game} = useRecommendSignUp();
-// let deleteEvent = ref(true);
-let text = ref('立即登录');
-let token = localStorage.getItem('token');
-console.log(token);
-
-if (token != '') {
-  text.value = '已登录';
-  userInfo({}).then(res => {
-    console.log('---------res---------');
-    console.log(res);
-  }).catch(err => {
-    console.log('----------err----------');
-    console.log(err);
-  })
-}else{
-  text.value = '立即登录';
+let { toSignIn, MineOrderList, game } = useRecommendSignUp();
+let userName = ref('');
+let tokens = localStorage.getItem('token');
+(async function () {
+  let userInfoRes = await userInfo({});
+  if (userInfoRes.data.status == 1) {
+    userName.value= userInfoRes.data.data.avatarName;
+    // console.log(userName);
+  }else{
+    userName.value = '立即登录';
+  }
+})()
+// uploadAvatar({
+//   file:'/src/assets/images/cg.png',
+// }).then(res => {
+//   console.log('----------------res--------------');
+//   console.log(res);
+// })
+const toUserInfo = function (){
+  router.push({name:'userinfo'})
 }
 
+const setaccount = function () {
+  router.push({ name: 'setaccount', query: {} })
+}
 </script>
 
 <style scoped>
-
-main{
+main {
   background: #f5f5f5;
   height: calc(100vh - 5rem);
   overflow: hidden;
 }
-.nav-list{
+
+.nav-list {
   background-color: #fff;
   border-radius: .4rem;
   padding: 1.2rem 0;
 }
-.account-settings{
+
+.account-settings {
   font-size: 1.2rem;
   border-radius: 2rem;
   border: .1rem solid #e8e8e8;
   padding: .4rem .8rem;
+}
+.account-info_name{
+  font-weight: 550;
+  padding-left: 1rem;
 }
 </style>

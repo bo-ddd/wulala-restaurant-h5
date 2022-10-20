@@ -3,7 +3,8 @@
   <main>
     <div class="whole">
       <!-- 注册 -->
-      <Title class="wrap mt-24" level="1" color="white">注册账号</Title>
+      <Head class="head" color="white" imgcolor="1">注册账号</Head>
+      <!-- <Title class="wrap mt-24" level="1" color="white">注册账号</Title> -->
       <form class="wrap center from">
           <div class="user-box mb-18">
               <input v-model="userNameIptValue" type="text" required>
@@ -34,20 +35,20 @@
       <!-- 我稍后再登录(报名) -->
     </div>
   </main>
-  <!-- <div class="verificationYes"><img src="@/assets/images/yes.png" alt=""></div>
-  <div class="verificationNo"><img src="@/assets/images/error.png" alt=""></div> -->
 </template>
 
 <script lang="ts" setup>
 import { useRouter } from "vue-router";
 import useJumpInfo from './composables/JumpInfo';
 import { ref, type Ref } from 'vue';
-// import { signUp } from '@/api/api';
-import { signUp } from '@/api/api';
+import { signUp, loginApi } from '@/api/api';
+import { Notify } from 'vant';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
 
 let router = useRouter();
 let reg = /^\d{1,}$/; //判断是否为数子;
+let regs=/\s/; //判断是否有空格
+
 
 let isusernameActive = ref(false); //class的显示隐藏 用户名
 let ispasswordActive = ref(false); //class的显示隐藏 密码
@@ -77,6 +78,9 @@ if(userNameIptValue.value == ''){
 }else if(userNameIptValue.value.length <= 5 || userNameIptValue.value.length >=20){
   userNameLabel.value = '用户名长度必须是在6-20之间';
   isusernameActive.value = true; 
+}else if(regs.test(userNameIptValue.value) == true){
+  userNameLabel.value = '用户名存在特殊字符';
+  isusernameActive.value = true;
 }else if(userNameIptValue.value != ''){
   isusernameActive.value = false;    
   userNameLabel.value = '用户名'
@@ -89,6 +93,9 @@ if (passwordIptValue.value == '') {
 }else if (passwordIptValue.value.length <= 5 || passwordIptValue.value.length >= 20) {
   passwordLable.value = '密码长度必须是在6-20之间';
   ispasswordActive.value = true
+}else if(regs.test(passwordIptValue.value) == true){
+  passwordLable.value = '密码存在特殊字符';
+  ispasswordActive.value = true;
 } else if(passwordIptValue.value != ''){
   passwordLable.value = '密码'
   ispasswordActive.value = false
@@ -113,6 +120,9 @@ if (phoneNumberIptValue.value == '') {
 }else if (phoneNumberIptValue.value.length == 10) {
   phoneNumberLable.value = '您输入的手机号不合法，请重新输入'
   isphoneNumberActive.value = true;
+}else if(regs.test(phoneNumberIptValue.value) == true){
+  phoneNumberLable.value = '您输入的手机号不合法，请重新输入';
+  isphoneNumberActive.value = true;
 }else {
   phoneNumberLable.value = '手机号'
   isphoneNumberActive.value = false;
@@ -121,6 +131,9 @@ if (phoneNumberIptValue.value == '') {
 if (avatarNameIptValue.value != '') {
   if (avatarNameIptValue.value.length >= 12) {
     avatarNameLable.value = '昵称字符长度必须是在1-12';
+    isavatarNameActive.value = true;
+  }else if(regs.test(avatarNameIptValue.value) == true){
+    avatarNameLable.value = '昵称带有特殊字符';
     isavatarNameActive.value = true;
   }else{
     avatarNameLable.value = '昵称';
@@ -132,19 +145,29 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
   signUp({
     username:userNameIptValue.value,
     password:passwordIptValue.value,
-    avatarName:avatarNameLable.value,
+    avatarName:avatarNameIptValue.value,
     phoneNumber:phoneNumberIptValue.value
   }).then(res=>{
     console.log('----------res----------');
     console.log(res);
     console.log(res.data.msg);
     if (res.data.msg == '用户名已存在') {
-      alert('您已注册过此账号');
+      Notify({ type: 'primary', message: '您已注册过此账号,请登录' });
       router.push({name:'signin'});
     }else{
-      router.push({name:'/'});
-      let token = res.data.data.token;
-      localStorage.setItem('token',token);
+      Notify({ type: 'success', message: '注册成功' });
+      loginApi({
+        username:userNameIptValue.value,
+        password:passwordIptValue.value,
+      }).then(res => {
+          setTimeout(function (){
+            router.push({name:'/'});
+            let token = res.data.data.token;
+            console.log(token);
+            localStorage.setItem('token',token);
+          },1500)
+        })
+
     }
   }).catch(err => {
     console.log('-------------err-----------');
@@ -152,7 +175,6 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
   })
 }
 }
-
 </script>
 
 <style scoped>

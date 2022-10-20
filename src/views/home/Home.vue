@@ -1,7 +1,11 @@
 <template>
     <div class="home">
-        <div class="aa wrap pt-18">
-            <Search.Wrapper class="">
+
+        <div class=" bb wrap pt-18">
+            <!-- <van-search v-model="value" placeholder="麻辣香锅" /> -->
+            <van-search v-model="value" shape="round" background="#4fc08d" placeholder="麻辣香锅">
+            </van-search>
+            <!-- <Search.Wrapper class="">
                 <Search.Iptup placeholder="麻辣香锅">
                     <template #btn>
                         <div class="search-btn">
@@ -9,7 +13,7 @@
                         </div>
                     </template>
                 </Search.Iptup>
-            </Search.Wrapper>
+            </Search.Wrapper> -->
         </div>
         <Silder.Wrapper class="wrap mt-14">
             <Silder.Banner :src="parsrAsssetFile('banaer-1.png')"></Silder.Banner>
@@ -19,10 +23,9 @@
             <Silder.Banner :src="parsrAsssetFile('banaer-5.png')"></Silder.Banner>
         </Silder.Wrapper>
 
-
         <!-- 开启点餐之旅 -->
-        <HomeBtn.Wrapper class="mt-14 wrap" v-model="sect" @tap="homeNav">
-            <HomeBtn.Item :src="parsrAsssetFile('btn-order.png')" name="menu"></HomeBtn.Item>
+        <HomeBtn.Wrapper class="mt-14" >
+            <HomeBtn.Item :src="parsrAsssetFile('btn-order.png')"></HomeBtn.Item>
         </HomeBtn.Wrapper>
 
 
@@ -70,26 +73,25 @@
 
 </template>
 <script setup lang="ts">
-import usehomeNav from '@/views/home/homeNav'
-import Search from '@/components/search'
 import Silder from '@/components/slider'
 import BestSellers from '@/components/bestSellers'
 import Title from '@/components/Title.vue'
 import useUlit from '@/assets/ulit/index'
 import HomeBtn from '@/components/homeBtn'
-import { useRouter } from 'vue-router'
-
-let { sect, homeNav } = usehomeNav()
+import { useRouter,useRoute } from 'vue-router'
+import { ref } from 'vue';
+const value = ref('');
 
 let router = useRouter()
+let route = useRoute()
 let { parsrAsssetFile } = useUlit()
+
 const onOrder = function (name: string) {
-    router.push(name)
+    router.push(name);
 }
 
 const toevaluate = function (name: string, goodsId: number) {
     window.location.href = `/evaluate?goodsId=${goodsId}`
-    // router.push(name)
 }
 
 const bestSellers = [
@@ -262,4 +264,18 @@ const bestSellers = [
     color: white;
     font-weight: 550;
 }
+.bb{
+    position: relative;
+}
+/* .aa{
+    font-size: 1.7rem;
+    font-weight:bold;
+    background-color: #212111;
+    color: #fff;
+    padding: .4rem 1rem;
+    border-radius: 3rem;
+    position: absolute;
+    top: 2rem;
+    right: .2rem;
+} */
 </style>
