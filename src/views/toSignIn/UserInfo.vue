@@ -2,7 +2,7 @@
     <main>
         <Head class="head" color="black" imgcolor="0">个人信息</Head>
         <div class="upload wrap mt-20">
-            <ExpressInfoItem class="order-info">
+            <ExpressInfoItem class="order-info border-bottom">
                 <template #left>
                     <span class="mode">头像</span>
                 </template>
@@ -15,6 +15,43 @@
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
             </ExpressInfoItem>
+            <ExpressInfoItem class="order-info">
+                <template #left>
+                    <span class="mode">昵称</span>
+                </template>
+                <template #middle>
+                    <span class="payment"> {{username}} </span>
+                </template>
+                <template #right>
+                    <img class="icon-right" src="@/assets/images/right.png" alt="">
+                </template>
+            </ExpressInfoItem>
+        </div>
+        <div class="upload wrap mt-20">
+            <ExpressInfoItem class="order-info border-bottom">
+                <template #left>
+                    <span class="mode">生日</span>
+                </template>
+                <template #middle>
+                    <span class="payment" >
+                        2022-12-24
+                    </span>
+                </template>
+                <template #right>
+                    <img class="icon-right" src="@/assets/images/right.png" alt="">
+                </template>
+            </ExpressInfoItem>
+            <ExpressInfoItem class="order-info">
+                <template #left>
+                    <span class="mode">个性标签</span>
+                </template>
+                <template #middle>
+                    <span class="payment"> 酒店房卡是否 </span>
+                </template>
+                <template #right>
+                    <img class="icon-right" src="@/assets/images/right.png" alt="">
+                </template>
+            </ExpressInfoItem>
         </div>
     </main>
 </template>
@@ -22,8 +59,10 @@
 <script lang="ts" setup> 
 import { uploadAvatar } from '@/api/api';
 import { Notify } from 'vant';
-import { useRouter } from 'vue-router';
+import { useRouter, useRoute } from 'vue-router';
 let router = useRouter();
+let route = useRoute();
+let username = route.query.name;
 let afterRead = (file : any) => {
   // 此时可以自行将文件上传至服务器
   console.log(file.file);
@@ -58,10 +97,11 @@ main{
     grid-template-columns: auto 8fr 1.8fr;
     align-items: center;
     justify-items: end;
-    padding: 1rem;
+    padding: 2rem;
 }
 .payment{
     color: #9d9d9d;
+    font-size: 1.6rem;
 }
 .mode{
     font-size: 1.6rem;
@@ -70,5 +110,8 @@ main{
 .icon-right{
     width: 1.6rem;
     filter: invert(67%);
+}
+.border-bottom{
+    border-bottom: .1rem solid red 51%;
 }
 </style>

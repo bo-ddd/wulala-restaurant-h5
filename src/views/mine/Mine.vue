@@ -62,7 +62,7 @@ console.log(image);
 })()
 
 const toUserInfo = function (){
-  router.push({name:'userinfo'})
+  router.push({name:'userinfo',query:{name:userName.value as any}})
 }
 
 const setaccount = function () {
