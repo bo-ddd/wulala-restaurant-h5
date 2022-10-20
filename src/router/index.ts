@@ -83,6 +83,10 @@ const router = createRouter({
       path:'/evaluate',
       name:'evaluate',
       component:()=> import("../views/evaluate/Evaluate.vue"),
+    },{
+      path:'/userinfo',
+      name:'userinfo',
+      component:()=> import("../views/toSignIn/UserInfo.vue")
     }
   ],
 })

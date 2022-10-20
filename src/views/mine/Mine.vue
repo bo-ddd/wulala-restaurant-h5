@@ -1,9 +1,10 @@
 <template>
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <!-- <input type="file" name="" id=""> -->
   <main>
     <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <!-- 个人 personal 信息 info -->
-    <AccountInfo.Wrapper v-if="userName  != '' && tokens!=null" class="wrap mt-20 mb-20">
+    <AccountInfo.Wrapper v-if="userName  != '' && tokens!=null" class="wrap mt-20 mb-20" @click="toUserInfo">
       <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" :text="userName">
         <template #accountSettings>
           <div class="account-settings" @click="setaccount">账户设置</div>
@@ -36,7 +37,7 @@ import useRecommendSignUp from "./composables/RecommendSignUp";
 import Nav from '@/components/nav';
 import AccountInfo from '@/components/accountInfo';
 import useUtil from "@/assets/ulit";
-import { userInfo } from '@/api/api';
+import { userInfo, uploadAvatar } from '@/api/api';
 import router from '@/router';
 let { parsrAsssetFile } = useUtil();
 let { toSignIn, MineOrderList, game } = useRecommendSignUp();
@@ -46,11 +47,20 @@ let tokens = localStorage.getItem('token');
   let userInfoRes = await userInfo({});
   if (userInfoRes.data.status == 1) {
     userName.value= userInfoRes.data.data.avatarName;
-    console.log(userName);
+    // console.log(userName);
   }else{
     userName.value = '立即登录';
   }
 })()
+// uploadAvatar({
+//   file:'/src/assets/images/cg.png',
+// }).then(res => {
+//   console.log('----------------res--------------');
+//   console.log(res);
+// })
+const toUserInfo = function (){
+  router.push({name:'userinfo'})
+}
 
 const setaccount = function () {
   router.push({ name: 'setaccount', query: {} })

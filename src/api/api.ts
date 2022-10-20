@@ -36,6 +36,10 @@ export const signUp = function (options = {}) {
     return instance.post('/user/register', options)
 }
 
+export const uploadAvatar = function (payload = {}){
+    return instance.post('upload/avatar',payload)
+}
+
 export const userInfo = function (payload = {}) {
     return instance.post('/user/info', payload)
 }
