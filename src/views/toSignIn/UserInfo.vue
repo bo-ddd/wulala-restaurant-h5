@@ -20,7 +20,7 @@
                     <span class="mode">昵称</span>
                 </template>
                 <template #middle>
-                    <span class="payment"> {{username}} </span>
+                    <p class="payment"> {{username}} </p>
                 </template>
                 <template #right>
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
@@ -33,9 +33,9 @@
                     <span class="mode">生日</span>
                 </template>
                 <template #middle>
-                    <span class="payment" @click="toBirthday">
+                    <p class="payment" @click="toBirthday">
                         yyy-m-r
-                    </span>
+                    </p>
                 </template>
                 <template #right>
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
@@ -46,7 +46,7 @@
                     <span class="mode">个性标签</span>
                 </template>
                 <template #middle>
-                    <span class="payment"> 酒店房卡是否 </span>
+                    <p class="payment"> 酒店房sda卡是否 </p>
                 </template>
                 <template #right>
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
@@ -105,6 +105,10 @@ main{
 .payment{
     color: #9d9d9d;
     font-size: 1.6rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 8rem;
+    white-space: nowrap;    
 }
 .mode{
     font-size: 1.6rem;
