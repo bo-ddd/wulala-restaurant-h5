@@ -8,8 +8,14 @@
       <van-tab :title="item.title" v-for="(item, index) in aa" :key="index">
         <!-- {{index}} -->
         <MenuConten.Wrapper>
-          <menuConten.Item v-for="(item, index) in foodlists" :key="index" :src="item.bannerUrl"
-            :content="item.foodName" :price="item.price" :description="item.description"></menuConten.Item>
+          <menuConten.Item
+            v-for="(item, index) in foodlists"
+            :key="index"
+            :src="item.bannerUrl"
+            :content="item.foodName"
+            :price="item.price"
+            :description="item.description"
+          ></menuConten.Item>
         </MenuConten.Wrapper>
       </van-tab>
     </van-tabs>
@@ -30,9 +36,10 @@ const active = ref(0);
 let foodlists = ref({});
 (async function () {
   let foodlist = await getFoodListApi({});
-  // console.log(foodlist);
+  console.log(foodlist);
 
   foodlists.value = foodlist.data.data.list;
+  console.log(foodlists.value);
 })();
 </script>
 
