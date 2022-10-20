@@ -5,10 +5,24 @@ const instance = axios.create({
     baseURL: '/api',
     timeout: 1000,  //如果接口一秒都没有返回结果，则axios会自动帮我们做一个失败(reject)的处理
     // headers: { 'token': token },  //在发送服务端之前，前端设置请求头信息；
+    // headers:{'Content-Type':'multipart/form-data'},
 });
-
+const upload = axios.create({
+    baseURL: '/api',
+    timeout: 1000,  //如果接口一秒都没有返回结果，则axios会自动帮我们做一个失败(reject)的处理
+    // headers: { 'token': token },  //在发送服务端之前，前端设置请求头信息；
+    headers:{'Content-Type':'multipart/form-data'},
+});
 // 使用拦截器，定义全局请求头
 instance.interceptors.request.use(config => {
+    // 在请求头中添加token\
+    let token = localStorage.getItem('token');
+    if(config.headers){
+        config.headers.token = token
+    }
+    return config
+})
+upload.interceptors.request.use(config => {
     // 在请求头中添加token\
     let token = localStorage.getItem('token');
     if(config.headers){
@@ -37,7 +51,7 @@ export const signUp = function (options = {}) {
 }
 
 export const uploadAvatar = function (payload = {}){
-    return instance.post('upload/avatar',payload)
+    return upload.post('upload/avatar',payload)
 }
 
 export const userInfo = function (payload = {}) {
