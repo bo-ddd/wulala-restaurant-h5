@@ -15,6 +15,7 @@ import router from "./router";
  * 周总的
  */
 import { Uploader } from 'vant';
+import { NoticeBar } from 'vant';
 
 
 
@@ -37,4 +38,5 @@ app.use(Skeleton).use(Search);
 app.use(Button);
 app.use(Stepper);
 app.use(Uploader);
+app.use(NoticeBar);
 app.mount("#app");

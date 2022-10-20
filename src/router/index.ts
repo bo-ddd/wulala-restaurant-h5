@@ -87,6 +87,10 @@ const router = createRouter({
       path:'/userinfo',
       name:'userinfo',
       component:()=> import("../views/toSignIn/UserInfo.vue")
+    },{
+      path:'/birthday',
+      name:'birthday',
+      component:()=> import("../views/toSignIn/Birthday.vue")
     }
   ],
 })

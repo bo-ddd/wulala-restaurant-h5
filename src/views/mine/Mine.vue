@@ -22,8 +22,11 @@
         </template>
       </AccountInfo.Item>
     </AccountInfo.Wrapper>
-
-    <Nav.Wrapper class="nav-list wrap">
+    <van-notice-bar
+      left-icon="volume-o"
+      text="温馨提示 : 当前疫情较为严重，请大家做好防护，尽量减少外出，保护自己保护他人;"
+    />
+    <Nav.Wrapper class="nav-list wrap mt-20">
       <Nav.Item class="order" v-for="item in MineOrderList" :size="'3'" :icon="parsrAsssetFile(item.orderUrl)"
         :text="item.text"></Nav.Item>
     </Nav.Wrapper>

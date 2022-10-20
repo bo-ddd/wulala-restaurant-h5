@@ -33,8 +33,8 @@
                     <span class="mode">生日</span>
                 </template>
                 <template #middle>
-                    <span class="payment" >
-                        2022-12-24
+                    <span class="payment" @click="toBirthday">
+                        yyy-m-r
                     </span>
                 </template>
                 <template #right>
@@ -78,6 +78,9 @@ let afterRead = (file : any) => {
     }
   })
 };
+const toBirthday = function (){
+    router.push({name:'birthday'})
+}
 </script>
 
 <style scoped>
