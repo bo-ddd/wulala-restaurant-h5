@@ -63,23 +63,23 @@ import { useRouter, useRoute } from 'vue-router';
 let router = useRouter();
 let route = useRoute();
 let username = route.query.name;
-// let label = route.query.iptValue;
+let userId = route.query.userId;;
 let afterRead = (file : any) => {
   // 此时可以自行将文件上传至服务器
 //   console.log(file.file);
   uploadAvatar({
     file:file.file,
   }).then(res => {
-    console.log('-------res UserInfo------');
-    console.log(res);
+    // console.log('-------res UserInfo------');
+    // console.log(res);
     if (res.data.status == 1) {
         (async function(){
             let userupdate = await userUpdate({
-                userId:res.data.status,
+                userId:userId,
                 avatarImg:res.data.data.url,
             })
-            console.log('-----------------userupdate----------------');
-            console.log(userupdate);
+            // console.log('-----------------userupdate----------------');
+            // console.log(userupdate);
             if(userupdate.data.msg=='成功'){
                 Notify({ type: 'success', message: '上传头像成功' });
                 router.push({name:'mine'})

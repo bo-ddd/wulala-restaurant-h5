@@ -50,14 +50,17 @@ let router = useRouter();
 let { parsrAsssetFile } = useUtil();
 let { toSignIn, MineOrderList, game } = useRecommendSignUp();
 let userName = ref('');
+let userId = ref(); //传id获取图片
 let tokens = localStorage.getItem('token');
-let image = ref();
+let image = ref(); //拿到图像图片，在上面渲染
 (async function () {
   let userInfoRes = await userInfo({});
   // console.log('-----userInfoRes----');
   // console.log(userInfoRes);
+  // console.log(userInfoRes.data.data.userId);
+  userId.value = userInfoRes.data.data.userId;
   if (userInfoRes.data.status == 1) {
-    image.value = userInfoRes.data.data.avatarImg;
+    image.value = userInfoRes.data.data.avatarImg; //后端返回的头像，进行赋值
     userName.value= userInfoRes.data.data.avatarName;
   }else{
     userName.value = '立即登录';
@@ -65,7 +68,7 @@ let image = ref();
 })()
 
 const toUserInfo = function (){
-  router.push({name:'userinfo',query:{name:userName.value as any}})
+  router.push({name:'userinfo',query:{name:userName.value as any,userId:userId.value}})
 }
 
 const setaccount = function () {
