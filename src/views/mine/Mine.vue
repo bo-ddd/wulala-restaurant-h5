@@ -5,7 +5,7 @@
     <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <!-- 个人 personal 信息 info -->
     <AccountInfo.Wrapper v-if="userName  != '' && tokens!=null" class="wrap mt-20 mb-20">
-      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')">
+      <AccountInfo.Item :icon="(image as string)">
         <template #text>
           <p class="account-info_name" @click="toUserInfo">{{userName}}</p>
         </template>

@@ -1,7 +1,7 @@
 <template>
     <!-- 头像 -->
     <div class="head-portrait">
-        <img :src="icon" alt="">
+        <img class="icon" :src="icon" alt="">
         <slot name="text">
             <Title class="title" lever="3" color="block">{{text}}</Title>
         </slot>
@@ -27,5 +27,14 @@ let { icon, text } = props;
 .head-portrait{
   display: flex;
   align-items: center;
+}
+.icon{
+    width: 5rem;
+    height: 5rem;
+    border-radius: 4rem;
+}
+img{
+    width: 100%;
+    height: 100%;
 }
 </style>

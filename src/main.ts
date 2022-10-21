@@ -16,7 +16,7 @@ import router from "./router";
  */
 import { Uploader } from 'vant';
 import { NoticeBar } from 'vant';
-
+import { DatetimePicker } from 'vant';
 
 
 import "./assets/main.css";
@@ -39,4 +39,5 @@ app.use(Button);
 app.use(Stepper);
 app.use(Uploader);
 app.use(NoticeBar);
+app.use(DatetimePicker);
 app.mount("#app");

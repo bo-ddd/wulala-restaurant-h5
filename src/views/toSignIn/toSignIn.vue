@@ -38,6 +38,8 @@ let username = ref(''); //获取input框的值
 let password = ref('');
 let router = useRouter();
 
+let regs=/\s/; //判断是否有空格
+
 let userNameLabel = ref('用户名或电话');
 let passwordLable = ref('密码');
 
@@ -48,6 +50,12 @@ const signInBtn = function () {
     userNameLabel.value = '请输入用户名';
     passwordLable.value = '密码不能为空';
     isUserName.value = true;
+    ispassword.value = true;
+  }else if(regs.test(username.value) == true){
+    userNameLabel.value = '用户名不能包含特殊字符';
+    isUserName.value = true;
+  }else if(regs.test(password.value) == true){
+    passwordLable.value = '密码不能包含特殊字符';
     ispassword.value = true;
   } else if (username.value != '' && password.value != '') {
     userNameLabel.value = '用户名';
