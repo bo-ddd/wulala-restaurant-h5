@@ -1,6 +1,11 @@
 <template>
     <main>
-        <Head class="head" color="black" imgcolor="0">个人信息</Head>
+        <Head class="head" color="black" imgcolor="0">
+            <template #icon>
+                <img @click="lastPage" src="/src/assets/images/icon-left.png" alt="">
+            </template>
+            个人信息
+        </Head>
         <div class="upload wrap mt-20">
             <ExpressInfoItem class="order-info border-bottom">
                 <template #left>
@@ -90,6 +95,9 @@ let afterRead = (file : any) => {
     }
   })
 };
+const lastPage = function(){
+    router.push({name:'mine'})
+}
 const toBirthday = function (){
     router.push({name:'birthday'})
 }
