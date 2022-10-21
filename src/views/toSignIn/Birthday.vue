@@ -6,17 +6,9 @@
       <div class="classify-window" :class="{ active:isActive }">
             <div class="options">
 
-                <!-- <p @click="outClassIfication">取消</p>
-                <p>确定</p> -->
-              
-                <van-datetime-picker
-                    v-model="currentDate"
-                    type="date"
-                    title="选择年月日"
-                    :min-date="minDate"
-                    :max-date="maxDate"
-                    cancel="outClassIfication"
-                />
+                <p @click="outClassIfication">取消</p>
+                <p>确定</p>
+                <!-- <Data></Data>                 -->
             </div>
         </div>
     </main>
@@ -24,12 +16,8 @@
 
 <script lang="ts" setup>
 import { ref } from "vue";
+import Data from "../../components/Data.vue";
 let isActive = ref(true);
-const currentDate = ref(new Date(2021, 0, 17));
-
-let minDate=new Date(1111, 0, 1);
-let maxDate= new Date(2025, 10, 1);
-
 const choiceBirthday = function () {
     isActive.value = false;
     return isActive

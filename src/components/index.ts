@@ -2,6 +2,7 @@ import Title from "@/components/Title.vue"
 import Button from "@/components/Button.vue";
 import Head from "./Head.vue";
 import ExpressInfoItem from './ExpressInfoItem.vue';
+import Data from "./Data.vue";
 import type { App } from "vue";
 
 export default {
@@ -10,5 +11,6 @@ export default {
         app.component('Button',Button);
         app.component('Head',Head);
         app.component('ExpressInfoItem',ExpressInfoItem);
+        app.component('Data',Data)
     }
 }
