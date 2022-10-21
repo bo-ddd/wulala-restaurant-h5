@@ -91,6 +91,10 @@ const router = createRouter({
       path:'/birthday',
       name:'birthday',
       component:()=> import("../views/toSignIn/Birthday.vue")
+    },{
+      path:'/selflable',
+      name:'selflable',
+      component:()=> import('../views/toSignIn/SelfLable.vue')
     }
   ],
 })

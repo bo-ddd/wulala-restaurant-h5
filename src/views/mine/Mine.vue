@@ -44,20 +44,20 @@ import Nav from '@/components/nav';
 import AccountInfo from '@/components/accountInfo';
 import useUtil from "@/assets/ulit";
 import { userInfo, uploadAvatar } from '@/api/api';
-import { useRouter,useRoute } from 'vue-router';
+import { useRouter } from 'vue-router';
 let router = useRouter();
-let route = useRoute ();
+
 let { parsrAsssetFile } = useUtil();
 let { toSignIn, MineOrderList, game } = useRecommendSignUp();
 let userName = ref('');
 let tokens = localStorage.getItem('token');
-
-let image = route.query.imgage;
-console.log(image);
-
+let image = ref();
 (async function () {
   let userInfoRes = await userInfo({});
+  // console.log('-----userInfoRes----');
+  // console.log(userInfoRes);
   if (userInfoRes.data.status == 1) {
+    image.value = userInfoRes.data.data.avatarImg;
     userName.value= userInfoRes.data.data.avatarName;
   }else{
     userName.value = '立即登录';
