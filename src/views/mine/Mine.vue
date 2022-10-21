@@ -5,7 +5,7 @@
     <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <!-- 个人 personal 信息 info -->
     <AccountInfo.Wrapper v-if="userName  != '' && tokens!=null" class="wrap mt-20 mb-20">
-      <AccountInfo.Item :icon="(image as string)">
+      <AccountInfo.Item :icon="(image as string) || parsrAsssetFile('end-sign_in.png')">
         <template #text>
           <p class="account-info_name" @click="toUserInfo">{{userName}}</p>
         </template>
@@ -43,7 +43,7 @@ import useRecommendSignUp from "./composables/RecommendSignUp";
 import Nav from '@/components/nav';
 import AccountInfo from '@/components/accountInfo';
 import useUtil from "@/assets/ulit";
-import { userInfo, uploadAvatar } from '@/api/api';
+import { userInfoApi, uploadAvatarApi } from '@/api/api';
 import { useRouter } from 'vue-router';
 let router = useRouter();
 
@@ -54,7 +54,7 @@ let userId = ref(); //传id获取图片
 let tokens = localStorage.getItem('token');
 let image = ref(); //拿到图像图片，在上面渲染
 (async function () {
-  let userInfoRes = await userInfo({});
+  let userInfoRes = await userInfoApi({});
   // console.log('-----userInfoRes----');
   // console.log(userInfoRes);
   // console.log(userInfoRes.data.data.userId);

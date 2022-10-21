@@ -57,7 +57,7 @@
 </template>
 
 <script lang="ts" setup> 
-import { uploadAvatar , userUpdate} from '@/api/api';
+import { uploadAvatarApi , userUpdateApi} from '@/api/api';
 import { Notify } from 'vant';
 import { useRouter, useRoute } from 'vue-router';
 let router = useRouter();
@@ -67,14 +67,14 @@ let userId = route.query.userId;;
 let afterRead = (file : any) => {
   // 此时可以自行将文件上传至服务器
 //   console.log(file.file);
-  uploadAvatar({
+  uploadAvatarApi({
     file:file.file,
   }).then(res => {
     // console.log('-------res UserInfo------');
     // console.log(res);
     if (res.data.status == 1) {
         (async function(){
-            let userupdate = await userUpdate({
+            let userupdate = await userUpdateApi({
                 userId:userId,
                 avatarImg:res.data.data.url,
             })

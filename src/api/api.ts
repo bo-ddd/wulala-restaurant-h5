@@ -47,23 +47,23 @@ export const loginApi = function (payload = {}) {
     return instance.post('/user/login', payload)
 }
 
-export const signUp = function (options = {}) {
+export const signUpApi = function (options = {}) {
     return instance.post('/user/register', options)
 }
 
 
-export const uploadAvatar = function (payload = {}){
+export const uploadAvatarApi = function (payload = {}){
     return upload.post('upload/avatar',payload)
 }
 /**
  * @description 更改用户信息接口
  */
-export const userUpdate = function(payload = {}){
+export const userUpdateApi = function(payload = {}){
     return instance.post('/user/update',payload)
 }
 
 
-export const userInfo = function (payload = {}) {
+export const userInfoApi = function (payload = {}) {
     return instance.post('/user/info', payload)
 }
 

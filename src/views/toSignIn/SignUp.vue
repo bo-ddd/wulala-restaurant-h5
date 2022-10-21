@@ -41,7 +41,7 @@
 import { useRouter } from "vue-router";
 import useJumpInfo from './composables/JumpInfo';
 import { ref, type Ref } from 'vue';
-import { signUp, loginApi } from '@/api/api';
+import { signUpApi, loginApi } from '@/api/api';
 import { Notify } from 'vant';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
 
@@ -142,7 +142,7 @@ if (avatarNameIptValue.value != '') {
 }
 
 if(isusernameActive.value == false && ispasswordActive.value==false && isconfirmActive.value == false && isphoneNumberActive.value == false && isavatarNameActive.value == false){
-  signUp({
+  signUpApi({
     username:userNameIptValue.value,
     password:passwordIptValue.value,
     avatarName:avatarNameIptValue.value,
