@@ -96,7 +96,11 @@ const router = createRouter({
       path: '/search',
       name: 'search',
       component: () => import("../views/searchpage/Search.vue")
-    },
+    },{
+      path:'/selflable',
+      name:'selflable',
+      component:()=> import("../views/toSignIn/SelfLable.vue")
+    }
   ],
 })
 // 导航守卫，路由守卫，路由拦截

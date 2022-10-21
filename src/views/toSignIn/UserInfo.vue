@@ -34,11 +34,11 @@
                 </template>
                 <template #middle>
                     <p class="payment" @click="toBirthday">
-                        yyy-m-r
+                        {{date}}
                     </p>
                 </template>
                 <template #right>
-                    <img class="icon-right" src="@/assets/images/right.png" alt="">
+                    <img  @click="toBirthday" class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
             </ExpressInfoItem>
             <ExpressInfoItem class="order-info">
@@ -64,6 +64,8 @@ let router = useRouter();
 let route = useRoute();
 let username = route.query.name;
 let userId = route.query.userId;;
+
+let date = route.query.date;
 let afterRead = (file : any) => {
   // 此时可以自行将文件上传至服务器
 //   console.log(file.file);
