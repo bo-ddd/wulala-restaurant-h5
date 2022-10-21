@@ -9,7 +9,7 @@ let router = useRouter();
 
 const signOut = function(){
     router.push({name:'mine'});
-    localStorage.setItem('token','')
+    localStorage.clear();
 }
 </script>
 

@@ -11,6 +11,14 @@ import App from "./App.vue";
 import { Skeleton,Search } from 'vant';
 import router from "./router";
 
+/**
+ * 周总的
+ */
+import { Uploader } from 'vant';
+import { NoticeBar } from 'vant';
+import { DatetimePicker } from 'vant';
+
+
 import "./assets/main.css";
 import "./assets/lib/lib-flexable.js";
 import  GlobalComponents  from "@/components";
@@ -29,4 +37,7 @@ app.use(Popup);
 app.use(Skeleton).use(Search);
 app.use(Button);
 app.use(Stepper);
+app.use(Uploader);
+app.use(NoticeBar);
+app.use(DatetimePicker);
 app.mount("#app");

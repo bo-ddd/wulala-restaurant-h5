@@ -41,7 +41,7 @@
 import { useRouter } from "vue-router";
 import useJumpInfo from './composables/JumpInfo';
 import { ref, type Ref } from 'vue';
-import { signUp } from '@/api/api';
+import { signUp, loginApi } from '@/api/api';
 import { Notify } from 'vant';
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
 
@@ -145,7 +145,7 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
   signUp({
     username:userNameIptValue.value,
     password:passwordIptValue.value,
-    avatarName:avatarNameLable.value,
+    avatarName:avatarNameIptValue.value,
     phoneNumber:phoneNumberIptValue.value
   }).then(res=>{
     console.log('----------res----------');
@@ -155,9 +155,19 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
       Notify({ type: 'primary', message: '您已注册过此账号,请登录' });
       router.push({name:'signin'});
     }else{
-      router.push({name:'/'});
-      let token = res.data.data.token;
-      localStorage.setItem('token',token);
+      Notify({ type: 'success', message: '注册成功' });
+      loginApi({
+        username:userNameIptValue.value,
+        password:passwordIptValue.value,
+      }).then(res => {
+          setTimeout(function (){
+            router.push({name:'/'});
+            let token = res.data.data.token;
+            console.log(token);
+            localStorage.setItem('token',token);
+          },1500)
+        })
+
     }
   }).catch(err => {
     console.log('-------------err-----------');
@@ -165,7 +175,6 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
   })
 }
 }
-
 </script>
 
 <style scoped>
