@@ -24,7 +24,7 @@
         </Silder.Wrapper>
 
         <!-- 开启点餐之旅 -->
-        <HomeBtn.Wrapper class="mt-14" >
+        <HomeBtn.Wrapper class="mt-14">
             <HomeBtn.Item :src="parsrAsssetFile('btn-order.png')"></HomeBtn.Item>
         </HomeBtn.Wrapper>
 
@@ -49,13 +49,13 @@
         <BestSellers.Wrapper class="wrap mt-14">
             <Title class="mt-14" level="2" color="#f6e6dd">今日推荐</Title>
             <p class="commodity">12件商品</p>
-            <BestSellers.Item class="mt-14" v-for="item in bestSellers" @click="toevaluate('evaluate',item.goodsId)">
+            <BestSellers.Item class="mt-14" v-for="item in bestSellers" @click="toevaluate('evaluate',item.foodId)">
                 <template #image>
-                    <img class="best-sellers_png" :src="parsrAsssetFile(item.imgUrl)" alt="" />
+                    <img class="best-sellers_png" :src="item.bannerUrl" alt="" />
                 </template>
                 <template #description>
                     <div class="description">
-                        <div class="title-best_sellers">{{item.title}}</div>
+                        <div class="title-best_sellers">{{item.foodName}}</div>
                         <div class="box-evaluate">
                             <div class="price">
                                 ￥{{item.price}}
@@ -78,61 +78,20 @@ import BestSellers from '@/components/bestSellers'
 import Title from '@/components/Title.vue'
 import useUlit from '@/assets/ulit/index'
 import HomeBtn from '@/components/homeBtn'
-import { useRouter,useRoute } from 'vue-router'
+import { getFoodListApi } from '@/api/api'
 import { ref } from 'vue';
 const value = ref('');
-
-let router = useRouter()
-let route = useRoute()
+let bestSellers:any = ref({})
 let { parsrAsssetFile } = useUlit()
 
-const onOrder = function (name: string) {
-    router.push(name);
+const toevaluate = function (name: string, foodId: number) {
+    window.location.href = `/evaluate?foodId=${foodId}`
 }
+getFoodListApi({
 
-const toevaluate = function (name: string, goodsId: number) {
-    window.location.href = `/evaluate?goodsId=${goodsId}`
-}
-
-const bestSellers = [
-    {
-        goodsId: 1,
-        imgUrl: 'yxrs.png',
-        title: '鱼香肉丝盖饭',
-        price: '13',
-    },
-    {
-        goodsId: 2,
-        imgUrl: 'jjrs.png',
-        title: '尖椒肉丝盖饭',
-        price: '12',
-    },
-    {
-        goodsId: 3,
-        imgUrl: 'gbjd.png',
-        title: '宫保鸡丁盖饭',
-        price: '13',
-        quantity: '20111'
-    },
-    {
-        goodsId: 4,
-        imgUrl: 'hsqe(1).png',
-        title: '红烧茄子盖饭',
-        price: '11',
-    },
-    {
-        goodsId: 5,
-        imgUrl: 'rpm.png',
-        title: '油泼面',
-        price: '16',
-    },
-    {
-        goodsId: 6,
-        imgUrl: 'huimian.png',
-        title: '烩面',
-        price: '18',
-    }
-]
+}).then(res => {
+    bestSellers.value = res.data.data.list
+})
 </script>
 <style scoped>
 .box-evaluate {
@@ -264,9 +223,11 @@ const bestSellers = [
     color: white;
     font-weight: 550;
 }
-.bb{
+
+.bb {
     position: relative;
 }
+
 /* .aa{
     font-size: 1.7rem;
     font-weight:bold;
