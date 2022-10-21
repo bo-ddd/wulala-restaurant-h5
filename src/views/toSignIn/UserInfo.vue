@@ -7,7 +7,7 @@
                     <span class="mode">头像</span>
                 </template>
                 <template #middle>
-                    <span class="payment" >
+                    <span class="payment">
                         <van-uploader :preview-image="false" :after-read="afterRead" />
                     </span>
                 </template>
@@ -46,10 +46,10 @@
                     <span class="mode">个性标签</span>
                 </template>
                 <template #middle>
-                    <p class="payment"> 酒店房sda卡是否 </p>
+                    <p class="payment" @click="toSelfLable"> 个性标签 </p>
                 </template>
                 <template #right>
-                    <img class="icon-right" src="@/assets/images/right.png" alt="">
+                    <img class="icon-right" src="@/assets/images/right.png" alt="" @click="toSelfLable">
                 </template>
             </ExpressInfoItem>
         </div>
@@ -57,29 +57,42 @@
 </template>
 
 <script lang="ts" setup> 
-import { uploadAvatar } from '@/api/api';
+import { uploadAvatarApi , userUpdateApi} from '@/api/api';
 import { Notify } from 'vant';
 import { useRouter, useRoute } from 'vue-router';
 let router = useRouter();
 let route = useRoute();
 let username = route.query.name;
+let userId = route.query.userId;;
 let afterRead = (file : any) => {
   // 此时可以自行将文件上传至服务器
-  console.log(file.file);
-  uploadAvatar({
+//   console.log(file.file);
+  uploadAvatarApi({
     file:file.file,
   }).then(res => {
-    console.log('-------res UserInfo------');
-    console.log(res);
-    console.log(res.data.data.url);
+    // console.log('-------res UserInfo------');
+    // console.log(res);
     if (res.data.status == 1) {
-        Notify({ type: 'success', message: '上传头像成功' });
-        router.push({name:'mine',query:{imgage:res.data.data.url}})
+        (async function(){
+            let userupdate = await userUpdateApi({
+                userId:userId,
+                avatarImg:res.data.data.url,
+            })
+            // console.log('-----------------userupdate----------------');
+            // console.log(userupdate);
+            if(userupdate.data.msg=='成功'){
+                Notify({ type: 'success', message: '上传头像成功' });
+                router.push({name:'mine'})
+            }
+        })()
     }
   })
 };
 const toBirthday = function (){
     router.push({name:'birthday'})
+}
+const toSelfLable = function (){
+    router.push({name:'selflable'})
 }
 </script>
 

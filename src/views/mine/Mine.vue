@@ -5,7 +5,7 @@
     <Title class="wrap mt-24" level="1" color="block">吃了么</Title>
     <!-- 个人 personal 信息 info -->
     <AccountInfo.Wrapper v-if="userName  != '' && tokens!=null" class="wrap mt-20 mb-20">
-      <AccountInfo.Item :icon="(image as string)">
+      <AccountInfo.Item :icon="(image as string) || parsrAsssetFile('end-sign_in.png')">
         <template #text>
           <p class="account-info_name" @click="toUserInfo">{{userName}}</p>
         </template>
@@ -43,21 +43,24 @@ import useRecommendSignUp from "./composables/RecommendSignUp";
 import Nav from '@/components/nav';
 import AccountInfo from '@/components/accountInfo';
 import useUtil from "@/assets/ulit";
-import { userInfo, uploadAvatar } from '@/api/api';
-import { useRouter,useRoute } from 'vue-router';
+import { userInfoApi, uploadAvatarApi } from '@/api/api';
+import { useRouter } from 'vue-router';
 let router = useRouter();
-let route = useRoute ();
+
 let { parsrAsssetFile } = useUtil();
 let { toSignIn, MineOrderList, game } = useRecommendSignUp();
 let userName = ref('');
+let userId = ref(); //传id获取图片
 let tokens = localStorage.getItem('token');
-
-let image = route.query.imgage;
-console.log(image);
-
+let image = ref(); //拿到图像图片，在上面渲染
 (async function () {
-  let userInfoRes = await userInfo({});
+  let userInfoRes = await userInfoApi({});
+  // console.log('-----userInfoRes----');
+  // console.log(userInfoRes);
+  // console.log(userInfoRes.data.data.userId);
+  userId.value = userInfoRes.data.data.userId;
   if (userInfoRes.data.status == 1) {
+    image.value = userInfoRes.data.data.avatarImg; //后端返回的头像，进行赋值
     userName.value= userInfoRes.data.data.avatarName;
   }else{
     userName.value = '立即登录';
@@ -65,7 +68,7 @@ console.log(image);
 })()
 
 const toUserInfo = function (){
-  router.push({name:'userinfo',query:{name:userName.value as any}})
+  router.push({name:'userinfo',query:{name:userName.value as any,userId:userId.value}})
 }
 
 const setaccount = function () {

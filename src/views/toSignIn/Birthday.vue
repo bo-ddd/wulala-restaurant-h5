@@ -10,11 +10,12 @@
                 <p>确定</p> -->
               
                 <van-datetime-picker
-                v-model="currentDate"
-                type="date"
-                title="选择年月日"
-                :min-date="minDate"
-                :max-date="maxDate"
+                    v-model="currentDate"
+                    type="date"
+                    title="选择年月日"
+                    :min-date="minDate"
+                    :max-date="maxDate"
+                    cancel="outClassIfication"
                 />
             </div>
         </div>
@@ -26,7 +27,7 @@ import { ref } from "vue";
 let isActive = ref(true);
 const currentDate = ref(new Date(2021, 0, 17));
 
-let minDate=new Date(2020, 0, 1);
+let minDate=new Date(1111, 0, 1);
 let maxDate= new Date(2025, 10, 1);
 
 const choiceBirthday = function () {

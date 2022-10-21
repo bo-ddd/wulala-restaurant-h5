@@ -70,8 +70,8 @@ const signInBtn = function () {
         password: password.value,
       })
       if (res.status == 200) {
-        console.log('------res----');
-        console.log(res)
+        // console.log('------res----');
+        // console.log(res)
         if (res.data.msg == '用户名或者密码错误') {
           Notify({ type: 'danger', message: '用户名密码错误' })
         } else if (res.data.msg == '成功') {

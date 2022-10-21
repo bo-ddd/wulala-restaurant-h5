@@ -83,6 +83,7 @@ const value = ref(1);
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 10rem;
+  padding: 1rem 0;
 }
 
 .layer {
