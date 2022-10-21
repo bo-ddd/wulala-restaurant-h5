@@ -1,28 +1,38 @@
 <template>
-    <img class="food-details-png" :src=parsrAsssetFile(data.imgUrl) alt="">
+    <img class="food-details-png" :src='foodList.bannerUrl' alt="">
     <div class="wrap">
-        <span class="text-details_food">{{data.title}}</span>
         <div>
-            <span class="details-food">约{{data.kg}}克</span>
-            <span class="details-food">{{data.taste}}</span>
-            <span class="details-food">有{{data.garlic}}</span>
-        </div>
-        <div class="box-price">
-            <span class="price—details_food"><span class="symbol">￥</span>{{data.price}}</span>
-            <span class="specifications-select">+选规格</span>
+            <span class="text-details_food">{{foodList.foodName}}</span>
+            <div>
+                <span class="details-food">约{{foodList.price}}克</span>
+                <span class="details-food">{{foodList.price}}</span>
+                <span class="details-food">有{{foodList.price}}</span>
+            </div>
+            <div class="box-price">
+                <span class="price—details_food"><span class="symbol">￥</span>{{foodList.price}}</span>
+                <span class="specifications-select">+选规格</span>
+            </div>
         </div>
     </div>
 </template>
 <script setup lang="ts">
 import useUlit from '@/assets/ulit/index'
-let { parsrAsssetFile } = useUlit()
-let props = defineProps<{
-    data: any
-}>()
+import { getFoodListApi } from '@/api/api'
+import { ref } from "vue";
+const foodList: any = ref({})
+let search = window.location.search
+let foodId = search.split('=');
+let id = foodId[1]
+getFoodListApi({
 
-let { data } = props;
-console.log(data);
-
+}).then(res => {
+    res.data.data.list.find((el: any) => {
+        if (el.foodId == id) {
+            foodList.value = el
+            console.log(foodList.value);
+        }
+    });
+})
 </script>
 
 <style scoped>
@@ -69,5 +79,4 @@ console.log(data);
     border-radius: .5rem;
     font-weight: 500;
 }
-
 </style>

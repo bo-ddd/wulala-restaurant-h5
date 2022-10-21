@@ -6,20 +6,12 @@
     <div class="content">
       <span>{{ content }}</span
       ><br />
-      <span class="description">{{ description }}</span>
+      <p class="description">{{ description }}</p>
     </div>
     <div class="price">
       <span>￥{{ price }}</span>
     </div>
   </div>
-
-  <!-- <van-popup v-model:show="show">
-      <div class="layer">
-        <img :src="src" alt="" />
-        <span>{{ content }}</span>
-        <span>￥{{ price }}</span>
-      </div>
-    </van-popup> -->
   <van-popup
     v-model:show="show"
     closeable
@@ -31,6 +23,7 @@
       <img :src="src" alt="" />
       <div class="contents">
         <span class="balck">{{ content }}</span>
+        <span class="descriptions">{{description}}</span>
         <span class="red">￥{{ price }}</span>
       </div>
     </div>
@@ -80,12 +73,17 @@ const value = ref(1);
   border-radius: 1rem;
 }
 .content {
-  margin-right: 10rem;
+  margin-right: 5rem;
 }
 .description {
   font-size: 1.2rem;
   font-weight: 500;
   color: #bcbcb9;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 10rem;
+  padding: 1rem 0;
 }
 
 .layer {
@@ -124,8 +122,12 @@ const value = ref(1);
   background-image: url(/src/assets/images/bj.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  /* background: var(--van-button-success-background-color); */
   border: var(--van-button-border-width) solid
     var(--van-button-success-border-color);
+}
+.descriptions{
+  font-size: 1.3rem;
+  margin-top: -1rem;
+  color: #bcbcb9;
 }
 </style>
