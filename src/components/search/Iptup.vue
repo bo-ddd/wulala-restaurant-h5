@@ -25,6 +25,9 @@ input {
     text-indent: 1.2rem;
     margin-left: .8rem;
 }
+.text{
+    font-size: 1.2rem;
+}
 /* .search-input {
     background-color: white;
     border-radius:2rem;
