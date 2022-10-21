@@ -1,19 +1,8 @@
 <template>
     <div class="home">
-
         <div class=" bb wrap pt-18">
-            <!-- <van-search v-model="value" placeholder="麻辣香锅" /> -->
-            <van-search v-model="value" shape="round" background="#4fc08d" placeholder="麻辣香锅">
+            <van-search v-model="value" shape="round" placeholder="麻辣香锅" @click="toSearch">
             </van-search>
-            <!-- <Search.Wrapper class="">
-                <Search.Iptup placeholder="麻辣香锅">
-                    <template #btn>
-                        <div class="search-btn">
-                            搜&nbsp索
-                        </div>
-                    </template>
-                </Search.Iptup>
-            </Search.Wrapper> -->
         </div>
         <Silder.Wrapper class="wrap mt-14">
             <Silder.Banner :src="parsrAsssetFile('banaer-1.png')"></Silder.Banner>
@@ -49,7 +38,8 @@
         <BestSellers.Wrapper class="wrap mt-14">
             <Title class="mt-14" level="2" color="#f6e6dd">今日推荐</Title>
             <p class="commodity">12件商品</p>
-            <BestSellers.Item class="mt-14" v-for="item in bestSellers" @click="toevaluate('evaluate',item.foodId)">
+            <BestSellers.Item class="mt-14" v-for="item in bestSellers"
+                @click="toevaluate('detailsOfDishes',item.foodId)">
                 <template #image>
                     <img class="best-sellers_png" :src="item.bannerUrl" alt="" />
                 </template>
@@ -80,18 +70,20 @@ import useUlit from '@/assets/ulit/index'
 import HomeBtn from '@/components/homeBtn'
 import { getFoodListApi } from '@/api/api'
 import { ref } from 'vue';
-const value = ref('');
-let bestSellers:any = ref({})
+import { useRouter } from 'vue-router'
 let { parsrAsssetFile } = useUlit()
-
+let bestSellers: any = ref({})
+let router = useRouter()
+const value = ref('');
 const toevaluate = function (name: string, foodId: number) {
-    window.location.href = `/evaluate?foodId=${foodId}`
+    window.location.href = `/detailsOfDishes?foodId=${foodId}`
 }
-getFoodListApi({
-
-}).then(res => {
+getFoodListApi({}).then(res => {
     bestSellers.value = res.data.data.list
 })
+const toSearch = function () {
+    router.push('search')
+}
 </script>
 <style scoped>
 .box-evaluate {
@@ -117,7 +109,6 @@ getFoodListApi({
     background-repeat: no-repeat;
     min-height: 100%;
     background-color: #f5f5f5;
-    /* padding: 0 .5rem; */
 }
 
 .btn-order {
