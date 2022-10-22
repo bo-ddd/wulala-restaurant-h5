@@ -30,9 +30,8 @@
               <div class="send">发送验证码</div>
           </div>
       </form>
-      <!-- 继续使用Facebook -->
+      <!-- 注册按钮 -->
       <Button  @click="lastPage" class="wrap btn pd-18" color="white" bjcolor="#f77120">注册账号</Button>
-      <!-- 我稍后再登录(报名) -->
     </div>
   </main>
 </template>
@@ -43,6 +42,20 @@ import useJumpInfo from './composables/JumpInfo';
 import { ref, type Ref } from 'vue';
 import { signUpApi, loginApi } from '@/api/api';
 import { Notify } from 'vant';
+
+import { onMounted, onUnmounted } from "vue";
+
+onMounted(()=>{
+    window.addEventListener('keydown',keyDown)
+})
+const keyDown = (e: { keyCode: any; }) =>{
+    if (e.keyCode == 13) {
+      lastPage()
+    }
+}
+onUnmounted(()=>{
+    window.removeEventListener('keydown',keyDown,false);
+})
 let { toForgotPasswrod,toSignUp } = useJumpInfo();
 
 let router = useRouter();
@@ -80,9 +93,6 @@ if(userNameIptValue.value == ''){
   isusernameActive.value = true; 
 }else if(regs.test(userNameIptValue.value) == true){
   userNameLabel.value = '用户名存在特殊字符';
-  isusernameActive.value = true;
-}else if(/\W/.test(userNameIptValue.value)){
-  userNameLabel.value = '用户名不符合规范';
   isusernameActive.value = true;
 }else if(userNameIptValue.value != ''){
   isusernameActive.value = false;    
@@ -123,7 +133,7 @@ if (phoneNumberIptValue.value == '') {
 }else if(reg.test(phoneNumberIptValue.value) != true){
   phoneNumberLable.value = '您输入的手机号不合法，请重新输入'
   isphoneNumberActive.value = true;
-}else if (phoneNumberIptValue.value.length == 10) {
+}else if (phoneNumberIptValue.value.length != 11) {
   phoneNumberLable.value = '您输入的手机号不合法，请重新输入'
   isphoneNumberActive.value = true;
 }else if(regs.test(phoneNumberIptValue.value) == true){
