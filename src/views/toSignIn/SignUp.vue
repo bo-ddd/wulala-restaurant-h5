@@ -81,6 +81,9 @@ if(userNameIptValue.value == ''){
 }else if(regs.test(userNameIptValue.value) == true){
   userNameLabel.value = '用户名存在特殊字符';
   isusernameActive.value = true;
+}else if(/\W/.test(userNameIptValue.value)){
+  userNameLabel.value = '用户名不符合规范';
+  isusernameActive.value = true;
 }else if(userNameIptValue.value != ''){
   isusernameActive.value = false;    
   userNameLabel.value = '用户名'
@@ -93,6 +96,9 @@ if (passwordIptValue.value == '') {
 }else if (passwordIptValue.value.length <= 5 || passwordIptValue.value.length >= 20) {
   passwordLable.value = '密码长度必须是在6-20之间';
   ispasswordActive.value = true
+}else if(/\W/.test(passwordIptValue.value)){
+  passwordLable.value = '密码不符合规范';
+  ispasswordActive.value = true;
 }else if(regs.test(passwordIptValue.value) == true){
   passwordLable.value = '密码存在特殊字符';
   ispasswordActive.value = true;

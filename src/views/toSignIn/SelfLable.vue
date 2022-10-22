@@ -2,7 +2,6 @@
     <main>
         <Head class="head" color="black" imgcolor="0">个性标签</Head>
         <textarea class="textarea" v-model="textareaValue" name="text" id="" cols="40" rows="5"  required></textarea>
-        <!-- <div class="">{{textareaValue}}</div> -->
         <Button @click="complete" class="btn mt-24" color="white" bjcolor="#ccc">完成</Button>
     </main>
 </template>
