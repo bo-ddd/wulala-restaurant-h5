@@ -20,7 +20,7 @@
 <script lang="ts" setup>
 import router from "@/router";
 import { ref } from "vue";
-let isActive = ref(true);
+let isActive = ref(false);
 const currentDate = ref(new Date(2021, 0, 17));
 
 let minDate = new Date(1111, 0, 1);
