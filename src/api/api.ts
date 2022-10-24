@@ -3,7 +3,7 @@ import axios from "axios";
 
 const instance = axios.create({
     baseURL: '/api',
-    timeout: 1000,  //如果接口一秒都没有返回结果，则axios会自动帮我们做一个失败(reject)的处理
+    timeout: 5000,  //如果接口一秒都没有返回结果，则axios会自动帮我们做一个失败(reject)的处理
     // headers: { 'token': token },  //在发送服务端之前，前端设置请求头信息；
     // headers: { 'token': token },  //在发送服务端之前，前端设置请求头信息；
     // headers:{'Content-Type':'multipart/form-data'},
@@ -12,13 +12,13 @@ const upload = axios.create({
     baseURL: '/api',
     timeout: 1000,  //如果接口一秒都没有返回结果，则axios会自动帮我们做一个失败(reject)的处理
     // headers: { 'token': token },  //在发送服务端之前，前端设置请求头信息；
-    headers:{'Content-Type':'multipart/form-data'},
+    headers: { 'Content-Type': 'multipart/form-data' },
 });
 // 使用拦截器，定义全局请求头
 instance.interceptors.request.use(config => {
     // 在请求头中添加token\
     let token = localStorage.getItem('token');
-    if(config.headers){
+    if (config.headers) {
         config.headers.token = token
     }
     return config
@@ -26,7 +26,7 @@ instance.interceptors.request.use(config => {
 upload.interceptors.request.use(config => {
     // 在请求头中添加token\
     let token = localStorage.getItem('token');
-    if(config.headers){
+    if (config.headers) {
         config.headers.token = token
     }
     return config
@@ -52,14 +52,14 @@ export const signUpApi = function (options = {}) {
 }
 
 
-export const uploadAvatarApi = function (payload = {}){
-    return upload.post('upload/avatar',payload)
+export const uploadAvatarApi = function (payload = {}) {
+    return upload.post('upload/avatar', payload)
 }
 /**
  * @description 更改用户信息接口
  */
-export const userUpdateApi = function(payload = {}){
-    return instance.post('/user/update',payload)
+export const userUpdateApi = function (payload = {}) {
+    return instance.post('/user/update', payload)
 }
 
 
@@ -75,6 +75,15 @@ export const uploadGoods = function (payload = {}) {
 export const getFoodListApi = function (payload = {}) {
     return instance.post('/food/list', payload)
 }
+
+export const getComment = function (payload = {}) {
+    return instance.post('comment/food/list', payload)
+}
+export const updatecomment = function (payload = {}) {
+    return instance.post('comment/food/create', payload)
+}
+
+
 /*
 * @food/list  菜肴列表
 * payload object
