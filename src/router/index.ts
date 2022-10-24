@@ -19,36 +19,6 @@ const router = createRouter({
           path: '/menu', //menu
           name: 'menu',
           component: () => import("@/views/menu/Menu.vue"),
-        }, {
-          path: '/order',//shoppingCart
-          name: 'order',
-          // route level code-splitting
-          // this generates a separate chunk (About.[hash].js) for this route
-          // which is lazy-loaded when the route is visited.
-          //路由的懒加载，型能好
-          component: () => import('../views/order/Order.vue'),
-          children: [
-            {
-              path: '/allorder',
-              name: 'allorder',
-              component: () => import("@/views/order/AllOrder.vue")
-            },
-            {
-              path: '/appraise',
-              name: 'appraise',
-              component: () => import("@/views/order/appraise.vue")
-            },
-            {
-              path: '/consignmentfee',
-              name: 'consignmentfee',
-              component: () => import("@/views/order/ConsignmentFee.vue")
-            },
-            {
-              path: '/refund',
-              name: 'refund',
-              component: () => import("@/views/order/Refund.vue")
-            },
-          ]
         },
         {
           path: '/mine', //mien
@@ -96,10 +66,10 @@ const router = createRouter({
       path: '/search',
       name: 'search',
       component: () => import("../views/searchpage/Search.vue")
-    },{
-      path:'/selflable',
-      name:'selflable',
-      component:()=> import("../views/toSignIn/SelfLable.vue")
+    }, {
+      path: '/selflable',
+      name: 'selflable',
+      component: () => import("../views/toSignIn/SelfLable.vue")
     }
   ],
 })

@@ -1,1 +1,0 @@
-<template>Consignment fee</template>
