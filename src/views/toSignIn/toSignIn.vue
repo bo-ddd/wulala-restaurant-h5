@@ -33,6 +33,19 @@ import { useRouter } from "vue-router";
 import { ref } from 'vue';
 import { loginApi } from '@/api/api';
 import { Notify } from 'vant';
+import { onMounted, onUnmounted } from "vue";
+
+onMounted(()=>{
+    window.addEventListener('keydown',keyDown)
+})
+const keyDown = (e: { keyCode: any; }) =>{
+    if (e.keyCode == 13) {
+      signInBtn()
+    }
+}
+onUnmounted(()=>{
+    window.removeEventListener('keydown',keyDown,false);
+})
 let { toForgotPasswrod, toSignUp } = useJumpInfo();
 let username = ref(''); //获取input框的值
 let password = ref('');

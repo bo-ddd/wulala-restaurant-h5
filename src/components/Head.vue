@@ -1,6 +1,8 @@
 <template>
     <div class="whole-order">
-        <img @click="lastPage" src="/src/assets/images/icon-left.png" alt="">
+        <slot name="icon">
+            <img @click="lastPage" src="/src/assets/images/icon-left.png" alt="">
+        </slot>
         <Title level="1" color="block">
             <slot></slot>
         </Title>
