@@ -27,8 +27,14 @@
       text="温馨提示 : 当前疫情较为严重，请大家做好防护，尽量减少外出，保护自己保护他人;"
     />
     <Nav.Wrapper class="nav-list wrap mt-20">
-      <Nav.Item class="order" v-for="item in MineOrderList" :size="'3'" :icon="parsrAsssetFile(item.orderUrl)"
-        :text="item.text"></Nav.Item>
+      <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-shopcar.png')"
+        text="订单"></Nav.Item>
+        <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-collection.png')"
+        text="收藏"></Nav.Item>
+        <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-evaluate.png')"
+        text="评价" @click="topinjia"></Nav.Item>
+        <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-feedback.png')"
+        text="反馈"></Nav.Item>
     </Nav.Wrapper>
     <Nav.Wrapper class="nav-list wrap mt-20">
       <Nav.Item class="order" v-for="item in game" :size="'3'" :icon="parsrAsssetFile(item.orderUrl)" :text="item.text">
@@ -74,6 +80,10 @@ const toUserInfo = function (){
 const setaccount = function () {
   router.push({ name: 'setaccount', query: {} })
 }
+
+const topinjia = function(){
+        router.push('evaluate')     
+    }
 </script>
 
 <style scoped>

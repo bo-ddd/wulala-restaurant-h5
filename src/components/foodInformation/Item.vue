@@ -2,34 +2,67 @@
     <img class="food-details-png" :src='foodList.bannerUrl' alt="">
     <div class="wrap">
         <div>
-            <span class="text-details_food">{{foodList.foodName}}</span>
+            <span class="text-details_food">{{ foodList.foodName }}</span>
             <div>
-                <span class="details-food">约{{foodList.price}}克</span>
-                <span class="details-food">{{foodList.price}}</span>
-                <span class="details-food">有{{foodList.price}}</span>
+                <span class="details-food">约{{ foodList.price }}克</span>
+                <span class="details-food">{{ foodList.price }}</span>
+                <span class="details-food">有{{ foodList.price }}</span>
             </div>
             <div class="box-price">
-                <span class="price—details_food"><span class="symbol">￥</span>{{foodList.price}}</span>
-                <span class="specifications-select">+选规格</span>
+                <span class="price—details_food"><span class="symbol">￥</span>{{ foodList.price }}</span>
+                <span class="specifications-select" @click="showPopup">+选规格</span>
             </div>
         </div>
     </div>
+
+    <van-popup v-model:show="show" closeable round position="bottom" :style="{ height: '40%' }">
+        <div class="layer">
+            <img :src="foodList.bannerUrl" alt="" />
+            <div class="contents">
+                <span class="balck">{{ foodList.foodName }}</span>
+                <span class="red">￥{{ foodList.price }}</span>
+            </div>
+        </div>
+        <div class="sum">
+            <span>数量</span>
+            <van-stepper v-model="value" />
+        </div>
+        <div class="button">
+            <van-button round type="success" size="large" @click="toOrder">选好了</van-button>
+        </div>
+    </van-popup>
 </template>
 <script setup lang="ts">
 import useUlit from '@/assets/ulit/index'
 import { getFoodListApi } from '@/api/api'
 import { ref } from "vue";
+import { useRouter } from 'vue-router'
+let router = useRouter()
 const foodList: any = ref({})
 let search = window.location.search
 let foodId = search.split('=');
 let id = foodId[1]
-getFoodListApi({
+let foods = ref()
+const show = ref(false);
+const showPopup = () => { //弹出层
+    show.value = true;
+};
+const toOrder = () => {
+    router.push({
+        name: 'evaluate',
+        query: {
+            foodList: id,
+            value: value.value
+        }
+    })
+}
+const value = ref('1');
+getFoodListApi({ //接口
 
 }).then(res => {
     res.data.data.list.find((el: any) => {
         if (el.foodId == id) {
             foodList.value = el
-            console.log(foodList.value);
         }
     });
 })
@@ -78,5 +111,57 @@ getFoodListApi({
     padding: .3rem .7rem;
     border-radius: .5rem;
     font-weight: 500;
+}
+
+.layer {
+    display: flex;
+    margin: 2rem;
+}
+
+.layer img {
+    width: 10rem;
+    height: 10rem;
+}
+
+.contents {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    margin: 0 2rem;
+}
+
+.balck {
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.red {
+    color: red;
+    font-weight: 600;
+}
+
+.sum {
+    display: flex;
+    margin: 2rem;
+    justify-content: space-between;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.button {
+    margin: 2rem;
+}
+
+.van-button--success {
+    background-image: url(/src/assets/images/bj.png);
+    background-size: 100% 100%;
+    background-repeat: no-repeat;
+    border: var(--van-button-border-width) solid var(--van-button-success-border-color);
+}
+
+.descriptions {
+    font-size: 1.3rem;
+    margin-top: -1rem;
+    color: #bcbcb9;
 }
 </style>

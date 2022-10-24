@@ -11,6 +11,10 @@ import App from "./App.vue";
 import { Skeleton,Search } from 'vant';
 import router from "./router";
 import { Icon } from 'vant';
+import UndrawUi from 'undraw-ui'
+import 'undraw-ui/dist/style.css'
+import { Rate } from 'vant';
+
 /**
  * 周总的
  */
@@ -34,7 +38,7 @@ app.use(router);
 app.use(Tab);
 app.use(Tabs);
 app.use(Popup);
-app.use(Skeleton).use(Search).use(Icon);
+app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate);;
 app.use(Button);
 app.use(Stepper);
 app.use(Uploader);

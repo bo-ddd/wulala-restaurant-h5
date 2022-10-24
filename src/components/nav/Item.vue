@@ -1,12 +1,12 @@
 <template>
     <div class="nav-item">
-        <div>
+        <div class="box">
             <slot name="icon">
                 <img v-if="icon" class="nav-icon" :src="icon" alt=''>
             </slot>
         </div>
-        <div>
-            <slot>{{text}}</slot>
+        <div >
+            <slot  >{{text}}</slot>
         </div>
         <!-- <slot name="icon"></slot>
         <slot></slot> -->
@@ -14,6 +14,8 @@
 </template>
 
 <script setup lang="ts">
+import { useRouter } from 'vue-router';
+let router = useRouter()
     const props = defineProps<{
         icon?:string;
         text?:string;
@@ -21,6 +23,7 @@
         gap?:string;
     }>();
     const { icon,text,size } = props
+    
 </script>
 
 <style scoped>
