@@ -32,7 +32,7 @@
       <van-stepper v-model="value" />
     </div>
     <div class="button">
-      <van-button round type="success" size="large">选好了</van-button>
+      <van-button round type="success" size="large" @click="submuit">选好了</van-button>
     </div>
   </van-popup>
 </template>
@@ -55,6 +55,13 @@ const showPopup = () => {
 };
 
 const value = ref(1);
+
+let submuit = () =>{
+  console.log(value.value);
+  console.log(content);
+  console.log(description);
+  console.log(price);
+}
 </script>
 
 <style scoped>
