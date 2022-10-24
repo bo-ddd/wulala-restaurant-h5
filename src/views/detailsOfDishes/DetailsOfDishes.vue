@@ -22,7 +22,7 @@
                     </div>
                     <div class=" box-text wrap ">
                         <div class="text">
-                            <van-rate v-model="item.star" :size="10" color="#ffd21e" void-icon="star" void-color="#eee" />
+                            <van-rate v-model="item.star" :size="10" color="#ffd21e" void-icon="star" readonly void-color="#eee" />
                         </div>
                         <span class="text">{{ item.content }}</span>
                     </div>
