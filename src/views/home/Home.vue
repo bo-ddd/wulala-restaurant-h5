@@ -78,11 +78,8 @@ const value = ref('');
 const toevaluate = function (name: string, foodId: number) {
     window.location.href = `/detailsOfDishes?foodId=${foodId}`
 }
-getFoodListApi({
-    
-}).then(res => {
+getFoodListApi({}).then(res => {
     bestSellers.value = res.data.data.list
-    
 })
 const toSearch = function () {
     router.push('search')
