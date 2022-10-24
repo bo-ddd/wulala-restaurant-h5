@@ -1,6 +1,7 @@
 <template>
     <div class="last-to_back ">
-        <img src="@/assets/images/icon-left.png" alt="" @click="backtoLast">
+        <van-icon name="arrow-left" @click="backtoLast"/>
+        <!-- <img src="@/assets/images/icon-left.png" alt="" > -->
         <span class="last-text">{{text}}</span>
     </div>
 </template>
@@ -20,7 +21,7 @@ const backtoLast = function () {
 <style scoped>
 .last-to_back {
    display: grid;
-  grid-template-columns: auto 20rem;
+  grid-template-columns: auto 22rem;
   align-items: center;
 }
 
@@ -30,8 +31,8 @@ const backtoLast = function () {
 
 .last-text {
     font-size: 1.7rem;
-    /* margin-left: 11rem; */
     font-weight: bold;
+
     color: v-bind(color);
 }
 </style>
