@@ -16,9 +16,8 @@
                 </template>
                 <template #middle>
                     <span class="payment">
-                        <van-uploader v-model="fileList" :preview-image="true" multiple :max-count="2"
+                        <van-uploader :preview-image="true" multiple v-model="fileList" :max-count="1" :upload-icon="avatarImg"
                         :after-read="afterRead" />
-                        <!-- <van-uploader v-model="fileList" multiple :max-count="2" /> -->
                     </span>
                 </template>
                 <template #right>
@@ -69,6 +68,31 @@
                 <template #middle>
                     <p class="payment"> {{ sex }} </p>
                 </template>
+                <template #right>
+                    <img class="icon-right" src="@/assets/images/right.png" alt="">
+                </template>
+            </ExpressInfoItem>
+            <ExpressInfoItem class="order-info">
+                <template #left>
+                    <span class="mode">个性签名</span>
+                </template>
+                <template #middle>
+                    <p class="payment"> {{ personalSignature }} </p>
+                </template>
+                <template #right>
+                    <img class="icon-right" src="@/assets/images/right.png" alt="">
+                </template>
+            </ExpressInfoItem>
+            <ExpressInfoItem class="order-info">
+                <template #left>
+                    <span class="mode">爱好</span>
+                </template>
+                <template #middle>
+                    <p class="payment"> {{ personalSignature }} </p>
+                </template>
+                <template #right>
+                    <img class="icon-right" src="@/assets/images/right.png" alt="">
+                </template>
             </ExpressInfoItem>
         </div>
     </main>
@@ -89,43 +113,61 @@ let userId = ref();
 let cellPhoneNumber = ref();//手机号
 let birthday = ref('');//生日
 let sex = ref();
+let personalSignature = ref();//个性签名
+let hobby = ref();//爱好
+let avatarImg = ref("");
 const fileList = ref([]);
 setTimeout(() => {
     userInfoApi({}).then(res => {
     console.log(res);
+    avatarImg.value=res.data.data.avatarImg;
     username.value = res.data.data.avatarName;
     userId.value = res.data.data.userId;
     cellPhoneNumber.value = res.data.data.phoneNumber;
     birthday.value = res.data.data.birthday.slice(0, 10);
     sex.value = res.data.data.sex == 0 ? '女' : '男';
+    personalSignature.value = res.data.data.personalSignature == '' ? '去设置' :res.data.data.personalSignature ;
+    hobby.value = res.data.data.hobby == '' ? '去设置':res.data.data.hobby;
 }).catch(err => {
     console.log(err);
 })
+console.log(avatarImg.value);
 pageLoading.value = false;
 }, 400);
-// let date = route.query.date; //生日
+
 let afterRead = (file: any) => {
     // 此时可以自行将文件上传至服务器
     //   console.log(file.file);
     uploadAvatarApi({
-        file: file.file,
-    }).then(res => {
-        // console.log('-------res UserInfo------');
-        // console.log(res);
-        if (res.data.status == 1) {
-            (async function () {
+     file: file.file,
+    }).then(ress => {
+    //  console.log('-------res UserInfo------');
+    //  console.log(ress);
+     if (ress.data.status == 1) {
+          userInfoApi({}).then(res => {
+               (async function () {
                 let userupdate = await userUpdateApi({
-                    userId: userId,
-                    avatarImg: res.data.data.url,
+                   userId: res.data.data.userId,
+                   sex:res.data.data.sex,
+                   birthday:res.data.data.birthday,
+                   personalSignature:res.data.data.personalSignature,
+                   hobby:res.data.data.hobby,
+                   avatarImg: ress.data.data.url,
                 })
                 // console.log('-----------------userupdate----------------');
                 // console.log(userupdate);
+                // console.log(res.data.data.avatarImg);
+                
                 if (userupdate.data.msg == '成功') {
-                    Notify({ type: 'success', message: '上传头像成功' });
-                    router.push({ name: 'mine' })
+                   Notify({ type: 'success', message: '上传头像成功' });
+                   router.push({ name: 'mine' })
                 }
-            })()
-        }
+               })()
+          })
+     }
+     if(ress.data.msg == 9103){
+          Notify({ type: 'success', message: ress.data.data.msg });
+     }
     })
 };
 const lastPage = function () {
@@ -185,5 +227,18 @@ main {
     display: flex;
     align-items: center;
     justify-content: center;
+}
+
+::v-deep .van-badge__wrapper{
+    width: 8rem;
+    height: 8rem;
+}
+::v-deep .van-uploader__upload-icon{
+    font-size: 8rem;
+    height: 100%;
+}
+::v-deep .van-uploader__upload{
+    margin: 0;
+    background:0;
 }
 </style>
