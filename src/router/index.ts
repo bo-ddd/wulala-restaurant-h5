@@ -82,6 +82,14 @@ const router = createRouter({
       path:'/modifyautograph',
       name:'modifyautograph',
       component:()=>import("../views/toSignIn/Modifyautograph.vue")
+    },{
+      path:'/modifysex',
+      name:'modifysex',
+      component:()=>import("../views/toSignIn/ModifySex.vue")
+    },{
+      path:'/modifyhobby',
+      name:'modifyhobby',
+      component:()=>import("../views/toSignIn/ModifyHobby.vue")
     }
   ],
 })

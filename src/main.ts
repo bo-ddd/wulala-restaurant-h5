@@ -23,6 +23,9 @@ import { NoticeBar } from 'vant';
 import { DatetimePicker } from 'vant';
 import { Loading } from 'vant';
 import { Field, CellGroup } from 'vant';
+import { Picker } from 'vant';
+import { Checkbox, CheckboxGroup } from 'vant';
+import { Cell } from 'vant'
 
 import "./assets/main.css";
 import "./assets/lib/lib-flexable.js";
@@ -48,4 +51,8 @@ app.use(DatetimePicker);
 app.use(Pagination);
 app.use(Field);
 app.use(CellGroup);
+app.use(Picker);
+app.use(Checkbox);
+app.use(CheckboxGroup);
+app.use(Cell)
 app.mount("#app");

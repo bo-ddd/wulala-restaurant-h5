@@ -1,5 +1,6 @@
 <template>
     <main>
+        <Head class="head" color="black" imgcolor="0">个性签名</Head>
         <div class="ipt">
             <van-cell-group inset>
                 <van-field
@@ -72,5 +73,8 @@ main {
 }
 .btn{
     padding: 1.4rem 0;
+}
+.head{
+    background: #fff;
 }
 </style>

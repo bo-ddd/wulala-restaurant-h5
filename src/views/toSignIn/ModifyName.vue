@@ -1,5 +1,6 @@
 <template>
     <main>
+        <Head class="head" color="black" imgcolor="0">用户名</Head>
         <div class="ipt">
             <van-cell-group inset>
                 <van-field v-model="value" label="用户名" placeholder="请输入用户名" />
@@ -73,5 +74,8 @@ main {
 }
 .btn{
     padding: 1.4rem 0;
+}
+.head{
+    background: #fff;
 }
 </style>

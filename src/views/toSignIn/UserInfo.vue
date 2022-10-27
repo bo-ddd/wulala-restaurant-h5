@@ -65,7 +65,7 @@
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
             </ExpressInfoItem>
-            <ExpressInfoItem class="order-info">
+            <ExpressInfoItem class="order-info" @click="toSex">
                 <template #left>
                     <span class="mode">性别</span>
                 </template>
@@ -87,7 +87,7 @@
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
             </ExpressInfoItem>
-            <ExpressInfoItem class="order-info">
+            <ExpressInfoItem class="order-info" @click="toModifyHobby">
                 <template #left>
                     <span class="mode">爱好</span>
                 </template>
@@ -119,6 +119,8 @@ let birthday = ref('');//生日
 let sex = ref();
 let personalSignature = ref();//个性签名
 let hobby = ref();//爱好
+console.log(hobby.value);
+
 let avatarImg = ref("");
 const fileList = ref([]);
 setTimeout(() => {
@@ -132,6 +134,7 @@ setTimeout(() => {
     sex.value = res.data.data.sex == 0 ? '女' : '男';
     personalSignature.value = res.data.data.personalSignature == '' ? '去设置' :res.data.data.personalSignature ;
     hobby.value = res.data.data.hobby == '' ? '去设置':res.data.data.hobby;
+    hobby.value = hobby.value.substring(0, hobby.value.lastIndexOf(','));//去除最后小数点
 }).catch(err => {
     console.log(err);
 })
@@ -187,6 +190,12 @@ const toModifyphoneNumber = function(){
 }
 const toModifyAutograph = function(){
     router.push({name:'modifyautograph'});
+}
+const toSex = function (){
+    router.push({name:'modifysex'});
+}
+const toModifyHobby = function (){
+    router.push({name:'modifyhobby'})
 }
 </script>
 

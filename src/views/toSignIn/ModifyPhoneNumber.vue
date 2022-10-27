@@ -1,5 +1,6 @@
 <template>
     <main>
+        <Head class="head" color="black" imgcolor="0">手机号</Head>
         <div class="ipt">
             <van-cell-group inset>
                 <van-field v-model="tel" type="tel" label="手机号" />
@@ -43,7 +44,7 @@ const confirm = function (){
                     hobby:res.data.data.hobby,
                     phoneNumber:tel.value
                 }).then(res => {
-                    console.log(res);
+                    // console.log(res);
                     Notify({ type: 'success', message: '修改成功' })
                     router.push({name:'userinfo'})
                 }).catch(err => {
@@ -73,5 +74,8 @@ main {
 }
 .btn{
     padding: 1.4rem 0;
+}
+.head {
+    background: #fff;
 }
 </style>
