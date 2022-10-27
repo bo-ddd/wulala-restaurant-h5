@@ -38,15 +38,15 @@
             </ExpressInfoItem>
         </div>
         <div class="upload wrap mt-20">
-            <ExpressInfoItem class="order-info border-bottom">
+            <ExpressInfoItem class="order-info border-bottom" @click="toBirthday">
                 <template #left>
                     <span class="mode">生日</span>
                 </template>
                 <template #middle>
-                    <p class="payment" @click="toBirthday" v-if="birthday == null">
+                    <p class="payment" v-if="birthday == null">
                         yyy-mmm-n
                     </p>
-                    <p class="payment" @click="toBirthday" v-else>
+                    <p class="payment" v-else>
                         {{ birthday }}
                     </p>
                 </template>
@@ -54,7 +54,7 @@
                     <img @click="toBirthday" class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
             </ExpressInfoItem>
-            <ExpressInfoItem class="order-info">
+            <ExpressInfoItem class="order-info" @click="toModifyphoneNumber">
                 <template #left>
                     <span class="mode">手机号</span>
                 </template>
@@ -76,7 +76,7 @@
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
             </ExpressInfoItem>
-            <ExpressInfoItem class="order-info">
+            <ExpressInfoItem class="order-info" @click="toModifyAutograph">
                 <template #left>
                     <span class="mode">个性签名</span>
                 </template>
@@ -92,7 +92,7 @@
                     <span class="mode">爱好</span>
                 </template>
                 <template #middle>
-                    <p class="payment"> {{ personalSignature }} </p>
+                    <p class="payment"> {{ hobby }} </p>
                 </template>
                 <template #right>
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
@@ -135,7 +135,6 @@ setTimeout(() => {
 }).catch(err => {
     console.log(err);
 })
-console.log(avatarImg.value);
 pageLoading.value = false;
 }, 400);
 
@@ -182,6 +181,12 @@ const toBirthday = function () {
 }
 const toModifyName = function () {
     router.push({name:'modifyname'})
+}
+const toModifyphoneNumber = function(){
+    router.push({name:'modifyphonenumber'})
+}
+const toModifyAutograph = function(){
+    router.push({name:'modifyautograph'});
 }
 </script>
 

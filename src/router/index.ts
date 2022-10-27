@@ -74,6 +74,14 @@ const router = createRouter({
       path:'/modifyname',
       name:'modifyname',
       component:()=>import("../views/toSignIn/ModifyName.vue")
+    },{
+      path:'/modifyphonenumber',
+      name:'modifyphonenumber',
+      component:()=>import("../views/toSignIn/ModifyPhoneNumber.vue")
+    },{
+      path:'/modifyautograph',
+      name:'modifyautograph',
+      component:()=>import("../views/toSignIn/Modifyautograph.vue")
     }
   ],
 })
