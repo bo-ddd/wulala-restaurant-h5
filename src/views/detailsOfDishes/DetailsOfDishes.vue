@@ -13,15 +13,18 @@
                 </FoodDetails.Wrappar>
             </van-tab>
             <van-tab title="评价">
-                <div class="line-top pt-10">
-                    <div class="box-evaluate wrap" v-for="(item) in userInfo">
-                        <div class="user-avatar" >
-                            <img class="oo" :src="item.avatarImg" alt="">
+                <div class="line-top pt-10" v-for="(item) in comment">
+                    <div class="box-evaluate wrap" v-for="el in item.users">
+                        <div class="user-avatar">
+                            <img class="oo" :src="el.avatarImg" alt="">
                         </div>
-                        <div class="user-name">{{item.avatarName}}</div>
+                        <div class="user-name">{{ el.avatarName }}</div>
                     </div>
-                    <div class=" box-text wrap">
-                        <span class="text" v-for="(el) in comment">{{ el.content }}</span>
+                    <div class=" box-text wrap ">
+                        <div class="text">
+                            <van-rate v-model="item.star" :size="10" color="#ffd21e" void-icon="star" readonly void-color="#eee" />
+                        </div>
+                        <span class="text">{{ item.content }}</span>
                     </div>
                 </div>
             </van-tab>
@@ -41,18 +44,15 @@ let router = useRouter()
 
 const foodList = ref({})
 const comment: any = ref({})
-const userInfo:any = ref({})
 // 路由传参
 let search = window.location.search
 let foodId = search.split('=');
 let id = foodId[1]
+let value = ref()
 
-getComment({ foodId: id  }).then(res => {
+getComment({ foodId: id }).then(res => {
     comment.value = res.data.data.list
-    res.data.data.list.forEach((item: any) => {
-        userInfo.value = item.users
-        console.log(userInfo.value);
-    });
+    console.log(comment.value);
 
 })
 

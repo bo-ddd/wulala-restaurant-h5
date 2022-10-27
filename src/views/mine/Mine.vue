@@ -74,7 +74,7 @@ let image = ref(); //拿到图像图片，在上面渲染
 })()
 
 const toUserInfo = function (){
-  router.push({name:'userinfo',query:{name:userName.value as any,userId:userId.value}})
+  router.push({name:'userinfo'})
 }
 
 const setaccount = function () {
