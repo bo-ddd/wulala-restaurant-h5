@@ -119,13 +119,13 @@ let birthday = ref('');//生日
 let sex = ref();
 let personalSignature = ref();//个性签名
 let hobby = ref();//爱好
-console.log(hobby.value);
+// console.log(hobby.value);
 
 let avatarImg = ref("");
 const fileList = ref([]);
 setTimeout(() => {
     userInfoApi({}).then(res => {
-    console.log(res);
+    // console.log(res);
     avatarImg.value=res.data.data.avatarImg;
     username.value = res.data.data.avatarName;
     userId.value = res.data.data.userId;

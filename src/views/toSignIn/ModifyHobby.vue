@@ -32,12 +32,12 @@ export default {
         const confirm =function(){
             let hobby = checked.value;
             let hobbys = ref('');
-            console.log(hobby);
-            console.log(hobbys);
+            // console.log(hobby);
+            // console.log(hobbys);
             hobby.forEach(e => {
-                console.log(e);
+                // console.log(e);
                 hobbys.value += e+',';
-                console.log(e);
+                // console.log(e);
                 
                 userInfoApi({}).then(res => {
                     userUpdateApi({

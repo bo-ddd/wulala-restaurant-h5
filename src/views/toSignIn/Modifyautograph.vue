@@ -44,7 +44,7 @@ const confirm = function(){
                 hobby:res.data.data.hobby,
                 phoneNumber:res.data.data.phoneNumber,
             }).then(res => {
-                console.log(res);
+                // console.log(res);
                 Notify({ type: 'success', message: '修改成功' })
                 router.push({name:'userinfo'})
             }).catch(err => {
