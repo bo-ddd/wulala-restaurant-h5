@@ -61,6 +61,9 @@
                 <template #middle>
                     <p class="payment"> {{ cellPhoneNumber }} </p>
                 </template>
+                <template #right>
+                    <img class="icon-right" src="@/assets/images/right.png" alt="">
+                </template>
             </ExpressInfoItem>
             <ExpressInfoItem class="order-info">
                 <template #left>

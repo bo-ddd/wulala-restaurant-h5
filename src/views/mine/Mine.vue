@@ -108,5 +108,9 @@ main {
 .account-info_name{
   font-weight: 550;
   padding-left: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 18rem;
 }
 </style>
