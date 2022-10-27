@@ -21,7 +21,7 @@ import { Rate } from 'vant';
 import { Uploader } from 'vant';
 import { NoticeBar } from 'vant';
 import { DatetimePicker } from 'vant';
-
+import { Loading } from 'vant';
 
 import "./assets/main.css";
 import "./assets/lib/lib-flexable.js";
@@ -39,7 +39,7 @@ app.use(Tab);
 app.use(Tabs);
 app.use(Popup);
 app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate);;
-app.use(Button);
+app.use(Button).use(Loading);
 app.use(Stepper);
 app.use(Uploader);
 app.use(NoticeBar);

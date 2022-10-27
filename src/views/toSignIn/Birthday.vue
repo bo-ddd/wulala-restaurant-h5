@@ -3,7 +3,6 @@
 
         <Head class="head" color="black" imgcolor="0">账户设置</Head>
         <div class="choice mt-20" @click="choiceBirthday">请选择您的生日</div>
-        <!-- 分类 classIfy 窗口 window -->
         <div class="classify-window" :class="{ active:isActive }">
             <div class="options">
 
@@ -18,6 +17,7 @@
 </template>
 
 <script lang="ts" setup>
+import {userUpdateApi, userInfoApi} from '@/api/api';
 import router from "@/router";
 import { ref } from "vue";
 let isActive = ref(false);
@@ -25,10 +25,7 @@ const currentDate = ref(new Date(2021, 0, 17));
 
 let minDate = new Date(1111, 0, 1);
 let maxDate = new Date(2025, 10, 1);
-// let change = function(){
-//     console.log(2);
 
-// }
 let cancel = function () {
     isActive.value = true;
     return isActive
@@ -42,7 +39,24 @@ const getEndTime = (value: any) => {
     d = d < 10 ? '0' + d : d
     authInfo.value = value = y + '-' + m + '-' + d;
 
-    router.push({name:'userinfo',query:{date:authInfo.value}})
+    router.push({name:'userinfo'})
+    
+    userInfoApi({}).then(res => {
+        console.log(res);
+        userUpdateApi({
+            userId:  res.data.data.userId,
+            sex:res.data.data.sex,
+            birthday:authInfo.value,
+            personalSignature:res.data.data.personalSignature,
+            hobby:res.data.data.hobby
+        }).then(res => {
+            console.log(res);
+        }).catch(err => {
+            console.log(err);
+        })
+    }).catch(err => {
+        console.log(err);
+    })
 }
 const choiceBirthday = function () {
     isActive.value = false;

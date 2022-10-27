@@ -67,10 +67,6 @@ const router = createRouter({
       name: 'search',
       component: () => import("../views/searchpage/Search.vue")
     }, {
-      path: '/selflable',
-      name: 'selflable',
-      component: () => import("../views/toSignIn/SelfLable.vue")
-    }, {
       path: '/evaluate',
       name: 'evaluate',
       component: () => import("../views/evaluate/Evaluate.vue")
