@@ -38,7 +38,7 @@
 </template>
 
 <script setup lang="ts">
-import { ref } from "vue";
+import { ref,watch,toRefs } from "vue";
 
 let props = defineProps<{
   src?: string;
@@ -47,7 +47,7 @@ let props = defineProps<{
   description?: string;
 }>();
 
-const { src, content, price, description } = props;
+const { src, content, price, description } = toRefs(props);
 
 const show = ref(false);
 const showPopup = () => {
@@ -136,5 +136,8 @@ let submuit = () =>{
   font-size: 1.3rem;
   margin-top: -1rem;
   color: #bcbcb9;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
 }
 </style>
