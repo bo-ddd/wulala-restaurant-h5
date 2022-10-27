@@ -29,11 +29,12 @@
                     <span class="mode">昵称</span>
                 </template>
                 <template #middle>
-                    <p class="payment"> {{ username }} </p>
+                    <!-- modify : 修改 name  -->
+                    <p class="payment" @click="toModifyName"> {{ username }} </p>
                 </template>
-                <!-- <template #right>
+                <template #right>
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
-                </template> -->
+                </template>
             </ExpressInfoItem>
         </div>
         <div class="upload wrap mt-20">
@@ -175,6 +176,9 @@ const lastPage = function () {
 }
 const toBirthday = function () {
     router.push({ name: 'birthday' })
+}
+const toModifyName = function () {
+    router.push({name:'modifyname'})
 }
 </script>
 

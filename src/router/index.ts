@@ -70,6 +70,10 @@ const router = createRouter({
       path: '/evaluate',
       name: 'evaluate',
       component: () => import("../views/evaluate/Evaluate.vue")
+    },{
+      path:'/modifyname',
+      name:'modifyname',
+      component:()=>import("../views/toSignIn/ModifyName.vue")
     }
   ],
 })

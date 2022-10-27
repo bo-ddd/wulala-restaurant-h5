@@ -22,6 +22,7 @@ import { Uploader } from 'vant';
 import { NoticeBar } from 'vant';
 import { DatetimePicker } from 'vant';
 import { Loading } from 'vant';
+import { Field, CellGroup } from 'vant';
 
 import "./assets/main.css";
 import "./assets/lib/lib-flexable.js";
@@ -45,4 +46,6 @@ app.use(Uploader);
 app.use(NoticeBar);
 app.use(DatetimePicker);
 app.use(Pagination);
+app.use(Field);
+app.use(CellGroup);
 app.mount("#app");
