@@ -1,7 +1,7 @@
 <template> 
     <main>
         <div class="loading" v-show="pageLoading">
-        <van-loading class="loading-bg" type="spinner" color="#303030" size="24px" v-show="pageLoading"/>
+            <van-loading class="loading-bg" type="spinner" color="#303030" size="24px" v-show="pageLoading"/>
         </div>  
         <Head class="head" color="black" imgcolor="0">
             <template #icon>
