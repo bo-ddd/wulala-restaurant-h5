@@ -22,7 +22,7 @@ import { useRouter } from "vue-router";
 import { Notify } from 'vant';
 export default {
     setup() {
-        
+        let arr = ref([]);
         let router = useRouter();
         const checked = ref([]);
         const checkboxRefs = ref([]);
@@ -40,6 +40,8 @@ export default {
                 // console.log(e);
                 
                 userInfoApi({}).then(res => {
+                    console.log(res.data.data.hobby);
+                    arr.value = res.data.data.hobby;
                     userUpdateApi({
                         avatarName:res.data.data.avatarName,
                         userId:  res.data.data.userId,
@@ -68,7 +70,8 @@ export default {
             toggle,
             checked,
             checkboxRefs,
-            confirm
+            confirm,
+            arr
         };
     },
 };

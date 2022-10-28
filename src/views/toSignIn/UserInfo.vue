@@ -224,6 +224,7 @@ main {
 .payment {
     color: #9d9d9d;
     font-size: 1.6rem;
+    /* width: 12rem; */
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
