@@ -117,6 +117,7 @@ main {
   white-space: nowrap;
   text-overflow: ellipsis;
   width: 18rem;
+  font-size: 1.6rem;
 }
 .loading{
     background-color: #fff;

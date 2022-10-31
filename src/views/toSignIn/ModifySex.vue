@@ -2,7 +2,7 @@
     <main>
         <div class="ipt">
             <Head class="head" color="black" imgcolor="0">账户设置</Head>
-            <div class="choice mt-20" @click="choiceBirthday">请选择您的生日</div>
+            <div class="choice mt-20" @click="choiceBirthday">请选择您的性别</div>
         </div>
         <div class="classify-window" :class="{ active:isActive }">
             <div class="options">
