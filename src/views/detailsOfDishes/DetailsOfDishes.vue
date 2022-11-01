@@ -16,15 +16,17 @@
                 <div class="line-top pt-10" v-for="(item) in comment">
                     <div class="box-evaluate wrap" v-for="el in item.users">
                         <div class="user-avatar">
-                            <img class="oo" :src="el.avatarImg" alt="">
+                            <img class="avatarImg" :src="el.avatarImg" alt="">
                         </div>
                         <div class="user-name">{{ el.avatarName }}</div>
                     </div>
                     <div class=" box-text wrap ">
                         <div class="text">
-                            <van-rate v-model="item.star" :size="10" color="#ffd21e" void-icon="star" readonly void-color="#eee" />
+                            <van-rate v-model="item.star" :size="10" color="#ffd21e" void-icon="star" readonly
+                                void-color="#eee" />
                         </div>
                         <span class="text">{{ item.content }}</span>
+                        <!--评价文本  -->
                     </div>
                 </div>
             </van-tab>
@@ -38,7 +40,6 @@ import FoodDetails from '@/components/foodDetails'
 import { getComment } from '@/api/api'
 import { ref } from "vue";
 import { useRouter } from 'vue-router'
-
 const active = ref(0);
 let router = useRouter()
 
@@ -52,9 +53,28 @@ let value = ref()
 
 getComment({ foodId: id }).then(res => {
     comment.value = res.data.data.list
-    console.log(comment.value);
-
+    res.data.data.list.forEach((el: any) => {
+        if (el.content == '') {
+            if (el.star == 5) {
+                el.content = '非常满意'
+            } else if (el.star == 4) {
+                el.content = '满意'
+            } else if (el.star == 3) {
+                el.content = '一般'
+            } else if (el.star == 2) {
+                el.content = '差'
+            } else if (el.star == 1) {
+                el.content = '非常差'
+            }
+        }
+    });
 })
+
+
+
+
+
+// -------------------
 
 </script>
 
@@ -92,7 +112,7 @@ main {
     font-weight: bold;
 }
 
-.oo {
+.avatarImg {
     width: 100%;
     height: 100%;
     border-radius: 50%;
