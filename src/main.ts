@@ -3,7 +3,7 @@ import { createPinia } from "pinia";
 /**
  * 刘总的
  */
-import { Tab, Tabs, Popup, Button, Stepper } from 'vant'
+import {Tab,Tabs,Popup ,Button,Stepper,Pagination} from 'vant'
 import App from "./App.vue";
 /**
  * 宋总的
@@ -24,7 +24,11 @@ import { PullRefresh } from 'vant';
 import { Uploader } from 'vant';
 import { NoticeBar } from 'vant';
 import { DatetimePicker } from 'vant';
-
+import { Loading } from 'vant';
+import { Field, CellGroup } from 'vant';
+import { Picker } from 'vant';
+import { Checkbox, CheckboxGroup } from 'vant';
+import { Cell } from 'vant'
 
 import "./assets/main.css";
 import "./assets/lib/lib-flexable.js";
@@ -42,11 +46,19 @@ app.use(Tab);
 app.use(Tabs);
 app.use(Popup);
 app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate).use(Toast).use(List).use(PullRefresh);
-app.use(Button);
+app.use(Button).use(Loading);
 app.use(Stepper);
 app.use(Uploader);
 app.use(NoticeBar);
+
 app.use(DatetimePicker);
+app.use(Pagination);
+app.use(Field);
+app.use(CellGroup);
+app.use(Picker);
+app.use(Checkbox);
+app.use(CheckboxGroup);
+app.use(Cell)
 app.mount("#app");
 app.use(Lazyload, {
     lazyComponent: true,

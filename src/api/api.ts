@@ -62,7 +62,9 @@ export const userUpdateApi = function (payload = {}) {
     return instance.post('/user/update', payload)
 }
 
-
+/**
+ * @description 查询用户信息接口
+ */
 export const userInfoApi = function (payload = {}) {
     return instance.post('/user/info', payload)
 }
