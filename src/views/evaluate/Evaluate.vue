@@ -1,7 +1,7 @@
 <template>
     <BackToLastVue class="mt-14" text="发表评价"></BackToLastVue>
     <div class="box">
-        <div class="wrap mt-14">
+        <div class="text-box wrap mt-14">
             <div class="title-ecaluate">您对菜品满意吗？</div>
             <div class="mt-14">
                 <span class="population-ecaluate">总体</span>
@@ -17,9 +17,10 @@
                 <span class="text-population">{{ flavor }}</span>
             </div>
             <div class="comment mt-14">
-                <textarea name="" class="text-content" placeholder="请输入内容" v-model="commentText"></textarea>
+                <textarea name="" id="text-content" class="text-content" placeholder="请输入内容"
+                    v-model="commentText"></textarea>
             </div>
-            <span class="fa" @click="tofa">发送</span>
+            <span class="send-out" @click="tofa">发送</span>
         </div>
 
     </div>
@@ -27,8 +28,10 @@
 </template>
 <script setup lang="ts">
 import BackToLastVue from '@/components/BackToLast.vue';
-import emoji from '@/assets/emoji/emoji' //表情包
-import { userInfoApi, updatecomment, getComment } from '@/api/api'; //获取id
+import emoji from '@/assets/emoji/emoji'//表情包
+import 'vant/es/toast/style';
+import { Toast } from 'vant';
+import { userInfoApi, updatecomment } from '@/api/api'; //获取id
 
 import { ref } from 'vue'
 import { useRoute } from 'vue-router'
@@ -40,20 +43,28 @@ const value = ref(0);
 const val = ref(0)
 const commentText = ref('')
 const tofa = () => {
-    (async function () {
-        let userInfoRes = await userInfoApi({});
-        userId.value = userInfoRes.data.data.userId;
-        console.log(userId.value);
-        let comment = await updatecomment({
-            userId: userId.value, //用户id
-            foodId: 23, //菜品id
-            content: commentText.value, //评价内容
-            star: value.value, //如不填默认是5, 代表的是几颗星,最高5颗
-            isRealName: 0 //是否实名评价
-        }).then(res => {
-            console.log(res);
-        })
-    })()
+    if (commentText.value == '' && value.value == 0) {
+        Toast.fail('请输入内容');
+    } else {
+        (async function () {
+            let userInfoRes = await userInfoApi({});
+            userId.value = userInfoRes.data.data.userId;
+            console.log(userId.value);
+            let comment = await updatecomment({
+                userId: userId.value, //用户id
+                foodId: 29, //菜品id
+                content: commentText.value, //评价内容
+                star: value.value, //如不填默认是5, 代表的是几颗星,最高5颗
+                isRealName: 0 //是否实名评价
+            }).then(res => {
+                value.value = 0
+                commentText.value = ''
+                population.value = ''
+                Toast.success('发送成功');
+                console.log(res);
+            })
+        })()
+    }
 }
 
 let rateScoreDesc = ['非常差', '差', '一般', '满意', '非常满意']
@@ -68,8 +79,6 @@ const onChange = (value: number) => {
 const Change = (value: number) => {
     flavor.value = rate[value - 1]
 }
-
-
 
 
 </script>
@@ -114,11 +123,28 @@ const Change = (value: number) => {
     top: .2rem;
 }
 
-.fa {
+.text-box {
+    position: relative;
+}
+
+.send-out {
     display: inline-block;
     font-size: 1.2rem;
     padding: .5rem 1rem;
-    background-color: pink;
+    background-color: black;
     border-radius: 1rem;
+    position: absolute;
+    right: .4rem;
+    bottom: -2.8rem;
+    color: #fff;
+}
+
+.okk {
+    position: relative;
+}
+
+.ok {
+    position: absolute;
+    right: 5rem;
 }
 </style>

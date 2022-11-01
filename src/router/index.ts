@@ -21,6 +21,11 @@ const router = createRouter({
           component: () => import("@/views/menu/Menu.vue"),
         },
         {
+          path: '/shoppingcart', //shoppingcart
+          name: 'shoppingcart',
+          component: () => import("@/views/shoppingcart/Shoppingcart.vue"),
+        },
+        {
           path: '/mine', //mien
           name: 'mine',
           // route level code-splitting
@@ -70,6 +75,26 @@ const router = createRouter({
       path: '/evaluate',
       name: 'evaluate',
       component: () => import("../views/evaluate/Evaluate.vue")
+    },{
+      path:'/modifyname',
+      name:'modifyname',
+      component:()=>import("../views/toSignIn/ModifyName.vue")
+    },{
+      path:'/modifyphonenumber',
+      name:'modifyphonenumber',
+      component:()=>import("../views/toSignIn/ModifyPhoneNumber.vue")
+    },{
+      path:'/modifyautograph',
+      name:'modifyautograph',
+      component:()=>import("../views/toSignIn/Modifyautograph.vue")
+    },{
+      path:'/modifysex',
+      name:'modifysex',
+      component:()=>import("../views/toSignIn/ModifySex.vue")
+    },{
+      path:'/modifyhobby',
+      name:'modifyhobby',
+      component:()=>import("../views/toSignIn/ModifyHobby.vue")
     }
   ],
 })

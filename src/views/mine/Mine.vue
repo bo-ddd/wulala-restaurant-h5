@@ -1,4 +1,7 @@
 <template>
+  <div class="loading" v-show="pageLoading">
+    <van-loading class="loading-bg" type="spinner" color="#303030" size="24px" v-show="pageLoading"/>
+  </div>  
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
   <!-- <input type="file" name="" id=""> -->
   <main>
@@ -52,7 +55,7 @@ import useUtil from "@/assets/ulit";
 import { userInfoApi, uploadAvatarApi } from '@/api/api';
 import { useRouter } from 'vue-router';
 let router = useRouter();
-
+let pageLoading = ref(true);//loading
 let { parsrAsssetFile } = useUtil();
 let { toSignIn, MineOrderList, game } = useRecommendSignUp();
 let userName = ref('');
@@ -72,7 +75,9 @@ let image = ref(); //拿到图像图片，在上面渲染
     userName.value = '立即登录';
   }
 })()
-
+setTimeout(() => {
+  pageLoading.value = false;
+}, 500);
 const toUserInfo = function (){
   router.push({name:'userinfo'})
 }
@@ -108,5 +113,18 @@ main {
 .account-info_name{
   font-weight: 550;
   padding-left: 1rem;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  width: 18rem;
+  font-size: 1.6rem;
 }
+.loading{
+    background-color: #fff;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 </style>
