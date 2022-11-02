@@ -9,7 +9,7 @@
       </van-tab>
       
     <MenuConten.Wrapper>
-      <menuConten.Item
+      <MenuConten.Item
         v-for="(item, index) in foodlists.data"
         :key="index"
         :src="item.bannerUrl"
@@ -17,7 +17,7 @@
         :price="item.price"
         :description="item.description"
       >
-    </menuConten.Item>
+    </MenuConten.Item>
     </MenuConten.Wrapper>
   </van-tabs>
 
@@ -42,7 +42,7 @@ let pageSize = ref();
 let total = ref();
 let pageNum = ref();
 
-let foodlists = reactive({data:[]});
+let foodlists:any = reactive({data:[]});
 (async function () {
   let foodlist = await getFoodListApi({
     pageSize: pageSize.value,
