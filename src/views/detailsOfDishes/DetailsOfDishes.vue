@@ -5,7 +5,6 @@
             <FoodInformation.Item></FoodInformation.Item>
         </FoodInformation.Wrapper>
 
-
         <van-tabs v-model:active="active" class="mt-14">
             <van-tab title="详情">
                 <FoodDetails.Wrappar>

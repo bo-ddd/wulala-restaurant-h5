@@ -18,6 +18,7 @@ import { Rate } from 'vant';
 import { Lazyload } from 'vant';
 import { List } from 'vant';
 import { PullRefresh } from 'vant';
+import { Card } from 'vant';
 /**
  * 周总的
  */
@@ -29,6 +30,7 @@ import { Field, CellGroup } from 'vant';
 import { Picker } from 'vant';
 import { Checkbox, CheckboxGroup } from 'vant';
 import { Cell } from 'vant'
+
 
 import "./assets/main.css";
 import "./assets/lib/lib-flexable.js";
@@ -45,7 +47,7 @@ app.use(router);
 app.use(Tab);
 app.use(Tabs);
 app.use(Popup);
-app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate).use(Toast).use(List).use(PullRefresh);
+app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate).use(Toast).use(List).use(PullRefresh).use(Card);
 app.use(Button).use(Loading);
 app.use(Stepper);
 app.use(Uploader);

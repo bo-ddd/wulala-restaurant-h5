@@ -48,23 +48,24 @@ const showPopup = () => { //弹出层
     show.value = true;
 };
 const toOrder = () => {
-    router.push({
-        name: 'evaluate',
-        query: {
-            foodList: id,
-            value: value.value
-        }
-    })
+    let localStorageNull = localStorage.getItem('')
+    if (localStorageNull == null) {
+        console.log(1);
+       localStorage.setItem('id',JSON.stringify(id))
+    }
+
 }
 const value = ref('1');
 getFoodListApi({ //接口
 
 }).then(res => {
+    console.log(res);
     res.data.data.list.find((el: any) => {
         if (el.foodId == id) {
             foodList.value = el
         }
     });
+
 })
 </script>
 
