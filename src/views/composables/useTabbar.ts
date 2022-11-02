@@ -23,11 +23,18 @@ export default function () {
         },
         {
             id: 3,
+            url: parsrAsssetFile('icon-shoppingcart.png'),
+            urls: parsrAsssetFile('icon-shoppingcart_hover.png'),
+            text: '购物车',
+            name: '/shoppingcart'
+        },
+        {
+            id: 4,
             url: parsrAsssetFile('icon-mine.png'),
             urls: parsrAsssetFile('icon-mine_hover.png'),
             text: '我的',
             name: '/mine'
-        }
+        },
     ]
     let route = useRoute()
     let selected = ref(route.name) as Ref<string>

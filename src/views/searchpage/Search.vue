@@ -62,7 +62,6 @@ watch(searchValue, (a, b) => {
     } else {
         getFoodListApi({}).then(res => {
             data.bestSellers = res.data.data.list //数据
-
             let sea = searchValue.value
             if (sea) {
                 data.tableDataTwo = data.bestSellers.filter((item) => {

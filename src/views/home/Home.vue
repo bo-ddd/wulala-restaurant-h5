@@ -1,64 +1,67 @@
 <template>
     <div class="home">
-        <div class=" bb wrap pt-18">
-            <van-search v-model="value" shape="round" placeholder="麻辣香锅" @click="toSearch">
-            </van-search>
-        </div>
-        <Silder.Wrapper class="wrap mt-14">
-            <Silder.Banner :src="parsrAsssetFile('banaer-1.png')"></Silder.Banner>
-            <Silder.Banner :src="parsrAsssetFile('banaer-2.png')"></Silder.Banner>
-            <Silder.Banner :src="parsrAsssetFile('banaer-3.png')"></Silder.Banner>
-            <Silder.Banner :src="parsrAsssetFile('banaer-4.png')"></Silder.Banner>
-            <Silder.Banner :src="parsrAsssetFile('banaer-5.png')"></Silder.Banner>
-        </Silder.Wrapper>
+        <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
 
-        <!-- 开启点餐之旅 -->
-        <HomeBtn.Wrapper class="mt-14">
-            <HomeBtn.Item :src="parsrAsssetFile('btn-order.png')"></HomeBtn.Item>
-        </HomeBtn.Wrapper>
-
-
-        <div class=" wrap box-ranking mt-14">
-            <div>
-                <div class="ranking breakfast-bj">
-                    <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
-                    <span class="=text-ranking">早餐排名</span>
-                </div>
-                <div class="ranking wan mt-14 ">
-                    <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
-                    <span class="=text-ranking">晚餐排名</span>
-                </div>
+            <div class=" box-search wrap pt-18">
+                <van-search v-model="value" shape="round" placeholder="麻辣香锅" @click="toSearch">
+                </van-search>
             </div>
-            <div class="ranking  lunch-bj ">
-                <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
-                <span class="pd-tb_43">午餐排名</span>
-            </div>
-        </div>
+            <Silder.Wrapper class="wrap mt-14">
+                <Silder.Banner :src="parsrAsssetFile('banaer-1.png')"></Silder.Banner>
+                <Silder.Banner :src="parsrAsssetFile('banaer-2.png')"></Silder.Banner>
+                <Silder.Banner :src="parsrAsssetFile('banaer-3.png')"></Silder.Banner>
+                <Silder.Banner :src="parsrAsssetFile('banaer-4.png')"></Silder.Banner>
+                <Silder.Banner :src="parsrAsssetFile('banaer-5.png')"></Silder.Banner>
+            </Silder.Wrapper>
 
-        <BestSellers.Wrapper class="wrap mt-14">
-            <Title class="mt-14" level="2" color="#f6e6dd">今日推荐</Title>
-            <p class="commodity">12件商品</p>
-            <BestSellers.Item class="mt-14" v-for="item in bestSellers"
-                @click="toevaluate('detailsOfDishes',item.foodId)">
-                <template #image>
-                    <img class="best-sellers_png" :src="item.bannerUrl" alt="" />
-                </template>
-                <template #description>
-                    <div class="description">
-                        <div class="title-best_sellers">{{item.foodName}}</div>
-                        <div class="box-evaluate">
-                            <div class="price">
-                                ￥{{item.price}}
-                            </div>
-                            <!-- <div>
-                                <img class="icon-evaluate" src="@/assets/images/icon-evaluate.png" alt="">
-                                <span @click="toevaluate('evaluate')">评价</span>
-                            </div> -->
-                        </div>
+            <!-- 开启点餐之旅 -->
+            <HomeBtn.Wrapper class="mt-14">
+                <HomeBtn.Item :src="parsrAsssetFile('btn-order.png')"></HomeBtn.Item>
+            </HomeBtn.Wrapper>
+
+
+            <div class=" wrap box-ranking mt-14">
+                <div>
+                    <div class="ranking breakfast-bj">
+                        <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
+                        <span class="=text-ranking">早餐排名</span>
                     </div>
-                </template>
-            </BestSellers.Item>
-        </BestSellers.Wrapper>
+                    <div class="ranking wan mt-14 ">
+                        <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
+                        <span class="=text-ranking">晚餐排名</span>
+                    </div>
+                </div>
+                <div class="ranking  lunch-bj ">
+                    <img class="icon-ranking"  src="@/assets/images/icon-ranking.png" alt="">
+                    <span class="pd-tb_43">午餐排名</span>
+                </div>
+            </div>
+            <van-list v-model:loading="loading" :finished="finished" finished-text="没有更多了" @load="onLoad">
+
+                <BestSellers.Wrapper class="wrap mt-14">
+                    <Title class="mt-14" level="2" color="#f6e6dd">今日推荐</Title>
+                    <p class="commodity">12件商品</p>
+                    <BestSellers.Item class="mt-14" v-for="item in bestSellers"
+                        @click="toevaluate('detailsOfDishes', item.foodId)">
+                        <template #image>
+                            <img class="best-sellers_png" v-lazy="item.bannerUrl"  alt="" />
+                        </template>
+                        <template #description>
+                            <div class="description">
+                                <div class="title-best_sellers">{{ item.foodName }}</div>
+                                <div class="box-evaluate">
+                                    <div class="price">
+                                        ￥{{ item.price }}
+                                    </div>
+                                </div>
+                            </div>
+                        </template>
+                    </BestSellers.Item>
+                </BestSellers.Wrapper>
+            </van-list>
+        </van-pull-refresh>
+
+
     </div>
 
 </template>
@@ -68,6 +71,7 @@ import BestSellers from '@/components/bestSellers'
 import Title from '@/components/Title.vue'
 import useUlit from '@/assets/ulit/index'
 import HomeBtn from '@/components/homeBtn'
+import { Toast } from 'vant';
 import { getFoodListApi } from '@/api/api'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'
@@ -84,6 +88,39 @@ getFoodListApi({}).then(res => {
 const toSearch = function () {
     router.push('search')
 }
+
+// ------------
+const list: any = ref([]);
+const loading = ref(false);
+const finished = ref(false);
+const refreshing = ref(false);
+
+const onLoad = () => {
+    setTimeout(() => {
+        if (refreshing.value) {
+            list.value = [];
+            refreshing.value = false;
+        }
+
+        for (let i = 0; i < 10; i++) {
+            list.value.push(list.value.length + 1);
+        }
+        loading.value = false;
+
+        if (list.value.length >= 40) {
+            finished.value = true;
+        }
+    }, 1000);
+};
+
+const onRefresh = () => {
+    finished.value = false;
+    setTimeout(() => {
+        Toast('刷新成功');
+        loading.value = false;
+    }, 1000);
+    onLoad();
+};
 </script>
 <style scoped>
 .box-evaluate {
@@ -215,19 +252,7 @@ const toSearch = function () {
     font-weight: 550;
 }
 
-.bb {
+.box-search {
     position: relative;
 }
-
-/* .aa{
-    font-size: 1.7rem;
-    font-weight:bold;
-    background-color: #212111;
-    color: #fff;
-    padding: .4rem 1rem;
-    border-radius: 3rem;
-    position: absolute;
-    top: 2rem;
-    right: .2rem;
-} */
 </style>

@@ -85,32 +85,11 @@ export const updatecomment = function (payload = {}) {
     return instance.post('comment/food/create', payload)
 }
 
+/**
+ * @description 加入购物车接口
+ */
 
-/*
-* @food/list  菜肴列表
-* payload object
-*/
-
-
-
-//命名规范  以Api为结尾；
-//增删改查的命名 和 post 接口命名规范是一样的；
-// 获取商品列表 getGoodsListApi();
-// 删除商品   deleteGoodsApi();
-// 查询某件商品  getGoodsSetail();
-// 修改商品信息  updateGoodsInfo();
-// axios.post('/user/login',{
-//     username:'xiaoming',
-//     password:'999999',
-//   }, {
-//     headers:{
-//       "Content-Type":"application/x-www-form-urlencoded;charset=UTF-8"
-//     }
-//   } ).then(res => {
-//     console.log('----------res--------');
-//     console.log(res);
-//   }).catch(err => {
-//     console.log('-----------err--------');
-//     console.log(err);
-//   })
+export const cartAddApi = function (payload = {}) {
+    return instance.post('/cart/add',payload)
+}
 export default instance;

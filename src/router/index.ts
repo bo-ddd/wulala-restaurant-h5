@@ -21,6 +21,11 @@ const router = createRouter({
           component: () => import("@/views/menu/Menu.vue"),
         },
         {
+          path: '/shoppingcart', //shoppingcart
+          name: 'shoppingcart',
+          component: () => import("@/views/shoppingcart/Shoppingcart.vue"),
+        },
+        {
           path: '/mine', //mien
           name: 'mine',
           // route level code-splitting

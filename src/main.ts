@@ -8,13 +8,17 @@ import App from "./App.vue";
 /**
  * 宋总的
  */
-import { Skeleton,Search } from 'vant';
+import { Toast } from 'vant';
+import { Skeleton, Search } from 'vant';
 import router from "./router";
 import { Icon } from 'vant';
 import UndrawUi from 'undraw-ui'
 import 'undraw-ui/dist/style.css'
 import { Rate } from 'vant';
-
+import { Lazyload } from 'vant';
+import { List } from 'vant';
+import { PullRefresh } from 'vant';
+import { Card } from 'vant';
 /**
  * 周总的
  */
@@ -27,9 +31,10 @@ import { Picker } from 'vant';
 import { Checkbox, CheckboxGroup } from 'vant';
 import { Cell } from 'vant'
 
+
 import "./assets/main.css";
 import "./assets/lib/lib-flexable.js";
-import  GlobalComponents  from "@/components";
+import GlobalComponents from "@/components";
 
 const app = createApp(App);
 
@@ -42,11 +47,12 @@ app.use(router);
 app.use(Tab);
 app.use(Tabs);
 app.use(Popup);
-app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate);;
+app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate).use(Toast).use(List).use(PullRefresh).use(Card);
 app.use(Button).use(Loading);
 app.use(Stepper);
 app.use(Uploader);
 app.use(NoticeBar);
+
 app.use(DatetimePicker);
 app.use(Pagination);
 app.use(Field);
@@ -56,3 +62,6 @@ app.use(Checkbox);
 app.use(CheckboxGroup);
 app.use(Cell)
 app.mount("#app");
+app.use(Lazyload, {
+    lazyComponent: true,
+});
