@@ -23,7 +23,7 @@
             </div>
         </div>
         <div class="content">
-            <div class="upload pd-10 wrap mt-20" @click="toSignUp">
+            <div class="upload pd-10 wrap mt-20" @click="toSignIp">
                 <div class="head-info df-al">
                     <img class="add-to_icon" src="@/assets/images/add-to.png" alt="">
                     <div class="info">
@@ -54,8 +54,8 @@ userInfoApi({}).then(res => {
     console.log(err);
 })
 
-const toSignUp = function(){
-    router.push({name:'signup'})
+const toSignIp = function(){
+    router.push({name:'signin'})
 }
 
 const mobileStr=function(str:string) {
