@@ -8,7 +8,21 @@
             <div class="upload mt-20">
                 <ExpressInfoItem class="order-info" @click="toPersonalInfo">
                     <template #left>
-                        <span class="mode">个人信息</span>
+                        <span class="mode">
+                            个人信息
+                            <p class="details pt-5">头像、昵称、收货地址</p>
+                        </span>
+                    </template>
+                    <template #right>
+                        <img class="icon-right" src="@/assets/images/right.png" alt="">
+                    </template>
+                </ExpressInfoItem>
+                <ExpressInfoItem class="order-info" @click="toSafeCenter">
+                    <template #left>
+                        <span class="mode">
+                            账号于安全
+                            <p class="details pt-5">修改密码、修改手机号码、账号绑定管理</p>
+                        </span>
                     </template>
                     <template #right>
                         <img class="icon-right" src="@/assets/images/right.png" alt="">
@@ -31,6 +45,9 @@ const signOut = function(){
 }
 const toPersonalInfo = function(){
     router.push({name:'userinfo'})
+}
+const toSafeCenter = function(){
+    router.push({name:'safcenter'})
 }
 setTimeout(function () {
     pageLoading.value = false;
@@ -68,5 +85,8 @@ main{
 .upload {
     background: #fff;
 }
-
+.details{
+    font-size: 1.2rem;
+    color: #ccc;
+}
 </style>

@@ -225,10 +225,11 @@ main {
     color: #9d9d9d;
     font-size: 1.6rem;
     width: 12rem;
-    text-align: center;
+    text-align: right;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding-right: 1rem;
 }
 
 .mode {
