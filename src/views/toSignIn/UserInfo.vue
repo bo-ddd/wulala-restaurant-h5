@@ -244,14 +244,6 @@ main {
 .border-bottom {
     border-bottom: .1rem solid red 51%;
 }
-.loading{
-    background-color: #fff;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 ::v-deep .van-badge__wrapper{
     width: 8rem;
     height: 8rem;

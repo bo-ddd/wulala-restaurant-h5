@@ -77,3 +77,13 @@ a {
 .ml-23 {
   margin-left: 2.3rem;
 }
+.loading{
+  position: fixed;
+  width: 100%;
+  background-color: #fff;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+}
