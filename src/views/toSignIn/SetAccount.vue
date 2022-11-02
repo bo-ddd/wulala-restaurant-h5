@@ -29,7 +29,8 @@
                     </template>
                 </ExpressInfoItem>
             </div>
-            <Button @click="signOut" class="wrap btn mt-24" color="white" bjcolor="url(/src/assets/images/bj.png)">退出登录</Button>
+            <Button @click="toSwitchAccountNumber" class="wrap btn mt-24" color="white" bjcolor="url(/src/assets/images/bj.png)">切换账号</Button>
+            <Button @click="signOut" class="wrap btn mt-24" color="white" bjcolor="#ccc">退出登录</Button>
         </div>
     </main>
 </template>
@@ -48,6 +49,9 @@ const toPersonalInfo = function(){
 }
 const toSafeCenter = function(){
     router.push({name:'safcenter'})
+}
+const toSwitchAccountNumber = function(){
+    router.push({name:'switchaccountnumber'})
 }
 setTimeout(function () {
     pageLoading.value = false;

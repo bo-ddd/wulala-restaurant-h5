@@ -46,7 +46,9 @@ export const loginApi = function (payload = {}) {
     //就是网页的预览
     return instance.post('/user/login', payload)
 }
-
+/**
+ * @description 注册接口
+ */
 export const signUpApi = function (options = {}) {
     return instance.post('/user/register', options)
 }

@@ -99,6 +99,10 @@ const router = createRouter({
       path:'/safcenter',
       name:'safcenter',
       component:()=>import("../views/toSignIn/SafCenter.vue")
+    },{
+      path:'/switchaccountnumber',
+      name:'switchaccountnumber',
+      component:()=>import("../views/toSignIn/SwitchAccountNumber.vue")
     }
   ],
 })

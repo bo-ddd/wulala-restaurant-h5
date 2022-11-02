@@ -95,3 +95,10 @@ a {
 .pt-5{
   padding-top: .5rem;
 }
+.pd-10{
+  padding: 1rem;
+}
+.df-al{
+  display: flex;
+    align-items: center;
+}

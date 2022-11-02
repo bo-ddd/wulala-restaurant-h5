@@ -54,7 +54,7 @@
                     <img @click="toBirthday" class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
             </ExpressInfoItem>
-            <ExpressInfoItem class="order-info" @click="toModifyphoneNumber">
+            <!-- <ExpressInfoItem class="order-info" @click="toModifyphoneNumber">
                 <template #left>
                     <span class="mode">手机号</span>
                 </template>
@@ -64,7 +64,7 @@
                 <template #right>
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
-            </ExpressInfoItem>
+            </ExpressInfoItem> -->
             <ExpressInfoItem class="order-info" @click="toSex">
                 <template #left>
                     <span class="mode">性别</span>
@@ -256,5 +256,6 @@ main {
 ::v-deep .van-uploader__upload{
     margin: 0;
     background:0;
+    border-radius: 1rem;
 }
 </style>
