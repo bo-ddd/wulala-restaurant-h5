@@ -49,10 +49,11 @@ const showPopup = () => { //弹出层
 };
 
 const value = ref(1);
+let localStorageNull = localStorage.getItem('token')  //登录状态
+let getCartAdd = JSON.parse(localStorage.getItem('cartAdd')) //本地存储的数据
+let getUserId = localStorage.getItem('userId')
+let data: any = ref([])
 const toOrder = () => {
-    let data: any = ref([])
-    let localStorageNull = localStorage.getItem('token')  //登录状态
-    let getCartAdd = JSON.parse(localStorage.getItem('cartAdd')) //本地存储的数据
     if (localStorageNull == null) { //没登录
         if (getCartAdd == null) { //没数据
             data.value.push({
@@ -70,6 +71,13 @@ const toOrder = () => {
         }
     }
 }
+
+if(localStorageNull != null){
+    data.value.push({
+        userId:getUserId
+    })
+}
+console.log(data.vlaue);
 getFoodListApi({ //接口
 
 }).then(res => {
@@ -80,29 +88,6 @@ getFoodListApi({ //接口
         }
     });
 })
-// getFoodListApi({ //接口
-
-// }).then(res => {
-//     console.log(res);
-//     res.data.data.list.find((el: any) => {
-//         if (el.foodId == id) {
-//             foodList.value = el
-//             cartAddApi({
-//                 "productId": el.foodId,
-//                 "quantity": value.value //数量
-//             }).then(res => {
-//                 console.log('-----this is cart------');
-//                 console.log(res);
-//             })
-//         }
-//     });
-// })
-// cartAddApi({
-//     "productId": 58,
-//     "quantity": 6 //数量
-// }).then(res => {
-//     console.log(res);
-// })
 </script>
 
 <style scoped>

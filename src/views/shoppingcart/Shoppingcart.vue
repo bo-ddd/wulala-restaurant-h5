@@ -120,7 +120,7 @@ if (token != null) {
     if (getCartAdd == null) {
 
     } else {
-        getCartAdd.forEach(el => {
+        getCartAdd.forEach((el:any) => {
             cartAddApi({
                 productId: el.productId,
                 quantity: el.quantity//数量
