@@ -95,6 +95,14 @@ const router = createRouter({
       path:'/modifyhobby',
       name:'modifyhobby',
       component:()=>import("../views/toSignIn/ModifyHobby.vue")
+    },{
+      path:'/safcenter',
+      name:'safcenter',
+      component:()=>import("../views/toSignIn/SafCenter.vue")
+    },{
+      path:'/switchaccountnumber',
+      name:'switchaccountnumber',
+      component:()=>import("../views/toSignIn/SwitchAccountNumber.vue")
     }
   ],
 })
