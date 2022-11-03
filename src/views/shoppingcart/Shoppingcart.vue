@@ -106,11 +106,37 @@ console.log(userId);
 getCartListApi({
 
 }).then(res => {
-    if (res.data.status == 1) {
-        res.data.data.forEach((ele: any) => {
-            foodLists.value.push(ele)
+    function delSameObjValue(arr: any, resultNum: any, keyName: any, keyValue: any) {
+        console.log(keyName);
+        
+        const warp = new Map();
+        arr.forEach((i: any) => {
+            let str = keyName.map((v: any) => i[v]).join('_');
+            i[resultNum] = keyValue.reduce((p: any, c: any) => p += i[c], 0);
+            warp.has(str) ? warp.get(str)[resultNum] += i[resultNum] : warp.set(str, i);
         });
+        return Array.from(warp).map(([, v]) => v);
+    };
+    if (res.data.status == 1) {
+        // res.data.data.forEach((ele: any) => {
+        //     foodLists.value.push(ele)
+        // });
+        console.log(res.data.data);
+        let data = JSON.parse(JSON.stringify(res.data.data))
+        for(let i=0; i<data.length; i++){
+            for(let j=i+1; j<data.length; j++){
+                if(data[i].productId === data[j].productId ){
+                //console.log('重复',data[i],data[j])
+                data[i].quantity = data[i].quantity + data[j].quantity 
+                data.splice(j,1)
+                j--
+                }
+            }
+        }
+        // console.log(data);
+        foodLists.value = data
     }
+    
 })
 
 
