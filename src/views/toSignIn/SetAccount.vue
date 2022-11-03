@@ -42,7 +42,7 @@ let router = useRouter();
 let pageLoading = ref(true);
 const signOut = function(){
     router.push({name:'mine'});
-    localStorage.clear();
+    sessionStorage.clear();
 }
 const toPersonalInfo = function(){
     router.push({name:'userinfo'})

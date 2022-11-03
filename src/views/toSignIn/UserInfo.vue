@@ -107,7 +107,8 @@ import { uploadAvatarApi, userUpdateApi, userInfoApi } from '@/api/api';
 import { Notify } from 'vant';
 import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
-
+import useUtil from "@/assets/ulit";
+let { parsrAsssetFile } = useUtil();
 let pageLoading = ref(true);
 
 let router = useRouter();
@@ -126,7 +127,7 @@ const fileList = ref([]);
 setTimeout(() => {
     userInfoApi({}).then(res => {
     console.log(res);
-    avatarImg.value=res.data.data.avatarImg;
+    avatarImg.value=res.data.data.avatarImg || parsrAsssetFile('end-sign_in.png');
     username.value = res.data.data.avatarName;
     userId.value = res.data.data.userId;
     cellPhoneNumber.value = res.data.data.phoneNumber;

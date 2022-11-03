@@ -39,6 +39,8 @@
 import {useRouter} from 'vue-router';
 import { userInfoApi } from '@/api/api';
 import {ref} from 'vue';
+import useUtil from "@/assets/ulit";
+let { parsrAsssetFile } = useUtil();
 let router = useRouter();
 let pageLoading = ref(true);
 
@@ -47,7 +49,7 @@ let username = ref();
 let cellPhoneNumber = ref();//手机号
 userInfoApi({}).then(res => {
     // console.log(res);
-    avatarImg.value=res.data.data.avatarImg;
+    avatarImg.value=res.data.data.avatarImg || parsrAsssetFile('end-sign_in.png');
     username.value = res.data.data.avatarName;
     cellPhoneNumber.value = mobileStr(res.data.data.phoneNumber);
 }).catch(err => {
@@ -55,6 +57,7 @@ userInfoApi({}).then(res => {
 })
 
 const toSignIp = function(){
+    sessionStorage.clear();
     router.push({name:'signin'})
 }
 
@@ -130,5 +133,8 @@ img{
 }
 .add-to_icon{
     width: 4.5rem;
+}
+.head-info{
+    width: 50rem;
 }
 </style>
