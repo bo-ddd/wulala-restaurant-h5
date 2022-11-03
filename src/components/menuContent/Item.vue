@@ -38,16 +38,18 @@
 </template>
 
 <script setup lang="ts">
-import { ref,watch,toRefs } from "vue";
+import { ref,toRefs } from "vue";
+import { cartAddApi } from '@/api/api'
 
 let props = defineProps<{
   src?: string;
   content?: string;
   price?: number;
   description?: string;
+  foodId?:number
 }>();
 
-const { src, content, price, description } = toRefs(props);
+const { src, content, price, description, foodId } = toRefs(props);
 
 const show = ref(false);
 const showPopup = () => {
@@ -58,9 +60,34 @@ const value = ref(1);
 
 let submuit = () =>{
   console.log(value.value);
-  console.log(content);
-  console.log(description);
-  console.log(price);
+  console.log(content?.value);
+  console.log(description?.value);
+  console.log(price?.value);
+  console.log(foodId?.value);
+
+  if(localStorage.getItem('token')){
+    console.log('调接口');
+  } else {
+    console.log('存本地');
+    let data = [{
+      "productId":foodId?.value,
+      "quantity":value.value
+    }];SON.stringify
+    localStorage.setItem('eat',J(data))
+    // if(localStorage.getItem('eat')){
+    //   data = JSON.parse(localStorage.getItem('id'))
+    // }else {
+    //   var data = []
+    // }
+  }
+  
+  // cartAddApi({
+  //   productId:foodId?.value,
+  //   quantity:value.value
+  // }).then(res =>{
+  //   console.log(res);
+  // })
+  show.value = false;
 }
 </script>
 
