@@ -21,6 +21,7 @@ let fontSize = (12 + 2 * (6 - Number(level))) / 10 + 'rem';
   padding: .9rem 0;
   font-size: v-bind(fontSize);
   color: v-bind(color);
+  font-weight: 400;
 }
 </style>
   

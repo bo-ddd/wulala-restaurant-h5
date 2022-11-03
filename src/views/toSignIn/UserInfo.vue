@@ -125,16 +125,21 @@ let avatarImg = ref("");
 const fileList = ref([]);
 setTimeout(() => {
     userInfoApi({}).then(res => {
-    // console.log(res);
+    console.log(res);
     avatarImg.value=res.data.data.avatarImg;
     username.value = res.data.data.avatarName;
     userId.value = res.data.data.userId;
     cellPhoneNumber.value = res.data.data.phoneNumber;
-    birthday.value = res.data.data.birthday.slice(0, 10);
+    birthday.value = res.data.data.birthday == null ? '编辑/设置' : res.data.data.birthday.slice(0, 10);
     sex.value = res.data.data.sex == 0 ? '女' : '男';
-    personalSignature.value = res.data.data.personalSignature == '' ? '去设置' :res.data.data.personalSignature ;
-    hobby.value = res.data.data.hobby == '' ? '去设置':res.data.data.hobby;
-    hobby.value = hobby.value.substring(0, hobby.value.lastIndexOf(','));//去除最后小数点
+    personalSignature.value = res.data.data.personalSignature == '' ? '编辑/设置' :res.data.data.personalSignature ;
+    if (res.data.data.hobby == '') {
+        hobby.value ='编辑/设置';
+    }else{
+        hobby.value = res.data.data.hobby;
+        hobby.value = hobby.value.substring(0, hobby.value.lastIndexOf(','));//去除最后小数点
+    }
+    // hobby.value = res.data.data.hobby == '' ? '编辑/设置':res.data.data.hobby;
 }).catch(err => {
     console.log(err);
 })

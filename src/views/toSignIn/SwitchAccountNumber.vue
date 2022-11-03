@@ -106,7 +106,7 @@ main{
 }
 .state{
     font-size: 1.6rem; 
-    width: 40rem;
+    width: 16rem;
     display: flex;
     align-items: center;
     justify-content: space-between;
