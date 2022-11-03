@@ -11,7 +11,7 @@
                 <div class="ml-10 box">
                     <div class="name">
                         <span class="text">{{ el.info.foodName }}</span>
-                        <span>{{el.productName}}</span>
+                        <span>{{ el.productName }}</span>
                         <img class="icon-del" src="@/assets/images/icon-del.png" alt="">
                     </div>
                     <div class="specifications">
@@ -33,11 +33,11 @@
 
             <div class="box-shopping mt-20" v-for="(el, i) in foodLists" :key="i">
                 <div class="box-food_png">
-                    <img class="food-png" src="@/assets/images/dwx.png" alt="">
+                    <img class="food-png" :src="el.bannerUrl" alt="">
                 </div>
                 <div class="ml-10 box">
                     <div class="name">
-                        <span class="text">{{ el.productName}}</span>
+                        <span class="text">{{ el.productName }}</span>
                         <img class="icon-del" src="@/assets/images/icon-del.png" alt="">
                     </div>
                     <div class="specifications">
@@ -63,12 +63,13 @@
 <script setup lang="ts">
 import Title from '@/components/Title.vue'
 import useUlit from '@/assets/ulit/index'
-import { getFoodListApi, getCartListApi } from '@/api/api';
+import { getFoodListApi, getCartListApi, cartAddApi } from '@/api/api';
 import { ref } from 'vue'
 let { parsrAsssetFile } = useUlit()
 let foodList = ref()
-let foodLists = ref([])
-let getCartAdd = JSON.parse(localStorage.getItem('eat'))
+let foodLists: any = ref([])
+let getCartAdd = JSON.parse(localStorage.getItem('cartAdd'))
+
 if (getCartAdd == null) {
 
 } else {
@@ -93,7 +94,7 @@ if (getCartAdd == null) {
     getFoodListApi({
 
     }).then(res => {
-        foodList.value.forEach(item => {
+        foodList.value.forEach((item: any) => {
             item.info = res.data.data.list.find((e: any) => e.foodId == item.productId)
         })
     })
@@ -106,16 +107,32 @@ getCartListApi({
 
 }).then(res => {
     if (res.data.status == 1) {
-        res.data.data.forEach(ele => {
+        res.data.data.forEach((ele: any) => {
             foodLists.value.push(ele)
-            console.log(foodLists.value);
-            
-            
         });
     }
-
-
 })
+
+
+let token = localStorage.getItem('token')
+
+if (token != null) {
+    if (getCartAdd == null) {
+
+    } else {
+        getCartAdd.forEach(el => {
+            cartAddApi({
+                productId: el.productId,
+                quantity: el.quantity//数量
+            }).then(res => {
+                console.log('-----thiscartList------');
+                console.log(res);
+            })
+        })
+        localStorage.removeItem('cartAdd')
+    }
+}
+
 
 </script>
 <style scoped>
