@@ -54,7 +54,7 @@
                     <img @click="toBirthday" class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
             </ExpressInfoItem>
-            <ExpressInfoItem class="order-info" @click="toModifyphoneNumber">
+            <!-- <ExpressInfoItem class="order-info" @click="toModifyphoneNumber">
                 <template #left>
                     <span class="mode">手机号</span>
                 </template>
@@ -64,7 +64,7 @@
                 <template #right>
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
-            </ExpressInfoItem>
+            </ExpressInfoItem> -->
             <ExpressInfoItem class="order-info" @click="toSex">
                 <template #left>
                     <span class="mode">性别</span>
@@ -225,10 +225,11 @@ main {
     color: #9d9d9d;
     font-size: 1.6rem;
     width: 12rem;
-    text-align: center;
+    text-align: right;
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: nowrap;
+    padding-right: 1rem;
 }
 
 .mode {
@@ -244,14 +245,6 @@ main {
 .border-bottom {
     border-bottom: .1rem solid red 51%;
 }
-.loading{
-    background-color: #fff;
-    min-height: 100vh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
 ::v-deep .van-badge__wrapper{
     width: 8rem;
     height: 8rem;
@@ -263,5 +256,6 @@ main {
 ::v-deep .van-uploader__upload{
     margin: 0;
     background:0;
+    border-radius: 1rem;
 }
 </style>

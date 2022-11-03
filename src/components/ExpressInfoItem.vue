@@ -1,8 +1,11 @@
 <template>
     <div class="order-info">
         <div class="left"><slot name="left"></slot></div>
-        <div><slot name="middle"></slot></div>
-        <slot name="right"></slot>
+        <div class="content">
+
+            <div class="middle"><slot name="middle"></slot></div>
+            <slot name="right"></slot>
+        </div>
     </div>
 </template>
 
@@ -10,7 +13,11 @@
 .order-info{
     font-size: 1.2rem;
 }
-.left{
-    width: 10rem;
+.middle{
+    /* width: 12rem; */
+}
+.content{
+    display: flex;
+    align-items: center;
 }
 </style>

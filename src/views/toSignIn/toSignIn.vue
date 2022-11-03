@@ -84,7 +84,7 @@ const signInBtn = function () {
       })
       if (res.status == 200) {
         // console.log('------res----');
-        // console.log(res)
+        console.log(res)
         if (res.data.msg == '用户名或者密码错误') {
           Notify({ type: 'danger', message: '用户名密码错误' })
         } else if (res.data.msg == '成功') {
@@ -101,8 +101,10 @@ const signInBtn = function () {
     })()
   }
 };
-
-
+let token = localStorage.getItem('token');
+if (token != undefined) {
+  router.push({ name: '/' });
+}
 const lastPage = function () {
   window.history.back();
 }
