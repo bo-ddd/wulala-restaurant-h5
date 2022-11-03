@@ -32,7 +32,7 @@
                     </div>
                 </div>
                 <div class="ranking  lunch-bj ">
-                    <img class="icon-ranking"  src="@/assets/images/icon-ranking.png" alt="">
+                    <img class="icon-ranking" src="@/assets/images/icon-ranking.png" alt="">
                     <span class="pd-tb_43">午餐排名</span>
                 </div>
             </div>
@@ -44,7 +44,7 @@
                     <BestSellers.Item class="mt-14" v-for="item in bestSellers"
                         @click="toevaluate('detailsOfDishes', item.foodId)">
                         <template #image>
-                            <img class="best-sellers_png" v-lazy="item.bannerUrl"  alt="" />
+                            <img class="best-sellers_png" v-lazy="item.bannerUrl" alt="" />
                         </template>
                         <template #description>
                             <div class="description">
@@ -72,7 +72,7 @@ import Title from '@/components/Title.vue'
 import useUlit from '@/assets/ulit/index'
 import HomeBtn from '@/components/homeBtn'
 import { Toast } from 'vant';
-import { getFoodListApi } from '@/api/api'
+import { getFoodListApi, userInfoApi } from '@/api/api'
 import { ref } from 'vue';
 import { useRouter } from 'vue-router'
 let { parsrAsssetFile } = useUlit()
@@ -88,6 +88,10 @@ getFoodListApi({}).then(res => {
 const toSearch = function () {
     router.push('search')
 }
+
+userInfoApi({}).then(res => {
+    localStorage.setItem('userId', res.data.data.userId)
+})
 
 // ------------
 const list: any = ref([]);

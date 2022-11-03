@@ -16,6 +16,7 @@
         :content="item.foodName"
         :price="item.price"
         :description="item.description"
+        :foodId="item.foodId"
       >
     </MenuConten.Item>
     </MenuConten.Wrapper>
@@ -49,17 +50,13 @@ let foodlists:any = reactive({data:[]});
     pageNum: pageNum.value
   });
 
-  // console.log(foodlist.data.data);
-  // pageSize.value = foodlist.data.data.pageSize;
   total.value = foodlist.data.data.total;
-  // pageNum.value = foodlist.data.data.pageNum;
   
   foodlists.data = foodlist.data.data.list;
   console.log(foodlists);
 })();
 let page =async function () {
   pageNum.value = currentPage.value;
-  // (async function () {
     let foodlist = await getFoodListApi({
       pageSize: pageSize.value,
       pageNum: pageNum.value
@@ -67,15 +64,8 @@ let page =async function () {
     foodlists.data = foodlist.data.data.list;
     console.log(foodlist.data.data.list);
     
-  // console.log(pageSize.value);
-  // console.log(pageNum.value);
-  // console.log(currentPage);
   console.log(foodlists.data);
   total.value = foodlist.data.data.total;
-  // pageNum.value = foodlist.data.data.pageNum;
-  
-  // console.log(foodlists);
-// })();
 }
 </script>
 

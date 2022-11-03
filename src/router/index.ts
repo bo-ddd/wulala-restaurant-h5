@@ -10,11 +10,15 @@ const router = createRouter({
       path: '/Layout',
       name: 'Layout',
       component: Layout,
+     
       children: [
         {
           path: '/', // Home
           name: '/',
-          component: Home
+          component: Home,
+          meta:{
+            label:"权限管理"
+        },
         }, {
           path: '/menu', //menu
           name: 'menu',

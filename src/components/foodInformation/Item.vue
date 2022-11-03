@@ -34,7 +34,7 @@
 </template>
 <script setup lang="ts">
 import useUlit from '@/assets/ulit/index'
-import { getFoodListApi } from '@/api/api'
+import { getFoodListApi, cartAddApi } from '@/api/api'
 import { ref } from "vue";
 import { useRouter } from 'vue-router'
 let router = useRouter()
@@ -47,15 +47,55 @@ const show = ref(false);
 const showPopup = () => { //弹出层
     show.value = true;
 };
+
+const value = ref(1);
 const toOrder = () => {
-    let localStorageNull = localStorage.getItem('')
+    let data: any = ref([])
+    let localStorageNull = localStorage.getItem('token')
+    let getCartAdd = JSON.parse(localStorage.getItem('cartAdd'))
     if (localStorageNull == null) {
-        console.log(1);
-       localStorage.setItem('id',JSON.stringify(id))
+        if (getCartAdd == null) {
+            data.value.push({
+                productId: id,
+                quantity: value.value
+            })
+            localStorage.setItem('cartAdd', JSON.stringify(data.value))
+        } else {
+            data.value.push({
+                productId: id,
+                quantity: value.value
+            })
+            let datas = [...data.value, ...getCartAdd]
+            localStorage.setItem('cartAdd', JSON.stringify(datas))
+        }
+    } else {
+        cartAddApi({
+            productId: id,
+            quantity: value.value
+        }).then(res => {
+            console.log(res);
+        })
     }
+    getFoodListApi({ //接口
+
+    }).then(res => {
+        console.log(res);
+        res.data.data.list.find((el: any) => {
+            if (el.foodId == id) {
+                foodList.value = el
+                cartAddApi({
+                    "productId": el.foodId,
+                    "quantity": value.value //数量
+                }).then(res => {
+                    console.log('-----this is cart------');
+                    console.log(res);
+                })
+            }
+        });
+    })
 
 }
-const value = ref('1');
+
 getFoodListApi({ //接口
 
 }).then(res => {
@@ -67,6 +107,12 @@ getFoodListApi({ //接口
     });
 
 })
+// cartAddApi({
+//     "productId": 58,
+//     "quantity": 6 //数量
+// }).then(res => {
+//     console.log(res);
+// })
 </script>
 
 <style scoped>

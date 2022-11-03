@@ -4,13 +4,14 @@
             <Title color="#000">购物车</Title>
         </div>
         <div class="wrap">
-            <div class="box-shopping">
+            <div class="box-shopping mt-20" v-for="(el, i) in foodList">
                 <div class="box-food_png">
                     <img class="food-png" src="@/assets/images/dwx.png" alt="">
                 </div>
                 <div class="ml-10 box">
                     <div class="name">
-                        <span class="text">大螃蟹</span>
+                        <span class="text">{{ el.info.foodName }}</span>
+                        <span>{{el.productName}}</span>
                         <img class="icon-del" src="@/assets/images/icon-del.png" alt="">
                     </div>
                     <div class="specifications">
@@ -19,11 +20,37 @@
 
                     <div class="box-price">
                         <div>
-                            <span class="price"><span class="symbol">￥</span>199</span>
+                            <span class="price"><span class="symbol">￥</span>{{ el.info.price }}</span>
                         </div>
                         <div class="box-btn">
                             <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="">
-                            <span class="text">1</span>
+                            <span class="text">{{ el.quantity }}</span>
+                            <img class="icon-btn" src="@/assets/images/icon-add.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box-shopping mt-20" v-for="(el, i) in foodLists" :key="i">
+                <div class="box-food_png">
+                    <img class="food-png" src="@/assets/images/dwx.png" alt="">
+                </div>
+                <div class="ml-10 box">
+                    <div class="name">
+                        <span class="text">{{ el.productName}}</span>
+                        <img class="icon-del" src="@/assets/images/icon-del.png" alt="">
+                    </div>
+                    <div class="specifications">
+                        <span class="text"> 规格：</span>
+                    </div>
+
+                    <div class="box-price">
+                        <div>
+                            <span class="price"><span class="symbol">￥</span>{{ el.originalPrice }}</span>
+                        </div>
+                        <div class="box-btn">
+                            <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="">
+                            <span class="text">{{ el.quantity }}</span>
                             <img class="icon-btn" src="@/assets/images/icon-add.png" alt="">
                         </div>
                     </div>
@@ -36,12 +63,57 @@
 <script setup lang="ts">
 import Title from '@/components/Title.vue'
 import useUlit from '@/assets/ulit/index'
-import { getFoodListApi } from '@/api/api';
+import { getFoodListApi, getCartListApi } from '@/api/api';
+import { ref } from 'vue'
 let { parsrAsssetFile } = useUlit()
-getFoodListApi({
+let foodList = ref()
+let foodLists = ref([])
+let getCartAdd = JSON.parse(localStorage.getItem('eat'))
+if (getCartAdd == null) {
+
+} else {
+    function delSameObjValue(arr: any, resultNum: any, keyName: any, keyValue: any) {
+        const warp = new Map();
+        arr.forEach((i: any) => {
+            let str = keyName.map((v: any) => i[v]).join('_');
+            i[resultNum] = keyValue.reduce((p: any, c: any) => p += i[c], 0);
+            warp.has(str) ? warp.get(str)[resultNum] += i[resultNum] : warp.set(str, i);
+        });
+        return Array.from(warp).map(([, v]) => v);
+    };
+    foodList.value = (delSameObjValue(getCartAdd, 'quantity', ['productId'], ['quantity']));
+    foodList.value = foodList.value.map((item: {}) => {
+        return {
+            ...item,
+            info: {
+                foodName: ''
+            }
+        }
+    });
+    getFoodListApi({
+
+    }).then(res => {
+        foodList.value.forEach(item => {
+            item.info = res.data.data.list.find((e: any) => e.foodId == item.productId)
+        })
+    })
+}
+
+let userId = localStorage.getItem('userId')
+console.log(userId);
+
+getCartListApi({
 
 }).then(res => {
-    console.log(res);
+    if (res.data.status == 1) {
+        res.data.data.forEach(ele => {
+            foodLists.value.push(ele)
+            console.log(foodLists.value);
+            
+            
+        });
+    }
+
 
 })
 

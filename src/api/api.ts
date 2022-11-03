@@ -94,4 +94,12 @@ export const updatecomment = function (payload = {}) {
 export const cartAddApi = function (payload = {}) {
     return instance.post('/cart/add',payload)
 }
+
+/**
+ *  @description 获取购物车列表
+ */
+ export const getCartListApi = function (payload = {}) {
+    return instance.post('/cart/list',payload)
+}
+
 export default instance;
