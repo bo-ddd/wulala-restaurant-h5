@@ -67,13 +67,19 @@ let submuit = () =>{
 
   if(localStorage.getItem('token')){
     console.log('调接口');
+    cartAddApi({
+    productId:foodId?.value,
+    quantity:value.value
+  }).then(res =>{
+    console.log(res);
+  })
   } else {
     console.log('存本地');
     let data = [{
       "productId":foodId?.value,
       "quantity":value.value
-    }];SON.stringify
-    localStorage.setItem('eat',J(data))
+    }];
+    localStorage.setItem('eat',JSON.stringify(data))
     // if(localStorage.getItem('eat')){
     //   data = JSON.parse(localStorage.getItem('id'))
     // }else {
@@ -81,12 +87,7 @@ let submuit = () =>{
     // }
   }
   
-  // cartAddApi({
-  //   productId:foodId?.value,
-  //   quantity:value.value
-  // }).then(res =>{
-  //   console.log(res);
-  // })
+  
   show.value = false;
 }
 </script>

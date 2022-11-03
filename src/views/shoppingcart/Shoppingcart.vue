@@ -30,6 +30,32 @@
                     </div>
                 </div>
             </div>
+
+            <div class="box-shopping mt-20" v-for="(el, i) in foodLists" :key="i">
+                <div class="box-food_png">
+                    <img class="food-png" src="@/assets/images/dwx.png" alt="">
+                </div>
+                <div class="ml-10 box">
+                    <div class="name">
+                        <span class="text">{{ el.productName}}</span>
+                        <img class="icon-del" src="@/assets/images/icon-del.png" alt="">
+                    </div>
+                    <div class="specifications">
+                        <span class="text"> 规格：</span>
+                    </div>
+
+                    <div class="box-price">
+                        <div>
+                            <span class="price"><span class="symbol">￥</span>{{ el.originalPrice }}</span>
+                        </div>
+                        <div class="box-btn">
+                            <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="">
+                            <span class="text">{{ el.quantity }}</span>
+                            <img class="icon-btn" src="@/assets/images/icon-add.png" alt="">
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -41,7 +67,8 @@ import { getFoodListApi, getCartListApi } from '@/api/api';
 import { ref } from 'vue'
 let { parsrAsssetFile } = useUlit()
 let foodList = ref()
-let getCartAdd = JSON.parse(localStorage.getItem('cartAdd'))
+let foodLists = ref([])
+let getCartAdd = JSON.parse(localStorage.getItem('eat'))
 if (getCartAdd == null) {
 
 } else {
@@ -80,7 +107,9 @@ getCartListApi({
 }).then(res => {
     if (res.data.status == 1) {
         res.data.data.forEach(ele => {
-            console.log(ele);
+            foodLists.value.push(ele)
+            console.log(foodLists.value);
+            
             
         });
     }
