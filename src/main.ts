@@ -19,6 +19,7 @@ import { Lazyload } from 'vant';
 import { List } from 'vant';
 import { PullRefresh } from 'vant';
 import { Card } from 'vant';
+import { SubmitBar } from 'vant';
 /**
  * 周总的
  */
@@ -47,7 +48,7 @@ app.use(router);
 app.use(Tab);
 app.use(Tabs);
 app.use(Popup);
-app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate).use(Toast).use(List).use(PullRefresh).use(Card);
+app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate).use(Toast).use(List).use(PullRefresh).use(Card).use(SubmitBar);
 app.use(Button).use(Loading);
 app.use(Stepper);
 app.use(Uploader);

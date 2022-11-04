@@ -57,7 +57,23 @@
                 </div>
             </div>
         </div>
+    </div>
 
+
+    <div class="shopping-settlement">
+        <div class="item-shopping_settlement wrap pt-08 ">
+            <div>
+                <span class="text-shopping_settlement">总计</span>
+                <span class="price-shopping_settlement">￥480.00</span>
+                <span class="price-shopping_settlement">(4件)</span>
+                <div class="no-shopping_settlement">不含用费</div>
+            </div>
+            <div>
+                <div class="add-den" @click="toConfirmOrder">
+                    结算
+                </div>
+            </div>
+        </div>
     </div>
 </template>
 <script setup lang="ts">
@@ -65,6 +81,8 @@ import Title from '@/components/Title.vue'
 import useUlit from '@/assets/ulit/index'
 import { getFoodListApi, getCartListApi, cartAddApi } from '@/api/api';
 import { ref } from 'vue'
+import { useRouter } from 'vue-router'
+let router = useRouter()
 let { parsrAsssetFile } = useUlit()
 let foodList = ref()
 let foodLists: any = ref([])
@@ -108,7 +126,7 @@ getCartListApi({
 }).then(res => {
     function delSameObjValue(arr: any, resultNum: any, keyName: any, keyValue: any) {
         console.log(keyName);
-        
+
         const warp = new Map();
         arr.forEach((i: any) => {
             let str = keyName.map((v: any) => i[v]).join('_');
@@ -123,20 +141,20 @@ getCartListApi({
         // });
         console.log(res.data.data);
         let data = JSON.parse(JSON.stringify(res.data.data))
-        for(let i=0; i<data.length; i++){
-            for(let j=i+1; j<data.length; j++){
-                if(data[i].productId === data[j].productId ){
-                //console.log('重复',data[i],data[j])
-                data[i].quantity = data[i].quantity + data[j].quantity 
-                data.splice(j,1)
-                j--
+        for (let i = 0; i < data.length; i++) {
+            for (let j = i + 1; j < data.length; j++) {
+                if (data[i].productId === data[j].productId) {
+                    //console.log('重复',data[i],data[j])
+                    data[i].quantity = data[i].quantity + data[j].quantity
+                    data.splice(j, 1)
+                    j--
                 }
             }
         }
         // console.log(data);
         foodLists.value = data
     }
-    
+
 })
 
 
@@ -146,7 +164,7 @@ if (token != null) {
     if (getCartAdd == null) {
 
     } else {
-        getCartAdd.forEach((el:any) => {
+        getCartAdd.forEach((el: any) => {
             cartAddApi({
                 productId: el.productId,
                 quantity: el.quantity//数量
@@ -158,7 +176,9 @@ if (token != null) {
         localStorage.removeItem('cartAdd')
     }
 }
-
+const toConfirmOrder = function () {
+    // router.push('')
+}
 
 </script>
 <style scoped>
@@ -235,5 +255,42 @@ if (token != null) {
 .icon-btn {
     width: 2rem;
     height: 2rem;
+}
+
+
+.shopping-settlement {
+    width: 100%;
+    box-shadow: -0px -2px 2px #ccc;
+}
+
+.item-shopping_settlement {
+    display: flex;
+    justify-content: space-between;
+}
+
+.text-shopping_settlement {
+    font-size: 1.2rem;
+    font-weight: bold;
+}
+
+.price-shopping_settlement {
+    font-size: 1.4rem;
+    color: #5451b1;
+}
+
+.no-shopping_settlement {
+    font-size: 1rem;
+    color: #afafaf;
+    margin-top: .5rem;
+}
+
+.add-den {
+    font-size: 1.4rem;
+    float: right;
+    padding: 1rem 2.5rem;
+    background-color: #5451b1;
+    color: #fff;
+    border-radius: 2rem;
+    margin-top: .8rem;
 }
 </style>
