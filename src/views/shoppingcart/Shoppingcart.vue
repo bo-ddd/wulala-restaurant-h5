@@ -58,23 +58,6 @@
             </div>
         </div>
     </div>
-
-
-    <div class="shopping-settlement">
-        <div class="item-shopping_settlement wrap pt-08 ">
-            <div>
-                <span class="text-shopping_settlement">总计</span>
-                <span class="price-shopping_settlement">￥480.00</span>
-                <span class="price-shopping_settlement">(4件)</span>
-                <div class="no-shopping_settlement">不含用费</div>
-            </div>
-            <div>
-                <div class="add-den" @click="toConfirmOrder">
-                    结算
-                </div>
-            </div>
-        </div>
-    </div>
 </template>
 <script setup lang="ts">
 import Title from '@/components/Title.vue'
@@ -158,7 +141,7 @@ getCartListApi({
 })
 
 
-let token = localStorage.getItem('token')
+let token = sessionStorage.getItem('token')
 
 if (token != null) {
     if (getCartAdd == null) {
@@ -255,42 +238,5 @@ const toConfirmOrder = function () {
 .icon-btn {
     width: 2rem;
     height: 2rem;
-}
-
-
-.shopping-settlement {
-    width: 100%;
-    box-shadow: -0px -2px 2px #ccc;
-}
-
-.item-shopping_settlement {
-    display: flex;
-    justify-content: space-between;
-}
-
-.text-shopping_settlement {
-    font-size: 1.2rem;
-    font-weight: bold;
-}
-
-.price-shopping_settlement {
-    font-size: 1.4rem;
-    color: #5451b1;
-}
-
-.no-shopping_settlement {
-    font-size: 1rem;
-    color: #afafaf;
-    margin-top: .5rem;
-}
-
-.add-den {
-    font-size: 1.4rem;
-    float: right;
-    padding: 1rem 2.5rem;
-    background-color: #5451b1;
-    color: #fff;
-    border-radius: 2rem;
-    margin-top: .8rem;
 }
 </style>

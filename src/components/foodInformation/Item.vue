@@ -49,12 +49,12 @@ const showPopup = () => { //弹出层
 };
 
 const value = ref(1);
-let localStorageNull = localStorage.getItem('token')  //登录状态
+let sessionStorageNull = sessionStorage.getItem('token')  //登录状态
 let getCartAdd = JSON.parse(localStorage.getItem('cartAdd')) //本地存储的数据
 let getUserId = localStorage.getItem('userId')
 let data: any = ref([])
 const toOrder = () => {
-    if (localStorageNull == null) { //没登录
+    if (sessionStorageNull == null) { //没登录
         if (getCartAdd == null) { //没数据
             data.value.push({
                 productId: id,
@@ -72,7 +72,7 @@ const toOrder = () => {
     }
 }
 
-if(localStorageNull != null){
+if(sessionStorageNull != null){
     data.value.push({
         userId:getUserId
     })
