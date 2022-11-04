@@ -57,12 +57,14 @@ const toOrder = () => {
     if (sessionStorageNull == null) { //没登录
         if (getCartAdd == null) { //没数据
             data.value.push({
+                localId: data.value.length + 1,
                 productId: id,
                 quantity: value.value
             })
             localStorage.setItem('cartAdd', JSON.stringify(data.value))
         } else {
             data.value.push({
+                localId: data.value.length + 2,
                 productId: id,
                 quantity: value.value
             })

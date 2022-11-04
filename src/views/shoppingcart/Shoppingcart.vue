@@ -174,7 +174,7 @@
     }
   });
   
-  let token = localStorage.getItem("token");
+  let token = sessionStorage.getItem("token");
   
   if (token != null) {
     if (getCartAdd == null) {
@@ -189,6 +189,7 @@
         });
       });
       localStorage.removeItem("cartAdd");
+      localStorage.removeItem("userId");
     }
   }
   
