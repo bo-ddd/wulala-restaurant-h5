@@ -70,8 +70,8 @@ let tokens = sessionStorage.getItem('token');
 let image = ref(); //拿到图像图片，在上面渲染
 (async function () {
   let userInfoRes = await userInfoApi({});
-  console.log('-----userInfoRes----');
-  console.log(userInfoRes);
+  // console.log('-----userInfoRes----');
+  // console.log(userInfoRes);
   // console.log(userInfoRes.data.data.userId);
   userId.value = userInfoRes.data.data.userId;
   if (userInfoRes.data.status == 1) {

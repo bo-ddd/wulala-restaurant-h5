@@ -79,7 +79,7 @@ setTimeout(function () {
 
 <style scoped>
 main{
-    background: #eee;
+    background: #f4f4f4;
     overflow: hidden;
     min-height: 100vh;
 }
@@ -124,7 +124,7 @@ img{
 .spot{
     width: 1rem;
     height: 1rem;
-    background: green;
+    background: rgb(42, 230, 42);
     border-radius: 2rem;
 }
 .tips{
