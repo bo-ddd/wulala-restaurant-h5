@@ -107,7 +107,8 @@ import { uploadAvatarApi, userUpdateApi, userInfoApi } from '@/api/api';
 import { Notify } from 'vant';
 import { useRouter, useRoute } from 'vue-router';
 import { ref } from 'vue';
-
+import useUtil from "@/assets/ulit";
+let { parsrAsssetFile } = useUtil();
 let pageLoading = ref(true);
 
 let router = useRouter();
@@ -126,20 +127,15 @@ const fileList = ref([]);
 setTimeout(() => {
     userInfoApi({}).then(res => {
     console.log(res);
-    avatarImg.value=res.data.data.avatarImg;
+    avatarImg.value=res.data.data.avatarImg || parsrAsssetFile('end-sign_in.png');
     username.value = res.data.data.avatarName;
     userId.value = res.data.data.userId;
     cellPhoneNumber.value = res.data.data.phoneNumber;
     birthday.value = res.data.data.birthday == null ? '编辑/设置' : res.data.data.birthday.slice(0, 10);
     sex.value = res.data.data.sex == 0 ? '女' : '男';
     personalSignature.value = res.data.data.personalSignature == '' ? '编辑/设置' :res.data.data.personalSignature ;
-    if (res.data.data.hobby == '') {
-        hobby.value ='编辑/设置';
-    }else{
-        hobby.value = res.data.data.hobby;
-        hobby.value = hobby.value.substring(0, hobby.value.lastIndexOf(','));//去除最后小数点
-    }
-    // hobby.value = res.data.data.hobby == '' ? '编辑/设置':res.data.data.hobby;
+    hobby.value = res.data.data.hobby == '' ? '编辑/设置' : res.data.data.hobby
+        // hobby.value = hobby.value.substring(0, hobby.value.lastIndexOf(','));//去除最后小数点
 }).catch(err => {
     console.log(err);
 })

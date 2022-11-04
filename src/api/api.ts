@@ -17,7 +17,7 @@ const upload = axios.create({
 // 使用拦截器，定义全局请求头
 instance.interceptors.request.use(config => {
     // 在请求头中添加token\
-    let token = localStorage.getItem('token');
+    let token = sessionStorage.getItem('token');
     if (config.headers) {
         config.headers.token = token
     }
@@ -25,7 +25,7 @@ instance.interceptors.request.use(config => {
 })
 upload.interceptors.request.use(config => {
     // 在请求头中添加token\
-    let token = localStorage.getItem('token');
+    let token = sessionStorage.getItem('token');
     if (config.headers) {
         config.headers.token = token
     }

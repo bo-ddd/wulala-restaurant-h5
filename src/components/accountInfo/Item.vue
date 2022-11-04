@@ -1,7 +1,9 @@
 <template>
     <!-- 头像 -->
     <div class="head-portrait">
-        <img class="icon" :src="icon" alt="">
+        <slot name="icon">
+            <img class="icon" :src="icon" alt="">
+        </slot>
         <slot name="text">
             <Title class="title" lever="3" color="block">{{text}}</Title>
         </slot>

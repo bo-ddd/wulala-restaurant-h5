@@ -18,8 +18,14 @@
       </AccountInfo.Item>
     </AccountInfo.Wrapper>
 
-    <AccountInfo.Wrapper v-else="tokens == null" class="wrap mt-20 mb-20" @click="toSignIn">
-      <AccountInfo.Item :icon="parsrAsssetFile('end-sign_in.png')" text="立即登录">
+    <AccountInfo.Wrapper v-else="tokens == null" class="wrap mt-20 mb-20">
+      <AccountInfo.Item text="立即登录">
+        <template #icon>
+          <img @click="toSignIn" :src="parsrAsssetFile('end-sign_in.png')" alt="">
+        </template>
+        <template #text>
+          <span class="titles" @click="toSignIn">立即登录</span>
+        </template>
         <template #accountSettings>
           <div class="account-settings">账户设置</div>
         </template>
@@ -60,7 +66,7 @@ let { parsrAsssetFile } = useUtil();
 let { toSignIn, MineOrderList, game } = useRecommendSignUp();
 let userName = ref('');
 let userId = ref(); //传id获取图片
-let tokens = localStorage.getItem('token');
+let tokens = sessionStorage.getItem('token');
 let image = ref(); //拿到图像图片，在上面渲染
 (async function () {
   let userInfoRes = await userInfoApi({});
@@ -126,5 +132,7 @@ main {
     align-items: center;
     justify-content: center;
 }
-
+.titles{
+  padding: 0 1rem;
+}
 </style>
