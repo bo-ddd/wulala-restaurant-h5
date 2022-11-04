@@ -43,7 +43,7 @@
         <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-evaluate.png')"
         text="评价" @click="topinjia"></Nav.Item>
         <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-feedback.png')"
-        text="反馈"></Nav.Item>
+        text="反馈" @click="toFeedback"></Nav.Item>
     </Nav.Wrapper>
     <Nav.Wrapper class="nav-list wrap mt-20">
       <Nav.Item class="order" v-for="item in game" :size="'3'" :icon="parsrAsssetFile(item.orderUrl)" :text="item.text">
@@ -95,6 +95,10 @@ const setaccount = function () {
 const topinjia = function(){
         router.push('evaluate')     
     }
+
+const toFeedback = function(){
+router.push({name:'feedback'})
+}
 </script>
 
 <style scoped>

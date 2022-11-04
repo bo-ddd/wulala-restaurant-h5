@@ -77,7 +77,7 @@ const mobileStr=function(str:string) {
 
 <style scoped>
 main{
-    background-color: #eee;
+    background-color: #f4f4f4;
     min-height: 100vh;
     overflow: hidden;
 }
