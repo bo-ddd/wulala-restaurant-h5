@@ -180,7 +180,7 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
             router.push({name:'/'});
             let token = res.data.data.token;
             console.log(token);
-            localStorage.setItem('token',token);
+            sessionStorage.setItem('token',token);
           },1500)
         })
 

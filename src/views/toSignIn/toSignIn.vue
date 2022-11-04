@@ -90,7 +90,7 @@ const signInBtn = function () {
         } else if (res.data.msg == '成功') {
           Notify({ type: 'success', message: '登录成功' });
           let token = res.data.data.token;
-          localStorage.setItem('token', token);
+          sessionStorage.setItem('token', token);
           setTimeout(function () {
             router.push({ name: '/' });
           }, 1500)
@@ -101,7 +101,7 @@ const signInBtn = function () {
     })()
   }
 };
-let token = localStorage.getItem('token');
+let token = sessionStorage.getItem('token');
 if (token != undefined) {
   router.push({ name: '/' });
 }

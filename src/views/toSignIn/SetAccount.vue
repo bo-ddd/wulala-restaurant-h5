@@ -29,8 +29,8 @@
                     </template>
                 </ExpressInfoItem>
             </div>
-            <Button @click="toSwitchAccountNumber" class="wrap btn mt-24" color="white" bjcolor="url(/src/assets/images/bj.png)">切换账号</Button>
-            <Button @click="signOut" class="wrap btn mt-24" color="white" bjcolor="#ccc">退出登录</Button>
+            <Button @click="toSwitchAccountNumber" class="wrap btn mt-24" color="black" bjcolor="#f7d347">切换账号</Button>
+            <Button @click="signOut" class="wrap btn mt-24" color="black" bjcolor="#e8e8e8">退出登录</Button>
         </div>
     </main>
 </template>
@@ -42,7 +42,7 @@ let router = useRouter();
 let pageLoading = ref(true);
 const signOut = function(){
     router.push({name:'mine'});
-    localStorage.clear();
+    sessionStorage.clear();
 }
 const toPersonalInfo = function(){
     router.push({name:'userinfo'})
@@ -60,17 +60,16 @@ setTimeout(function () {
 
 <style scoped>
 main{
-    background: #eee;
+    background: #f4f4f4;
     overflow: hidden;
 }
 .btn{
-    padding: 1rem 0;
+    padding: 1.5rem 0;
 }
 .head{
     background: #fff;
 }
 .content{
-    background: #eee;
     min-height: calc(100vh - 5.8rem);
 }
 .order-info {
