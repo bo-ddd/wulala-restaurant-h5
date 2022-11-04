@@ -49,60 +49,54 @@ const showPopup = () => { //弹出层
 };
 
 const value = ref(1);
+let sessionStorageNull = sessionStorage.getItem('token')  //登录状态
+let getCartAdd = JSON.parse(localStorage.getItem('cartAdd')) //本地存储的数据
+let getUserId = localStorage.getItem('userId')
+let data: any = ref([])
 const toOrder = () => {
-    let data: any = ref([])
-    let localStorageNull = localStorage.getItem('token')  //登录状态
-    let getCartAdd = JSON.parse(localStorage.getItem('cartAdd')) //本地存储的数据
-    if (localStorageNull == null) { //没登录
+    if (sessionStorageNull == null) { //没登录
         if (getCartAdd == null) { //没数据
             data.value.push({
+                localId: data.value.length + 1,
                 productId: id,
                 quantity: value.value
             })
             localStorage.setItem('cartAdd', JSON.stringify(data.value))
         } else {
             data.value.push({
+                localId: data.value.length + 2,
                 productId: id,
                 quantity: value.value
             })
             let datas = [...data.value, ...getCartAdd]
             localStorage.setItem('cartAdd', JSON.stringify(datas))
         }
+    } else {
+        cartAddApi({
+            productId: id,
+            quantity: value.value
+        }).then(res => {
+            console.log(res);
+        })
     }
+    show.value = false;
 }
+
+if (sessionStorageNull != null) {
+    data.value.push({
+        userId: getUserId
+    })
+}
+console.log(data.vlaue);
 getFoodListApi({ //接口
 
 }).then(res => {
-    console.log(res);
     res.data.data.list.find((el: any) => {
         if (el.foodId == id) {
             foodList.value = el
         }
     });
 })
-// getFoodListApi({ //接口
-
-// }).then(res => {
-//     console.log(res);
-//     res.data.data.list.find((el: any) => {
-//         if (el.foodId == id) {
-//             foodList.value = el
-//             cartAddApi({
-//                 "productId": el.foodId,
-//                 "quantity": value.value //数量
-//             }).then(res => {
-//                 console.log('-----this is cart------');
-//                 console.log(res);
-//             })
-//         }
-//     });
-// })
-// cartAddApi({
-//     "productId": 58,
-//     "quantity": 6 //数量
-// }).then(res => {
-//     console.log(res);
-// })
 </script>
 
 <style scoped>
