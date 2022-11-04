@@ -69,19 +69,25 @@ const toOrder = () => {
             let datas = [...data.value, ...getCartAdd]
             localStorage.setItem('cartAdd', JSON.stringify(datas))
         }
+    } else {
+        cartAddApi({
+            productId: id,
+            quantity: value.value
+        }).then(res => {
+            console.log(res);
+        })
     }
 }
 
-if(sessionStorageNull != null){
+if (sessionStorageNull != null) {
     data.value.push({
-        userId:getUserId
+        userId: getUserId
     })
 }
 console.log(data.vlaue);
 getFoodListApi({ //接口
 
 }).then(res => {
-    console.log(res);
     res.data.data.list.find((el: any) => {
         if (el.foodId == id) {
             foodList.value = el

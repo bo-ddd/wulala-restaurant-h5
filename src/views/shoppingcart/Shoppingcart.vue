@@ -132,7 +132,7 @@
     });
   }
   
-  let userId = localStorage.getItem("userId");
+  let userId = sessionStorage.getItem("userId");
   console.log(userId);
   
   getCartListApi({}).then((res) => {
