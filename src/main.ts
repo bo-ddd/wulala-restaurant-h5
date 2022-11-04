@@ -30,6 +30,7 @@ import { Field, CellGroup } from 'vant';
 import { Picker } from 'vant';
 import { Checkbox, CheckboxGroup } from 'vant';
 import { Cell } from 'vant'
+import { ContactEdit } from 'vant';
 
 
 import "./assets/main.css";
@@ -61,6 +62,7 @@ app.use(Picker);
 app.use(Checkbox);
 app.use(CheckboxGroup);
 app.use(Cell)
+app.use(ContactEdit);
 app.mount("#app");
 app.use(Lazyload, {
     lazyComponent: true,

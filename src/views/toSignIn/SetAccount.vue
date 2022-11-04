@@ -29,6 +29,19 @@
                     </template>
                 </ExpressInfoItem>
             </div>
+            <div class="upload mt-20">
+                <ExpressInfoItem class="order-info" @click="toFeedback">
+                    <template #left>
+                        <span class="mode">
+                            意见反馈
+                            <!-- <p class="details pt-5">修改密码、修改手机号码、账号绑定管理</p> -->
+                        </span>
+                    </template>
+                    <template #right>
+                        <img class="icon-right" src="@/assets/images/right.png" alt="">
+                    </template>
+                </ExpressInfoItem>
+            </div>
             <Button @click="toSwitchAccountNumber" class="wrap btn mt-24" color="black" bjcolor="#f7d347">切换账号</Button>
             <Button @click="signOut" class="wrap btn mt-24" color="black" bjcolor="#e8e8e8">退出登录</Button>
         </div>
@@ -52,6 +65,9 @@ const toSafeCenter = function(){
 }
 const toSwitchAccountNumber = function(){
     router.push({name:'switchaccountnumber'})
+}
+const toFeedback = function(){
+    router.push({name:'feedback'})
 }
 setTimeout(function () {
     pageLoading.value = false;
