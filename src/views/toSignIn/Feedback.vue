@@ -25,11 +25,11 @@
                     <van-field v-model="message" rows="2" autosize label="" type="textarea" maxlength="150"
                         placeholder="说说您的建议或问题,我们会尽快改进,以便提供更好的服务(5字以上)" show-word-limit />
                 </van-cell-group>
-                <div class="tips">
+                <div class="tips" :class="{none:isTips}">
                     上传图片事情说的更明白
                     <!-- 三角形 -->
-                    <div class="triangle"></div>
                 </div>
+                <div class="triangle" :class="{none:isTips}"></div>
                 <van-uploader v-model="fileList" :deletable="false" />
             </div>
             <!-- 提示 -->
@@ -57,11 +57,15 @@ const toUp = function(){
         Notify({ type: 'primary', message: '请输入正确的手机号' });
     }
 }
-
+let isTips = ref(true);
 let pageLoading = ref(true);
 let isActive = ref(false);
 let isActives = ref(false);
 let message = ref();//反馈
+    isTips.value = false;
+    setTimeout(function () {
+        isTips.value = true;
+    },4000)
 const hide = function () {
     isActive.value = true;
     isActives.value = false;
@@ -142,8 +146,12 @@ img{
 .triangle{
     width: 0;
     height: 0;
-    border-top: 1rem solid skyblue;
+    border-top: 1rem solid #4c4c4c;
     border-right: 1rem solid transparent;
     border-left: 1rem solid transparent;
+    transform: translate(30px, -1px);
+}
+.none{
+    display: none;
 }
 </style>
