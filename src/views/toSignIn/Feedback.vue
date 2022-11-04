@@ -22,11 +22,17 @@
             <div class="content-sup wrap mt-20">
                 <p class="pb-10">反馈描述</p>
                 <van-cell-group inset>
-                    <van-field v-model="message" rows="2" autosize label="" type="textarea" maxlength="50"
+                    <van-field v-model="message" rows="2" autosize label="" type="textarea" maxlength="150"
                         placeholder="说说您的建议或问题,我们会尽快改进,以便提供更好的服务(5字以上)" show-word-limit />
                 </van-cell-group>
+                <div class="tips">
+                    上传图片事情说的更明白
+                    <!-- 三角形 -->
+                    <div class="triangle"></div>
+                </div>
                 <van-uploader v-model="fileList" :deletable="false" />
             </div>
+            <!-- 提示 -->
             <div class="content-sup wrap mt-20">
                 <p class="pb-10">联系方式(选填)</p>
                 <van-field v-model="tel" type="tel" label="手机号" />
@@ -124,5 +130,20 @@ main {
 img{
     width: 100%;
     height: 100%;
+}
+.tips{
+    font-size: 1.4rem;
+    padding: .6rem;
+    background: #4c4c4c;
+    color: #fff;
+    border-radius: .8rem;
+    width: fit-content
+}
+.triangle{
+    width: 0;
+    height: 0;
+    border-top: 1rem solid skyblue;
+    border-right: 1rem solid transparent;
+    border-left: 1rem solid transparent;
 }
 </style>
