@@ -107,6 +107,10 @@ const router = createRouter({
       path:'/switchaccountnumber',
       name:'switchaccountnumber',
       component:()=>import("../views/toSignIn/SwitchAccountNumber.vue")
+    },{
+      path:'/feedback',
+      name:'feedback',
+      component:()=>import("../views/toSignIn/Feedback.vue")
     }
   ],
 })
