@@ -111,6 +111,10 @@ const router = createRouter({
       path:'/feedback',
       name:'feedback',
       component:()=>import("../views/toSignIn/Feedback.vue")
+    },{
+      path:'/modifypassword',
+      name:'modifypassword',
+      component:()=>import("../views/toSignIn/ModifyPassword.vue")
     }
   ],
 })

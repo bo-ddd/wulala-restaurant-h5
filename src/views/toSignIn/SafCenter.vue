@@ -6,12 +6,12 @@
         <Head class="head" color="black" imgcolor="0">安全中心</Head>
         <p class="title mt-10 wrap">账号</p>
         <div class="upload wrap mt-20">
-            <ExpressInfoItem class="order-info" @click="">
+            <ExpressInfoItem class="order-info" @click="toModifyPassword">
                 <template #left>
                     <span class="mode">修改登录密码</span>
                 </template>
                 <template #middle>
-                    <p class="payment"> 安全等级：{{'中'}} </p>
+                    <p class="payment"> 安全等级：<span>{{passwords}}</span> </p>
                 </template>
                 <template #right>
                     <img class="icon-right" src="@/assets/images/right.png" alt="">
@@ -53,6 +53,22 @@ import { useRouter } from "vue-router";
 let router = useRouter();
 let pageLoading = ref(true);
 let cellPhoneNumber = ref();//手机号
+let passwords =ref('');
+let userPassword : any= sessionStorage.getItem('password');
+console.log(userPassword);
+let reg1 = /[a-zA-Z]/;//字母
+let reg2 = /\d/;//数字
+let reg3 = /_/;//下划线
+if(reg1.test(userPassword)&&reg2.test(userPassword)&&reg3.test(userPassword)){
+	//高级密码
+    passwords.value = '强';
+}else if(reg1.test(userPassword)&&reg2.test(userPassword)){
+	//中级密码
+    passwords.value = '中';
+}else if(reg1.test(userPassword)||reg2.test(userPassword)){
+	//低级密码
+    passwords.value = '低';
+}
 
 userInfoApi({}).then(res => {
     cellPhoneNumber.value = mobileStr(res.data.data.phoneNumber);
@@ -65,6 +81,9 @@ setTimeout(function () {
 },1000)
 const toModifyphoneNumber = function(){
     router.push({name:'modifyphonenumber'})
+}
+const toModifyPassword = function(){
+    router.push({name:'modifypassword'})
 }
 const mobileStr=function(str:string) {
   if(str.length>7){
@@ -116,5 +135,8 @@ main{
     text-overflow: ellipsis;
     white-space: nowrap;
     padding-right: 1rem;
+}
+.payment span{
+    color: red;
 }
 </style>

@@ -108,5 +108,11 @@ export const cartAddApi = function (payload = {}) {
 export const cartDeleteApi = function (payload = {}) {
     return instance.post('/cart/delete',payload)
 }
+/**
+ * @description 用户修改密码接口
+ */
+ export const userPasswordUpdataApi = function (payload = {}) {
+    return instance.post('/user/password/update',payload)
+}
 
 export default instance;
