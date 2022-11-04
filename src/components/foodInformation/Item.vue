@@ -77,6 +77,7 @@ const toOrder = () => {
             console.log(res);
         })
     }
+    show.value = false;
 }
 
 if (sessionStorageNull != null) {

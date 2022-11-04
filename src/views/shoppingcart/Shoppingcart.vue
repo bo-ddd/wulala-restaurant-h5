@@ -136,6 +136,8 @@
   console.log(userId);
   
   getCartListApi({}).then((res) => {
+    console.log(res);
+    
     function delSameObjValue(
       arr: any,
       resultNum: any,
