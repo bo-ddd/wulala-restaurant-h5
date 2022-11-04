@@ -3,7 +3,7 @@ import { createPinia } from "pinia";
 /**
  * 刘总的
  */
-import {Tab,Tabs,Popup ,Button,Stepper,Pagination} from 'vant'
+import {Tab,Tabs,Popup ,Button,Stepper,Pagination,Dialog} from 'vant'
 import App from "./App.vue";
 /**
  * 宋总的
@@ -60,7 +60,8 @@ app.use(CellGroup);
 app.use(Picker);
 app.use(Checkbox);
 app.use(CheckboxGroup);
-app.use(Cell)
+app.use(Cell);
+app.use(Dialog);
 app.mount("#app");
 app.use(Lazyload, {
     lazyComponent: true,

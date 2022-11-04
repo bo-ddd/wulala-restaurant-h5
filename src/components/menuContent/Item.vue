@@ -23,7 +23,7 @@
       <img :src="src" alt="" />
       <div class="contents">
         <span class="balck">{{ content }}</span>
-        <span class="descriptions">{{description}}</span>
+        <span class="descriptions">{{ description }}</span>
         <span class="red">￥{{ price }}</span>
       </div>
     </div>
@@ -32,21 +32,23 @@
       <van-stepper v-model="value" />
     </div>
     <div class="button">
-      <van-button round type="success" size="large" @click="submuit">选好了</van-button>
+      <van-button round type="success" size="large" @click="submuit"
+        >选好了</van-button
+      >
     </div>
   </van-popup>
 </template>
 
 <script setup lang="ts">
-import { ref,toRefs } from "vue";
-import { cartAddApi } from '@/api/api'
+import { ref, toRefs } from "vue";
+import { cartAddApi } from "@/api/api";
 
 let props = defineProps<{
   src?: string;
   content?: string;
   price?: number;
   description?: string;
-  foodId?:number
+  foodId?: number;
 }>();
 
 const { src, content, price, description, foodId } = toRefs(props);
@@ -58,14 +60,34 @@ const showPopup = () => {
 
 const value = ref(1);
 
-let submuit = () =>{
+let submuit = () => {
   console.log(value.value);
   console.log(content?.value);
   console.log(description?.value);
   console.log(price?.value);
   console.log(foodId?.value);
 
-  if(localStorage.getItem('token')){
+  let data: any = ref([]);
+  let localStorageNull = localStorage.getItem("token"); //登录状态
+  let getCartAdd = JSON.parse(localStorage.getItem("cartAdd")); //本地存储的数据
+  if (localStorageNull == null) {
+    //没登录
+    if (getCartAdd == null) {
+      //没数据
+      data.value.push({
+        productId: foodId?.value,
+        quantity: value.value,
+      });
+      localStorage.setItem("cartAdd", JSON.stringify(data.value));
+    } else {
+      data.value.push({
+        productId: foodId?.value,
+        quantity: value.value,
+      });
+      let datas = [...data.value, ...getCartAdd];
+      localStorage.setItem("cartAdd", JSON.stringify(datas));
+    }
+  }  else{
     console.log('调接口');
     cartAddApi({
     productId:foodId?.value,
@@ -73,23 +95,10 @@ let submuit = () =>{
   }).then(res =>{
     console.log(res);
   })
-  } else {
-    console.log('存本地');
-    let data = [{
-      "productId":foodId?.value,
-      "quantity":value.value
-    }];
-    localStorage.setItem('eat',JSON.stringify(data))
-    // if(localStorage.getItem('eat')){
-    //   data = JSON.parse(localStorage.getItem('id'))
-    // }else {
-    //   var data = []
-    // }
   }
-  
-  
+
   show.value = false;
-}
+};
 </script>
 
 <style scoped>
@@ -160,7 +169,7 @@ let submuit = () =>{
   border: var(--van-button-border-width) solid
     var(--van-button-success-border-color);
 }
-.descriptions{
+.descriptions {
   font-size: 1.3rem;
   margin-top: -1rem;
   color: #bcbcb9;
