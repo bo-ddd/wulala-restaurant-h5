@@ -102,4 +102,11 @@ export const cartAddApi = function (payload = {}) {
     return instance.post('/cart/list',payload)
 }
 
+/**
+ * @description 删除购物车接口
+ */
+export const cartDeleteApi = function (payload = {}) {
+    return instance.post('/cart/delete',payload)
+}
+
 export default instance;
