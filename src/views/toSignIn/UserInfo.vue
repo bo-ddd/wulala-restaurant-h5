@@ -58,17 +58,6 @@
                     <img @click="toBirthday" class="icon-right" src="@/assets/images/right.png" alt="">
                 </template>
             </ExpressInfoItem>
-            <!-- <ExpressInfoItem class="order-info" @click="toModifyphoneNumber">
-                <template #left>
-                    <span class="mode">手机号</span>
-                </template>
-                <template #middle>
-                    <p class="payment"> {{ cellPhoneNumber }} </p>
-                </template>
-                <template #right>
-                    <img class="icon-right" src="@/assets/images/right.png" alt="">
-                </template>
-            </ExpressInfoItem> -->
             <ExpressInfoItem class="order-info" @click="toSex">
                 <template #left>
                     <span class="mode">性别</span>

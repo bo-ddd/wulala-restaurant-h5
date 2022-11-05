@@ -115,6 +115,10 @@ const router = createRouter({
       path:'/modifypassword',
       name:'modifypassword',
       component:()=>import("../views/toSignIn/ModifyPassword.vue")
+    },{
+      path:'/collection',
+      name:'collection',
+      component:()=>import("../views/toSignIn/Collection.vue")
     }
   ],
 })

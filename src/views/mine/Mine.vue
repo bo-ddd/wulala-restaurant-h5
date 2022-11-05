@@ -39,7 +39,7 @@
       <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-shopcar.png')"
         text="订单"></Nav.Item>
         <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-collection.png')"
-        text="收藏"></Nav.Item>
+        text="收藏" @click="toCollection"></Nav.Item>
         <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-evaluate.png')"
         text="评价" @click="topinjia"></Nav.Item>
         <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-feedback.png')"
@@ -101,6 +101,9 @@ const topinjia = function(){
 const toFeedback = function(){
 router.push({name:'feedback'})
 }
+const toCollection = function(){
+  router.push({name:'collection'})
+}
 </script>
 
 <style scoped>
@@ -140,5 +143,7 @@ main {
 }
 .titles{
   padding: 0 1rem;
+  font-size: 2rem;
+  font-weight: 550;
 }
 </style>

@@ -61,7 +61,7 @@ let isTips = ref(true);
 let pageLoading = ref(true);
 let isActive = ref(false);
 let isActives = ref(false);
-let message = ref();//反馈
+let message = ref('');//反馈
     isTips.value = false;
     setTimeout(function () {
         isTips.value = true;
