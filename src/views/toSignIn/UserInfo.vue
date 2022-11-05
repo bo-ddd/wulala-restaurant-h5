@@ -16,7 +16,11 @@
                 </template>
                 <template #middle>
                     <span class="payment">
-                        <van-uploader :preview-image="true" multiple v-model="fileList" :max-count="1" :upload-icon="avatarImg"
+                        <van-uploader :preview-image="true" 
+                        multiple v-model="fileList" 
+                        :max-count="1" 
+                        :max-size="500 * 1024"
+                        :upload-icon="avatarImg"
                         :after-read="afterRead" />
                     </span>
                 </template>

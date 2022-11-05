@@ -72,13 +72,15 @@ let image = ref(); //拿到图像图片，在上面渲染
   let userInfoRes = await userInfoApi({});
   // console.log('-----userInfoRes----');
   // console.log(userInfoRes);
-  // console.log(userInfoRes.data.data.userId);
-  userId.value = userInfoRes.data.data.userId;
+  console.log(userInfoRes.data.data.userId);
   if (userInfoRes.data.status == 1) {
     image.value = userInfoRes.data.data.avatarImg; //后端返回的头像，进行赋值
     userName.value= userInfoRes.data.data.avatarName;
   }else{
     userName.value = '立即登录';
+  }
+  if (userInfoRes.data.data.userId == Number) {
+    userId.value = userInfoRes.data.data.userId;
   }
 })()
 setTimeout(() => {
