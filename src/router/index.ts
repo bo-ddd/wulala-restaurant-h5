@@ -123,6 +123,10 @@ const router = createRouter({
       path:'/order',
       name:'order',
       component:()=>import("../views/toSignIn/Order.vue")
+    },{
+      path:'/turntable',
+      name:'turntable',
+      component:()=>import("../views/toSignIn/Turntable.vue")
     }
   ],
 })

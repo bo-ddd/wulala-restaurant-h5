@@ -45,9 +45,41 @@
         <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-feedback.png')"
         text="反馈" @click="toFeedback"></Nav.Item>
     </Nav.Wrapper>
+    <div class="upload wrap mt-20">
+    
+      <ExpressInfoItem class="order-info border-bottom" @click="">
+          <template #left>
+              <span class="mode">我的订单</span>
+          </template>
+          <template #middle>
+              <p class="payment">
+                  全部订单
+              </p>
+          </template>
+          <template #right>
+              <img @click="" class="icon-right" src="@/assets/images/right.png" alt="">
+          </template>
+      </ExpressInfoItem>
+      <Nav.Wrapper class="nav-list wrap">
+        <Nav.Item class="order" :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to-be_paid.png')"
+          text="待付款" @click=""></Nav.Item>
+          <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to-be_received.png')"
+          text="待收货" @click=""></Nav.Item>
+          <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to -be_use.png')"
+          text="待使用" @click=""></Nav.Item>
+          <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('icon-feedback.png')"
+          text="待评价" @click=""></Nav.Item>
+          <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('refund.png')"
+          text="退款" @click=""></Nav.Item>
+      </Nav.Wrapper>
+    </div>
     <Nav.Wrapper class="nav-list wrap mt-20">
-      <Nav.Item class="order" v-for="item in game" :size="'3'" :icon="parsrAsssetFile(item.orderUrl)" :text="item.text">
-      </Nav.Item>
+      <!-- <Nav.Item class="order" v-for="item in game" :size="'2.8'" :icon="parsrAsssetFile(item.orderUrl)" :text="item.text">
+      </Nav.Item> -->
+      <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('icon-lucky_turntable.png')"
+      text="转盘" @click="toTurntable"></Nav.Item>
+      <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('xiaoxiaole.png')"
+      text="消消乐" @click=""></Nav.Item>
     </Nav.Wrapper>
   </main>
 </template>
@@ -107,6 +139,9 @@ const toCollection = function(){
 const toOrder = function(){
   router.push({name:'order'})
 }
+const toTurntable = function(){
+  router.push({name:'turntable'})
+}
 </script>
 
 <style scoped>
@@ -149,4 +184,41 @@ main {
   font-size: 2rem;
   font-weight: 550;
 }
+
+
+.upload {
+    background: #fff;
+    border-radius: .4rem;
+}
+.order-info {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem 1rem 0 1rem;
+}
+
+.payment {
+    color: #9d9d9d;
+    font-size: 1.2rem;
+    width: 12rem;
+    text-align: right;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+.mode {
+    font-size: 1.6rem;
+    font-weight: 560;
+}
+
+.icon-right {
+    width: 1.6rem;
+    filter: invert(67%);
+}
+
+.border-bottom {
+    border-bottom: .1rem solid red 51%;
+}
+
 </style>
