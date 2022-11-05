@@ -4,6 +4,7 @@
       <Title color="#000">购物车</Title>
     </div>
     <div class="wrap">
+
       <div class="box-shopping mt-20" v-if="token" v-for="(el, i) in foodLists" :key="i">
         <div class="box-food_png">
           <img class="food-png" :src="el.bannerUrl" alt="" />
@@ -37,8 +38,10 @@
         <div class="ml-10 box">
           <div class="name">
             <span class="text">{{ el.info.foodName }}</span>
+            <div class="aa">
+              <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecart(el)" />
+            </div>
             <span>{{ el.productName }}</span>
-            <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecar" />
           </div>
           <div class="specifications">
             <span class="text"> 规格：</span>
@@ -49,9 +52,9 @@
               <span class="price"><span class="symbol">￥</span>{{ el.info.price }}</span>
             </div>
             <div class="box-btn">
-              <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" />
+              <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" @click="sub(el)" />
               <span class="text">{{ el.quantity }}</span>
-              <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" />
+              <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" @click="add(el)" />
             </div>
           </div>
         </div>
@@ -65,6 +68,8 @@
 <script setup lang="ts">
 import Title from "@/components/Title.vue";
 import useUlit from "@/assets/ulit/index";
+
+import { Toast } from 'vant';
 import {
   getFoodListApi,
   getCartListApi,
@@ -85,7 +90,7 @@ if (token != null) {
   localStorage.removeItem("cartAdd");
   console.log(localDate);
   if (localDate != null) {
-    localDate.forEach((el) => {
+    localDate.forEach((el: any) => {
       cartAddApi({
         productId: Number(el.productId),
         quantity: el.quantity, //数量
@@ -101,7 +106,6 @@ if (token != null) {
     })
   } else {
     getCartListApi({}).then((res) => {
-      console.log(2);
       foodLists.value = res.data.data
     });
   }
@@ -109,11 +113,15 @@ if (token != null) {
   if (localDate == null) { } else {
     function delSameObjValue(arr: any, resultNum: any, keyName: any, keyValue: any) {
       const warp = new Map();
-      arr.forEach((i: any) => {
-        let str = keyName.map((v: any) => i[v]).join("_");
-        i[resultNum] = keyValue.reduce((p: any, c: any) => (p += i[c]), 0);
-        warp.has(str) ? (warp.get(str)[resultNum] += i[resultNum]) : warp.set(str, i);
-      });
+      if (arr == null) {
+
+      } else {
+        arr.forEach((i: any) => {
+          let str = keyName.map((v: any) => i[v]).join("_");
+          i[resultNum] = keyValue.reduce((p: any, c: any) => (p += i[c]), 0);
+          warp.has(str) ? (warp.get(str)[resultNum] += i[resultNum]) : warp.set(str, i);
+        });
+      }
       return Array.from(warp).map(([, v]) => v);
     }
     foodList.value = delSameObjValue(getCartAdd, "quantity", ["productId"], ["quantity"]);
@@ -175,6 +183,41 @@ let deletecar = (el: any) => {
     });
 };
 
+const deletecart = function (el: any) {
+  for (let i = 0; i < foodList.value.length; i++) {
+    if (el.productId == foodList.value[i].productId) {
+      delete foodList.value[i]
+      // console.log(foodList.value[i]);
+      foodList.value.splice(i, 1)
+      // console.log(foodList.value);
+      localStorage.setItem('cartAdd', JSON.stringify(foodList.value))
+    }
+  }
+}
+
+const sub = function (el) {
+  for (let i = 0; i < foodList.value.length; i++) {
+    if (el.productId == foodList.value[i].productId) {
+      if (foodList.value[i].quantity == 1) {
+        Toast('商品小于起购数量');
+      } else {
+        foodList.value[i].quantity--
+        localStorage.setItem('cartAdd', JSON.stringify(foodList.value))
+      }
+    }
+  }
+}
+
+const add = function (el) {
+  for (let i = 0; i < foodList.value.length; i++) {
+    if (el.productId == foodList.value[i].productId) {
+      foodList.value[i].quantity++
+      localStorage.setItem('cartAdd', JSON.stringify(foodList.value))
+
+    }
+  }
+}
+
 </script>
 <style scoped>
 .box-dir {
@@ -234,6 +277,13 @@ let deletecar = (el: any) => {
 .icon-del {
   width: 2rem;
   height: 2rem;
+  display: inline-block;
+  
+}
+.aa{
+  flex-grow:1;
+  display: flex;
+  justify-content: flex-end;
 }
 
 .box-btn {

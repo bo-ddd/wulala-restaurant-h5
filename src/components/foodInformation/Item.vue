@@ -1,5 +1,6 @@
 <template>
     <img class="food-details-png" :src='foodList.bannerUrl' alt="">
+    <img class="icon-left" src="@/assets/images/icon-left.png" alt="" @click="backToPrevious">
     <div class="wrap">
         <div>
             <span class="text-details_food">{{ foodList.foodName }}</span>
@@ -98,12 +99,17 @@ getFoodListApi({ //接口
         }
     });
 })
+
+const backToPrevious = function () {
+    router.go(-1)
+}
 </script>
 
 <style scoped>
 .food-details-png {
     width: 100%;
     height: 25.1rem;
+    position: relative;
 }
 
 .text-details_food {
@@ -195,5 +201,11 @@ getFoodListApi({ //接口
     font-size: 1.3rem;
     margin-top: -1rem;
     color: #bcbcb9;
+}
+
+.icon-left {
+    position: absolute;
+    top: 0;
+    left: 0;
 }
 </style>
