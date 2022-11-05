@@ -184,15 +184,26 @@ let deletecar = (el: any) => {
 };
 
 const deletecart = function (el: any) {
-  for (let i = 0; i < foodList.value.length; i++) {
-    if (el.productId == foodList.value[i].productId) {
-      delete foodList.value[i]
-      // console.log(foodList.value[i]);
-      foodList.value.splice(i, 1)
-      // console.log(foodList.value);
-      localStorage.setItem('cartAdd', JSON.stringify(foodList.value))
+
+  Dialog.confirm({
+  message:
+    '确定删除这1种商品吗?',
+})
+  .then(() => {
+    for (let i = 0; i < foodList.value.length; i++) {
+      if (el.productId == foodList.value[i].productId) {
+        delete foodList.value[i]
+        // console.log(foodList.value[i]);
+        foodList.value.splice(i, 1)
+        // console.log(foodList.value);
+        localStorage.setItem('cartAdd', JSON.stringify(foodList.value))
+      }
     }
-  }
+    Toast('删除成功');
+  })
+  .catch(() => {
+    Toast('取消成功');
+  });
 }
 
 const sub = function (el) {
