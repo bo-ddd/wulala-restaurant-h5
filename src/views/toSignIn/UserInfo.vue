@@ -19,7 +19,7 @@
                         <van-uploader :preview-image="true" 
                         multiple v-model="fileList" 
                         :max-count="1" 
-                        :max-size="500 * 1024"
+                        :max-size="5000 * 1024"
                         :upload-icon="avatarImg"
                         :after-read="afterRead" />
                     </span>
