@@ -32,6 +32,7 @@ import { Picker } from 'vant';
 import { Checkbox, CheckboxGroup } from 'vant';
 import { Cell } from 'vant'
 import { ContactEdit } from 'vant';
+import { Empty } from 'vant';
 
 
 import "./assets/main.css";
@@ -62,7 +63,7 @@ app.use(CellGroup);
 app.use(Picker);
 app.use(Checkbox);
 app.use(CheckboxGroup);
-
+app.use(Empty);
 app.use(ContactEdit);
 
 app.use(Cell);

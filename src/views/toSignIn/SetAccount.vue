@@ -20,7 +20,7 @@
                 <ExpressInfoItem class="order-info" @click="toSafeCenter">
                     <template #left>
                         <span class="mode">
-                            账号于安全
+                            账号与安全
                             <p class="details pt-5">修改密码、修改手机号码、账号绑定管理</p>
                         </span>
                     </template>
