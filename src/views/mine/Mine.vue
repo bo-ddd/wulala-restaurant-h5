@@ -37,7 +37,7 @@
     />
     <Nav.Wrapper class="nav-list wrap mt-20">
       <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-shopcar.png')"
-        text="订单"></Nav.Item>
+        text="订单" @click="toOrder"></Nav.Item>
         <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-collection.png')"
         text="收藏" @click="toCollection"></Nav.Item>
         <Nav.Item class="order"  :size="'3'" :icon="parsrAsssetFile('icon-evaluate.png')"
@@ -103,6 +103,9 @@ router.push({name:'feedback'})
 }
 const toCollection = function(){
   router.push({name:'collection'})
+}
+const toOrder = function(){
+  router.push({name:'order'})
 }
 </script>
 

@@ -119,6 +119,10 @@ const router = createRouter({
       path:'/collection',
       name:'collection',
       component:()=>import("../views/toSignIn/Collection.vue")
+    },{
+      path:'/order',
+      name:'order',
+      component:()=>import("../views/toSignIn/Order.vue")
     }
   ],
 })
