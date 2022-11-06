@@ -3,67 +3,66 @@
     <div class="wrap">
       <Title color="#000">购物车</Title>
     </div>
-    <div class="wrap">
-
-      <div class="box-shopping mt-20" v-if="token" v-for="(el, i) in foodLists" :key="i">
-        <div class="box-food_png">
-          <img class="food-png" :src="el.bannerUrl" alt="" />
-        </div>
-        <div class="ml-10 box">
-          <div class="name">
-            <span class="text">{{ el.productName }}</span>
-            <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecar(el)" />
+      <div class="wrap lol">
+        <!-- 数据库 -->
+        <div class="box-shopping mt-20" v-if="token" v-for="(el, i) in foodLists" :key="i">
+          <van-checkbox v-model="checked"></van-checkbox>
+          <div class="box-food_png">
+            <img class="food-png" :src="el.bannerUrl" alt="" />
           </div>
-          <div class="specifications">
-            <span class="text"> 规格：</span>
-          </div>
-
-          <div class="box-price">
-            <div>
-              <span class="price"><span class="symbol">￥</span>{{ el.originalPrice }}</span>
+          <div class="ml-10 box">
+            <div class="name">
+              <span class="text">{{ el.productName }}</span>
+              <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecar(el)" />
             </div>
-            <div class="box-btn">
-              <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" />
-              <span class="text">{{ el.quantity }}</span>
-              <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" />
+            <div class="specifications">
+              <span class="text"> 规格：</span>
+            </div>
+
+            <div class="box-price">
+              <div>
+                <span class="price"><span class="symbol">￥</span>{{ el.originalPrice }}</span>
+              </div>
+              <div class="box-btn">
+                <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" />
+                <span class="text">{{ el.quantity }}</span>
+                <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- 本地 -->
+        <div class="box-shopping mt-20" v-else v-for="(el, i) in foodList">
+          <van-checkbox v-model="checked"></van-checkbox>
+          <div class="box-food_png">
+            <img class="food-png" :src="el.info.bannerUrl" alt="" />
+          </div>
+          <div class="ml-10 box">
+            <div class="name">
+              <span class="text">{{ el.info.foodName }}</span>
+              <div class="aa">
+                <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecart(el)" />
+              </div>
+              <span>{{ el.productName }}</span>
+            </div>
+            <div class="specifications">
+              <span class="text"> 规格：</span>
+            </div>
+
+            <div class="box-price">
+              <div>
+                <span class="price"><span class="symbol">￥</span>{{ el.info.price }}</span>
+              </div>
+              <div class="box-btn">
+                <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" @click="sub(el)" />
+                <span class="text">{{ el.quantity }}</span>
+                <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" @click="add(el)" />
+              </div>
             </div>
           </div>
         </div>
       </div>
-      <!-- 本地 -->
-      <div class="box-shopping mt-20" v-else v-for="(el, i) in foodList">
-        <div class="box-food_png">
-          <img class="food-png" :src="el.info.bannerUrl" alt="" />
-        </div>
-        <div class="ml-10 box">
-          <div class="name">
-            <span class="text">{{ el.info.foodName }}</span>
-            <div class="aa">
-              <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecart(el)" />
-            </div>
-            <span>{{ el.productName }}</span>
-          </div>
-          <div class="specifications">
-            <span class="text"> 规格：</span>
-          </div>
-
-          <div class="box-price">
-            <div>
-              <span class="price"><span class="symbol">￥</span>{{ el.info.price }}</span>
-            </div>
-            <div class="box-btn">
-              <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" @click="sub(el)" />
-              <span class="text">{{ el.quantity }}</span>
-              <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" @click="add(el)" />
-            </div>
-          </div>
-        </div>
-      </div>
-
-      <!-- 数据库 -->
-
     </div>
-  </div>
 </template>
 <script setup lang="ts">
 import Title from "@/components/Title.vue";
@@ -82,6 +81,7 @@ let { parsrAsssetFile } = useUlit();
 let foodList = ref();
 let foodLists: any = ref([]);
 let localDate: any = ref([])
+let checked = ref(true)
 let getCartAdd = JSON.parse(localStorage.getItem("cartAdd"));
 let userId = sessionStorage.getItem("userId");
 let token = sessionStorage.getItem("token");
@@ -186,27 +186,27 @@ let deletecar = (el: any) => {
 const deletecart = function (el: any) {
 
   Dialog.confirm({
-  message:
-    '确定删除这1种商品吗?',
-})
-  .then(() => {
-    for (let i = 0; i < foodList.value.length; i++) {
-      if (el.productId == foodList.value[i].productId) {
-        delete foodList.value[i]
-        // console.log(foodList.value[i]);
-        foodList.value.splice(i, 1)
-        // console.log(foodList.value);
-        localStorage.setItem('cartAdd', JSON.stringify(foodList.value))
-      }
-    }
-    Toast('删除成功');
+    message:
+      '确定删除这1种商品吗?',
   })
-  .catch(() => {
-    Toast('取消成功');
-  });
+    .then(() => {
+      for (let i = 0; i < foodList.value.length; i++) {
+        if (el.productId == foodList.value[i].productId) {
+          delete foodList.value[i]
+          // console.log(foodList.value[i]);
+          foodList.value.splice(i, 1)
+          // console.log(foodList.value);
+          localStorage.setItem('cartAdd', JSON.stringify(foodList.value))
+        }
+      }
+      Toast('删除成功');
+    })
+    .catch(() => {
+      Toast('取消成功');
+    });
 }
 
-const sub = function (el) {
+const sub = function (el: any) {
   for (let i = 0; i < foodList.value.length; i++) {
     if (el.productId == foodList.value[i].productId) {
       if (foodList.value[i].quantity == 1) {
@@ -219,7 +219,7 @@ const sub = function (el) {
   }
 }
 
-const add = function (el) {
+const add = function (el: any) {
   for (let i = 0; i < foodList.value.length; i++) {
     if (el.productId == foodList.value[i].productId) {
       foodList.value[i].quantity++
@@ -239,15 +239,16 @@ const add = function (el) {
 .box-shopping {
   display: flex;
   background-color: #fff;
-  border-radius: 1rem;
+  /* border-radius: 1rem; */
 }
 
 .box {
-  width: 100%;
+  /* width: 100%;*/
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   padding: 0.2rem 1rem;
+  flex-grow: 1;
 }
 
 .name {
@@ -283,16 +284,18 @@ const add = function (el) {
   width: 9rem;
   height: 9rem;
   border-radius: 1rem;
+  margin-left: 1rem;
 }
 
 .icon-del {
   width: 2rem;
   height: 2rem;
   display: inline-block;
-  
+
 }
-.aa{
-  flex-grow:1;
+
+.aa {
+  flex-grow: 1;
   display: flex;
   justify-content: flex-end;
 }
@@ -308,4 +311,22 @@ const add = function (el) {
   width: 2rem;
   height: 2rem;
 }
+
+.all {
+  display: flex;
+}
+
+.add-text {
+  font-size: 1.8rem;
+}
+
+.lol {
+  height:calc(100vh - 16rem);
+  background-color: #fff;
+  padding: .1rem .5rem 1rem .5rem;
+  border-radius: 1rem;
+  overflow-y: scroll;
+
+}
+
 </style>
