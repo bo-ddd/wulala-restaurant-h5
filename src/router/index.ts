@@ -127,6 +127,10 @@ const router = createRouter({
       path:'/turntable',
       name:'turntable',
       component:()=>import("../views/toSignIn/Turntable.vue")
+    },{
+      path:'/wholeorder',
+      name:'wholeorder',
+      component:()=>import("../views/toSignIn/WholeOrder.vue")
     }
   ],
 })
