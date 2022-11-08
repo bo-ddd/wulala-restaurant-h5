@@ -3,66 +3,80 @@
     <div class="wrap">
       <Title color="#000">购物车</Title>
     </div>
-      <div class="wrap lol">
-        <!-- 数据库 -->
-        <div class="box-shopping mt-20" v-if="token" v-for="(el, i) in foodLists" :key="i">
-          <van-checkbox v-model="checked"></van-checkbox>
-          <div class="box-food_png">
-            <img class="food-png" :src="el.bannerUrl" alt="" />
+    <div class="wrap lol">
+      <!-- 数据库 -->
+      <div class="box-shopping mt-20" v-if="token" v-for="(el, i) in foodLists" :key="i">
+        <van-checkbox :value="el.id" v-model="el.isChecked" @click="chooseChange(el)"></van-checkbox>
+        <div class="box-food_png">
+          <img class="food-png" :src="el.bannerUrl" alt="" />
+        </div>
+        <div class="ml-10 box">
+          <div class="name">
+            <span class="text">{{ el.productName }}</span>
+            <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecar(el)" />
           </div>
-          <div class="ml-10 box">
-            <div class="name">
-              <span class="text">{{ el.productName }}</span>
-              <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecar(el)" />
-            </div>
-            <div class="specifications">
-              <span class="text"> 规格：</span>
-            </div>
+          <div class="specifications">
+            <span class="text"> 规格：</span>
+          </div>
 
-            <div class="box-price">
-              <div>
-                <span class="price"><span class="symbol">￥</span>{{ el.originalPrice }}</span>
-              </div>
-              <div class="box-btn">
-                <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" />
-                <span class="text">{{ el.quantity }}</span>
-                <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" />
-              </div>
+          <div class="box-price">
+            <div>
+              <span class="price"><span class="symbol">￥</span>{{ el.originalPrice }}</span>
+            </div>
+            <div class="box-btn">
+              <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" />
+              <span class="text">{{ el.quantity }}</span>
+              <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" />
             </div>
           </div>
         </div>
-        <!-- 本地 -->
-        <div class="box-shopping mt-20" v-else v-for="(el, i) in foodList">
-          <van-checkbox v-model="checked"></van-checkbox>
-          <div class="box-food_png">
-            <img class="food-png" :src="el.info.bannerUrl" alt="" />
+        <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
+          <van-checkbox v-model="AllChecked" @click="checkAll">全选</van-checkbox>
+          <template #tip>
+            你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
+          </template>
+        </van-submit-bar>
+      </div>
+      <!-- 本地 -->
+      <div class="box-shopping mt-20" v-else v-for="(el, i) in foodList">
+        <van-checkbox :value="el.localId" v-model="el.isCheckeds" @click="checkChange(el)"></van-checkbox>
+        <div class="box-food_png">
+          <img class="food-png" :src="el.info.bannerUrl" alt="" />
+        </div>
+        <div class="ml-10 box">
+          <div class="name">
+            <span class="text">{{ el.info.foodName }}</span>
+            <div class="aa">
+              <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecart(el)" />
+            </div>
+            <span>{{ el.productName }}</span>
           </div>
-          <div class="ml-10 box">
-            <div class="name">
-              <span class="text">{{ el.info.foodName }}</span>
-              <div class="aa">
-                <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecart(el)" />
-              </div>
-              <span>{{ el.productName }}</span>
-            </div>
-            <div class="specifications">
-              <span class="text"> 规格：</span>
-            </div>
+          <div class="specifications">
+            <span class="text"> 规格：</span>
+          </div>
 
-            <div class="box-price">
-              <div>
-                <span class="price"><span class="symbol">￥</span>{{ el.info.price }}</span>
-              </div>
-              <div class="box-btn">
-                <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" @click="sub(el)" />
-                <span class="text">{{ el.quantity }}</span>
-                <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" @click="add(el)" />
-              </div>
+          <div class="box-price">
+            <div>
+              <span class="price"><span class="symbol">￥</span>{{ el.info.price }}</span>
+            </div>
+            <div class="box-btn">
+              <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" @click="sub(el)" />
+              <span class="text">{{ el.quantity }}</span>
+              <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" @click="add(el)" />
             </div>
           </div>
         </div>
+        <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
+          <van-checkbox v-model="AllCheckeds" @click="lostCheckAll">全选</van-checkbox>
+          <template #tip>
+            你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
+          </template>
+        </van-submit-bar>
       </div>
     </div>
+  </div>
+
+
 </template>
 <script setup lang="ts">
 import Title from "@/components/Title.vue";
@@ -75,20 +89,21 @@ import {
   cartAddApi,
   cartDeleteApi,
 } from "@/api/api";
-import { reactive, ref } from "vue";
+import { ref } from "vue";
 import { Dialog, Notify } from "vant";
+import { ElEmpty } from "element-plus";
 let { parsrAsssetFile } = useUlit();
 let foodList = ref();
 let foodLists: any = ref([]);
 let localDate: any = ref([])
-let checked = ref(true)
+let AllChecked = ref(false);
+let checkedNames = []
 let getCartAdd = JSON.parse(localStorage.getItem("cartAdd"));
 let userId = sessionStorage.getItem("userId");
 let token = sessionStorage.getItem("token");
 if (token != null) {
   localDate = JSON.parse(localStorage.getItem('cartAdd'))
   localStorage.removeItem("cartAdd");
-  console.log(localDate);
   if (localDate != null) {
     localDate.forEach((el: any) => {
       cartAddApi({
@@ -101,12 +116,14 @@ if (token != null) {
           console.log(2);
           console.log(res);
           foodLists.value = res.data.data
+
         });
       });
     })
   } else {
     getCartListApi({}).then((res) => {
       foodLists.value = res.data.data
+      Object.assign({}, foodLists.value, { isChecked: true })
     });
   }
 } else {
@@ -130,6 +147,7 @@ if (token != null) {
         ...item,
         info: {
           foodName: "",
+
         },
       };
     });
@@ -193,9 +211,7 @@ const deletecart = function (el: any) {
       for (let i = 0; i < foodList.value.length; i++) {
         if (el.productId == foodList.value[i].productId) {
           delete foodList.value[i]
-          // console.log(foodList.value[i]);
           foodList.value.splice(i, 1)
-          // console.log(foodList.value);
           localStorage.setItem('cartAdd', JSON.stringify(foodList.value))
         }
       }
@@ -228,9 +244,74 @@ const add = function (el: any) {
     }
   }
 }
+const onSubmit = () => Toast('点击按钮');
+const onClickLink = () => Toast('修改地址');
+// 操作数据库-------------------------------
+const chooseChange = (item) => {
+  checkedNames.push(item)
+  if (checkedNames.length == foodLists.value.length) {
+    AllChecked.value = true
+  } else {
+    AllChecked.value = false
+  }
+}
 
+const checkAll = function () {
+  if (AllChecked.value) {
+    foodLists.value.forEach((el: any) => {
+      checkedNames.push(el)
+      el.isChecked = true;
+    })
+    AllChecked.value = true
+
+  } else {
+    foodLists.value.forEach((el: any) => {
+      checkedNames = []
+      el.isChecked = false;
+    })
+    AllChecked.value = false
+  }
+}
+// 操作数据库end-------------------------------
+
+
+//操作本地-------------------------------
+interface foodList {
+  item: {}
+}
+let checkedItem = []
+let AllCheckeds = ref(false)
+const checkChange = (item: foodList) => {
+  checkedItem.push(item)
+  if (checkedItem.length == foodList.value.length) {
+    AllCheckeds.value = true
+  } else {
+    AllCheckeds.value = false
+  }
+}
+const lostCheckAll = function () {
+  if (AllCheckeds.value) {
+    foodList.value.forEach((el: any) => {
+      checkedItem.push(el)
+      el.isCheckeds = true;
+    })
+    AllChecked.value = true
+  } else {
+    foodList.value.forEach((el: any) => {
+      checkedItem = []
+      el.isCheckeds = false;
+    })
+    AllCheckeds.value = false
+  }
+}
+//操作本地end-------------------------------
 </script>
 <style scoped>
+.tijiao {
+  height: calc(100vh - 61.5rem);
+  background-color: yellowgreen;
+}
+
 .box-dir {
   background-color: #f5f5f5;
   height: calc(100vh - 5rem);
@@ -321,7 +402,7 @@ const add = function (el: any) {
 }
 
 .lol {
-  height:calc(100vh - 16rem);
+  height: calc(100vh - 18.8rem);
   background-color: #fff;
   padding: .1rem .5rem 1rem .5rem;
   border-radius: 1rem;
@@ -329,4 +410,14 @@ const add = function (el: any) {
 
 }
 
+::v-deep .van-submit-bar {
+  position: fixed;
+  bottom: 50px;
+  left: 0;
+  z-index: var(--van-submit-bar-z-index);
+  width: 100%;
+  background: var(--van-submit-bar-background-color);
+  -webkit-user-select: none;
+  user-select: none;
+}
 </style>

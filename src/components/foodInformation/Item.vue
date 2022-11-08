@@ -34,7 +34,6 @@
     </van-popup>
 </template>
 <script setup lang="ts">
-import useUlit from '@/assets/ulit/index'
 import { getFoodListApi, cartAddApi } from '@/api/api'
 import { ref } from "vue";
 import { useRouter } from 'vue-router'
@@ -43,7 +42,6 @@ const foodList: any = ref({})
 let search = window.location.search
 let foodId = search.split('=');
 let id = foodId[1]
-let foods = ref()
 const show = ref(false);
 const showPopup = () => { //弹出层
     show.value = true;
@@ -60,14 +58,16 @@ const toOrder = () => {
             data.value.push({
                 localId: data.value.length + 1,
                 productId: id,
-                quantity: value.value
+                quantity: value.value,
+                isCheckeds: false
             })
             localStorage.setItem('cartAdd', JSON.stringify(data.value))
         } else {
             data.value.push({
                 localId: data.value.length + 2,
                 productId: id,
-                quantity: value.value
+                quantity: value.value,
+                isCheckeds: false
             })
             let datas = [...data.value, ...getCartAdd]
             localStorage.setItem('cartAdd', JSON.stringify(datas))
