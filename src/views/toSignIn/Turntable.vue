@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div class="bodys">
       <div class="lottery-container">
         <div class="turntable-wrap">
           <div
@@ -27,11 +27,11 @@
         <div class="cost-wrap">
           <div class="turntable-btn btn-0" @click="onStart">
             <div>单抽</div>
-            <svg-icon name="ks"></svg-icon> <span>200</span>
+            <span>200</span>
           </div>
           <div class="turntable-btn btn-1" @click="onGet">
             <div>十连抽</div>
-            <svg-icon name="ks"></svg-icon> <span>2000</span>
+            <span>2000</span>
           </div>
         </div>
         <div v-if="showResult" class="result-container">
@@ -48,13 +48,13 @@
   </template>
   <script setup lang="ts">
   import { computed, ref } from "vue";
-  interface Props {
-    /** 宽度 */
-    width: string;
-    /** 高度 */
-    height: string;
-  }
-  withDefaults(defineProps<Props>(), {});
+  // interface Props {
+  //   /** 宽度 */
+  //   width: string;
+  //   /** 高度 */
+  //   height: string;
+  // }
+  // withDefaults(defineProps<Props>(), {});
   
   const borders = [
     { className: "upper-border up-down" },
@@ -130,13 +130,13 @@
   function onStart() {
     let interval = setInterval(() => {
       curActive.value = Math.floor(Math.random() * 9);
-    }, 20);
+    }, 200);
     let timer = setTimeout(() => {
       curActive.value = winPrize(probArr.value);
       showResult.value = true;
       clearInterval(interval);
       clearTimeout(timer);
-    }, 2000);
+    }, 6000);
   }
   
   function onGet() {
@@ -159,10 +159,7 @@
 <style lang="scss" scoped>
 .lottery-container {
   width: 100vw;
-  height: 50.2rem;
-  background: #fadd95;
-  box-shadow: inset 0 0 16px #ff9a2e;
-  box-sizing: border-box;
+  height: 100vh;
   display: flex;
   flex-direction: column;
 
@@ -247,7 +244,7 @@
 
       .goods-list-wrap {
         width: 100%;
-        height: 100%;
+        height: 70%;
         background: #e37815;
         border-radius: 8px;
         padding: 16px;
@@ -311,8 +308,7 @@
     margin:1rem 0;
 
     .turntable-btn {
-      width: 204px;
-      height: 64px;
+      // width: 
       display: flex;
       align-items: center;
       justify-content: center;
@@ -415,5 +411,13 @@
       cursor: pointer;
     }
   }
+}
+.bodys{
+  background: #fadd95; 
+     box-shadow: inset 0 0 16px #ff9a2e; 
+     box-sizing: border-box;
+     min-height: 100vh;
+     display: flex;
+    align-items: center;
 }
 </style>
