@@ -13,6 +13,7 @@
     "@amap/amap-jsapi-loader": "^1.0.1",
     "axios": "^1.1.2",
     "pinia": "^2.0.21",
+    "scss": "^0.2.4",
     "undraw-ui": "^0.6.7",
     "vant": "^3.6.4",
     "vue": "^3.2.38",

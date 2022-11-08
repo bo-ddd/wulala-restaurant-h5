@@ -47,7 +47,7 @@
     </Nav.Wrapper>
     <div class="upload wrap mt-20">
     
-      <ExpressInfoItem class="order-info border-bottom" @click="">
+      <ExpressInfoItem class="order-info border-bottom" @click="toWholeOrder">
           <template #left>
               <span class="mode">我的订单</span>
           </template>
@@ -141,6 +141,9 @@ const toOrder = function(){
 }
 const toTurntable = function(){
   router.push({name:'turntable'})
+}
+const toWholeOrder = function(){
+  router.push({name:'wholeorder'})
 }
 </script>
 
