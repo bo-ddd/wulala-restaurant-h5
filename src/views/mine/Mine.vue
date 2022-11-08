@@ -47,12 +47,12 @@
     </Nav.Wrapper>
     <div class="upload wrap mt-20">
     
-      <ExpressInfoItem class="order-info border-bottom" @click="toWholeOrder">
+      <ExpressInfoItem class="order-info border-bottom" >
           <template #left>
               <span class="mode">我的订单</span>
           </template>
           <template #middle>
-              <p class="payment">
+              <p class="payment" @click="toWholeOrder">
                   全部订单
               </p>
           </template>
@@ -62,15 +62,15 @@
       </ExpressInfoItem>
       <Nav.Wrapper class="nav-list wrap">
         <Nav.Item class="order" :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to-be_paid.png')"
-          text="待付款" @click=""></Nav.Item>
+          text="待付款" @click="toOrders(1)"></Nav.Item>
           <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to-be_received.png')"
-          text="待收货" @click=""></Nav.Item>
+          text="待收货" @click="toOrders(2)"></Nav.Item>
           <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to -be_use.png')"
-          text="待使用" @click=""></Nav.Item>
+          text="待使用" @click="toOrders(3)"></Nav.Item>
           <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('icon-feedback.png')"
-          text="待评价" @click=""></Nav.Item>
+          text="待评价" @click="toOrders(4)"></Nav.Item>
           <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('refund.png')"
-          text="退款" @click=""></Nav.Item>
+          text="退款" @click="toOrders(5)"></Nav.Item>
       </Nav.Wrapper>
     </div>
     <Nav.Wrapper class="nav-list wrap mt-20">
@@ -104,7 +104,7 @@ let image = ref(); //拿到图像图片，在上面渲染
   let userInfoRes = await userInfoApi({});
   // console.log('-----userInfoRes----');
   // console.log(userInfoRes);
-  console.log(userInfoRes.data.data.userId);
+  // console.log(userInfoRes.data.data.userId);
   if (userInfoRes.data.status == 1) {
     image.value = userInfoRes.data.data.avatarImg; //后端返回的头像，进行赋值
     userName.value= userInfoRes.data.data.avatarName;
@@ -138,6 +138,9 @@ const toCollection = function(){
 }
 const toOrder = function(){
   router.push({name:'order'})
+}
+const toOrders = function(a : number){
+  router.push({name:'wholeorder',query: {id:a}} )
 }
 const toTurntable = function(){
   router.push({name:'turntable'})
