@@ -42,6 +42,7 @@
 <script setup lang="ts">
 import { ref, toRefs } from "vue";
 import { cartAddApi } from "@/api/api";
+import { Toast } from 'vant';
 
 let props = defineProps<{
   src?: string;
@@ -94,6 +95,12 @@ let submuit = () => {
     quantity:value.value
   }).then(res =>{
     console.log(res);
+    
+    if(res.data.status){
+      Toast.success('加入成功');
+    } else {
+      Toast.success('加入失败');
+    }
   })
   }
 

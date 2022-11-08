@@ -37,6 +37,10 @@ import { Cell } from 'vant'
 import { ContactEdit } from 'vant';
 import { Empty } from 'vant';
 
+//订单
+import { Col, Row } from 'vant';
+
+
 
 import "./assets/main.css";
 import "./assets/lib/lib-flexable.js";
@@ -45,6 +49,7 @@ import GlobalComponents from "@/components";
 const app = createApp(App);
 
 app.use(GlobalComponents)
+app.use(Col).use(Row);;
 
 
 app.use(createPinia());
