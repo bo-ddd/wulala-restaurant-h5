@@ -30,5 +30,7 @@ import { RouterLink, RouterView } from "vue-router";
   background: var(--van-search-background-color);
   border-radius: 3rem !important;
 }
-
+.van-nav-bar__text {
+    color: black !important;
+}
 </style>

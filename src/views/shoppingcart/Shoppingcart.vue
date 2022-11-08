@@ -3,77 +3,80 @@
     <div class="wrap">
       <Title color="#000">购物车</Title>
     </div>
-    <div class="wrap lol">
-      <!-- 数据库 -->
-      <div class="box-shopping mt-20" v-if="token" v-for="(el, i) in foodLists" :key="i">
-        <van-checkbox :value="el.id" v-model="el.isChecked" @click="chooseChange(el)"></van-checkbox>
-        <div class="box-food_png">
-          <img class="food-png" :src="el.bannerUrl" alt="" />
-        </div>
-        <div class="ml-10 box">
-          <div class="name">
-            <span class="text">{{ el.productName }}</span>
-            <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecar(el)" />
+    <div>
+      <div class="wrap lol">
+        <!-- 数据库  -->
+        <div class="box-shopping mt-20" v-for="(el, i) in foodLists" :key="i">
+          <van-checkbox :value="el.id" v-model="el.isChecked" @click="chooseChange(el)"></van-checkbox>
+          <div class="box-food_png">
+            <img class="food-png" :src="el.bannerUrl" alt="" />
           </div>
-          <div class="specifications">
-            <span class="text"> 规格：</span>
-          </div>
+          <div class="ml-10 box">
+            <div class="name">
+              <span class="text">{{ el.productName }}</span>
+              <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecar(el)" />
+            </div>
+            <div class="specifications">
+              <span class="text"> 规格：</span>
+            </div>
 
-          <div class="box-price">
-            <div>
-              <span class="price"><span class="symbol">￥</span>{{ el.originalPrice }}</span>
-            </div>
-            <div class="box-btn">
-              <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" />
-              <span class="text">{{ el.quantity }}</span>
-              <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" />
+            <div class="box-price">
+              <div>
+                <span class="price"><span class="symbol">￥</span>{{ el.originalPrice }}</span>
+              </div>
+              <div class="box-btn">
+                <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" />
+                <span class="text">{{ el.quantity }}</span>
+                <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" />
+              </div>
             </div>
           </div>
+          <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
+            <van-checkbox v-model="AllChecked" @click="checkAll">全选</van-checkbox>
+            <template #tip>
+              你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
+            </template>
+          </van-submit-bar>
         </div>
-        <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
-          <van-checkbox v-model="AllChecked" @click="checkAll">全选</van-checkbox>
-          <template #tip>
-            你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
-          </template>
-        </van-submit-bar>
-      </div>
-      <!-- 本地 -->
-      <div class="box-shopping mt-20" v-else v-for="(el, i) in foodList">
-        <van-checkbox :value="el.localId" v-model="el.isCheckeds" @click="checkChange(el)"></van-checkbox>
-        <div class="box-food_png">
-          <img class="food-png" :src="el.info.bannerUrl" alt="" />
-        </div>
-        <div class="ml-10 box">
-          <div class="name">
-            <span class="text">{{ el.info.foodName }}</span>
-            <div class="aa">
-              <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecart(el)" />
+        <!-- 本地  -->
+        <div class="box-shopping mt-20" v-for="(el, i) in foodList">
+          <van-checkbox :value="el.localId" v-model="el.isCheckeds" @click="checkChange(el)"></van-checkbox>
+          <div class="box-food_png">
+            <img class="food-png" :src="el.info.bannerUrl" alt="" />
+          </div>
+          <div class="ml-10 box">
+            <div class="name">
+              <span class="text">{{ el.info.foodName }}</span>
+              <div class="aa">
+                <img class="icon-del" src="@/assets/images/icon-del.png" alt="" @click="deletecart(el)" />
+              </div>
+              <span>{{ el.productName }}</span>
             </div>
-            <span>{{ el.productName }}</span>
-          </div>
-          <div class="specifications">
-            <span class="text"> 规格：</span>
-          </div>
+            <div class="specifications">
+              <span class="text"> 规格：</span>
+            </div>
 
-          <div class="box-price">
-            <div>
-              <span class="price"><span class="symbol">￥</span>{{ el.info.price }}</span>
-            </div>
-            <div class="box-btn">
-              <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" @click="sub(el)" />
-              <span class="text">{{ el.quantity }}</span>
-              <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" @click="add(el)" />
+            <div class="box-price">
+              <div>
+                <span class="price"><span class="symbol">￥</span>{{ el.info.price }}</span>
+              </div>
+              <div class="box-btn">
+                <img class="icon-btn" src="@/assets/images/icon-sub.png" alt="" @click="sub(el)" />
+                <span class="text">{{ el.quantity }}</span>
+                <img class="icon-btn" src="@/assets/images/icon-add.png" alt="" @click="add(el)" />
+              </div>
             </div>
           </div>
+          <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
+            <van-checkbox v-model="AllCheckeds" @click="lostCheckAll">全选</van-checkbox>
+            <template #tip>
+              你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
+            </template>
+          </van-submit-bar>
         </div>
-        <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
-          <van-checkbox v-model="AllCheckeds" @click="lostCheckAll">全选</van-checkbox>
-          <template #tip>
-            你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
-          </template>
-        </van-submit-bar>
       </div>
     </div>
+
   </div>
 
 
@@ -81,24 +84,19 @@
 <script setup lang="ts">
 import Title from "@/components/Title.vue";
 import useUlit from "@/assets/ulit/index";
-
 import { Toast } from 'vant';
-import {
-  getFoodListApi,
-  getCartListApi,
-  cartAddApi,
-  cartDeleteApi,
-} from "@/api/api";
-import { ref } from "vue";
+import { getFoodListApi, getCartListApi, cartAddApi, cartDeleteApi, } from "@/api/api";
+import { ref, provide } from "vue";
 import { Dialog, Notify } from "vant";
-import { ElEmpty } from "element-plus";
+import router from "@/router";
 let { parsrAsssetFile } = useUlit();
 let foodList = ref();
 let foodLists: any = ref([]);
 let localDate: any = ref([])
 let AllChecked = ref(false);
-let checkedNames = []
-let getCartAdd = JSON.parse(localStorage.getItem("cartAdd"));
+let checkedNames: any = ref([])
+let getCartAdd = ref(JSON.parse(localStorage.getItem("cartAdd")))
+
 let userId = sessionStorage.getItem("userId");
 let token = sessionStorage.getItem("token");
 if (token != null) {
@@ -141,7 +139,7 @@ if (token != null) {
       }
       return Array.from(warp).map(([, v]) => v);
     }
-    foodList.value = delSameObjValue(getCartAdd, "quantity", ["productId"], ["quantity"]);
+    foodList.value = delSameObjValue(getCartAdd.value, "quantity", ["productId"], ["quantity"]);
     foodList.value = foodList.value.map((item: {}) => {
       return {
         ...item,
@@ -191,6 +189,7 @@ let deletecar = (el: any) => {
             // console.log(data);
             foodLists.value = data;
           }
+
         } else {
           Notify({ type: "danger", message: "删除失败" });
         }
@@ -244,12 +243,18 @@ const add = function (el: any) {
     }
   }
 }
-const onSubmit = () => Toast('点击按钮');
+const onSubmit = () => {
+  localStorage.setItem('item',JSON.stringify(checkedNames.value))
+    router.push({
+      name: 'orderDetails',
+  })
+
+};
 const onClickLink = () => Toast('修改地址');
 // 操作数据库-------------------------------
 const chooseChange = (item) => {
-  checkedNames.push(item)
-  if (checkedNames.length == foodLists.value.length) {
+  checkedNames.value.push(item)
+  if (checkedNames.value.length == foodLists.value.length) {
     AllChecked.value = true
   } else {
     AllChecked.value = false
@@ -259,14 +264,14 @@ const chooseChange = (item) => {
 const checkAll = function () {
   if (AllChecked.value) {
     foodLists.value.forEach((el: any) => {
-      checkedNames.push(el)
+      checkedNames.value.push(el)
       el.isChecked = true;
     })
     AllChecked.value = true
 
   } else {
     foodLists.value.forEach((el: any) => {
-      checkedNames = []
+      checkedNames.value = []
       el.isChecked = false;
     })
     AllChecked.value = false
@@ -393,13 +398,7 @@ const lostCheckAll = function () {
   height: 2rem;
 }
 
-.all {
-  display: flex;
-}
 
-.add-text {
-  font-size: 1.8rem;
-}
 
 .lol {
   height: calc(100vh - 18.8rem);
@@ -407,7 +406,6 @@ const lostCheckAll = function () {
   padding: .1rem .5rem 1rem .5rem;
   border-radius: 1rem;
   overflow-y: scroll;
-
 }
 
 ::v-deep .van-submit-bar {
@@ -419,5 +417,15 @@ const lostCheckAll = function () {
   background: var(--van-submit-bar-background-color);
   -webkit-user-select: none;
   user-select: none;
+}
+
+::v-deep .van-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  /* padding: var(--van-empty-padding); */
+  padding: 22.5rem 0;
 }
 </style>
