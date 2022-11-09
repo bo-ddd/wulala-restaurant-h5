@@ -11,7 +11,9 @@
   },
   "dependencies": {
     "@amap/amap-jsapi-loader": "^1.0.1",
+    "@amap/amap-jsapi-types": "^0.0.10",
     "axios": "^1.1.2",
+    "echarts-extension-amap": "^1.11.0",
     "mitt": "^3.0.0",
     "pinia": "^2.0.21",
     "scss": "^0.2.4",
