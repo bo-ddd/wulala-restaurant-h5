@@ -9,9 +9,19 @@
                     <span>18888888888</span>
                 </div>
             </van-cell>
-            <van-popup v-model:show="show" position="bottom" :style="{ height: '40%' }">
+            <van-popup class="popup" v-model:show="show" position="bottom" :style="{ height: '40%' }">
                 <div class="wrap">
-                    <van-button class="btn wrap" type="default">新增收货地址</van-button>
+                    <p class="title">选择收货地址</p>
+                    <van-address-list
+                    v-model="chosenAddressId"
+                    :list="list"
+                    :disabled-list="disabledList"
+                    disabled-text="以下地址超出配送范围"
+                    default-tag-text="默认"
+                    @add="onAdd"
+                    @edit="onEdit"
+                    />
+                    <!-- <van-button class="btn wrap" type="default">新增收货地址</van-button> -->
                 </div>
             </van-popup>
             <div class="box-shopping mt-20" v-for="item in foodList">
@@ -46,8 +56,21 @@
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import { useRoute } from 'vue-router'
-let route = useRoute()
+import { Toast } from 'vant';
+import { useRoute,useRouter } from 'vue-router'
+let route = useRoute();
+let router = useRouter();
+
+const onAdd = function(){
+    router.push({name:'addressedit'})
+};
+const onEdit = function(item: any, index: string){
+    router.push({name:'addressedit',query:{'item':item}})
+    console.log(item);
+    
+};
+const chosenAddressId = ref('1');
+
 const onClickLeft = () => history.back();
 const show = ref(false);
 const showPopup = () => {
@@ -58,6 +81,29 @@ let qina = ref(0)
 foodList.forEach((item: any) => {
     qina.value += item.quantity * item.originalPrice
 })
+    const list = [
+      {
+        id: '1',
+        name: '张三',
+        tel: '13000000000',
+        address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室',
+        isDefault: true,
+      },
+      {
+        id: '2',
+        name: '李四',
+        tel: '1310000000',
+        address: '浙江省杭州市拱墅区莫干山路 50 号',
+      },
+    ];
+    const disabledList = [
+      {
+        id: '3',
+        name: '王五',
+        tel: '1320000000',
+        address: '浙江省杭州市滨江区江南大道 15 号',
+      },
+    ];
 
 </script>
 <style scoped>
@@ -182,5 +228,15 @@ foodList.forEach((item: any) => {
     padding: 1rem 1.5rem;
     border-radius: 2rem;
     font-weight: bold;
+}
+
+.title{
+    font-size: 1.4rem;
+    color: black;
+    text-align: center;
+    padding: 1rem 0;
+}
+::v-deep .van-popup--bottom{
+    border-radius: 2rem 2rem 0 0;
 }
 </style>
