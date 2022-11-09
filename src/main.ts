@@ -23,6 +23,8 @@ import { SubmitBar } from 'vant';
 import { NavBar } from 'vant';
 import { Sticky } from 'vant';
 import mitt from 'mitt'
+import { AddressList } from 'vant';
+import { AddressEdit } from 'vant';
 /**
  * 周总的
  */
@@ -77,7 +79,8 @@ app.use(ContactEdit);
 
 app.use(Cell);
 app.use(Dialog);
-
+app.use(AddressList);
+app.use(AddressEdit);
 app.mount("#app");
 app.use(Lazyload, {
     lazyComponent: true,
