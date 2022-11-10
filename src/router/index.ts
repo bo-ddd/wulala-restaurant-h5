@@ -135,10 +135,14 @@ const router = createRouter({
       path: '/orderDetails',
       name: 'orderDetails',
       component: () => import("../views/orderDetails/OrderDetails.vue")
-    },{
-      path:'/addressedit',
-      name:'addressedit',
-      component:()=>import("../views/orderDetails/AddressEdit.vue")
+    }, {
+      path: '/addressedit',
+      name: 'addressedit',
+      component: () => import("../views/orderDetails/AddressEdit.vue")
+    }, {
+      path: '/modifyAddress',
+      name: 'modifyAddress',
+      component: () => import("../views/orderDetails/ModifyAddress.vue")
     }
   ],
 })

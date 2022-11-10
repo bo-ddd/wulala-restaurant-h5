@@ -5,22 +5,16 @@
             <van-cell is-link @click="showPopup">
                 <div>小顶创业 城管局后小鹿韩餐</div>
                 <div>
-                    <span>周 先生</span>
+                    <span>{{ useinfo.name }}</span>
                     <span>18888888888</span>
                 </div>
             </van-cell>
-            <van-popup class="popup" v-model:show="show" position="bottom" :style="{ height: '40%' }">
+            <van-popup class="popup" v-model:show="show" position="bottom" :style="{ height: '90%' }">
                 <div class="wrap">
                     <p class="title">选择收货地址</p>
-                    <van-address-list
-                    v-model="chosenAddressId"
-                    :list="list"
-                    :disabled-list="disabledList"
-                    disabled-text="以下地址超出配送范围"
-                    default-tag-text="默认"
-                    @add="onAdd"
-                    @edit="onEdit"
-                    />
+                    <van-address-list v-model="chosenAddressId" :list="list" :disabled-list="disabledList"
+                        disabled-text="以下地址超出配送范围" default="你好" default-tag-text="默认" @add="onAdd" @edit="onEdit"
+                        @select='onSelect' />
                     <!-- <van-button class="btn wrap" type="default">新增收货地址</van-button> -->
                 </div>
             </van-popup>
@@ -57,19 +51,25 @@
 <script setup lang="ts">
 import { ref } from 'vue'
 import { Toast } from 'vant';
-import { useRoute,useRouter } from 'vue-router'
+import { useRoute, useRouter } from 'vue-router'
+import { getDeliveryListApi } from '@/api/api'
+import { areaList } from '@vant/area-data';
+
 let route = useRoute();
 let router = useRouter();
 
-const onAdd = function(){
-    router.push({name:'addressedit'})
+const onAdd = function () {
+    router.push({ name: 'addressedit' })
 };
-const onEdit = function(item: any, index: string){
-    router.push({name:'addressedit',query:{'item':item}})
-    console.log(item);
-    
+const onEdit = function (item: any, index: string) {
+    router.push({ name: 'modifyAddress', query: { 'name': item.name, 'id': item.id, 'tel': item.tel } })
 };
-const chosenAddressId = ref('1');
+let useinfo = ref({})
+const onSelect = (item: any, index: number) => {   //选中的数据
+    console.log(item.name);
+    useinfo.value = item
+};
+const chosenAddressId = ref('');
 
 const onClickLeft = () => history.back();
 const show = ref(false);
@@ -81,29 +81,43 @@ let qina = ref(0)
 foodList.forEach((item: any) => {
     qina.value += item.quantity * item.originalPrice
 })
-    const list = [
-      {
-        id: '1',
-        name: '张三',
-        tel: '13000000000',
-        address: '浙江省杭州市西湖区文三路 138 号东方通信大厦 7 楼 501 室',
-        isDefault: true,
-      },
-      {
-        id: '2',
-        name: '李四',
-        tel: '1310000000',
-        address: '浙江省杭州市拱墅区莫干山路 50 号',
-      },
-    ];
-    const disabledList = [
-      {
+let aa = []
+let provinceList = areaList.province_list; // 省
+let cityList = areaList.city_list;//市
+let countyList = areaList.county_list;//区
+const list: any = ref([])
+getDeliveryListApi({}).then(res => {
+    res.data.data.forEach((el: any) => {
+        list.value.push({
+            id: el.id,
+            name: el.receiver,
+            tel: el.phoneNumber,
+            address: provinceList[el.provinceCode] + cityList[el.cityCode] + countyList[el.areaCode] + el.address,
+            isDefault: el.isDefaultActive ? true : false,
+        })
+
+    })
+    console.log(list.value);
+    list.value.forEach((el: any ,index) => {
+        if (el.isDefault) {
+            chosenAddressId.value = el.id
+         aa = el
+         console.log(aa);
+onSelect(el,index)
+
+        }
+    })
+})
+
+
+const disabledList = [
+    {
         id: '3',
         name: '王五',
         tel: '1320000000',
         address: '浙江省杭州市滨江区江南大道 15 号',
-      },
-    ];
+    },
+];
 
 </script>
 <style scoped>
@@ -230,13 +244,14 @@ foodList.forEach((item: any) => {
     font-weight: bold;
 }
 
-.title{
+.title {
     font-size: 1.4rem;
     color: black;
     text-align: center;
     padding: 1rem 0;
 }
-::v-deep .van-popup--bottom{
+
+::v-deep .van-popup--bottom {
     border-radius: 2rem 2rem 0 0;
 }
 </style>
