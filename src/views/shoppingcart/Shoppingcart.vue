@@ -87,10 +87,19 @@
                 @click="deletecart(el)"
               />
             </div>
-            <span>{{ el.productName }}</span>
           </div>
-          <div class="specifications">
-            <span class="text"> 规格：</span>
+          <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
+            <van-checkbox v-model="AllChecked" @click="checkAll">全选</van-checkbox>
+            <template #tip>
+              你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
+            </template>
+          </van-submit-bar>
+        </div>
+        <!-- 本地  -->
+        <div class="box-shopping mt-20" v-for="(el, i) in foodList">
+          <van-checkbox :value="el.localId" v-model="el.isCheckeds" @click="checkChange(el)"></van-checkbox>
+          <div class="box-food_png">
+            <img class="food-png" :src="el.info.bannerUrl" alt="" />
           </div>
 
           <div class="box-price">
@@ -115,6 +124,12 @@
               />
             </div>
           </div>
+          <van-submit-bar :price="3050" button-text="提交订单" @submit="onSubmit">
+            <van-checkbox v-model="AllCheckeds" @click="lostCheckAll">全选</van-checkbox>
+            <template #tip>
+              你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
+            </template>
+          </van-submit-bar>
         </div>
         <van-submit-bar
           :price="totalPrices"
@@ -127,6 +142,7 @@
         </van-submit-bar>
       </div>
     </div>
+
   </div>
 </template>
 <script setup lang="ts">
@@ -576,13 +592,7 @@ const onSubmit = () => Toast("点击按钮");
   height: 2rem;
 }
 
-.all {
-  display: flex;
-}
 
-.add-text {
-  font-size: 1.8rem;
-}
 
 .lol {
   height: calc(100vh - 18.8rem);
@@ -601,5 +611,15 @@ const onSubmit = () => Toast("点击按钮");
   background: var(--van-submit-bar-background-color);
   -webkit-user-select: none;
   user-select: none;
+}
+
+::v-deep .van-empty {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  /* padding: var(--van-empty-padding); */
+  padding: 22.5rem 0;
 }
 </style>

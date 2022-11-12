@@ -1,0 +1,6 @@
+<script type="text/javascript">
+    window._AMapSecurityConfig = {
+      securityJsCode: '你的安全密钥',
+    }
+  </script>
+//现在高德需要安全密钥和key配合使用
