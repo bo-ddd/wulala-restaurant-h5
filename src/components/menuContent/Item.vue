@@ -42,7 +42,7 @@
 <script setup lang="ts">
 import { ref, toRefs } from "vue";
 import { cartAddApi } from "@/api/api";
-import { Toast } from 'vant';
+import { Toast } from "vant";
 
 let props = defineProps<{
   src?: string;
@@ -69,39 +69,41 @@ let submuit = () => {
   console.log(foodId?.value);
 
   let data: any = ref([]);
-  let localStorageNull = sessionStorage.getItem("token"); //登录状态
+ 
+  let sessionStorageNull = sessionStorage.getItem('token')  //登录状态
   let getCartAdd = JSON.parse(localStorage.getItem("cartAdd")); //本地存储的数据
-  if (localStorageNull == null) {
-    //没登录
-    if (getCartAdd == null) {
-      //没数据
-      data.value.push({
-        productId: foodId?.value,
-        quantity: value.value,
-      });
-      localStorage.setItem("cartAdd", JSON.stringify(data.value));
-    } else {
-      data.value.push({
-        productId: foodId?.value,
-        quantity: value.value,
-      });
-      let datas = [...data.value, ...getCartAdd];
-      localStorage.setItem("cartAdd", JSON.stringify(datas));
-    }
-  }  else{
-    console.log('调接口');
+ if(sessionStorageNull == null) { //没登录
+        if (getCartAdd == null) { //没数据
+            data.value.push({
+                localId: data.value.length + 1,
+                productId:foodId?.value,
+                quantity: value.value,
+                isCheckeds: false
+            })
+            localStorage.setItem('cartAdd', JSON.stringify(data.value))
+        } else {
+            data.value.push({
+                localId: data.value.length + 2,
+                productId: foodId?.value,
+                quantity: value.value,
+                isCheckeds: false
+            })
+            let datas = [...data.value, ...getCartAdd]
+            localStorage.setItem('cartAdd', JSON.stringify(datas))
+        }
+    }else {
+    console.log("调接口");
     cartAddApi({
-    productId:foodId?.value,
-    quantity:value.value
-  }).then(res =>{
-    console.log(res);
-    
-    if(res.data.status){
-      Toast.success('加入成功');
-    } else {
-      Toast.success('加入失败');
-    }
-  })
+      productId: foodId?.value,
+      quantity: value.value,
+    }).then((res) => {
+      console.log(res);
+      if (res.data.status) {
+        Toast.success("加入成功");
+      } else {
+        Toast.success("加入失败");
+      }
+    });
   }
 
   show.value = false;
