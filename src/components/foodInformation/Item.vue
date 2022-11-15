@@ -55,22 +55,42 @@ let data: any = ref([])
 const toOrder = () => {
     if (sessionStorageNull == null) { //没登录
         if (getCartAdd == null) { //没数据
-            data.value.push({
-                localId: data.value.length + 1,
-                productId: id,
-                quantity: value.value,
-                isCheckeds: false
+
+            getFoodListApi({}).then(res => {
+                res.data.data.list.forEach((item: any) => {
+                    if (id == item.foodId) {
+                        data.value.push({
+                            quantity: value.value,//数量
+                            isCheckeds: false,
+                            foodName: item.foodName,
+                            price: item.price,
+                            bannerUrl: item.bannerUrl,
+                            description: item.description,
+                            foodId: item.foodId
+                        })
+                    }
+                })
+                localStorage.setItem('cartAdd', JSON.stringify(data.value))
             })
-            localStorage.setItem('cartAdd', JSON.stringify(data.value))
         } else {
-            data.value.push({
-                localId: data.value.length + 2,
-                productId: id,
-                quantity: value.value,
-                isCheckeds: false
+            getFoodListApi({}).then(res => {
+                res.data.data.list.forEach((item: any) => {
+                    if (id == item.foodId) {
+                        data.value.push({
+                            quantity: value.value,//数量
+                            isCheckeds: false,
+                            foodName: item.foodName,
+                            price: item.price,
+                            bannerUrl: item.bannerUrl,
+                            description: item.description,
+                            foodId: item.foodId
+                        })
+                    }
+                })
+                let datas = [...data.value, ...getCartAdd]
+                localStorage.setItem('cartAdd', JSON.stringify(datas))
             })
-            let datas = [...data.value, ...getCartAdd]
-            localStorage.setItem('cartAdd', JSON.stringify(datas))
+
         }
     } else {
         cartAddApi({
@@ -83,13 +103,6 @@ const toOrder = () => {
     show.value = false;
 }
 
-
-if (sessionStorageNull != null) {
-    data.value.push({
-        userId: getUserId
-    })
-}
-console.log(data.vlaue);
 getFoodListApi({ //接口
 
 }).then(res => {

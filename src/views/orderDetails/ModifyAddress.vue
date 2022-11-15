@@ -10,35 +10,43 @@
             </div>
             <div class="address-btn">修改地址</div>
         </div>
-
-        <van-address-edit :area-list="areaList" show-postal show-delete show-set-default show-search-result
-            :search-result="searchResult" :area-columns-placeholder="['请选择', '请选择', '请选择']" @save="onSave"
+        <van-address-edit :area-list="areaList" show-delete show-set-default show-search-result
+        save-button-text="修改地址"
+        
+            :address-info="{
+                name: useinfoAddress.receiver,
+                tel: useinfoAddress.phoneNumber,
+                addressDetail:useinfoAddress.address,
+                areaCode:String(useinfoAddress.areaCode),
+            }" :search-result="searchResult" :area-columns-placeholder="['请选择', '请选择', '请选择']" @save="onSave"
             @delete="onDelete" @change-detail="onChangeDetail" @change-area='onCode' />
     </main>
 </template>
-
+<!--:address-info="aa"-->
 <script lang="ts" setup>
 import { areaList } from '@vant/area-data';
-import { deleteDeliveryApi, updateDeliveryApi } from '@/api/api'
+import { deleteDeliveryApi, updateDeliveryApi, getDeliveryListApi } from '@/api/api'
 import { Dialog } from 'vant'
-import { ref } from 'vue';
+import { ref, reactive } from 'vue';
 import { Toast } from 'vant';
 import { useRoute } from 'vue-router';
 let route = useRoute();
 let provinceCode = ref('')  //省的code编码
 let cityCode = ref('') //市编码
 let areaCode = ref('')  //区编码
+
 const searchResult: any = ref([]);
 let id = route.query.id
 let name = route.query.name;
 let tel = route.query.tel
+let aa = reactive({})
 const onClickLeft = () => history.back();
 const onSave = (value: any) => {
     updateDeliveryApi({
         "id": id,
         "provinceCode": provinceCode.value,
         "cityCode": cityCode.value,
-        "areaCode": areaCode.value,
+        "areaCode": String(areaCode.value),
         "address": value.addressDetail,
         "townCode": value.postalCode,
         "isDefaultActive": value.isDefault ? 1 : 0,
@@ -48,6 +56,16 @@ const onSave = (value: any) => {
         console.log(res);
     })
 };
+
+let useinfoAddress: any = ref({})
+getDeliveryListApi({}).then(res => {
+    res.data.data.forEach((item: any) => {
+        if (item.id == id) {
+            useinfoAddress.value = item
+        }
+
+    })
+})
 const onDelete = () => {
     Dialog.confirm({
         message: '地址删除后无法恢复是否删除地址',
