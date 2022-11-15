@@ -88,20 +88,17 @@
 import Title from "@/components/Title.vue";
 import useUlit from "@/assets/ulit/index";
 import { Toast } from 'vant';
-import { getFoodListApi, getCartListApi, cartAddApi, cartDeleteApi, } from "@/api/api";
-import { ref, provide, watch } from "vue";
+import {  getCartListApi, cartAddApi, cartDeleteApi, } from "@/api/api";
+import { ref,  watch } from "vue";
 import { Dialog, Notify } from "vant";
 import router from "@/router";
-
 let { parsrAsssetFile } = useUlit();
 let bendiGood = ref();
 let foodLists: any = ref([]);//线上数据
 let localDate: any = ref([])
 let AllChecked = ref(false); //全选
-let danChecked = ref(false)//单选
 let checkedNames: any = ref([])//选中的东西放入数组
 let getCartAdd = ref(JSON.parse(localStorage.getItem("cartAdd")))
-let userId = sessionStorage.getItem("userId");
 let token = sessionStorage.getItem("token");
 if (token != null) {
   localDate = JSON.parse(localStorage.getItem("cartAdd"));

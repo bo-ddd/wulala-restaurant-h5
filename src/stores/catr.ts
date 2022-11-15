@@ -17,7 +17,7 @@ export const useCatrStore = defineStore({
             list.forEach((el: any) => {
                 el['check'] = true
                 this.select.push(el.id)
-            });·
+            });
             this.cartList = list
         },
         all() {
