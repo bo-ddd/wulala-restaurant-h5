@@ -194,6 +194,9 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
 </script>
 
 <style scoped>
+.head {
+  background: 000;
+}
 .pd-18{
 padding: 1.8rem 0;
 }

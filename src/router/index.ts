@@ -79,22 +79,22 @@ const router = createRouter({
       path: '/evaluate',
       name: 'evaluate',
       component: () => import("../views/evaluate/Evaluate.vue")
-    }, {
-      path: '/modifyname',
-      name: 'modifyname',
-      component: () => import("../views/toSignIn/ModifyName.vue")
-    }, {
-      path: '/modifyphonenumber',
-      name: 'modifyphonenumber',
-      component: () => import("../views/toSignIn/ModifyPhoneNumber.vue")
-    }, {
-      path: '/modifyautograph',
-      name: 'modifyautograph',
-      component: () => import("../views/toSignIn/Modifyautograph.vue")
-    }, {
-      path: '/modifysex',
-      name: 'modifysex',
-      component: () => import("../views/toSignIn/ModifySex.vue")
+    },{
+      path:'/modifyname',
+      name:'modifyname',
+      component:()=>import("../views/toSignIn/ModifyName.vue")
+    },{
+      path:'/modifyphonenumber',
+      name:'modifyphonenumber',
+      component:()=>import("../views/toSignIn/ModifyPhoneNumber.vue")
+    },{
+      path:'/modifyautograph',
+      name:'modifyautograph',
+      component:()=>import("../views/toSignIn/Modifyautograph.vue")
+    },{
+      path:'/orderdata',
+      name:'orderdata',
+      component:()=>import("../views/toSignIn/OrderData.vue")
     }, {
       path: '/modifyhobby',
       name: 'modifyhobby',
