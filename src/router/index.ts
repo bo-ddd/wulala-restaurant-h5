@@ -131,6 +131,10 @@ const router = createRouter({
       path:'/wholeorder',
       name:'wholeorder',
       component:()=>import("../views/toSignIn/WholeOrder.vue")
+    },{
+      path:'/orderdata',
+      name:'orderdata',
+      component:()=>import("../views/toSignIn/OrderData.vue")
     }
   ],
 })

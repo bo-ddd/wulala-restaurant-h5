@@ -49,7 +49,7 @@ const showPopup = () => { //弹出层
 
 const value = ref(1);
 let sessionStorageNull = sessionStorage.getItem('token')  //登录状态
-let getCartAdd = JSON.parse(localStorage.getItem('cartAdd')) //本地存储的数据
+let getCartAdd  = JSON.parse(localStorage.getItem('cartAdd')) //本地存储的数据
 let getUserId = localStorage.getItem('userId')
 let data: any = ref([])
 const toOrder = () => {
@@ -89,7 +89,7 @@ if (sessionStorageNull != null) {
         userId: getUserId
     })
 }
-console.log(data.vlaue);
+// console.log(data.vlaue);
 getFoodListApi({ //接口
 
 }).then(res => {
