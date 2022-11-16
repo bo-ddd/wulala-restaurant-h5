@@ -10,15 +10,15 @@ const router = createRouter({
       path: '/Layout',
       name: 'Layout',
       component: Layout,
-     
+
       children: [
         {
           path: '/', // Home
           name: '/',
           component: Home,
-          meta:{
-            label:"权限管理"
-        },
+          meta: {
+            label: "权限管理"
+          },
         }, {
           path: '/menu', //menu
           name: 'menu',
@@ -92,49 +92,57 @@ const router = createRouter({
       name:'modifyautograph',
       component:()=>import("../views/toSignIn/Modifyautograph.vue")
     },{
-      path:'/modifysex',
-      name:'modifysex',
-      component:()=>import("../views/toSignIn/ModifySex.vue")
-    },{
-      path:'/modifyhobby',
-      name:'modifyhobby',
-      component:()=>import("../views/toSignIn/ModifyHobby.vue")
-    },{
-      path:'/safcenter',
-      name:'safcenter',
-      component:()=>import("../views/toSignIn/SafCenter.vue")
-    },{
-      path:'/switchaccountnumber',
-      name:'switchaccountnumber',
-      component:()=>import("../views/toSignIn/SwitchAccountNumber.vue")
-    },{
-      path:'/feedback',
-      name:'feedback',
-      component:()=>import("../views/toSignIn/Feedback.vue")
-    },{
-      path:'/modifypassword',
-      name:'modifypassword',
-      component:()=>import("../views/toSignIn/ModifyPassword.vue")
-    },{
-      path:'/collection',
-      name:'collection',
-      component:()=>import("../views/toSignIn/Collection.vue")
-    },{
-      path:'/order',
-      name:'order',
-      component:()=>import("../views/toSignIn/Order.vue")
-    },{
-      path:'/turntable',
-      name:'turntable',
-      component:()=>import("../views/toSignIn/Turntable.vue")
-    },{
-      path:'/wholeorder',
-      name:'wholeorder',
-      component:()=>import("../views/toSignIn/WholeOrder.vue")
-    },{
       path:'/orderdata',
       name:'orderdata',
       component:()=>import("../views/toSignIn/OrderData.vue")
+    }, {
+      path: '/modifyhobby',
+      name: 'modifyhobby',
+      component: () => import("../views/toSignIn/ModifyHobby.vue")
+    }, {
+      path: '/safcenter',
+      name: 'safcenter',
+      component: () => import("../views/toSignIn/SafCenter.vue")
+    }, {
+      path: '/switchaccountnumber',
+      name: 'switchaccountnumber',
+      component: () => import("../views/toSignIn/SwitchAccountNumber.vue")
+    }, {
+      path: '/feedback',
+      name: 'feedback',
+      component: () => import("../views/toSignIn/Feedback.vue")
+    }, {
+      path: '/modifypassword',
+      name: 'modifypassword',
+      component: () => import("../views/toSignIn/ModifyPassword.vue")
+    }, {
+      path: '/collection',
+      name: 'collection',
+      component: () => import("../views/toSignIn/Collection.vue")
+    }, {
+      path: '/order',
+      name: 'order',
+      component: () => import("../views/toSignIn/Order.vue")
+    }, {
+      path: '/turntable',
+      name: 'turntable',
+      component: () => import("../views/toSignIn/Turntable.vue")
+    }, {
+      path: '/wholeorder',
+      name: 'wholeorder',
+      component: () => import("../views/toSignIn/WholeOrder.vue")
+    }, {
+      path: '/orderDetails',
+      name: 'orderDetails',
+      component: () => import("../views/orderDetails/OrderDetails.vue")
+    }, {
+      path: '/addressedit',
+      name: 'addressedit',
+      component: () => import("../views/orderDetails/AddressEdit.vue")
+    }, {
+      path: '/modifyAddress',
+      name: 'modifyAddress',
+      component: () => import("../views/orderDetails/ModifyAddress.vue")
     }
   ],
 })

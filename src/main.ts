@@ -20,6 +20,11 @@ import { List } from 'vant';
 import { PullRefresh } from 'vant';
 import { Card } from 'vant';
 import { SubmitBar } from 'vant';
+import { NavBar } from 'vant';
+import { Sticky } from 'vant';
+import mitt from 'mitt'
+import { AddressList } from 'vant';
+import { AddressEdit } from 'vant';
 /**
  * 周总的
  */
@@ -55,7 +60,8 @@ app.use(router);
 app.use(Tab);
 app.use(Tabs);
 app.use(Popup);
-app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate).use(Toast).use(List).use(PullRefresh).use(Card).use(SubmitBar);
+app.use(Skeleton).use(Search).use(Icon).use(UndrawUi).use(Rate).use(Toast).use(List).use(PullRefresh).use(Card).use(SubmitBar).use(NavBar).use(Sticky);
+app.config.globalProperties.$mitt=mitt();
 app.use(Button).use(Loading);
 app.use(Stepper);
 app.use(Uploader);
@@ -73,8 +79,11 @@ app.use(ContactEdit);
 
 app.use(Cell);
 app.use(Dialog);
-
+app.use(AddressList);
+app.use(AddressEdit);
 app.mount("#app");
 app.use(Lazyload, {
     lazyComponent: true,
 });
+
+

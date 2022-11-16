@@ -92,27 +92,57 @@ export const updatecomment = function (payload = {}) {
  */
 
 export const cartAddApi = function (payload = {}) {
-    return instance.post('/cart/add',payload)
+    return instance.post('/cart/add', payload)
 }
 
 /**
  *  @description 获取购物车列表
  */
- export const getCartListApi = function (payload = {}) {
-    return instance.post('/cart/list',payload)
+export const getCartListApi = function (payload = {}) {
+    return instance.post('/cart/list', payload)
 }
 
 /**
  * @description 删除购物车接口
  */
 export const cartDeleteApi = function (payload = {}) {
-    return instance.post('/cart/delete',payload)
+    return instance.post('/cart/delete', payload)
 }
 /**
  * @description 用户修改密码接口
  */
- export const userPasswordUpdataApi = function (payload = {}) {
-    return instance.post('/user/password/update',payload)
+export const userPasswordUpdataApi = function (payload = {}) {
+    return instance.post('/user/password/update', payload)
 }
+
+/**
+ * @description 新增收货地址 
+ */
+export const addDeliveryApi = function (payload = {}) {
+    return instance.post('/delivery/address/create', payload)
+}
+
+/**
+ * @description 获取收货地址 
+ */
+export const getDeliveryListApi = function (payload = {}) {
+    return instance.post('/delivery/address/list', payload)
+}
+
+/**
+ * @description 删除收货地址 
+ */
+export const deleteDeliveryApi = function (payload = {}) {
+    return instance.post('/delivery/address/delete', payload)
+}
+
+
+/**
+ * @description 修改收货地址 
+ */
+export const updateDeliveryApi = function (payload = {}) {
+    return instance.post('/delivery/address/update', payload)
+}
+
 
 export default instance;
