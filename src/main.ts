@@ -8,6 +8,7 @@ import App from "./App.vue";
 /**
  * 宋总的
  */
+//  import 'default-passive-events';
 import { Toast } from 'vant';
 import { Skeleton, Search } from 'vant';
 import router from "./router";
