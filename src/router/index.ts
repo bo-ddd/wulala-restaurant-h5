@@ -144,6 +144,11 @@ const router = createRouter({
       name: 'modifyAddress',
       component: () => import("../views/orderDetails/ModifyAddress.vue")
     }
+    , {
+      path: '/map',
+      name: 'map',
+      component: () => import("../views/orderDetails/Map.vue")
+    }
   ],
 })
 // 导航守卫，路由守卫，路由拦截
