@@ -4,9 +4,9 @@
             <van-loading class="loading-bg" type="spinner" color="#303030" size="24px" v-show="pageLoading" />
         </div>
 
-        <Head color="black" imgcolor="0">全部订单</Head>
-        <van-tabs v-model:active="active" swipeable>
-            <van-tab class="content"  v-for="(item,i) in  order" :title="item.name" @click-tab="onClickTab(i)">
+        <Head isActive=1 color="black" imgcolor="0">全部订单</Head>
+        <van-tabs v-model:active="active" swipeable @click-tab="onClickTab">
+            <van-tab class="content"  v-for="(item,i) in  order" :title="item.name">
                 
                 <van-empty v-show="item.name != '全部'" description="什么都没有哦，快去添加吧" />
                 <div class="box-item">
@@ -61,7 +61,6 @@
 
 <script lang="ts" setup>
 import { ref } from 'vue';
-
 import { useRoute,useRouter } from 'vue-router';
 import orderDetails from "@/components/orderDetails"
 let route = useRoute()
@@ -71,10 +70,12 @@ router.push({name:'detailsOfDishes',query:{foodId:61}})
 }
 let a = Number (route.query.id) 
 let active = ref(a);
-let onClickTab = function (i:number) {
-    console.log(i);
-    
-}
+const onClickTab = (name :any) =>{
+    console.log(name.name);
+    router.push({query: {id:name.name}})
+} 
+;
+   
 let pageLoading = ref(true);
 setTimeout(function () {
     pageLoading.value = false;
