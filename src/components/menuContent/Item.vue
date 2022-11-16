@@ -4,21 +4,14 @@
       <img :src="src" alt="" />
     </div>
     <div class="content">
-      <span>{{ content }}</span
-      ><br />
+      <span>{{ content }}</span><br />
       <p class="description">{{ description }}</p>
     </div>
     <div class="price">
       <span>￥{{ price }}</span>
     </div>
   </div>
-  <van-popup
-    v-model:show="show"
-    closeable
-    round
-    position="bottom"
-    :style="{ height: '40%' }"
-  >
+  <van-popup v-model:show="show" closeable round position="bottom" :style="{ height: '40%' }">
     <div class="layer">
       <img :src="src" alt="" />
       <div class="contents">
@@ -32,17 +25,15 @@
       <van-stepper v-model="value" />
     </div>
     <div class="button">
-      <van-button round type="success" size="large" @click="submuit"
-        >选好了</van-button
-      >
+      <van-button round type="success" size="large" @click="submuit">选好了</van-button>
     </div>
   </van-popup>
 </template>
 
 <script setup lang="ts">
 import { ref, toRefs } from "vue";
-import { cartAddApi } from "@/api/api";
-import { Toast } from "vant";
+import { cartAddApi, getFoodListApi } from "@/api/api";
+import { Toast } from 'vant';
 
 let props = defineProps<{
   src?: string;
@@ -69,41 +60,61 @@ let submuit = () => {
   console.log(foodId?.value);
 
   let data: any = ref([]);
- 
   let sessionStorageNull = sessionStorage.getItem('token')  //登录状态
-  let getCartAdd = JSON.parse(localStorage.getItem("cartAdd")); //本地存储的数据
- if(sessionStorageNull == null) { //没登录
-        if (getCartAdd == null) { //没数据
+  let getCartAdd = JSON.parse(localStorage.getItem('cartAdd')) //本地存储的数据
+  if (sessionStorageNull == null) { //没登录
+    if (getCartAdd == null) { //没数据
+
+      getFoodListApi({}).then(res => {
+        res.data.data.list.forEach((item: any) => {
+          if (foodId?.value == item.foodId) {
             data.value.push({
-                localId: data.value.length + 1,
-                productId:foodId?.value,
-                quantity: value.value,
-                isCheckeds: false
+              quantity: value.value,//数量
+              isCheckeds: false,
+              foodName: item.foodName,
+              price: item.price,
+              bannerUrl: item.bannerUrl,
+              description: item.description,
+              foodId: item.foodId
             })
-            localStorage.setItem('cartAdd', JSON.stringify(data.value))
-        } else {
+          }
+        })
+        localStorage.setItem('cartAdd', JSON.stringify(data.value))
+      })
+    } else {
+      getFoodListApi({}).then(res => {
+        res.data.data.list.forEach((item: any) => {
+          if (foodId?.value == item.foodId) {
             data.value.push({
-                localId: data.value.length + 2,
-                productId: foodId?.value,
-                quantity: value.value,
-                isCheckeds: false
+              quantity: value.value,//数量
+              isCheckeds: false,
+              foodName: item.foodName,
+              price: item.price,
+              bannerUrl: item.bannerUrl,
+              description: item.description,
+              foodId: item.foodId
             })
-            let datas = [...data.value, ...getCartAdd]
-            localStorage.setItem('cartAdd', JSON.stringify(datas))
-        }
-    }else {
-    console.log("调接口");
+          }
+        })
+        let datas = [...data.value, ...getCartAdd]
+        localStorage.setItem('cartAdd', JSON.stringify(datas))
+      })
+
+    }
+  } else {
+    console.log('调接口');
     cartAddApi({
       productId: foodId?.value,
-      quantity: value.value,
-    }).then((res) => {
+      quantity: value.value
+    }).then(res => {
       console.log(res);
+
       if (res.data.status) {
-        Toast.success("加入成功");
+        Toast.success('加入成功');
       } else {
-        Toast.success("加入失败");
+        Toast.success('加入失败');
       }
-    });
+    })
   }
 
   show.value = false;
@@ -120,14 +131,17 @@ let submuit = () => {
   font-weight: 600;
   border-bottom: 0.2rem solid #ececec;
 }
+
 .img img {
   width: 10.5rem;
   height: 8.5rem;
   border-radius: 1rem;
 }
+
 .content {
   margin-right: 5rem;
 }
+
 .description {
   font-size: 1.2rem;
   font-weight: 500;
@@ -143,24 +157,29 @@ let submuit = () => {
   display: flex;
   margin: 2rem;
 }
+
 .layer img {
   width: 10rem;
   height: 10rem;
 }
+
 .contents {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   margin: 0 2rem;
 }
+
 .balck {
   font-size: 1.8rem;
   font-weight: 600;
 }
+
 .red {
   color: red;
   font-weight: 600;
 }
+
 .sum {
   display: flex;
   margin: 2rem;
@@ -168,16 +187,18 @@ let submuit = () => {
   font-size: 1.8rem;
   font-weight: 600;
 }
+
 .button {
   margin: 2rem;
 }
+
 .van-button--success {
   background-image: url(/src/assets/images/bj.png);
   background-size: 100% 100%;
   background-repeat: no-repeat;
-  border: var(--van-button-border-width) solid
-    var(--van-button-success-border-color);
+  border: var(--van-button-border-width) solid var(--van-button-success-border-color);
 }
+
 .descriptions {
   font-size: 1.3rem;
   margin-top: -1rem;

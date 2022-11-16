@@ -6,14 +6,54 @@
 
         <Head color="black" imgcolor="0">全部订单</Head>
         <van-tabs v-model:active="active" swipeable>
-            <van-tab class="content"  v-for="item in  order" :title="item.name">
+            <van-tab class="content"  v-for="(item,i) in  order" :title="item.name" @click-tab="onClickTab(i)">
+                
                 <van-empty v-show="item.name != '全部'" description="什么都没有哦，快去添加吧" />
-                <orderDetails.Wrapper v-show="item.name == '全部'">
-                    <orderDetails.Item></orderDetails.Item>
-                </orderDetails.Wrapper>
-                <orderDetails.Wrapper v-show="item.name == '全部'">
-                    <orderDetails.Item></orderDetails.Item>
-                </orderDetails.Wrapper>
+                <div class="box-item">
+
+                    <orderDetails.Wrapper v-show="item.name == '全部'">
+                        <orderDetails.Item>
+                            <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">再来一单</van-button>
+                        </orderDetails.Item>
+                    </orderDetails.Wrapper>
+                    <orderDetails.Wrapper v-show="item.name == '全部'">
+                        <orderDetails.Item>
+                            <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">再来一单</van-button>
+                        </orderDetails.Item>
+                    </orderDetails.Wrapper>
+                    <orderDetails.Wrapper v-show="item.name == '全部'">
+                        <orderDetails.Item>
+                            <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">再来一单</van-button>
+                        </orderDetails.Item>
+                    </orderDetails.Wrapper>
+                    <orderDetails.Wrapper v-show="item.name == '全部'">
+                        <orderDetails.Item>
+                            <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">再来一单</van-button>
+                        </orderDetails.Item>
+                    </orderDetails.Wrapper>
+                    <orderDetails.Wrapper v-show="item.name == '全部'">
+                        <orderDetails.Item>
+                            <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">再来一单</van-button>
+                        </orderDetails.Item>
+                    </orderDetails.Wrapper>
+                    <orderDetails.Wrapper v-show="item.name == '全部'">
+                        <orderDetails.Item>
+                            <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">再来一单</van-button>
+                        </orderDetails.Item>
+                    </orderDetails.Wrapper>
+                    <orderDetails.Wrapper v-show="item.name == '全部'">
+                        <orderDetails.Item>
+                            <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">再来一单</van-button>
+                        </orderDetails.Item>
+                    </orderDetails.Wrapper>
+    
+                    <orderDetails.Wrapper v-show="item.name == '全部'">
+                        <orderDetails.Item>
+                            <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">再来一单</van-button>
+                        </orderDetails.Item>
+                    </orderDetails.Wrapper>
+                </div>
+             
             </van-tab>
         </van-tabs>
     </main>
@@ -22,11 +62,19 @@
 <script lang="ts" setup>
 import { ref } from 'vue';
 
-import { useRoute } from 'vue-router';
+import { useRoute,useRouter } from 'vue-router';
 import orderDetails from "@/components/orderDetails"
 let route = useRoute()
-let a =Number (route.query.id) 
-const active = ref(a);
+let router = useRouter();
+const CommodityDetails = function(){
+router.push({name:'detailsOfDishes',query:{foodId:61}})
+}
+let a = Number (route.query.id) 
+let active = ref(a);
+let onClickTab = function (i:number) {
+    console.log(i);
+    
+}
 let pageLoading = ref(true);
 setTimeout(function () {
     pageLoading.value = false;
@@ -75,7 +123,10 @@ main {
     min-height: 100vh;
     overflow: hidden;
 }
-
+.box-item{
+    overflow-y: scroll;
+     height: calc(100vh - 9.2rem);
+}
 .content {
     height: calc(100vh - 9.2rem);
     padding: 1rem;

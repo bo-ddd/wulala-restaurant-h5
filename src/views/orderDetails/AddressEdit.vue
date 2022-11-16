@@ -3,7 +3,7 @@
         <van-nav-bar title="地址编辑" left-text="返回" left-arrow @click-left="onClickLeft" />
         <!-- 定位 -->
         <div  class="nav">选择收货地址></div>
-        <van-address-edit :area-list="areaList" show-postal show-delete show-set-default show-search-result
+        <van-address-edit save-button-text="保存地址"  delete-button-text="删除地址" :area-list="areaList" show-postal show-delete show-set-default show-search-result
             :search-result="searchResult" :area-columns-placeholder="['请选择', '请选择', '请选择']" @save="onSave"
             @delete="onDelete" @change-detail="onChangeDetail" @change-area='onCode' />
     </main>
@@ -27,7 +27,7 @@ const onSave = (value: any) => {
     addDeliveryApi({
         "provinceCode": provinceCode.value, //省编码
         "cityCode": cityCode.value, //市编码
-        "areaCode": areaCode.value, //区编码
+        "areaCode":String(areaCode.value) , //区编码
         "address": value.addressDetail, //详情地址
         "townCode": '043500', //街编码
         "isDefaultActive": value.isDefault ? 1 : 0, //是否默认收货地址1：是 0：否如果不传则是0

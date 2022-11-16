@@ -33,4 +33,8 @@ import { RouterLink, RouterView } from "vue-router";
 .van-nav-bar__text {
     color: black !important;
 }
+
+.van-nav-bar .van-icon {
+    color: var(--van-nav-bar-title-text-color) !important;
+}
 </style>
