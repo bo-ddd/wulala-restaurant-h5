@@ -99,6 +99,8 @@ AMapLoader.load({
             showControlButton: true,  // 是否显示倾斜、旋转按钮。默认为 true
         }));
     });
+
+    
 }).catch(e => {
     console.log(e);
 })
@@ -149,5 +151,3 @@ function search() {
     width: 8rem;
 }
 </style> -->
-  
-  
