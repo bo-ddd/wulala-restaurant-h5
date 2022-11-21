@@ -16,7 +16,7 @@
                 <div class="wrap">
                     <p class="title">选择收货地址</p>
                     <van-address-list v-model="chosenAddressId" :list="list" :disabled-list="disabledList"
-                        disabled-text="以下地址超出配送范围" default="你好" default-tag-text="默认" @add="onAdd" @edit="onEdit"
+                        disabled-text="以下地址超出配送范围" default="你好" @setAddressDetail="setAddressDetail" default-tag-text="默认" @add="onAdd" @edit="onEdit"
                         @select="onSelect" />
                     <!-- <van-button class="btn wrap" type="default">新增收货地址</van-button> -->
                 </div>
@@ -99,10 +99,6 @@ getDeliveryListApi({}).then(res => {
             address: provinceList[el.provinceCode] + cityList[el.cityCode] + countyList[el.areaCode] + el.address,
             isDefault: el.isDefaultActive ? true : false,
         })
-        console.log(el);
-        // if(el.isDefaultActive){
-
-        // }
     })
     list.value.forEach((item: any) => {
         console.log(item);
@@ -113,6 +109,11 @@ getDeliveryListApi({}).then(res => {
     })
 
 })
+
+const setAddressDetail = (addressDetail: string)=>{
+console.log(addressDetail);
+
+}
 
 
 const disabledList = [

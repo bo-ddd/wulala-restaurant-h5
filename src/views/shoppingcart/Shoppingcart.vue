@@ -4,7 +4,14 @@
       <Title color="#000">购物车</Title>
     </div>
     <div>
-      <div class="wrap lol">
+      <div v-if="foodLists.length <= 0">
+        <van-empty
+          image="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F83%2F46%2F5a58884e52d66_610.jpg&refer=http%3A%2F%2Fbpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1671067842&t=c009000d9550846c3c2260dc675271fa"
+          description="购物车空空如也~" />
+      </div>
+
+
+      <div class="wrap lol" v-else>
         <!-- 数据库  -->
         <div class="box-shopping mt-20" v-for="(el, i) in foodLists" :key="i">
           <van-checkbox :value="el.id" v-model="el.isChecked" @click="chooseChange(el)"></van-checkbox>
@@ -88,8 +95,8 @@
 import Title from "@/components/Title.vue";
 import useUlit from "@/assets/ulit/index";
 import { Toast } from 'vant';
-import {  getCartListApi, cartAddApi, cartDeleteApi, } from "@/api/api";
-import { ref,  watch } from "vue";
+import { getCartListApi, cartAddApi, cartDeleteApi, } from "@/api/api";
+import { ref, watch } from "vue";
 import { Dialog, Notify } from "vant";
 import router from "@/router";
 let { parsrAsssetFile } = useUlit();
@@ -189,7 +196,9 @@ const deletecart = function (el: any) {
           bendiGood.value.splice(i, 1)
           localStorage.setItem('cartAdd', JSON.stringify(bendiGood.value))
         }
+
       }
+
       Toast('删除成功');
     })
     .catch(() => {
@@ -266,6 +275,10 @@ const onSubmit = () => {
     })
   } else {
     Toast('还没有选择任何商品');
+  }
+
+  if (token == null) {
+    Toast('请先登录');
   }
 };
 
@@ -513,7 +526,7 @@ const lostCheckAll = function () {
   overflow-y: scroll;
 }
 
-::v-deep .van-submit-bar {
+::v-deep(.van-submit-bar) {
   position: fixed;
   bottom: 50px;
   left: 0;
@@ -524,13 +537,13 @@ const lostCheckAll = function () {
   user-select: none;
 }
 
-::v-deep .van-empty {
+::v-deep(.van-empty) {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   box-sizing: border-box;
   /* padding: var(--van-empty-padding); */
-  padding: 22.5rem 0;
+  padding: 15.5rem 0;
 }
 </style>
