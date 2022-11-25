@@ -2,16 +2,14 @@
     <div>
         <van-nav-bar title="地址编辑" left-text="返回" left-arrow @click-left="onClickLeft" />
         <div id="container"></div>
+
     </div>
 </template>
 <script setup lang="ts">
 import AMapLoader from '@amap/amap-jsapi-loader';
 import { ref } from "vue";
-
-const map = ref<any>(null);
-
+let map = ref<any>(null)
 const onClickLeft = () => history.back();
-
 
 AMapLoader.load({
     key: "b75527404f3a02890dc6d58c3fbee2d3",          // 申请好的Web端开发者Key，首次调用 load 时必填
@@ -19,14 +17,32 @@ AMapLoader.load({
     plugins: [],                                      // 需要使用的的插件列表，如比例尺'AMap.Scale'等
     AMapUI: {                                         // 是否加载 AMapUI，缺省不加载
         version: '1.1',                               // AMapUI 缺省 1.1
-        plugins: [
-
-        ],                                  // 需要加载的 AMapUI ui插件
+        plugins: [],                                  // 需要加载的 AMapUI ui插件
     },
     Loca: {                                           // 是否加载 Loca， 缺省不加载
         version: '1.3.2'                              // Loca 版本，缺省 1.3.2
     },
 }).then((AMap) => {
+    var options = {
+        'showButton': true,//是否显示定位按钮
+        'position': 'LB',//定位按钮的位置
+        /* LT LB RT RB */
+        'offset': [10, 20],//定位按钮距离对应角落的距离
+        'showMarker': true,//是否显示定位点
+        'markerOptions': {//自定义定位点样式，同Marker的Options
+            'offset': new AMap.Pixel(-18, -36), 
+            'content': `<img src="https://a.amap.com/jsapi_demos/static/resource/img/user.png" style="width:36px;height:36px"/>`
+        },
+        'showCircle': true,//是否显示定位精度圈
+        'circleOptions': {//定位精度圈的样式
+            'strokeColor': '#0093FF',
+            'noSelect': true,
+            'strokeOpacity': 0.5,
+            'strokeWeight': 1,
+            'fillColor': '#02B0FF',
+            'fillOpacity': 0.25
+        }
+    }
     var map = new AMap.Map('container', {
         zoom: 10,                                        // 缩放级别
         center: [116.397428, 39.90923],                  //中心点坐标
@@ -34,25 +50,8 @@ AMapLoader.load({
         viewMode: '3D',                                  //使用3D视图
     });
     AMap.plugin("AMap.Geolocation", function () {
-        var geolocation = new AMap.Geolocation({
-            // 是否使用高精度定位，默认：true
-            enableHighAccuracy: true,
-            // 设置定位超时时间，默认：无穷大
-            timeout: 10000,
-            // 定位按钮的停靠位置的偏移量
-            offset: [0, 0],
-            //  定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：false
-            zoomToAccuracy: true,
-            //  定位按钮的排放位置,  RB表示右下
-            buttonPosition: 'RB',
-            position: "RB",
-            showCircle: true,
-            useNative: true,
-            noIpLocate: 0,
-            noGeoLocation: 0,
-            showButton: true
-        });
-        geolocation.getCurrentPosition()
+        var geolocation = new AMap.Geolocation(options);
+        map.addControl(geolocation);
         geolocation.getCurrentPosition(function (status: any, result: any) {
             if (status == "complete") {
                 onComplete(result);
@@ -78,32 +77,30 @@ AMapLoader.load({
             console.log('------定位出错------');
             console.log(data);
         }
-    })
-    AMap.plugin('AMap.CitySearch', function () {
-        var citySearch = new AMap.CitySearch()
-        citySearch.getLocalCity(function (status, result) {
-            if (status === 'complete' && result.info === 'OK') {
-                // 查询成功，result即为当前所在城市信息
-                console.log('通过ip获取当前城市：', result)
-                //逆向地理编码
-                AMap.plugin('AMap.Geocoder', function () {
-                    var geocoder = new AMap.Geocoder({
-                        // city 指定进行编码查询的城市，支持传入城市名、adcode 和 citycode
-                        city: result.adcode
-                    })
+    });
 
-                    var lnglat = result.rectangle.split(';')[0].split(',')
+    AMap.plugin([
+        'AMap.ToolBar',
+    ], function () {
+        // 在图面添加工具条控件, 工具条控件只有缩放功能
+        map.addControl(new AMap.ToolBar());
+    });
 
-                    geocoder.getAddress(lnglat, function (status, data) {
-                        if (status === 'complete' && data.info === 'OK') {
-                            // result为对应的地理位置详细信息
-                            console.log(data)
-                        }
-                    })
-                })
-            }
-        })
-    })
+    AMap.plugin([
+        'AMap.ControlBar',
+    ], function () {
+
+        // 添加 3D 罗盘控制
+        map.addControl(new AMap.ControlBar({
+            position: {
+                right: '20px',
+                top: '20px'
+            },
+            showControlButton: true,  // 是否显示倾斜、旋转按钮。默认为 true
+        }));
+    });
+
+    
 }).catch(e => {
     console.log(e);
 })
@@ -111,7 +108,7 @@ AMapLoader.load({
 <style scoped>
 #container {
     width: 100%;
-    height: 60vh;
+    height: calc(100vh - 5rem);
 }
 </style>
 
@@ -154,5 +151,3 @@ function search() {
     width: 8rem;
 }
 </style> -->
-  
-  

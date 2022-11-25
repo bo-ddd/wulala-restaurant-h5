@@ -7,8 +7,6 @@
             show-delete show-set-default show-search-result :search-result="searchResult"
             :area-columns-placeholder="['请选择', '请选择', '请选择']" @save="onSave" @delete="onDelete"
             @change-detail="onChangeDetail" @change-area='onCode' />
-
-        <div>定位</div>
     </main>
 </template>
 
