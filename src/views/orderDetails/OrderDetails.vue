@@ -16,8 +16,8 @@
                 <div class="wrap">
                     <p class="title">选择收货地址</p>
                     <van-address-list v-model="chosenAddressId" :list="list" :disabled-list="disabledList"
-                        disabled-text="以下地址超出配送范围" default="你好" @setAddressDetail="setAddressDetail" default-tag-text="默认" @add="onAdd" @edit="onEdit"
-                        @select="onSelect" />
+                        disabled-text="以下地址超出配送范围" default="你好" @setAddressDetail="setAddressDetail"
+                        default-tag-text="默认" @add="onAdd" @edit="onEdit" @select="onSelect" />
                     <!-- <van-button class="btn wrap" type="default">新增收货地址</van-button> -->
                 </div>
             </van-popup>
@@ -57,8 +57,8 @@ import { Toast } from 'vant';
 import { useRoute, useRouter } from 'vue-router'
 import { getDeliveryListApi } from '@/api/api'
 import { areaList } from '@vant/area-data';
-const chosenAddressId = ref('');
 let defaultAddress: any = ref({})
+const chosenAddressId = ref('');
 
 let route = useRoute();
 let router = useRouter();
@@ -69,12 +69,7 @@ const onAdd = function () {
 const onEdit = function (item: any, index: string) {
     router.push({ name: 'modifyAddress', query: { 'name': item.name, 'id': item.id, 'tel': item.tel } })
 };
-const onSelect = (item: any, index: number) => {   //选中的数据
-    console.log(item);
-    defaultAddress.value = item
-    show.value = false;
 
-};
 
 const onClickLeft = () => history.back();
 const show = ref(false);
@@ -101,17 +96,21 @@ getDeliveryListApi({}).then(res => {
         })
     })
     list.value.forEach((item: any) => {
-        console.log(item);
         if (item.isDefault) {
             defaultAddress.value = item
+            chosenAddressId.value = item.id
         }
 
     })
 
 })
-
-const setAddressDetail = (addressDetail: string)=>{
-console.log(addressDetail);
+const onSelect = (item: any, index: number) => {   //选中的数据
+    defaultAddress.value = item
+    chosenAddressId.value = item.id
+    show.value = false;
+};
+const setAddressDetail = (addressDetail: string) => {
+    console.log(addressDetail);
 
 }
 

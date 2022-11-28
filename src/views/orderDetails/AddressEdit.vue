@@ -16,8 +16,8 @@ import { addDeliveryApi, deleteDeliveryApi } from '@/api/api'
 import { Dialog } from 'vant'
 import { ref } from 'vue';
 import { Toast } from 'vant';
-import { useRoute } from 'vue-router';
-import router from '@/router';
+import { useRoute ,useRouter} from 'vue-router';
+let router = useRouter();
 let route = useRoute();
 let provinceCode = ref('')  //省的code编码
 let cityCode = ref('') //市编码
@@ -25,7 +25,6 @@ let areaCode = ref('')  //区编码
 const searchResult: any = ref([]);
 const onClickLeft = () => history.back();
 const onSave = (value: any) => {
-    console.log(value);
     addDeliveryApi({
         "provinceCode": provinceCode.value, //省编码
         "cityCode": cityCode.value, //市编码
@@ -35,9 +34,8 @@ const onSave = (value: any) => {
         "isDefaultActive": value.isDefault ? 1 : 0, //是否默认收货地址1：是 0：否如果不传则是0
         "phoneNumber": value.tel, //收货人手机号
         "receiver": value.name //收货人姓名
-    }).then(res => {
-        console.log(res);
     })
+    router.push('orderDetails')
 };
 let id = route.query.id
 const onDelete = () => {
@@ -47,12 +45,9 @@ const onDelete = () => {
         .then(() => {
             deleteDeliveryApi({
                 id: id
-            }).then(res => {
-                console.log(res);
             })
             Toast('删除成功')
             history.back()
-            // on confirm
         })
         .catch(() => {
             Toast('取消成功')
@@ -64,11 +59,13 @@ const tomap = () => {
     router.push('map')
 };
 
-const onChangeDetail = (val: any) => {
+const onChangeDetail = (val: any) => {  
+    console.log(val);
+    
     if (val) {
         searchResult.value = [{
-            name: '黄龙万科中心',
-            address: '杭州市西湖区',
+            // name:''
+            address: val,
         }];
     } else {
         searchResult.value = [];

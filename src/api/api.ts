@@ -144,5 +144,13 @@ export const updateDeliveryApi = function (payload = {}) {
     return instance.post('/delivery/address/update', payload)
 }
 
+/**
+ * @description 获取菜肴详情
+ *  food/detail
+ */
+
+export const getFoodDetail = function (payload = {}) {
+    return instance.post('food/detail', payload)
+}
 
 export default instance;
