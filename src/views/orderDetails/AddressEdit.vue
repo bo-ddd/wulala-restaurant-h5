@@ -3,9 +3,9 @@
         <van-nav-bar title="地址编辑" left-text="返回" left-arrow @click-left="onClickLeft" />
         <!-- 定位 -->
         <div class="nav" @click="tomap">选择收货地址></div>
-        <van-address-edit save-button-text="保存地址" delete-button-text="删除地址" :area-list="areaList" show-postal
-            show-delete show-set-default show-search-result :search-result="searchResult"
-            :area-columns-placeholder="['请选择', '请选择', '请选择']" @save="onSave" @delete="onDelete"
+        <van-address-edit save-button-text="保存地址"  :area-list="areaList" show-postal
+             show-set-default show-search-result :search-result="searchResult"
+            :area-columns-placeholder="['请选择', '请选择', '请选择']" @save="onSave"
             @change-detail="onChangeDetail" @change-area='onCode' />
     </main>
 </template>
@@ -39,48 +39,25 @@ const onSave = (value: any) => {
         "isDefaultActive": value.isDefault ? 1 : 0, //是否默认收货地址1：是 0：否如果不传则是0
         "phoneNumber": value.tel, //收货人手机号
         "receiver": value.name //收货人姓名
+    }).then(res=>{
+        router.push('orderDetails');
     })
-    router.push('orderDetails');
-    getDeliveryListApi({}).then(res => {
-        console.log('------------地址列表1----------');
-        console.log(res.data.data);
+    // getDeliveryListApi({}).then(res => {
+    //     console.log('------------地址列表1----------');
+    //     console.log(res);
 
-        res.data.data.forEach((el: any, index: number) => {
-            list.value.push({
-                id: el.id,
-                name: el.receiver,
-                tel: el.phoneNumber,
-                address: provinceList[el.provinceCode] + cityList[el.cityCode] + countyList[el.areaCode] + el.address,
-                isDefault: el.isDefaultActive ? true : false,
-            })
-        })
-        // list.value.forEach((item: any) => {
-        //     if (item.isDefault) {
-        //         defaultAddress.value = item
-        //         chosenAddressId.value = item.id
-        //     }
-        // })
-
-    })
+    //     res.data.data.forEach((el: any, index: number) => {
+    //         list.value.push({
+    //             id: el.id,
+    //             name: el.receiver,
+    //             tel: el.phoneNumber,
+    //             address: provinceList[el.provinceCode] + cityList[el.cityCode] + countyList[el.areaCode] + el.address,
+    //             isDefault: el.isDefaultActive ? true : false,
+    //         })
+    //     })
+    // })
 };
 let id = route.query.id
-const onDelete = () => {
-    Dialog.confirm({
-        message: '地址删除后无法恢复是否删除地址',
-    })
-        .then(() => {
-            deleteDeliveryApi({
-                id: id
-            })
-            Toast('删除成功')
-            history.back()
-        })
-        .catch(() => {
-            Toast('取消成功')
-        });
-
-};
-
 const tomap = () => {
     router.push('map')
 };

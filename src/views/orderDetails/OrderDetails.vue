@@ -3,14 +3,14 @@
     <div class="box-1">
         <div class="wrap box-item mt-20">
             <van-cell is-link @click="showPopup">
+                <div class="default-address" v-if="list.length == 0">请选择收获地址</div>
                 <div class="address">{{ defaultAddress.address }}</div>
-                <div>
+                <div v-if="list.length != 0">
                     <span>{{ defaultAddress.name }}</span>
                     &nbsp;
                     <span>{{ defaultAddress.tel }}</span>
                 </div>
             </van-cell>
-
 
             <van-popup class="popup" v-model:show="show" closeable position="bottom" :style="{ height: '90%' }">
                 <div class="wrap">
@@ -92,6 +92,9 @@ let cityList: any = areaList.city_list;//市
 let countyList: any = areaList.county_list;//区
 let list: any = ref([])
 getDeliveryListApi({}).then(res => {
+    console.log('------------地址-----------');
+    console.log(res);
+
     res.data.data.forEach((el: any, index: number) => {
         list.value.push({
             id: el.id,
@@ -105,12 +108,12 @@ getDeliveryListApi({}).then(res => {
         list.value.forEach((item: any) => {
             if (item.isDefault) {
                 defaultAddress.value = item
-                sessionStorage.setItem('item', JSON.stringify(item));
-
                 chosenAddressId.value = item.id
+                sessionStorage.setItem('item', JSON.stringify(item));
             } else {
                 defaultAddress.value = item
                 chosenAddressId.value = item.id
+                sessionStorage.setItem('item', JSON.stringify(item));
             }
         })
     }
@@ -142,19 +145,22 @@ const disabledList = [
 let address = JSON.parse(sessionStorage.getItem('item'))
 
 const topayment = () => {
-    console.log(foodList);
-    let res: any = [];
-    foodList.forEach((item: any) => {
-        res.push(
-            { skuId: item.productId, num: item.quantity }
-        )
+    router.push({
+        name: 'payment'
     })
-    addOrderCreate({
-        "addressId": address.id,//地址id
-        "rows": res,
-    }).then(res => {
-        console.log(res);
-    })
+    // console.log(foodList);
+    // let res: any = [];
+    // foodList.forEach((item: any) => {
+    //     res.push(
+    //         { skuId: item.productId, num: item.quantity }
+    //     )
+    // })
+    // addOrderCreate({
+    //     "addressId": address.id,//地址id
+    //     "rows": res,
+    // }).then(res => {
+    //     console.log(res);
+    // })
 }
 </script>
 <style scoped>
@@ -276,5 +282,9 @@ const topayment = () => {
 .address {
     font-weight: bold;
     font-size: 1.6rem;
+}
+
+.default-address {
+    font-size: 1.5rem;
 }
 </style>
