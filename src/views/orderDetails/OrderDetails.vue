@@ -48,28 +48,34 @@
     </div>
     <div class="pp wrap">
         <span class="payment">支付金额：<span class="price"><span class="symbol">￥</span>{{ qina }}</span> </span>
-        <span class="to-payment">立即支付</span>
+        <span class="to-payment" @click="topayment">立即支付</span>
     </div>
 </template>
 <script setup lang="ts">
 import { ref } from 'vue'
-import { Toast } from 'vant';
-import { useRoute, useRouter } from 'vue-router'
-import { getDeliveryListApi } from '@/api/api'
+import { useRouter } from 'vue-router'
+import { getDeliveryListApi, addOrderCreate } from '@/api/api'
 import { areaList } from '@vant/area-data';
 let defaultAddress: any = ref({})
-const chosenAddressId = ref('');
-
-let route = useRoute();
+const chosenAddressId = ref();
+if (sessionStorage.getItem('item')) {
+    let item = JSON.parse(sessionStorage.getItem('item'));
+    console.log(item.isDefault);
+    if (item.isDefault) {
+        defaultAddress.value = item
+        chosenAddressId.value = item.id
+    } else {
+        defaultAddress.value = item
+        chosenAddressId.value = item.id
+    }
+}
 let router = useRouter();
-
 const onAdd = function () {
     router.push({ name: 'addressedit' })
 };
 const onEdit = function (item: any, index: string) {
     router.push({ name: 'modifyAddress', query: { 'name': item.name, 'id': item.id, 'tel': item.tel } })
 };
-
 
 const onClickLeft = () => history.back();
 const show = ref(false);
@@ -81,10 +87,10 @@ let qina = ref(0)
 foodList.forEach((item: any) => {
     qina.value += item.quantity * item.originalPrice
 })
-let provinceList: string | any = areaList.province_list; // 省
-let cityList: string | any = areaList.city_list;//市
-let countyList: string | any = areaList.county_list;//区
-const list: any = ref([])
+let provinceList: any = areaList.province_list; // 省
+let cityList: any = areaList.city_list;//市
+let countyList: any = areaList.county_list;//区
+let list: any = ref([])
 getDeliveryListApi({}).then(res => {
     res.data.data.forEach((el: any, index: number) => {
         list.value.push({
@@ -95,23 +101,32 @@ getDeliveryListApi({}).then(res => {
             isDefault: el.isDefaultActive ? true : false,
         })
     })
-    list.value.forEach((item: any) => {
-        if (item.isDefault) {
-            defaultAddress.value = item
-            chosenAddressId.value = item.id
-        }
+    if (!sessionStorage.getItem('item')) {
+        list.value.forEach((item: any) => {
+            if (item.isDefault) {
+                defaultAddress.value = item
+                sessionStorage.setItem('item', JSON.stringify(item));
 
-    })
+                chosenAddressId.value = item.id
+            } else {
+                defaultAddress.value = item
+                chosenAddressId.value = item.id
+            }
+        })
+    }
 
 })
-const onSelect = (item: any, index: number) => {   //选中的数据
-    defaultAddress.value = item
-    chosenAddressId.value = item.id
+
+
+const onSelect = (item: any, index: number) => {
+    //选中的数据
+    defaultAddress.value = item;
+    chosenAddressId.value = item.id;
+    sessionStorage.setItem('item', JSON.stringify(item));
     show.value = false;
 };
 const setAddressDetail = (addressDetail: string) => {
     console.log(addressDetail);
-
 }
 
 
@@ -124,6 +139,23 @@ const disabledList = [
     },
 ];
 
+let address = JSON.parse(sessionStorage.getItem('item'))
+
+const topayment = () => {
+    console.log(foodList);
+    let res: any = [];
+    foodList.forEach((item: any) => {
+        res.push(
+            { skuId: item.productId, num: item.quantity }
+        )
+    })
+    addOrderCreate({
+        "addressId": address.id,//地址id
+        "rows": res,
+    }).then(res => {
+        console.log(res);
+    })
+}
 </script>
 <style scoped>
 .box-1 {

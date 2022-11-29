@@ -12,18 +12,23 @@
 
 <script lang="ts" setup>
 import { areaList } from '@vant/area-data';
-import { addDeliveryApi, deleteDeliveryApi } from '@/api/api'
+import { addDeliveryApi, deleteDeliveryApi, getDeliveryListApi } from '@/api/api'
 import { Dialog } from 'vant'
 import { ref } from 'vue';
 import { Toast } from 'vant';
-import { useRoute ,useRouter} from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 let router = useRouter();
 let route = useRoute();
 let provinceCode = ref('')  //省的code编码
 let cityCode = ref('') //市编码
 let areaCode = ref('')  //区编码
 const searchResult: any = ref([]);
+
+let provinceList: any = areaList.province_list; // 省
+let cityList: any = areaList.city_list;//市
+let countyList: any = areaList.county_list;//区
 const onClickLeft = () => history.back();
+let list: any = ref([])
 const onSave = (value: any) => {
     addDeliveryApi({
         "provinceCode": provinceCode.value, //省编码
@@ -35,7 +40,28 @@ const onSave = (value: any) => {
         "phoneNumber": value.tel, //收货人手机号
         "receiver": value.name //收货人姓名
     })
-    router.push('orderDetails')
+    router.push('orderDetails');
+    getDeliveryListApi({}).then(res => {
+        console.log('------------地址列表1----------');
+        console.log(res.data.data);
+
+        res.data.data.forEach((el: any, index: number) => {
+            list.value.push({
+                id: el.id,
+                name: el.receiver,
+                tel: el.phoneNumber,
+                address: provinceList[el.provinceCode] + cityList[el.cityCode] + countyList[el.areaCode] + el.address,
+                isDefault: el.isDefaultActive ? true : false,
+            })
+        })
+        // list.value.forEach((item: any) => {
+        //     if (item.isDefault) {
+        //         defaultAddress.value = item
+        //         chosenAddressId.value = item.id
+        //     }
+        // })
+
+    })
 };
 let id = route.query.id
 const onDelete = () => {
@@ -59,9 +85,7 @@ const tomap = () => {
     router.push('map')
 };
 
-const onChangeDetail = (val: any) => {  
-    console.log(val);
-    
+const onChangeDetail = (val: any) => {
     if (val) {
         searchResult.value = [{
             // name:''

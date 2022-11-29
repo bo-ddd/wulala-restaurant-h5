@@ -4,14 +4,7 @@
       <Title color="#000">购物车</Title>
     </div>
     <div>
-      <div v-if="foodLists.length <= 0">
-        <van-empty
-          image="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F83%2F46%2F5a58884e52d66_610.jpg&refer=http%3A%2F%2Fbpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1671067842&t=c009000d9550846c3c2260dc675271fa"
-          description="购物车空空如也~" />
-      </div>
-
-
-      <div class="wrap lol" v-else>
+      <div class="wrap lol">
         <!-- 数据库  -->
         <div class="box-shopping mt-20" v-for="(el, i) in foodLists" :key="i">
           <van-checkbox :value="el.id" v-model="el.isChecked" @click="chooseChange(el)"></van-checkbox>
@@ -41,7 +34,8 @@
           <van-submit-bar :price=totalPrice button-text="提交订单" @submit="onSubmit">
             <van-checkbox v-model="AllChecked" @click="checkAll">全选</van-checkbox>
             <template #tip>
-              你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
+              <!-- 你的收货地址不支持配送, -->
+               <span @click="onClickLink">修改地址</span>
             </template>
           </van-submit-bar>
         </div>

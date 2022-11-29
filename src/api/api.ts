@@ -152,5 +152,11 @@ export const updateDeliveryApi = function (payload = {}) {
 export const getFoodDetail = function (payload = {}) {
     return instance.post('food/detail', payload)
 }
-
+/**
+ * /order/create
+ * @description 添加订单详情
+ */
+ export const addOrderCreate = function (payload = {}) {
+    return instance.post('order/create', payload)
+}
 export default instance;
