@@ -146,7 +146,10 @@ let address = JSON.parse(sessionStorage.getItem('item'))
 
 const topayment = () => {
     router.push({
-        name: 'payment'
+        name: 'payment',
+        query: {
+            qina: qina.value
+        }
     })
     // console.log(foodList);
     // let res: any = [];
