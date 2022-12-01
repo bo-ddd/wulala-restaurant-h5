@@ -52,7 +52,7 @@ const tofa = () => {
             console.log(userId.value);
             let comment = await updatecomment({
                 userId: userId.value, //用户id
-                foodId: 58, //菜品id
+                foodId: 66, //菜品id
                 content: commentText.value, //评价内容
                 star: value.value, //如不填默认是5, 代表的是几颗星,最高5颗
                 isRealName: 0 //是否实名评价

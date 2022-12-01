@@ -1,22 +1,27 @@
 <template>
     <div class="wrap">
-        <div><span class="main-materials">主料:</span><span class="text-main_materials">{{data.mainMaterials}}</span>
+        <div v-for="item in productAttribute">
+            <span class="main-materials">{{ item.attrName + '：' }}</span>
+            <span class="text-main_materials">{{ item.attrValue }}</span>
         </div>
-        <div><span class="main-materials">辅料:</span><span class="text-main_materials">{{data.garlic}}</span>
-        </div>
-        <div><span class="main-materials">荤素:</span><span class="text-main_materials">{{data.meatAndVegetable}}</span>
-        </div>
-        <div><span class="main-materials">份量:</span><span class="text-main_materials">约{{data.kg}}克</span>
-        </div>
-        <div><span class="main-materials">口味:</span><span class="text-main_materials">{{data.taste}}</span>
-        </div>
+
     </div>
 </template>
 <script setup lang="ts">
-let props = defineProps<{
-    data: any
-}>()
-let { data } = props
+import { getFoodDetail } from '@/api/api'
+import { ref } from 'vue'
+let productAttribute = ref()
+let search = window.location.search
+let foodId = search.split('=');
+let id = foodId[1]
+console.log(id);
+
+getFoodDetail({ foodId: id }).then(res => {
+    productAttribute.value = res.data.data.attrs
+    console.log(res.data.data.attrs);
+
+})
+
 </script>
 
 <style scoped>
@@ -28,6 +33,6 @@ let { data } = props
 
 .text-main_materials {
     font-size: 1.2rem;
-    margin-left: 3rem;
+    margin-left: 1rem;
 }
 </style>

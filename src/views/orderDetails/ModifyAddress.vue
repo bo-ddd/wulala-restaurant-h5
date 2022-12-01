@@ -76,6 +76,7 @@ const onDelete = () => {
             }).then(res => {
                 console.log(res);
             })
+            sessionStorage.removeItem('item')
             Toast('删除成功')
             history.back()
             // on confirm

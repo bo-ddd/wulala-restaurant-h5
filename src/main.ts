@@ -26,6 +26,7 @@ import { Sticky } from 'vant';
 import mitt from 'mitt'
 import { AddressList } from 'vant';
 import { AddressEdit } from 'vant';
+import { CountDown } from 'vant';
 /**
  * 周总的
  */
@@ -82,6 +83,7 @@ app.use(Cell);
 app.use(Dialog);
 app.use(AddressList);
 app.use(AddressEdit);
+app.use(CountDown);
 app.mount("#app");
 app.use(Lazyload, {
     lazyComponent: true,
