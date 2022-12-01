@@ -82,9 +82,6 @@ const value = ref('');
 const toevaluate = function (name: string, foodId: number) {
     window.location.href = `/detailsOfDishes?foodId=${foodId}`
 }
-// getFoodListApi({}).then(res => {
-//     bestSellers.value = res.data.data.list
-// })
 const toSearch = function () {
     router.push('search')
 }
@@ -93,7 +90,6 @@ userInfoApi({}).then(res => {
     localStorage.setItem('userId', res.data.data.userId)
 })
 
-// ------------
 const list: any = ref([]);
 const loading = ref(false);
 const finished = ref(false);
@@ -101,10 +97,8 @@ const refreshing = ref(false);
 
 const onLoad = () => {
     getFoodListApi({}).then(res => {
-    bestSellers.value = res.data.data.list
-    console.log(bestSellers.value );
-    
-})
+        bestSellers.value = res.data.data.list
+        })
     setTimeout(() => {
         if (refreshing.value) {
             list.value = [];

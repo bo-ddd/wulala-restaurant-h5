@@ -8,7 +8,7 @@
         <van-tabs v-model:active="active" class="mt-14">
             <van-tab title="详情">
                 <FoodDetails.Wrappar>
-                    <FoodDetails.Item :data="foodList"></FoodDetails.Item>
+                    <FoodDetails.Item></FoodDetails.Item>
                 </FoodDetails.Wrappar>
             </van-tab>
             <van-tab title="评价">
@@ -48,8 +48,6 @@ const comment: any = ref({})
 let search = window.location.search
 let foodId = search.split('=');
 let id = foodId[1]
-let value = ref()
-
 getComment({ foodId: id }).then(res => {
     comment.value = res.data.data.list
     res.data.data.list.forEach((el: any) => {
@@ -68,13 +66,6 @@ getComment({ foodId: id }).then(res => {
         }
     });
 })
-
-
-
-
-
-// -------------------
-
 </script>
 
 <style scoped>

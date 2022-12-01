@@ -4,14 +4,7 @@
       <Title color="#000">购物车</Title>
     </div>
     <div>
-      <div v-if="foodLists.length <= 0">
-        <van-empty
-          image="https://gimg2.baidu.com/image_search/src=http%3A%2F%2Fbpic.51yuansu.com%2Fpic3%2Fcover%2F02%2F83%2F46%2F5a58884e52d66_610.jpg&refer=http%3A%2F%2Fbpic.51yuansu.com&app=2002&size=f9999,10000&q=a80&n=0&g=0n&fmt=auto?sec=1671067842&t=c009000d9550846c3c2260dc675271fa"
-          description="购物车空空如也~" />
-      </div>
-
-
-      <div class="wrap lol" v-else>
+      <div class="wrap lol">
         <!-- 数据库  -->
         <div class="box-shopping mt-20" v-for="(el, i) in foodLists" :key="i">
           <van-checkbox :value="el.id" v-model="el.isChecked" @click="chooseChange(el)"></van-checkbox>
@@ -41,7 +34,8 @@
           <van-submit-bar :price=totalPrice button-text="提交订单" @submit="onSubmit">
             <van-checkbox v-model="AllChecked" @click="checkAll">全选</van-checkbox>
             <template #tip>
-              你的收货地址不支持配送, <span @click="onClickLink">修改地址</span>
+              <!-- 你的收货地址不支持配送, -->
+              <span @click="onClickLink">修改地址</span>
             </template>
           </van-submit-bar>
         </div>
@@ -116,8 +110,6 @@ if (token != null) {
         productId: Number(el.foodId),
         quantity: el.quantity, //数量
       }).then((res) => {
-        console.log("-----添加数据库------");
-        console.log(res);
         getCartListApi({}).then((res) => {
           foodLists.value = res.data.data;
         });
@@ -158,15 +150,15 @@ let deletecar = (el: any) => {
     message: "确定删除这1种商品吗？",
   })
     .then(() => {
-      // on confirm
-      console.log(el.id);
       cartDeleteApi({
         id: el.id,
       }).then((res) => {
-        console.log(res);
         if (res.data.status == 1) {
           Notify({ type: "success", message: "删除成功" });
+          checkedNames.value = [];
+          totalPrice.value = 0
           getCartListApi({}).then((res) => {
+
             let data = JSON.parse(JSON.stringify(res.data.data));
             foodLists.value = data;
             if (checkedNames.length == foodLists.value.length) {
@@ -188,19 +180,18 @@ let deletecar = (el: any) => {
 const deletecart = function (el: any) {
   Dialog.confirm({
     message: '确定删除这1种商品吗?',
-  })
-    .then(() => {
-      for (let i = 0; i < bendiGood.value.length; i++) {
-        if (el.foodId == bendiGood.value[i].foodId) {
-          delete bendiGood.value[i]
-          bendiGood.value.splice(i, 1)
-          localStorage.setItem('cartAdd', JSON.stringify(bendiGood.value))
-        }
-
+  }).then(() => {
+    for (let i = 0; i < bendiGood.value.length; i++) {
+      if (el.foodId == bendiGood.value[i].foodId) {
+        delete bendiGood.value[i]
+        bendiGood.value.splice(i, 1)
+        localStorage.setItem('cartAdd', JSON.stringify(bendiGood.value))
       }
-
-      Toast('删除成功');
-    })
+    }
+    checkedItem.value = []
+    priceAdd.value = 0
+    Toast('删除成功');
+  })
     .catch(() => {
       Toast('取消成功');
     });
@@ -237,13 +228,11 @@ const subs = function (el: any) {
         Toast("商品小于起购数量");
       } else {
         foodLists.value[i].quantity--;
-
         cartAddApi({
           id: el.id,
           productId: el.productId,
           quantity: el.quantity,
         }).then((res) => {
-          console.log(res);
           sum()
         });
       }
@@ -260,7 +249,6 @@ const adds = function (el: any) {
         productId: el.productId,
         quantity: el.quantity,
       }).then((res) => {
-        console.log(res);
         sum()
       });
     }
@@ -300,8 +288,6 @@ const chooseChange = (item: any) => {
     foodLists.value.forEach((el: any) => {
       if (item.productId == el.productId) {
         Object.assign({}, foodLists.value, { isChecked: true });
-        console.log(item);
-
       }
     })
     checkedNames.value.push(item);
@@ -327,7 +313,6 @@ const chooseChange = (item: any) => {
 };
 
 foodLists.value.forEach((item: any) => {
-  console.log(item);
 })
 const checkAll = function () {
   if (AllChecked.value) {

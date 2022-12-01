@@ -5,9 +5,8 @@
         <div>
             <span class="text-details_food">{{ foodList.foodName }}</span>
             <div>
-                <span class="details-food">约{{ foodList.price }}克</span>
-                <span class="details-food">{{ foodList.price }}</span>
-                <span class="details-food">有{{ foodList.price }}</span>
+                <span class="details-food">约{{ attrs }}</span>
+                <span class="details-food">{{ flavor }}</span>
             </div>
             <div class="box-price">
                 <span class="price—details_food"><span class="symbol">￥</span>{{ foodList.price }}</span>
@@ -34,7 +33,7 @@
     </van-popup>
 </template>
 <script setup lang="ts">
-import { getFoodListApi, cartAddApi } from '@/api/api'
+import { getFoodListApi, cartAddApi, getFoodDetail } from '@/api/api'
 import { ref } from "vue";
 import { useRouter } from 'vue-router'
 let router = useRouter()
@@ -49,7 +48,7 @@ const showPopup = () => { //弹出层
 
 const value = ref(1);
 let sessionStorageNull = sessionStorage.getItem('token')  //登录状态
-let getCartAdd  = JSON.parse(localStorage.getItem('cartAdd')) //本地存储的数据
+let getCartAdd = JSON.parse(localStorage.getItem('cartAdd')) //本地存储的数据
 let getUserId = localStorage.getItem('userId')
 let data: any = ref([])
 const toOrder = () => {
@@ -103,16 +102,6 @@ const toOrder = () => {
     show.value = false;
 }
 
-<<<<<<< HEAD
-
-if (sessionStorageNull != null) {
-    data.value.push({
-        userId: getUserId
-    })
-}
-// console.log(data.vlaue);
-=======
->>>>>>> 406f131950f619c9edafddbb4c7a3b23b3e2caba
 getFoodListApi({ //接口
 
 }).then(res => {
@@ -122,6 +111,23 @@ getFoodListApi({ //接口
         }
     });
 })
+let attrs = ref()
+let flavor = ref() //口味
+getFoodDetail({ foodId: id }).then(res => {
+
+    res.data.data.attrs.forEach(el => {
+        if (el.attrName == '份量') {
+            attrs.value = el.attrValue
+        } else if (el.attrName == '口味') {
+            flavor.value = el.attrValue
+
+        }
+
+    })
+    console.log(res.data.data.attrs);
+})
+
+
 
 const backToPrevious = function () {
     router.go(-1)
