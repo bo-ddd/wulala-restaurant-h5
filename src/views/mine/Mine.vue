@@ -175,7 +175,7 @@ main {
   overflow: hidden;
   white-space: nowrap;
   text-overflow: ellipsis;
-  width: 18rem;
+  /* width: 18rem; */
   font-size: 1.6rem;
 }
 .loading{
