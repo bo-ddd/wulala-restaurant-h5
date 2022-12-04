@@ -47,7 +47,7 @@ let isActiveOrderNoOk = ref(false);//未选择
 const isActiveOrder = () => {
     if (isActiveOrderOk.value == true) {
         isActiveOrderOk.value = false;
-        isActiveOrderNoOk.value=true;
+        isActiveOrderNoOk.value = true;
     } else {
         isActiveOrderOk.value = true;
         isActiveOrderNoOk.value = false;
@@ -113,22 +113,25 @@ const isActiveOrder = () => {
     padding: 1rem 0;
     font-weight: 600;
     border-radius: 1rem;
-    position:fixed;
-    bottom:0
+    position: fixed;
+    bottom: 20px;
 }
 
 .payment-way-tf {
     width: 2rem;
     height: 2rem;
 }
-.price{
+
+.price {
     font-size: 5rem;
     font-weight: 900;
 }
-.shift4{
+
+.shift4 {
     font-size: 2.6rem;
 }
-.van-count-down{
+
+.van-count-down {
     font-size: 1.5rem;
 }
 </style>
