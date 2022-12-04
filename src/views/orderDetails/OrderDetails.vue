@@ -145,25 +145,25 @@ const disabledList = [
 let address = JSON.parse(sessionStorage.getItem('item'))
 
 const topayment = () => {
-    router.push({
-        name: 'payment',
-        query: {
-            qina: qina.value
-        }
-    })
+    // router.push({
+    //     name: 'payment',
+    //     query: {
+    //         qina: qina.value
+    //     }
+    // })
     // console.log(foodList);
-    // let res: any = [];
-    // foodList.forEach((item: any) => {
-    //     res.push(
-    //         { skuId: item.productId, num: item.quantity }
-    //     )
-    // })
-    // addOrderCreate({
-    //     "addressId": address.id,//地址id
-    //     "rows": res,
-    // }).then(res => {
-    //     console.log(res);
-    // })
+    let res: any = [];
+    foodList.forEach((item: any) => {
+        res.push(
+            { skuId: item.productId, num: item.quantity }
+        )
+    })
+    addOrderCreate({
+        "addressId": address.id,//地址id
+        "rows": res,
+    }).then(res => {
+        console.log(res);
+    })
 }
 </script>
 <style scoped>
