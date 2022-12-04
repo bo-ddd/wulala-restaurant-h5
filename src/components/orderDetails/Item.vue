@@ -1,22 +1,22 @@
 <template>
     <div class="time-box">
-        <div class="item-time">下单时间: 2022-10-24 16:00</div>
-        <div class="state">已完成</div>
+        <div class="item-time">下单时间:{{list.createdAt}}</div>
+        <div class="state" v-if="(list.orderStatus == 0)">待付款</div>
     </div>
     <hr/>
     <van-row @click="toOrderData">
         <van-col span="18">
-            <div class="item-data">
-                <img class="item-img" src="@/assets/images/banaer-1.png" alt="">
-                <span class="item-name">经典珍珠奶茶</span>
+            <div class="item-data" v-for="(item,i) in list.rows" :key="i">
+                <img class="item-img" :src="item.bannerUrl" alt="">
+                <span class="item-name">{{item.productName}}</span>
             </div>
         </van-col>
         <van-col span="6">
-            <div class="total">共计2件</div>
+            <div class="total">共计{{list.rows.length}}件</div>
         </van-col>
     </van-row>
     <div class="box-total_price">
-        <div><span class="total-price">合计</span><span class="price">￥12</span></div>
+        <div><span class="total-price">合计</span><span class="price">￥{{list.amount}}</span></div>
         <slot></slot>
     </div>
 </template>
@@ -24,9 +24,15 @@
     import { useRouter } from 'vue-router';
     let router = useRouter()
    const toOrderData = function (){
-    
-router.push({name:'orderdata'})
+router.push({name:'orderdata', query: { orderid: list.orderStatus } })
    }
+
+   const props = defineProps<{
+    list:any
+   }>()
+   let { list } = props
+   console.log(list);
+   
 </script>
 <style scoped>
 .item-img {
@@ -79,5 +85,6 @@ router.push({name:'orderdata'})
 .box-total_price {
     display: flex;
     justify-content: space-between;
+    align-items: center;
 }
 </style>

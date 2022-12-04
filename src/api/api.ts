@@ -159,4 +159,9 @@ export const getFoodDetail = function (payload = {}) {
  export const addOrderCreate = function (payload = {}) {
     return instance.post('order/create', payload)
 }
-export default instance;
+/**
+ * @description 订单列表
+ */
+ export const orderList = function (payload = {}) {
+    return instance.post('/order/list', payload)
+}

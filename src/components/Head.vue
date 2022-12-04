@@ -10,13 +10,22 @@
 </template>
 
 <script lang="ts" setup>
+    import { useRouter } from 'vue-router';
 const props = defineProps<{
     color?:string;
     imgcolor?:string;
+    isActive?:number;
 }>();
-let { color,imgcolor } = props;
+
+let router = useRouter();
+let { color,imgcolor,isActive} = props;
 const lastPage = function () {
-    window.history.back();
+    if (isActive != null) {
+        router.push({name:'mine'})
+    }else{
+        window.history.back();
+
+    }
 }
 </script>
 
