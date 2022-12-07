@@ -1,6 +1,6 @@
 <template>
     <div class="time-box">
-        <div class="item-time">下单时间:{{date(list.createdAt)}}</div>
+        <div class="item-time">下单时间:{{date(list.createdAt) }}</div>
         <div class="state" v-if="(list.orderStatus == 0)">待付款</div>
     </div>
     <hr/>
@@ -31,7 +31,7 @@ router.push({name:'orderdata', query: { orderid: list.orderStatus } })
     list:any
    }>()
    let { list } = props
-   let date=(d)=>{
+   let date=(d:any)=>{
        let date=new Date(d);
        return date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '+date.getHours()
     }

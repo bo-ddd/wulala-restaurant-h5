@@ -1,8 +1,5 @@
 <template>
   <main class="box">
-    <div class="loading" v-show="pageLoading">
-    <van-loading class="loading-bg" type="spinner" color="#303030" size="24px" v-show="pageLoading"/>
-  </div>
     <Head isActive="1" color="black" imgcolor="0">全部订单</Head>
     <van-tabs v-model:active="active" swipeable @click-tab="onClickTab">
       <van-tab
@@ -11,22 +8,25 @@
         :key="i"
         :title="item.name"
       >
-        <van-empty
+      <div v-if="pageLoading">
+        <van-loading size="24px" vertical>加载中...</van-loading>
+      </div>
+      <div v-else>
+  <van-empty
         v-show="(orderLists.length == 0)"
           description="什么都没有哦，快去添加吧"
         />
         <div class="box-item" v-show="(orderLists.length != 0)">
-          <div class="loading" v-show="pageLoading">
-    <van-loading class="loading-bg" type="spinner" color="#303030" size="24px" v-show="pageLoading"/>
-  </div>
           <orderDetails.Wrapper v-for="(item,i) in orderLists" :key="i">
              
             <orderDetails.Item :list = item >
-              <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">再来一单</van-button>
+              <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">去付款</van-button>
             </orderDetails.Item>
           </orderDetails.Wrapper>
      
         </div>
+      </div>
+      
       </van-tab>
     </van-tabs>
   </main>
@@ -84,6 +84,7 @@ const CommodityDetails = function () {
   router.push({ name: "menu",  });
 };
 const onClickTab = (name: any) => {
+  pageLoading.value = true;
   console.log(name);
   router.push({ query: {info:JSON.stringify(name)} });
   orderLists.value =[]
@@ -94,6 +95,7 @@ const onClickTab = (name: any) => {
   orderLists.value = res.data.data.list
   // console.log(orderLists.value);
   // console.log(userId);
+  pageLoading.value = false;
 });
   }else{
     orderList({
@@ -105,16 +107,15 @@ const onClickTab = (name: any) => {
       orderLists.value.push(el)
       }
     });
+    console.log(8555);
+  pageLoading.value = false;
+    
     console.log(orderLists.value);
   });
   }
 };
 
 onClickTab(a)
-
-setTimeout(function () {
-  pageLoading.value = false;
-}, 1000);
 
 </script>
 

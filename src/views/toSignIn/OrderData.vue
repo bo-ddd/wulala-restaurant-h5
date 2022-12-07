@@ -3,7 +3,7 @@
         <div class="loading" v-show="pageLoading">
             <van-loading class="loading-bg" type="spinner" color="#303030" size="24px" v-show="pageLoading" />
         </div>
-        <Head color="black" imgcolor="0"></Head>
+        <Head color="black" imgcolor="0">订单详情</Head>
         <div class="box wrap">
             <p class="title" v-if='orderLists.orderStatus == 0'>订单待付款</p>
             <orderDetails.Wrapper v-for="(item,i) in orderLists" :key="i">
@@ -16,7 +16,7 @@
                  plain
                  size="small"
                  @click="CommodityDetails"
-                 >再来一单</van-button
+                 >去付款</van-button
                >
              </orderDetails.Item>
            </orderDetails.Wrapper>
@@ -31,6 +31,7 @@ import {orderList} from "@/api/api";
 import { useRoute, useRouter } from "vue-router";
 let route = useRoute();
 let router = useRouter();
+
 console.log(route.query);
 
 
