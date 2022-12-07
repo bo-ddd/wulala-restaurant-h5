@@ -1,13 +1,7 @@
 <template>
   <main class="box">
     <div class="loading" v-show="pageLoading">
-      <!-- <van-loading
-        class="loading-bg"
-        type="spinner"
-        color="#303030"
-        size="24px"
-        v-show="pageLoading"
-      /> -->
+     
     </div>
 
     <Head isActive="1" color="black" imgcolor="0">全部订单</Head>
@@ -46,7 +40,7 @@ let a:any = JSON.parse(route.query.info);
 // let aa = String(route.query.name)
 // console.log(a);
 
-let active = ref(a);
+let active = ref(a.name);
 let orderLists:any = ref({})
 let userId = localStorage.getItem('userId')
 let router = useRouter();
@@ -99,9 +93,7 @@ const onClickTab = (name: any) => {
   // console.log(orderLists.value);
   // console.log(userId);
 });
-
   }else{
-  
     orderList({
     userId: userId
   }).then(res =>{
@@ -111,22 +103,12 @@ const onClickTab = (name: any) => {
       orderLists.value.push(el)
       }
     });
-      
     console.log(orderLists.value);
-    // console.log(userId);
   });
   }
 };
 
 onClickTab(a)
-// orderList({
-//   userId: userId
-// }).then(res =>{
-//   orderLists.value = res.data.data.list
-//   // console.log(orderLists.value);
-//   // console.log(userId);
-// });
-
 
 setTimeout(function () {
   pageLoading.value = false;

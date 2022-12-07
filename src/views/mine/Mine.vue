@@ -63,14 +63,7 @@
       <Nav.Wrapper class="nav-list wrap">
         <Nav.Item v-for="(item,i) in order" :key="i" class="order" :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile(item.src)"
           :text="item.title" @click="toOrders(item)"></Nav.Item>
-          <!-- <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to-be_received.png')"
-          text="待收货" @click="toOrders(2)"></Nav.Item>
-          <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to -be_use.png')"
-          text="待使用" @click="toOrders(3)"></Nav.Item>
-          <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('icon-feedback.png')"
-          text="待评价" @click="toOrders(4)"></Nav.Item>
-          <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('refund.png')"
-          text="退款" @click="toOrders(5)"></Nav.Item> -->
+         
       </Nav.Wrapper>
     </div>
     <Nav.Wrapper class="nav-list wrap mt-20">
