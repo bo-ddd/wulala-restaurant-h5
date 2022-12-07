@@ -38,9 +38,6 @@ export default function () {
     const toSignIn= function (){
         router.push({
             name:'signin',
-            // query:{
-            //     goodsId
-            // }
         })
     }
 
