@@ -1,9 +1,8 @@
 <template>
   <main class="box">
     <div class="loading" v-show="pageLoading">
-     
-    </div>
-
+    <van-loading class="loading-bg" type="spinner" color="#303030" size="24px" v-show="pageLoading"/>
+  </div>
     <Head isActive="1" color="black" imgcolor="0">全部订单</Head>
     <van-tabs v-model:active="active" swipeable @click-tab="onClickTab">
       <van-tab
@@ -17,6 +16,9 @@
           description="什么都没有哦，快去添加吧"
         />
         <div class="box-item" v-show="(orderLists.length != 0)">
+          <div class="loading" v-show="pageLoading">
+    <van-loading class="loading-bg" type="spinner" color="#303030" size="24px" v-show="pageLoading"/>
+  </div>
           <orderDetails.Wrapper v-for="(item,i) in orderLists" :key="i">
              
             <orderDetails.Item :list = item >

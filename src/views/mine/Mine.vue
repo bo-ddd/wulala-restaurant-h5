@@ -171,7 +171,7 @@ const toTurntable = function(){
   router.push({name:'turntable'})
 }
 const toWholeOrder = function(){
-  router.push({name:'wholeorder'})
+  router.push({name:'wholeorder',query: {info:JSON.stringify(order[0])}})
 }
 </script>
 

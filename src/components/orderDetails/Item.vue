@@ -1,6 +1,6 @@
 <template>
     <div class="time-box">
-        <div class="item-time">下单时间:{{list.createdAt}}</div>
+        <div class="item-time">下单时间:{{date(list.createdAt)}}</div>
         <div class="state" v-if="(list.orderStatus == 0)">待付款</div>
     </div>
     <hr/>
@@ -21,7 +21,7 @@
     </div>
 </template>
 <script setup lang="ts">
-    import { useRouter } from 'vue-router';
+import { useRouter } from 'vue-router';
     let router = useRouter()
    const toOrderData = function (){
 router.push({name:'orderdata', query: { orderid: list.orderStatus } })
@@ -31,8 +31,11 @@ router.push({name:'orderdata', query: { orderid: list.orderStatus } })
     list:any
    }>()
    let { list } = props
-//    console.log(list);
-   
+   let date=(d)=>{
+       let date=new Date(d);
+       return date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '+date.getHours()
+    }
+    console.log(date(list.createdAt));
 </script>
 <style scoped>
 .item-img {
