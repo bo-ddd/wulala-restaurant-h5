@@ -31,7 +31,7 @@ router.push({name:'orderdata', query: { orderid: list.orderStatus } })
     list:any
    }>()
    let { list } = props
-   console.log(list);
+//    console.log(list);
    
 </script>
 <style scoped>

@@ -19,22 +19,14 @@
         :title="item.name"
       >
         <van-empty
-          v-show="item.name != '全部'"
+        v-show="(orderLists.length == 0)"
           description="什么都没有哦，快去添加吧"
         />
-        <div class="box-item" v-show="item.name == '全部'">
+        <div class="box-item" v-show="(orderLists.length != 0)">
           <orderDetails.Wrapper v-for="(item,i) in orderLists" :key="i">
              
             <orderDetails.Item :list = item >
-              <van-button
-                round
-                type="success"
-                color="#7232dd"
-                plain
-                size="small"
-                @click="CommodityDetails"
-                >再来一单</van-button
-              >
+              <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">再来一单</van-button>
             </orderDetails.Item>
           </orderDetails.Wrapper>
      
@@ -50,56 +42,96 @@ import { useRoute, useRouter } from "vue-router";
 import orderDetails from "@/components/orderDetails";
 import {orderList} from "@/api/api";
 let route = useRoute();
-let router = useRouter();
-const CommodityDetails = function () {
-  router.push({ name: "menu",  });
-};
-let a = Number(route.query.id);
+let a:any = JSON.parse(route.query.info);
+// let aa = String(route.query.name)
+// console.log(a);
+
 let active = ref(a);
-const onClickTab = (name: any) => {
-  console.log(name.name);
-  router.push({ query: { id: name.name } });
-};
 let orderLists:any = ref({})
-orderList({
-  userId: 158,
-}).then(res =>{
-    orderLists.value = res.data.data.list
-    console.log(orderLists.value);
-});
-
-
+let userId = localStorage.getItem('userId')
+let router = useRouter();
 let pageLoading = ref(true);
-setTimeout(function () {
-  pageLoading.value = false;
-}, 1000);
-
 const order = [
   {
     id: 1,
     name: "全部",
+    src:"to-be_paid.png"
   },
   {
     id: 2,
     name: "待付款",
+    src:"to-be_received.png"
   },
   {
     id: 3,
     name: "待收货",
+    src:"to -be_use.png"
   },
   {
     id: 4,
     name: "已付款",
+    src:"icon-feedback.png"
   },
   {
     id: 5,
     name: "待评价",
+    src:"icon-feedback.png"
   },
   {
     id: 6,
     name: "退款",
+    src:"refund.png"
   },
 ];
+
+const CommodityDetails = function () {
+  router.push({ name: "menu",  });
+};
+const onClickTab = (name: any) => {
+  console.log(name);
+  router.push({ query: {info:JSON.stringify(name)} });
+  orderLists.value =[]
+  if (name.name == 0) {
+    orderList({
+  userId: userId
+}).then(res =>{
+  orderLists.value = res.data.data.list
+  // console.log(orderLists.value);
+  // console.log(userId);
+});
+
+  }else{
+  
+    orderList({
+    userId: userId
+  }).then(res =>{
+    res.data.data.list.forEach(el => {
+      if (el.orderStatus == name.name-1) {
+      console.log(el);
+      orderLists.value.push(el)
+      }
+    });
+      
+    console.log(orderLists.value);
+    // console.log(userId);
+  });
+  }
+};
+
+onClickTab(a)
+// orderList({
+//   userId: userId
+// }).then(res =>{
+//   orderLists.value = res.data.data.list
+//   // console.log(orderLists.value);
+//   // console.log(userId);
+// });
+
+
+setTimeout(function () {
+  pageLoading.value = false;
+}, 1000);
+
 </script>
 
 <style scoped>

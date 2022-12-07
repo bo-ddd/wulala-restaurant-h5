@@ -61,16 +61,16 @@
           </template>
       </ExpressInfoItem>
       <Nav.Wrapper class="nav-list wrap">
-        <Nav.Item class="order" :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to-be_paid.png')"
-          text="待付款" @click="toOrders(1)"></Nav.Item>
-          <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to-be_received.png')"
+        <Nav.Item v-for="(item,i) in order" :key="i" class="order" :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile(item.src)"
+          :text="item.title" @click="toOrders(item)"></Nav.Item>
+          <!-- <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to-be_received.png')"
           text="待收货" @click="toOrders(2)"></Nav.Item>
           <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('to -be_use.png')"
           text="待使用" @click="toOrders(3)"></Nav.Item>
           <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('icon-feedback.png')"
           text="待评价" @click="toOrders(4)"></Nav.Item>
           <Nav.Item class="order"  :size="'2.8'" gap=".6rem" :icon="parsrAsssetFile('refund.png')"
-          text="退款" @click="toOrders(5)"></Nav.Item>
+          text="退款" @click="toOrders(5)"></Nav.Item> -->
       </Nav.Wrapper>
     </div>
     <Nav.Wrapper class="nav-list wrap mt-20">
@@ -100,6 +100,38 @@ let userName = ref('');
 let userId = ref(); //传id获取图片
 let tokens = sessionStorage.getItem('token');
 let image = ref(); //拿到图像图片，在上面渲染
+const order = [
+  {
+    name: 0,
+    title: "全部",
+    src:"to-be_paid.png"
+  },
+  {
+    name: 1,
+    title: "待付款",
+    src:"to-be_received.png"
+  },
+  {
+    name: 2,
+    title: "待收货",
+    src:"to -be_use.png"
+  },
+  {
+    name: 3,
+    title: "已付款",
+    src:"icon-feedback.png"
+  },
+  {
+    name: 4,
+    title: "待评价",
+    src:"icon-feedback.png"
+  },
+  {
+    name: 5,
+    title: "退款",
+    src:"refund.png"
+  },
+];
 (async function () {
   let userInfoRes = await userInfoApi({});
   // console.log('-----userInfoRes----');
@@ -139,8 +171,8 @@ const toCollection = function(){
 const toOrder = function(){
   router.push({name:'order'})
 }
-const toOrders = function(a : number){
-  router.push({name:'wholeorder',query: {id:a}} )
+const toOrders = function(item:any){
+  router.push({name:'wholeorder',query: {info:JSON.stringify(item)}} )
 }
 const toTurntable = function(){
   router.push({name:'turntable'})
