@@ -13,7 +13,7 @@
       </div>
       <div v-else>
   <van-empty
-        v-show="(orderLists.length == 0)"
+        v-show="(orderLists.length == 0 || token==null)"
           description="什么都没有哦，快去添加吧"
         />
         <div class="box-item" v-show="(orderLists.length != 0)">
@@ -39,6 +39,7 @@ import orderDetails from "@/components/orderDetails";
 import {orderList} from "@/api/api";
 let route = useRoute();
 let a:any = JSON.parse(route.query.info);
+let token = sessionStorage.getItem('token')
 // let aa = String(route.query.name)
 // console.log(a);
 
@@ -84,35 +85,39 @@ const CommodityDetails = function () {
   router.push({ name: "menu",  });
 };
 const onClickTab = (name: any) => {
-  pageLoading.value = true;
-  console.log(name);
-  router.push({ query: {info:JSON.stringify(name)} });
-  orderLists.value =[]
-  if (name.name == 0) {
-    orderList({
-  userId: userId
-}).then(res =>{
-  orderLists.value = res.data.data.list
-  // console.log(orderLists.value);
-  // console.log(userId);
-  pageLoading.value = false;
-});
-  }else{
-    orderList({
+  if(token){
+
+    pageLoading.value = true;
+    console.log(name);
+    router.push({ query: {info:JSON.stringify(name)} });
+    orderLists.value =[]
+    if (name.name == 0) {
+      orderList({
     userId: userId
   }).then(res =>{
-    res.data.data.list.forEach(el => {
-      if (el.orderStatus == name.name-1) {
-      console.log(el);
-      orderLists.value.push(el)
-      }
-    });
-    console.log(8555);
-  pageLoading.value = false;
+    orderLists.value = res.data.data.list
     
-    console.log(orderLists.value);
+    pageLoading.value = false;
   });
+    }else{
+      orderList({
+      userId: userId
+    }).then(res =>{
+      res.data.data.list.forEach(el => {
+        if (el.orderStatus == name.name-1) {
+        console.log(el);
+        orderLists.value.push(el)
+        }
+      });
+    pageLoading.value = false;
+      
+      console.log(orderLists.value);
+    });
+    }
+  }else{
+    pageLoading.value = false;
   }
+  // pageLoading.value = false;
 };
 
 onClickTab(a)
