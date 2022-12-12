@@ -1,5 +1,7 @@
 <template>
-    <div class="home">
+    <van-loading v-if="show == 1" size="24px" vertical>加载中...</van-loading>
+
+    <div v-else class="home">
         <van-pull-refresh v-model="refreshing" @refresh="onRefresh">
 
             <div class=" box-search wrap pt-18">
@@ -79,6 +81,7 @@ let { parsrAsssetFile } = useUlit()
 let bestSellers: any = ref({})
 let router = useRouter()
 const value = ref('');
+let show = 0
 const toevaluate = function (name: string, foodId: number) {
     window.location.href = `/detailsOfDishes?foodId=${foodId}`
 }
@@ -94,10 +97,14 @@ const list: any = ref([]);
 const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
-
+getFoodListApi({}).then(res => {
+        bestSellers.value = res.data.data.list
+        show = res.status
+        })
 const onLoad = () => {
     getFoodListApi({}).then(res => {
         bestSellers.value = res.data.data.list
+        
         })
     setTimeout(() => {
         if (refreshing.value) {
@@ -145,7 +152,7 @@ const onRefresh = () => {
 
 .home {
     background-image: url('@/assets/images/bj.png');
-    background-size: 100% 12%;
+    background-size: 100% 10%;
     background-repeat: no-repeat;
     min-height: 100%;
     background-color: #f5f5f5;

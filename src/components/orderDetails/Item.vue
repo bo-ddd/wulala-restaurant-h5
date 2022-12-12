@@ -4,7 +4,7 @@
         <div class="state" v-if="(list.orderStatus == 0)">待付款</div>
     </div>
     <hr/>
-    <van-row @click="toOrderData">
+    <van-row @click="toOrderData()">
         <van-col span="18">
             <div class="item-data" v-for="(item,i) in list.rows" :key="i">
                 <img class="item-img" :src="item.bannerUrl" alt="">
@@ -24,7 +24,7 @@
 import { useRouter } from 'vue-router';
     let router = useRouter()
    const toOrderData = function (){
-router.push({name:'orderdata', query: { orderid: list.orderStatus } })
+router.push({name:'orderdata', query: { orderId: list.id } })
    }
 
    const props = defineProps<{
@@ -33,9 +33,9 @@ router.push({name:'orderdata', query: { orderid: list.orderStatus } })
    let { list } = props
    let date=(d:any)=>{
        let date=new Date(d);
-       return date.getFullYear()+'-'+date.getMonth()+'-'+date.getDay()+' '+date.getHours()
+       return date.getFullYear()+'-'+(date.getMonth()+1)+'-'+date.getDate()+' '+date.getHours()+":"+date.getMinutes()
     }
-    console.log(date(list.createdAt));
+    // console.log(date(list.createdAt));
 </script>
 <style scoped>
 .item-img {
@@ -50,7 +50,8 @@ router.push({name:'orderdata', query: { orderid: list.orderStatus } })
 }
 
 .item-data {
-    margin-bottom: 1rem;
+    /* margin-bottom: 1rem; */
+    padding-bottom: 1rem;
 }
 
 .item-name {
@@ -88,6 +89,11 @@ router.push({name:'orderdata', query: { orderid: list.orderStatus } })
 .box-total_price {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: flex-end;
+}
+::v-deep .van-col--6 {
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 </style>
