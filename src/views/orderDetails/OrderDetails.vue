@@ -143,8 +143,10 @@ const disabledList = [
 ];
 
 let address = JSON.parse(sessionStorage.getItem('item'))
-
+   
 const topayment = () => {
+    console.log(address);
+    
     // router.push({
     //     name: 'payment',
     //     query: {
@@ -159,8 +161,8 @@ const topayment = () => {
         )
     })
     addOrderCreate({
-        "addressId": address.id,//地址id
-        "rows": res,
+        addressId: address.id,//地址id
+        rows: res,
     }).then(res => {
         console.log(res);
     })

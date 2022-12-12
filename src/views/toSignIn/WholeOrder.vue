@@ -1,6 +1,6 @@
 <template>
   <main class="box">
-    <Head isActive="1" color="black" imgcolor="0">全部订单</Head>
+    <Head color="black" imgcolor="0">订单列表</Head>
     <van-tabs v-model:active="active" swipeable @click-tab="onClickTab">
       <van-tab
         class="content"
@@ -20,7 +20,7 @@
           <orderDetails.Wrapper v-for="(item,i) in orderLists" :key="i">
              
             <orderDetails.Item :list = item >
-              <van-button round type="success" color="#7232dd" plain size="small" @click="CommodityDetails">去付款</van-button>
+              <van-button round type="success" color="#000000" plain size="small" @click="CommodityDetails">去付款</van-button>
             </orderDetails.Item>
           </orderDetails.Wrapper>
      
@@ -133,11 +133,7 @@ onClickTab(a)
   background-color: #f5f5f5;
 }
 
-::v-deep .van-col--6 {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+
 
 main {
   background-color: #f5f5f5;
@@ -146,7 +142,7 @@ main {
 }
 .box-item {
   overflow-y: scroll;
-  height: calc(100vh - 9.2rem);
+  height: calc(100vh - 10rem);
 }
 .content {
   height: calc(100vh - 9.2rem);

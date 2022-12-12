@@ -94,7 +94,9 @@ const list: any = ref([]);
 const loading = ref(false);
 const finished = ref(false);
 const refreshing = ref(false);
-
+getFoodListApi({}).then(res => {
+        bestSellers.value = res.data.data.list
+        })
 const onLoad = () => {
     getFoodListApi({}).then(res => {
         bestSellers.value = res.data.data.list
