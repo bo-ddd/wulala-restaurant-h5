@@ -170,6 +170,8 @@ if(isusernameActive.value == false && ispasswordActive.value==false && isconfirm
     if (res.data.msg == '用户名已存在') {
       Notify({ type: 'primary', message: '您已注册过此账号,请登录' });
       router.push({name:'signin'});
+    }else if (res.data.msg != 1) {
+      Notify({ type: 'primary', message: res.data.msg });
     }else{
       Notify({ type: 'success', message: '注册成功' });
       loginApi({

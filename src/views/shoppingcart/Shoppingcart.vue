@@ -3,7 +3,8 @@
     <div class="wrap">
       <Title color="#000">购物车</Title>
     </div>
-    <div>
+    <van-empty description="您的购物车还没有商品哦，快去添加吧" v-if="foodLists == ''" />
+    <div v-else>
       <div class="wrap lol">
         <!-- 数据库  -->
         <div class="box-shopping mt-20" v-for="(el, i) in foodLists" :key="i">
@@ -258,9 +259,7 @@ const adds = function (el: any) {
 const onSubmit = () => {
   if (checkedNames.value.length > 0) {
     localStorage.setItem('item', JSON.stringify(checkedNames.value))
-    router.push({
-      name: 'orderDetails',
-    })
+    router.push({name: 'orderDetails'})
   } else {
     Toast('还没有选择任何商品');
   }
