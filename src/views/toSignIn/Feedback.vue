@@ -35,7 +35,7 @@
             <!-- 提示 -->
             <div class="content-sup wrap mt-20">
                 <p class="pb-10">联系方式(选填)</p>
-                <van-field v-model="tel" type="tel" label="手机号" />
+                <van-field v-model="tel" type="tel" label="手机号" placeholder="请输入手机号"/>
             </div>
         </div>
         <div class="botton" v-if="message == ''">
@@ -108,8 +108,8 @@ main {
     font-size: 1.6rem;
     border-radius: .5rem;
     color: black;
-    font-weight: 600;
     padding: 1rem;
+    position: relative;
 }
 
 .type {
@@ -141,7 +141,9 @@ img{
     background: #4c4c4c;
     color: #fff;
     border-radius: .8rem;
-    width: fit-content
+    width: fit-content;
+    position: absolute;
+    top: 95px;
 }
 .triangle{
     width: 0;
@@ -150,6 +152,8 @@ img{
     border-right: 1rem solid transparent;
     border-left: 1rem solid transparent;
     transform: translate(30px, -1px);
+    position: absolute;
+    top: 120px;
 }
 .none{
     display: none;
