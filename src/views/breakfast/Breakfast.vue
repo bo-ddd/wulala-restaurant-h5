@@ -19,7 +19,7 @@ import MenuConten from "@/components/menuContent";
 import { ref } from "vue";
 import userUtil from "@/assets/ulit";
 let { parsrAsssetFile } = userUtil();
-let foodLists = ref({});
+let foodLists: any = ref({});
 (async function () {
   let foodlist = await getFoodListApi({});
   foodLists.value = foodlist.data.data.list;

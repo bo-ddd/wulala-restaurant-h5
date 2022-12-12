@@ -165,3 +165,10 @@ export const getFoodDetail = function (payload = {}) {
  export const orderList = function (payload = {}) {
     return instance.post('/order/list', payload)
 }
+/**
+ * @description 获取类目接口
+ * @param payload object
+ */
+ export const getCategoryListApi = function (payload = {}) {
+    return instance.post('/order/list', payload)
+}
